@@ -18,30 +18,28 @@ use     ieee.numeric_std.all    ;
 
 
 ---------------------------------------------------------------------------
-entity rst_gen is
-    --generic(
-    --
-    --);
+entity rstn_gen is
     port(
         clk         :   in  std_logic;
         rstn        :   in  std_logic;
-        write       :   in  std_logic;
-        writedata   :   in  std_logic_vector(1  downto  0);
-        read        :   in  std_logic;
-        readdata    :   out std_logic;
+        
+        wr          :   in  std_logic;
+        wdata       :   in  std_logic_vector(1  downto  0);
+        rdata       :   out std_logic;
+        
         rstn_to_DUV  :   out std_logic
     );
-end entity rst_gen;
+end entity rstn_gen;
 ---------------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------------
-architecture rtl of rst_gen is
+architecture rtl of rstn_gen is
 
     signal din          :       std_logic_vector(1  downto  0); 
     signal din_mux      :       std_logic_vector(1  downto  0);
     
-    signal write_reg    :       std_logic;                      -- One cycle delay for the 'write' input
+    signal write_reg    :       std_logic;                      -- One cycle delay for the 'wr' input
     
     signal nxt_rst_reg  :       std_logic;
     signal rst_reg      :       std_logic;                      
@@ -51,25 +49,28 @@ architecture rtl of rst_gen is
     
     signal status       :       std_logic;
     
-    signal dout_mux     :       std_logic;
     
 begin
     
     --------------------------------------------------------
-    -- Feeding the 'write' input to a flop 
+    -- Feeding the 'wr' input to a flop 
     L_WRITE_FLOPPING_P:    process(clk,rstn)   is
     begin
         if(rstn='0')    then
             write_reg   <= '0';
+            
+            assert(write_reg = '0') report "Reset value error: 'write_reg'" severity failure;
+            
         elsif(rising_edge(clk)) then
-            write_reg   <= write; 
+            write_reg   <= wr;
+            
         end if;
     end process; 
     --------------------------------------------------------
     
     
     --------------------------------------------------------
-    -- Implementing the write interface
+    -- Implementing the wr interface
     L_WR_IF_BK: block
     begin
     
@@ -77,6 +78,8 @@ begin
         begin
             if(rstn = '0')  then
                 din <= B"00";
+                
+                assert(din = B"00") report "Reset value error: 'din'" severity failure;
                 
             elsif(rising_edge(clk))   then
                 din <= din_mux;
@@ -86,7 +89,7 @@ begin
         
         --------------------------------------------------
         -- The mux on the input
-        din_mux <=  writedata    when (write = '1')  else
+        din_mux <=  wdata    when (wr = '1')  else
                     din;
     end block;
     --------------------------------------------------------
@@ -103,6 +106,8 @@ begin
         begin
             if(rstn = '0')  then
                 rst_reg     <= '1';                          -- Reset to 1 !!!
+                
+                assert(rst_reg = '1') report "Reset value error: 'rst_reg'" severity failure;
                 
             elsif(rising_edge(clk))   then
                 rst_reg     <= nxt_rst_reg;
@@ -122,9 +127,7 @@ begin
     -- Implementing the read interface
     L_RD_IF_BK: block
     begin
-        readdata    <=  dout_mux;
-        dout_mux    <=  status   when (read = '1')   else   -- When it is read, it shows the status of reset gen. logic
-                        '0';
+        rdata    <=  status;
     end block;
     --------------------------------------------------------
     
@@ -147,6 +150,8 @@ begin
         begin
             if(rstn = '0')  then
                 re_det_reg  <= '1';                          -- Reset to 1 !!!
+                
+                assert(re_det_reg = '1') report "Reset value error: 're_det_reg'" severity failure;
                 
             elsif(rising_edge(clk)) then
                 re_det_reg  <= rst_reg; 
