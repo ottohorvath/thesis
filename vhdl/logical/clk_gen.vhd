@@ -23,7 +23,7 @@ library ieee                    ;
 use     ieee.std_logic_1164.all ;
 use     ieee.numeric_std.all    ;
 
-library work;
+
 
 
 ---------------------------------------------------------------------------
@@ -34,7 +34,6 @@ entity clk_gen  is
     
         wr      :   in  std_logic;                      --                                  
         wdata   :   in  std_logic_vector(1  downto  0); -- Processor IF
-        rd      :   in  std_logic;                      --
         rdata   :   out std_logic;                      --
         
         clk_out :   out std_logic                       -- The gated output clock
@@ -52,11 +51,10 @@ architecture rtl  of  clk_gen is
     signal int_din      :   std_logic_vector(1  downto  0); -- Register for storing wdata
     signal int_din_mux  :   std_logic_vector(1  downto  0); -- Mux on the 'int_din' register's input
     
-    signal int_dout_mux :   std_logic;                      -- Mux on the 'int_status' register's output
     
     signal int_status   :   std_logic;                      -- Control and int_status register
     
-    signal int_ckg      :   std_logic;                      -- The flop which will gate the 'clk_out'
+    signal int_cg      :   std_logic;                       -- The flop which will gate the 'clk_out'
     
     signal int_n_clk    :   std_logic;                      -- The inverted 'clk'
     
@@ -85,11 +83,8 @@ begin
     --------------------------------------------------------
     L_RD_IF_BK: block
     begin
-    
-        int_dout_mux    <= int_status   when (rd = '1')   else
-                       '0';
-    
-        rdata    <= int_dout_mux;
+   
+        rdata    <= int_status;
         
     end block;
     --------------------------------------------------------
@@ -103,15 +98,15 @@ begin
         process( int_n_clk, rstn )   is
         begin
             if(rstn = '0')  then
-                int_ckg <= '0';
+                int_cg <= '0';
                 
             elsif(rising_edge(int_n_clk))   then
-                int_ckg <= int_status;
+                int_cg <= int_status;
                 
             end if;
         end process;
         
-        clk_out  <= int_ckg and clk;
+        clk_out  <= int_cg and clk;                         -- Gating clock and flop output
         
     end block;
     --------------------------------------------------------
@@ -123,8 +118,8 @@ begin
     L_SC_FF:
         entity work.sc_ff(rtl)
             port map(
-                clk     => clk      ,
-                rstn    => rstn     ,
+                clk     => clk          ,
+                rstn    => rstn         ,
                 set     => int_din(0)   ,
                 clr     => int_din(1)   ,
                 q       => int_status
