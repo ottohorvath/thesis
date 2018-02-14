@@ -22,10 +22,10 @@ entity timer is
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
-        write           :   in  std_logic;
-        writedata       :   in  std_logic_vector(1  downto  0);
-        read            :   in  std_logic;
-        readdata        :   out std_logic_vector(CNTR_WIDTH-1   downto  0);
+        
+        wr              :   in  std_logic;
+        wdata           :   in  std_logic_vector(1  downto  0);
+        rdata           :   out std_logic_vector(CNTR_WIDTH-1   downto  0);
         signal_from_DUV :   in  std_logic
     );
 end entity timer;
@@ -38,7 +38,7 @@ architecture rtl of timer is
     signal  din         :   std_logic_vector(1  downto  0);
     signal  nxt_din     :   std_logic_vector(1  downto  0);
     
-    signal  cntr_dout_mux:  std_logic_vector(CNTR_WIDTH-1 downto 0);
+
     
     signal  cntr_dout_w :   std_logic_vector(CNTR_WIDTH-1 downto 0);
     signal  show_cntr_w :   std_logic;
@@ -63,6 +63,9 @@ begin
         begin
             if(rstn = '0')  then
                 din <= B"00";
+                
+                assert(din = B"00") report "Reset value error: 'din'" severity failure;
+                
             elsif(rising_edge(clk)) then
                 din <= nxt_din;
             end if;
@@ -80,11 +83,11 @@ begin
 
 
 --================================ Combinatorial BEGIN ========================================
-    nxt_din         <=  writedata       when (write = '1')  else
+    nxt_din         <=  wdata       when (wr = '1')  else
                         din;
     -------------------------------------------------            
-    readdata        <=  cntr_dout_mux   when (read = '1')   else
-                        (others => '0');
+    rdata           <=  cntr_dout_mux;
+                        
     -------------------------------------------------
     cntr_dout_mux   <=  cntr_dout_w     when (show_cntr_w = '1') else
                         (others => '0');

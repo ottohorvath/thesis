@@ -51,6 +51,8 @@ begin
             if(rstn = '0')  then
                 de_reg  <= '0';
                 
+                assert(de_reg = '0') report "Reset value error: 'de_reg'" severity failure;
+                
             elsif(rising_edge(clk)) then
                 de_reg  <= sig; 
             
@@ -68,6 +70,8 @@ begin
         begin
             if(rstn = '0')  then
                 dout    <= '0';
+                
+                assert(dout = '0') report "Reset value error: 'dout'" severity failure;
                 
             elsif(rising_edge(clk)) then
                 ----------------------------------------
