@@ -24,10 +24,11 @@ entity fe_det is
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
-        write           :   in  std_logic;
-        writedata       :   in  std_logic_vector(1  downto  0);
-        read            :   in  std_logic;
-        readdata        :   out std_logic;
+        
+        wr              :   in  std_logic;
+        wdata           :   in  std_logic_vector(1  downto  0);
+        rdata           :   out std_logic;
+        
         signal_from_DUV :   in  std_logic
     );
 end entity fe_det;
@@ -40,7 +41,6 @@ architecture rtl of fe_det is
     signal din_mux  :   std_logic_vector(1  downto  0);
     signal din      :   std_logic_vector(1  downto  0);
     
-    signal dout_mux :   std_logic;
     signal dout     :   std_logic;
     
     signal sig      :   std_logic;
@@ -50,7 +50,7 @@ architecture rtl of fe_det is
 begin
 
     --------------------------------------------------------
-    -- Implementing the write interface
+    -- Implementing the wr interface
     L_WR_IF: block
     begin
     
@@ -59,13 +59,15 @@ begin
             if(rstn = '0')  then
                 din <= B"00";
                 
+                assert(din = B"00") report "Reset value error: 'din'" severity failure;
+                
             elsif(rising_edge(clk)) then
                 din <= din_mux;
                 
             end if;
         end process;
     
-        din_mux <=  writedata when (write = '1')    else
+        din_mux <=  wdata when (wr = '1')    else
                     din;
     end block;
     --------------------------------------------------------
@@ -89,9 +91,7 @@ begin
             );
         
         
-        dout_mux <= dout    when    (read = '1')    else
-                    '0';
-        readdata <= dout_mux;
+        rdata <= dout;
     end block;
     --------------------------------------------------------
     
@@ -105,6 +105,8 @@ begin
         begin
             if(rstn = '0')  then
                 fe_reg <= '0';
+                
+                assert(fe_reg = '0') report "Reset value error: 'fe_reg'" severity failure;
                 
             elsif(rising_edge(clk)) then
             
