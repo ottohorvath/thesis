@@ -54,7 +54,7 @@ architecture rtl  of  clk_gen is
     
     signal int_status   :   std_logic;                      -- Control and int_status register
     
-    signal int_cg      :   std_logic;                       -- The flop which will gate the 'clk_out'
+    signal int_cg       :   std_logic;                      -- The flop which will gate the 'clk_out'
     
     signal int_n_clk    :   std_logic;                      -- The inverted 'clk'
     
@@ -68,6 +68,9 @@ begin
         begin
             if(rstn = '0')  then
                 int_din <= B"00";
+                
+                assert(int_din = B"00") report "Reset value error: 'int_din'" severity failure;
+                    
                 
             elsif(rising_edge(clk)) then
                 int_din <= int_din_mux;
@@ -93,12 +96,14 @@ begin
     L_CK_GATING_BK: block
     begin
     
-        int_n_clk   <= not clk;
+        int_n_clk   <= not(clk);
         
         process( int_n_clk, rstn )   is
         begin
             if(rstn = '0')  then
                 int_cg <= '0';
+                
+                assert(int_cg = '0') report "Reset value error: 'int_cg'" severity failure;
                 
             elsif(rising_edge(int_n_clk))   then
                 int_cg <= int_status;
