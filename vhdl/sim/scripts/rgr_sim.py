@@ -263,12 +263,12 @@ def compile_tb_packages(pkg_src_dir, log_file):
 def compile_rtl_files(src_dir, log_file):
     
     # First the entities
-    subprocess.call("vcom -just e   " + rtl_ver +" -lint   -check_synthesis -work work " + src_dir + "*" + file_ext, shell = False, stdout = log_file)
+    subprocess.call("vcom -just e   " + rtl_ver +" -lint   -work work " + src_dir + "*" + file_ext, shell = False, stdout = log_file)
     
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
     
     # Then the architectures
-    subprocess.call("vcom -just a   " + rtl_ver +" -lint   -check_synthesis -work work " + src_dir + "*" + file_ext, shell = False, stdout = log_file)
+    subprocess.call("vcom -just a   " + rtl_ver +" -lint   -work work " + src_dir + "*" + file_ext, shell = False, stdout = log_file)
 
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
 
