@@ -38,7 +38,7 @@ architecture rtl of timer is
     signal  din         :   std_logic_vector(1  downto  0);
     signal  nxt_din     :   std_logic_vector(1  downto  0);
     
-
+    signal  cntr_dout_mux :   std_logic_vector(CNTR_WIDTH-1 downto 0);
     
     signal  cntr_dout_w :   std_logic_vector(CNTR_WIDTH-1 downto 0);
     signal  show_cntr_w :   std_logic;
