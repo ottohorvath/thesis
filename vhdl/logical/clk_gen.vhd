@@ -67,9 +67,8 @@ begin
         process( clk, rstn )   is
         begin
             if(rstn = '0')  then
-                int_din <= B"00";
+                int_din <= "00";
                 
-                assert(int_din = B"00") report "Reset value error: 'int_din'" severity failure;
                     
                 
             elsif(rising_edge(clk)) then
@@ -103,8 +102,6 @@ begin
             if(rstn = '0')  then
                 int_cg <= '0';
                 
-                assert(int_cg = '0') report "Reset value error: 'int_cg'" severity failure;
-                
             elsif(rising_edge(int_n_clk))   then
                 int_cg <= int_status;
                 
@@ -130,6 +127,36 @@ begin
                 q       => int_status
             );
     --------------------------------------------------------
+    
+    
+    
+    
+    
+    -- synthesis translate_off
+	L_CHECKS_BK:   block
+    begin
+    
+        L_RESET_CHECK:  process is
+        begin
+            wait until rising_edge(rstn);
+            assert(int_din = "00") report "Reset value error: 'int_din'" severity failure;
+            assert(int_cg  = '0')  report "Reset value error: 'int_cg'"  severity failure;
+            
+        end process;
+        
+    end block;
+	-- synthesis translate_on
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
