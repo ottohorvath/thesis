@@ -59,7 +59,7 @@ begin
         if(rstn='0')    then
             write_reg   <= '0';
             
-            assert(write_reg = '0') report "Reset value error: 'write_reg'" severity failure;
+            
             
         elsif(rising_edge(clk)) then
             write_reg   <= wr;
@@ -79,7 +79,7 @@ begin
             if(rstn = '0')  then
                 din <= B"00";
                 
-                assert(din = B"00") report "Reset value error: 'din'" severity failure;
+                
                 
             elsif(rising_edge(clk))   then
                 din <= din_mux;
@@ -107,7 +107,7 @@ begin
             if(rstn = '0')  then
                 rst_reg     <= '1';                          -- Reset to 1 !!!
                 
-                assert(rst_reg = '1') report "Reset value error: 'rst_reg'" severity failure;
+                
                 
             elsif(rising_edge(clk))   then
                 rst_reg     <= nxt_rst_reg;
@@ -151,7 +151,7 @@ begin
             if(rstn = '0')  then
                 re_det_reg  <= '1';                          -- Reset to 1 !!!
                 
-                assert(re_det_reg = '1') report "Reset value error: 're_det_reg'" severity failure;
+                
                 
             elsif(rising_edge(clk)) then
                 re_det_reg  <= rst_reg; 
@@ -172,6 +172,41 @@ begin
                 );
     end block;
     --------------------------------------------------------
+    
+    
+    
+        -- synthesis translate_off
+	L_CHECKS_BK:   block
+    begin
+    
+        L_RESET_CHECK:  process is
+        begin
+            wait until rising_edge(rstn);
+            assert(din = B"00"      ) report "Reset value error: 'din'"         severity failure;
+            assert(write_reg = '0'  ) report "Reset value error: 'write_reg'"   severity failure;
+            assert(re_det_reg = '1' ) report "Reset value error: 're_det_reg'"  severity failure;
+            assert(rst_reg = '1'    ) report "Reset value error: 'rst_reg'"     severity failure;
+            
+        end process;
+        
+    end block;
+	-- synthesis translate_on
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 end architecture rtl;
 ---------------------------------------------------------------------------
