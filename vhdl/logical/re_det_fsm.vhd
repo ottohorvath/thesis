@@ -45,8 +45,8 @@ begin
     L_LOGIC: process(cur_state, en, clr, sig_from_re_det) is
     begin
         
-        re_caught   <= '0'  ;   -- 
-        nxt_state   <= IDLE ;   -- Default assignments (otherwise these would model latches)
+        re_caught   <= '0'  ;   
+        nxt_state   <= cur_state ;   
         
         case (cur_state)    is
             ------------------------------------------
@@ -56,10 +56,6 @@ begin
                 
                 if(en = '1' and clr = '0')  then            -- If it is enabled and not cleared, at the same time
                     nxt_state   <= ENABLED_AND_WAIT_FOR_RE;
-                    
-                else
-                    nxt_state   <= IDLE;
-                    
                 end if;
             ------------------------------------------
             when ENABLED_AND_WAIT_FOR_RE =>                -- It is enabled, waiting for a rise-edge on the watched signal
@@ -70,9 +66,6 @@ begin
                 elsif(sig_from_re_det = '1')   then
                     nxt_state   <= RE_CAUGHT_AND_WAIT_FOR_CLR;
                     
-                else
-                    nxt_state   <= ENABLED_AND_WAIT_FOR_RE;
-                    
                 end if;
             ------------------------------------------
             when RE_CAUGHT_AND_WAIT_FOR_CLR  =>             -- After the enablement, a rise-edge was caught, stays here until clearing
@@ -81,9 +74,6 @@ begin
                 
                 if(clr = '1' and en = '0')  then
                     nxt_state   <= IDLE;
-                    
-                else
-                    nxt_state   <= RE_CAUGHT_AND_WAIT_FOR_CLR;
                     
                 end if;
             ------------------------------------------
