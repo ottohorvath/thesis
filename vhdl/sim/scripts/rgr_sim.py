@@ -127,11 +127,11 @@ def is_rtl_src_present(rtl_src_dir, rtl_name):
 
     if not rtl_name:                        # If 'rtl_name' is omitted
         return 0                            # Then return with error
-        
+
 
     rtl_files   = os.listdir(rtl_src_dir)   # Gathering files from here
 
-    
+
     rtl_found   = 0                         #
     rtl_file    = rtl_name + file_ext       #
                                             # Iterating over the RTL source files.
@@ -154,11 +154,11 @@ def is_tbench_src_present(tbench_src_dir, rtl_name, tbench_suffix):
     Returning:      ~ 1 upon success, namely the corresponding testbench source 'rtl_name+tbench_suffix+file_ext' is present.
                     ~ 0 otherwise.
     """
-    
+
     if not rtl_name:                                        # If 'rtl_name' is omitted
         return 0                                            # Then return with error
 
-        
+
     tbench_files    = os.listdir(tbench_src_dir)            # Gathering files from here.
 
                                                             #
@@ -171,7 +171,7 @@ def is_tbench_src_present(tbench_src_dir, rtl_name, tbench_suffix):
 
     return tbench_found                                     # Result of the search.
 
-    
+
 def is_test_src_present(test_src_dir, rtl_name, test_suffix):
     """
     Description:    ~ This function is checking the presence of the corresponding testcase source file.
@@ -186,11 +186,11 @@ def is_test_src_present(test_src_dir, rtl_name, test_suffix):
                     ~ 0 otherwise.
     """
 
-    
+
     if not rtl_name:                                # If 'rtl_name' is omitted
         return 0                                    # Then return with error
 
-        
+
     test_files  = os.listdir(test_src_dir)          # Gathering files from here.
 
                                                     #
@@ -226,7 +226,7 @@ def is_check_src_present(check_src_dir, rtl_name, check_suffix):
 
     check_files     = os.listdir(check_src_dir)             # Gathering files from here.
 
-    
+
     check_found     = 0                                     #
     check_file      = rtl_name + check_suffix + file_ext    #
                                                             # Iterating over the check package files.
@@ -248,47 +248,47 @@ def create_lib_and_map(dest_dir):
 
 
 def compile_tb_packages(pkg_src_dir, log_file):
-    
+
     # Just the packages
     subprocess.call("vcom -just p   " + tb_ver + "  -work work " + pkg_src_dir + "*" + file_ext , shell = False, stdout = log_file)
-    
-    subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
-    
-    # Then the corresponding bodies
-    subprocess.call("vcom -just pb  " + tb_ver + "  -work work " + pkg_src_dir + "*" + file_ext , shell = False, stdout = log_file)
-    
+
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
 
-    
+    # Then the corresponding bodies
+    subprocess.call("vcom -just pb  " + tb_ver + "  -work work " + pkg_src_dir + "*" + file_ext , shell = False, stdout = log_file)
+
+    subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
+
+
 def compile_rtl_files(src_dir, log_file):
-    
+
     # First the entities
     subprocess.call("vcom -just e   " + rtl_ver +" -lint   -work work " + src_dir + "*" + file_ext, shell = False, stdout = log_file)
-    
+
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
-    
+
     # Then the architectures
     subprocess.call("vcom -just a   " + rtl_ver +" -lint   -work work " + src_dir + "*" + file_ext, shell = False, stdout = log_file)
 
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
 
-    
+
 def compile_one_tb_src(tb_src_dir, name, log_file):
-    
+
     # Compile one testbench related source file
     subprocess.call("vcom      "+ tb_ver +" -work work  " + tb_src_dir + name + file_ext, shell = False, stdout=log_file)
 
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
 
-    
+
 def compile_tb_files(tb_src_dir, log_file):
-    
+
     # Compile one testbench related source file
     subprocess.call("vcom      "+ tb_ver +" -work work  " + tb_src_dir + "*" + file_ext, shell = False, stdout=log_file)
 
     subprocess.call("echo "" ",shell = False, stdout=log_file)   # New line, make the log breezy
 
-       
+
 def vopt_for_sim(tb_name, rtl_name):
 
     subprocess.call('vopt '+ tb_name +' -o '+ tb_name +'_opt'       +   # Optimizing the testbench, visiblity here in CLI is not needed
@@ -301,7 +301,7 @@ def vopt_for_sim(tb_name, rtl_name):
 
 def vopt_for_sim_gui(tb_name, rtl_name):
 
-    subprocess.call('vopt +acc '+ tb_name +' -o '+ tb_name +'_opt'  +   # In case of GUI, full visiblity might be useful for debugging purposes, that's why +acc is added
+    subprocess.call('vopt +acc '+ tb_name +' -o '+ tb_name +'_opt '  +   # In case of GUI, full visiblity might be useful for debugging purposes, that's why +acc is added
                     ' -G RTL_NAME_G=\"'+ rtl_name+'\"'              +   # RTL name in string
                     ' -G CLI_G=0'                                   +   # Command line interface is used
                     ' -G GUI_G=1'                                   +   # GUI is used
@@ -318,17 +318,17 @@ def vsim_for_sim(tb_name, log_file):
                     ' work.'+tb_name+'_opt'                             # Load in the optimized testbench
                     , shell = False)
 
-                    
+
 def vsim_for_sim_gui(tb_name, log_file):
 
     subprocess.call('vsim -t 1'+sim_resolution                      +   # Starting Questa in GUI and setting the simulation time resolution
-                    ' -do "log -r /*; run -all; quit;"'             +   # Recursively log all signals for easier Waveform debugging 
+                    ' -do "log -r /*; run -all; quit;"'             +   # Recursively log all signals for easier Waveform debugging
                     ' -default_radix hexadecimal'                   +   # Setting default radix
                     ' -logfile "'+log_file+tb_name+'_log.log"'      +   # Specifing the simulation log files
-                    ' work.'+tb_name+'_opt'                             # Load in the optimized testbench
+                    ' work.'+tb_name+'_opt '                    # Load in the optimized testbench
                     , shell = False)
-                    
-                                        
+
+
 def run_sim(rtl_name):
     """
     Description:    ~ This function runs one self-checking testbench in CLI.
@@ -368,29 +368,29 @@ def run_sim_gui(rtl_name):
 
     Returning:      ~ None, creating log files
     """
-    
-    
+
+
     create_lib_and_map(comp_output_dir)                             # Create a library and map it to Questa
-    
+
     if not os.path.exists(gui_log_dir):                             # Check if there is an existing directory
         os.mkdir(gui_log_dir)                                       # Otherwise, make one
-    
+
     vcom_log = open(gui_log_dir + rtl_name + "_" + comp_log ,'w')   # Logging into separate compilation log file
-    
+
     compile_tb_packages(tbench_pkg_src_dir, vcom_log)               # Compiling TB framework related packages
     compile_tb_packages(test_src_dir,       vcom_log)               # Packages containing tests
     compile_tb_packages(check_src_dir,      vcom_log)               # Packages containing checks
-    
+
     compile_rtl_files(rtl_src_dir,  vcom_log)                       # Compile all the RTLs
-    
+
     tbench_name = rtl_name + tbench_suffix                          # Testbench is named <RTL>_tb
     compile_one_tb_src(tbench_src_dir,tbench_name, vcom_log)        # Compile <RTL>_tb
-    
+
     vopt_for_sim_gui(tbench_name, rtl_name)                         # Optimizing the testbench and passing values to the toplevel generics
-    
+
     vsim_for_sim_gui(tbench_name, gui_log_dir)                      # Run simulation
-    
-    
+
+
 def run_rgr():
     """
     Description:    ~ This function is responsible to run all the Self-checking testbenches for the RTL files.
@@ -407,34 +407,34 @@ def run_rgr():
     Returning:      ~ None, creating log files.
 
     """
-    
+
     create_lib_and_map(comp_output_dir)                             # Create a library and map it to Questa
-    
+
     if not os.path.exists(rgr_log_dir):                             # Check if there is an existing directory
         os.mkdir(rgr_log_dir)                                       # Otherwise, make one
-        
+
     vcom_log = open(rgr_log_dir + comp_log ,'w')                    # Logging into separate compilation log file
 
-    
+
     compile_tb_packages(tbench_pkg_src_dir, vcom_log)               # Compiling TB framework related packages
     compile_tb_packages(test_src_dir,       vcom_log)               # Packages containing tests
     compile_tb_packages(check_src_dir,      vcom_log)               # Packages containing checks
-    
-    compile_rtl_files(rtl_src_dir,  vcom_log)                       # Compile all the RTLs
-    
-    compile_tb_files(tbench_src_dir,vcom_log)                       # Compile all the testbenches
-    
-    
 
-    
-    
+    compile_rtl_files(rtl_src_dir,  vcom_log)                       # Compile all the RTLs
+
+    compile_tb_files(tbench_src_dir,vcom_log)                       # Compile all the testbenches
+
+
+
+
+
     tb_files    =       os.listdir(tbench_src_dir)
 
-    
+
     tb_names    =   [x.split('.')[0] for x in tb_files]             # Removing the 'file_ext' file extensions from the 'tb_files' list.
-    
-    
-    
+
+
+
     print("""
 
 ===========================================================================================================
@@ -443,41 +443,48 @@ def run_rgr():
 
     """)
 
+
+    if not os.path.exists(ccov_dir):                 # Same for codecoverage directory
+        os.mkdir(ccov_dir)                           #
+
+
+
+
     # Iterating over the testbenches
     for tb_name in tb_names:
 
         subprocess.call('vopt '+tb_name+' -o '+tb_name+'_opt'           +
-                        ' -G RTL_NAME_G=\"'+ tb_name.split('_')[0] +'\"'+   # Removing the '_tb' postfix to get the rtl name from tb name
+                        ' -G RTL_NAME_G=\"'+ tb_name.split('_tb')[0] +'\"'+   # Removing the '_tb' postfix to get the rtl name from tb name
                         ' -G CLI_G=0'                                   +
                         ' -G GUI_G=0'                                   +
                         ' -G RGR_G=1'                                   +
                         ' +cover=sbecft+/'+tb_name+'/L_DUT'                 # Setup code-coverage in QuestaSim
                         ,shell = False)
 
-        
-        if not os.path.exists(ccov_dir):                    # Same for codecoverage directory
-            os.mkdir(ccov_dir)                              # 
-            os.mkdir(ccov_dir+tb_name+ '_ccov/')            #
-        
-        
+
+        if not os.path.exists(ccov_dir+tb_name+ '_ccov/'):                 # Same for codecoverage directory
+            os.mkdir(ccov_dir+tb_name+ '_ccov/')                           #
+                                                                            #
+
+
         print("\n")
-        
-        
+
+
 
         subprocess.call('vsim -batch -t 1'+ sim_resolution                                          +
                         ' -coverage '                                                               +
-                        ' -do "coverage save -onexit ' +ccov_dir+tb_name+ '_ccov/' +tb_name+'.ucdb;'+
+                        ' -do "coverage save -onexit ' +ccov_dir+tb_name+ '_ccov/'+tb_name+'.ucdb;' +
                         ' run -all; quit"'                                                          +
                         ' -default_radix hexadecimal'                                               +
                         ' -logfile "'+ rgr_log_dir + tb_name +'_log.log"'                               +
                         ' work.'+tb_name+'_opt'
                         ,shell = False)
-        
+
         print("""
 ===========================================================================================================
         """)
 
-    
+
     print("""
 
 ===========================================================================================================
@@ -488,13 +495,14 @@ def run_rgr():
 
     for tb_name in tb_names:
 
-        subprocess.call('vcover report -html -htmldir '+ccov_dir+tb_name+'_ccov'        +
+        subprocess.call('vcover report -html -htmldir '+ccov_dir+tb_name+'_ccov'       +
                         ' -source -details -code bcefst'                                +
                         ' -threshL 50 -threshH 90'                                      +
                         ' '+ccov_dir+tb_name+'_ccov/'+tb_name+'.ucdb'
                         , shell = False)
 
-        
+        print("\n")
+
 
 
 def parse_stdin():
@@ -507,28 +515,28 @@ def parse_stdin():
     cmd         = []
 
     print("Type a command line and press ENTER ...")
-    
-    
+
+
     while True:
-    
+
         cin = input()           # Getting info from stdin.
-    
-    
+
+
         cin = cin.split()       # Splitting at whitespaces.
-    
+
         #------------------ Checking the input ------------------------
         rgr_needed = 0
         sim_needed = 0
         gui_needed = 0
         for arg in cin:
-    
+
             if arg == "-all"    and rgr_needed == 0:
                 rgr_needed  = 1
-    
+
             if arg.startswith("-sim=")  and sim_needed == 0:
                 sim_needed  = 1
                 rtl_name    = arg.replace("-sim=","")
-    
+
             if arg == "-gui"   and gui_needed == 0:
                 gui_needed  = 1
         #------------------ Updating the command indicators -----------
@@ -536,62 +544,62 @@ def parse_stdin():
             cmd     = cin
             rgr     = 1
             break
-    
+
         elif rgr_needed == 0 and sim_needed == 1 and gui_needed == 0:
             cmd     = cin
             sim     = 1
             break
-    
+
         elif rgr_needed == 0 and sim_needed == 1 and gui_needed == 1:
             cmd     = cin
             sim_gui = 1
             break
-    
+
         else:
             print("***ERROR***: The command " +str(cin)+ " is not understandable! Try again!")
-    
-    
-    
-    
+
+
+
+
     return rgr, sim, sim_gui, rtl_name, cmd     # Return the result of the parsing
-           
+
 
 def check_src_files(rgr, sim, sim_gui, rtl_name):
-    
-    
+
+
     file_errors = 0                                     # rtl/test/check source file related errors
-    
-    
+
+
     if rgr == 0 and sim == 1 or sim_gui == 1:           # If only one simulation is needed
         print("")
-        
+
         # Checking the RTL source file's presence
         if is_rtl_src_present(rtl_src_dir, rtl_name) == 0:
             print("RTL file '" + rtl_name + file_ext + "' has not been found in '" + rtl_src_dir + "' !")
             file_errors += 1
-        
+
         # Checking the testbench source file's presence
         if is_tbench_src_present(tbench_src_dir, rtl_name, tbench_suffix) == 0:
             print("Testbench file '"+rtl_name+tbench_suffix+file_ext+ "' has not been found in '" + tbench_src_dir + "' !")
             file_errors += 1
-    
+
         # Checking the corresponding test file's presence
         if is_test_src_present(test_src_dir, rtl_name, test_suffix) == 0:
             print("Package file '" + rtl_name + test_suffix + file_ext + "', describing the tests, has not been found in '" + test_src_dir + "' !")
             file_errors += 1
-    
+
         # Checking the corresponding check file's presence
         if is_check_src_present(check_src_dir, rtl_name,  check_suffix) == 0:
             print("Package file '" + rtl_name + check_suffix + file_ext + "', describing the checks, has not been found in '" + check_src_dir + "' !")
             file_errors += 1
-        
+
         #print("\nPress ENTER to finish ...")    # General script ending message
-    
-    
-    
-    
+
+
+
+
     return file_errors
-    
+
 
 def main():
     """
@@ -607,67 +615,67 @@ def main():
     Returning:      ~ 0, when all the source files are present in the directories for the desired entity.
                     ~ 1, when it cannot find RTL/TB source files.
     """
-    
-    
+
+
     print_welcome_msg()                                         # Welcome message.
-    
+
     rgr, sim, sim_gui, rtl_name, cmd = parse_stdin()            # Parsing STDIN
 
     file_errors = check_src_files(rgr, sim, sim_gui, rtl_name)  # Checking source files for CLI and GUI usage
 
-    
+
     if file_errors == 0:                                        # If the files are present
         if sim == 1:                                            # If GUI is not needed
             run_sim(rtl_name)
-            
-        if sim_gui == 1:                                        # If GUI should open up               
-            run_sim_gui(rtl_name)
-            
-        
-        
-    
 
-    
+        if sim_gui == 1:                                        # If GUI should open up
+            run_sim_gui(rtl_name)
+
+
+
+
+
+
     # Regression assumes all the source files are in their appropriate places
     if rgr == 1 and sim == 0 and sim_gui == 0:                 # If regression is needed
         run_rgr()
         print_exit_msg()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-
-
-
-    
 
 
 
 
 
 
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #--------- Main ----------------
 if __name__ == "__main__":
 
     main()
-    
+
 #-------------------------------
