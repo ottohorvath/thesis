@@ -58,20 +58,18 @@ begin
 
 --================================ Sequential BEGIN ==================================
 
-    -------------------------------------------------
+
     L_WR_IF: process(clk, rstn)  is
         begin
             if(rstn = '0')  then
                 din <= B"00";
                 
-                assert(din = B"00") report "Reset value error: 'din'" severity failure;
+                
                 
             elsif(rising_edge(clk)) then
                 din <= nxt_din;
             end if;
         end process;
-    -------------------------------------------------
-    
 --================================ Sequential END ====================================
 
 
@@ -136,6 +134,30 @@ begin
                 );
                 
 --================================ Instantiations END ===================================== 
+
+
+
+    -- synthesis translate_off
+	L_CHECKS_BK:   block
+    begin
+    
+        L_RESET_CHECK:  process is
+        begin
+            wait until rising_edge(rstn);
+            
+            assert(din = B"00") report "Reset value error: 'din'" severity failure;
+            
+        end process;
+        
+    end block;
+	-- synthesis translate_on
+
+
+
+
+
+
+
     
 
     

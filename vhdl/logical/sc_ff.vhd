@@ -73,5 +73,36 @@ begin
     --------------------------------------------------------
     
     
+    
+    -- synthesis translate_off
+	L_CHECKS_BK:   block
+    begin
+    
+        L_RESET_CHECK:  process is
+        begin
+            wait until rising_edge(rstn);
+            
+            assert(q = '0')    report "Reset value error: 'q'"    severity failure;
+            
+            
+        end process;
+        
+    end block;
+	-- synthesis translate_on
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 end architecture rtl;
 ---------------------------------------------------------------------------
