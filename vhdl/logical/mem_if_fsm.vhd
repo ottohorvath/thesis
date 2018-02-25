@@ -77,7 +77,7 @@ begin
             rd_data_reg_en  <=  '0' ;                                --
             rd_strobe       <=  '0' ;                                -- Default assignments (otherwise these would model latches)
             wr_strobe       <=  '0' ;                                --
-            next_state      <=  curr_state;                                --
+            next_state      <=  IDLE;                                --
             
             case(curr_state)    is
                 -----------------------------------------------------

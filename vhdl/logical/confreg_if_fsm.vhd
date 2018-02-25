@@ -100,7 +100,6 @@ begin
                     
                     if(write = '1' and writedata = WR_START)    then -- If the processor wants to WRITE something.
                         next_state  <= ST_WR_ADDR;
-
                     end if;
                     
                 -----------------------------------------------------
@@ -131,8 +130,7 @@ begin
                     cs  <= '1';
                     if(ack_from_DUV = '1')  then
                         next_state  <= CAPTURE_RD_DATA;
-                    else
-                        next_state  <= WAIT_FOR_RD_ACK;
+
                     end if;
                 
                 -----------------------------------------------------
@@ -145,7 +143,8 @@ begin
                     
                     if(ACK_NEEDED)  then                             -- Synthesis paramter!
                         next_state  <= EXTD_RD_TRANS;                 
-
+                    else
+                        next_state  <= IDLE;                         -- The transfer is finished.
                     end if;
 
                 -----------------------------------------------------
@@ -157,7 +156,8 @@ begin
                     if(ack_from_DUV = '1')  then
                         rd_data_reg_en  <= '1';                       -- The read DATA will be captured.
                         next_state  <= IDLE;
-
+                    else
+                        next_state  <= EXTD_RD_TRANS;
                     end if;
                     
                 -----------------------------------------------------
@@ -167,8 +167,6 @@ begin
                     if(write = '1') then
                         addr_reg_en <= '1';                          -- The write ADDRESS will be stored.
                         next_state  <= ST_WR_DATA;
-                    else
-                        next_state  <= ST_WR_ADDR;
                     end if;
                     
                 -----------------------------------------------------
@@ -178,7 +176,8 @@ begin
                     if(write = '1') then
                         wr_data_reg_en  <= '1';                      -- The write DATA will be stored.
                         next_state      <= INIT_WR_TRANS;
-
+                    else
+                        next_state      <= ST_WR_DATA;
                     end if;
                     
                 -----------------------------------------------------
@@ -188,7 +187,8 @@ begin
                     cs  <= '1';
                     if(ACK_NEEDED)  then                             -- Synthesis parameter!
                         next_state  <= WAIT_FOR_WR_ACK;              -- When the beginning of the transfer is bound to an ack.
-
+                    else
+                        next_state  <= GEN_WR_TRANS;                 -- When it is not
                     end if;
                 -----------------------------------------------------
                 -- The state for extending the transaction. It will be synthesised when the ACK_NEEDED is set to TRUE.
@@ -222,7 +222,6 @@ begin
                     
                     if(ack_from_DUV = '1')  then
                         next_state  <= IDLE;                        -- Finishing the write transfer.
-
                     end if;
                     
                 -----------------------------------------------------
