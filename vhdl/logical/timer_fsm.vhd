@@ -51,7 +51,7 @@ begin
     L_LOGIC:    process(cur_state, en_fsm, clr_fsm, de_caught) is
     begin
         
-        nxt_state   <= IDLE;    --
+        nxt_state   <= cur_state;    --
                                 
         show_cntr   <= '0';     --  
         cntr_clr    <= '0';     -- Default assignments (otherwise these would model latches)
@@ -71,8 +71,6 @@ begin
                 
                 if(en_fsm = '1' and clr_fsm = '0')  then
                     nxt_state   <= FSM_ENABLED;
-                else
-                    nxt_state   <= IDLE;
                 end if;
 
             ------------------------------------------
@@ -85,9 +83,6 @@ begin
                     
                 elsif(de_caught = '1')  then
                     nxt_state   <= DE_DET_AND_CNTR_ENABLED;
-                
-                else
-                    nxt_state   <= FSM_ENABLED;
                 
                 end if;
             ------------------------------------------
@@ -102,8 +97,6 @@ begin
                 elsif(de_caught = '1')  then
                     nxt_state   <= DE_CAUGHT_AND_WAIT_FOR_CLR;
                     
-                else
-                    nxt_state   <= DE_DET_AND_CNTR_ENABLED;
                 
                 end if;
             ------------------------------------------
@@ -113,9 +106,7 @@ begin
                 
                 if(en_fsm = '0' and clr_fsm = '1')  then
                     nxt_state   <= IDLE;
-                    
-                else
-                    nxt_state   <= DE_CAUGHT_AND_WAIT_FOR_CLR;
+
                     
                 end if;
                 
