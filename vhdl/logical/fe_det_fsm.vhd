@@ -46,7 +46,7 @@ begin
     begin
         
         fe_caught   <= '0'  ;   -- 
-        nxt_state   <= IDLE ;   -- Default assignments (otherwise these would model latches)
+        nxt_state   <= cur_state;   -- Default assignments (otherwise these would model latches)
         
         case (cur_state)    is
             ------------------------------------------
@@ -56,8 +56,7 @@ begin
                 
                 if(en = '1' and clr = '0')  then            -- If it is enabled and not cleared, at the same time
                     nxt_state <= ENABLED_AND_WAIT_FOR_FE;
-                else
-                    nxt_state <= IDLE;
+
                 end if;
             ------------------------------------------
             when ENABLED_AND_WAIT_FOR_FE =>                -- It is enabled, waiting for a falling-edge on the watched signal
@@ -71,9 +70,7 @@ begin
                 elsif(sig_from_fe_det = '1')   then
                     nxt_state   <= FE_CAUGHT_AND_WAIT_FOR_CLR;
                     
-                else
-                    nxt_state   <= ENABLED_AND_WAIT_FOR_FE;
-                    
+                   
                 end if;
             ------------------------------------------
             when FE_CAUGHT_AND_WAIT_FOR_CLR  =>             -- After the enablement, a falling-edge was caught, stays here until clearing
@@ -82,8 +79,7 @@ begin
                 
                 if(clr = '1' and en = '0')  then
                     nxt_state <= IDLE;
-                else
-                    nxt_state <= FE_CAUGHT_AND_WAIT_FOR_CLR;
+
                 end if;
             ------------------------------------------
             -- When the FSM reached an undefined state.
