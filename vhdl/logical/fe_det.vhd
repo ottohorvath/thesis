@@ -59,7 +59,7 @@ begin
             if(rstn = '0')  then
                 din <= B"00";
                 
-                assert(din = B"00") report "Reset value error: 'din'" severity failure;
+                
                 
             elsif(rising_edge(clk)) then
                 din <= din_mux;
@@ -106,7 +106,7 @@ begin
             if(rstn = '0')  then
                 fe_reg <= '0';
                 
-                assert(fe_reg = '0') report "Reset value error: 'fe_reg'" severity failure;
+                
                 
             elsif(rising_edge(clk)) then
             
@@ -124,6 +124,42 @@ begin
         det_out <=  not(sig) and fe_reg when (din(0) = '1')  else
                     '0';
     --------------------------------------------------------
+    
+    
+    
+    
+    
+    -- synthesis translate_off
+	L_CHECKS_BK:   block
+    begin
+    
+        L_RESET_CHECK:  process is
+        begin
+            wait until rising_edge(rstn);
+            
+            assert(din = B"00")     report "Reset value error: 'din'"       severity failure;
+            assert(fe_reg = '0')    report "Reset value error: 'fe_reg'"    severity failure;
+            
+        end process;
+        
+    end block;
+	-- synthesis translate_on
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 end architecture rtl;
 
