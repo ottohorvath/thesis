@@ -35,63 +35,104 @@ end entity de_det;
 ---------------------------------------------------------------------------
 architecture rtl of de_det is   
 
-    signal de_reg   :   std_logic;
-    signal de_xor   :   std_logic;
+
+    type    state_t is (
+        IDLE        ,
+        ENABLED     ,
+        SAMPLING
+    );
+    signal  state       :           state_t;
     
-    signal dout     :   std_logic;
-    
+    signal  en_sampling :           std_logic;
+    signal  sample      :           std_logic;
+    signal  sig_changed :           std_logic;
     
 begin
     
     
-    -----------------------------------------------
-    L_DE_DET:
-        process(clk, rstn)  is
-        begin
-            if(rstn = '0')  then
-                de_reg  <= '0';
-                
-                assert(de_reg = '0') report "Reset value error: 'de_reg'" severity failure;
-                
-            elsif(rising_edge(clk)) then
-                de_reg  <= sig; 
+    det_out <=  sig_changed;      
+    
+    
+    ---------------------------------------------------------------
+    L_FSM:  process(clk,rstn)   is
+    begin
+        if(rstn = '0')  then
+            state           <= IDLE;
+            en_sampling     <= '0';
+            sig_changed     <= '0';
             
-            end if;
-        end process;
+            
+        elsif(rising_edge(clk)) then
         
-        de_xor <= de_reg xor sig;                   -- Simple dual-edge detection: XOR-ing the input and the output of the flop
-    -----------------------------------------------
-    
-    
-    
-    -----------------------------------------------
-    L_DE_DOUT:
-        process(clk, rstn)  is
-        begin
-            if(rstn = '0')  then
-                dout    <= '0';
-                
-                assert(dout = '0') report "Reset value error: 'dout'" severity failure;
-                
-            elsif(rising_edge(clk)) then
+            case(state) is
                 ----------------------------------------
-                if(en = '1' and clr = '0')    then  -- When it needs to watch the DUV signal
-                
-                    dout <= de_xor;                 -- Just pass the change indicator signal to the flop.
-                    
-                end if;
-                ----------------------------------------     
-                if(en = '0' and clr = '1')   then   -- When it needs to be cleared
-                
-                    dout <= '0';
-                    
-                end if;
+                when IDLE       => sig_changed  <= '0';
+                                   en_sampling  <= '0';
+                                   
+                                   
+                                   if(en = '1')   then
+                                       state    <= ENABLED;
+                                   end if;
                 ----------------------------------------
-            end if;
-        end process;
+                when ENABLED    => en_sampling  <= '1';
+                                    
+                                   state        <= SAMPLING;
+                ----------------------------------------
+                when SAMPLING   => if(sample /= sig)   then--
+                                      sig_changed <= '1';  --
+                                   else                    -- Dual edge detector :D
+                                      sig_changed <= '0';  --
+                                   end if;                 --
+                                                           
+                                   if(clr = '1')  then
+                                      state     <= IDLE;
+                                   end if;
+                ----------------------------------------
+                when others     =>  state <= IDLE;
+                
+            end case;
+        end if;
         
-        det_out <= dout;
-    -----------------------------------------------
+        
+        
+    
+    end process;
+    ---------------------------------------------------------------
+    
+    
+    ---------------------------------------------------------------
+    L_SAMPLER:  process(clk,rstn)  is
+    begin
+        if(rstn = '0')  then
+            sample <= '0';
+            
+        elsif(rising_edge(clk)) then
+            -----------------------------
+            if(en_sampling = '1')   then
+                sample  <= sig;
+                
+            end if;
+            -----------------------------
+        end if;
+    end process;
+    ---------------------------------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 end architecture rtl;
 
