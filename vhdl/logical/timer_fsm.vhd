@@ -41,6 +41,8 @@ architecture rtl of timer_fsm   is
     signal  cur_state:  state_t;
     signal  nxt_state:  state_t;
     
+    
+    
 begin
     
     
@@ -62,13 +64,7 @@ begin
         case(cur_state) is
             ------------------------------------------
             when IDLE =>
-            
-                --show_cntr   <= '0';
-                cntr_clr    <= '1';
-                --cntr_en     <= '0';
-                det_clr     <= '1';
-                --det_en      <= '0';
-                
+                            
                 if(en_fsm = '1' and clr_fsm = '0')  then
                     nxt_state   <= FSM_ENABLED;
                 end if;
@@ -89,7 +85,7 @@ begin
             when DE_DET_AND_CNTR_ENABLED =>
                 
                 cntr_en <= '1';
-                det_en  <= '1';
+                --det_en  <= '1';
                 
                 if(en_fsm = '0' and clr_fsm = '1')  then
                     nxt_state   <= IDLE;
@@ -105,17 +101,25 @@ begin
                 show_cntr   <= '1';
                 
                 if(en_fsm = '0' and clr_fsm = '1')  then
-                    nxt_state   <= IDLE;
 
+
+                    det_clr     <= '1';
+                    cntr_clr    <= '1';
+                    
+                    nxt_state   <= IDLE;
                     
                 end if;
                 
             ------------------------------------------
             -- When the FSM reached an undefined state.
+            -- Excluding it from CCov
+            
+            -- coverage off
             when others =>
             
                 report "?" severity failure;
                 nxt_state   <= IDLE;
+            -- coverage on
             ------------------------------------------
         end case;
     
