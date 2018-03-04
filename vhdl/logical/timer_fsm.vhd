@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------
 --
--- Author: Otto Horvath           
---                                
+-- Author: Otto Horvath
+--
 ---------------------------------------------------------------------------
 --
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ---------------------------------------------------------------------------
 
@@ -17,8 +17,8 @@ entity timer_fsm is
     port(
         clk         :   in      std_logic;
         rstn        :   in      std_logic;
-        en_fsm      :   in      std_logic;
-        clr_fsm     :   in      std_logic;
+        en          :   in      std_logic;
+        clr         :   in      std_logic;
         de_caught   :   in      std_logic;
         show_cntr   :   out     std_logic;
         cntr_clr    :   out     std_logic;
@@ -30,111 +30,79 @@ end entity timer_fsm;
 
 
 architecture rtl of timer_fsm   is
-    
+
     type state_t is(
-        IDLE,
-        FSM_ENABLED,
-        DE_DET_AND_CNTR_ENABLED,
-        DE_CAUGHT_AND_WAIT_FOR_CLR
+        IDLE    ,
+        ENABLED ,
+        COUNTING,
+        DONE
     );
-    
+
     signal  cur_state:  state_t;
     signal  nxt_state:  state_t;
-    
-    
-    
+
+
+
 begin
     
-    
-    -----------------------------------------------------------------
-    -- Modeling the output and the next-state logic,
-    -- with two-process FSM description, so it is expected from the synthesizer to generate non-buffered (non-registered) outputs.
-    
-    L_LOGIC:    process(cur_state, en_fsm, clr_fsm, de_caught) is
+    L_FSM:  block
     begin
+        ------------------------------------------------
+        L_NEXT_STATE:   process(cur_state,en,clr,de_caught) is
+        begin
+            
+            nxt_state   <= cur_state;
+            
+            case(cur_state) is
+                ----------------------------------------
+                when IDLE       =>  if(en='1' and clr='0')  then
+                                        nxt_state   <= ENABLED;
+                                    end if;
+                ----------------------------------------                
+                when ENABLED    =>  if(en='0' and clr='1')  then
+                                        nxt_state   <= IDLE;
+                                    elsif(de_caught = '1')  then
+                                        nxt_state   <= COUNTING;
+                                    end if;
+                ----------------------------------------
+                when COUNTING   =>  if(en='0' and clr='1')  then
+                                        nxt_state   <= IDLE;
+                                    elsif(de_caught = '1')  then
+                                        nxt_state   <= DONE;
+                                    end if;
+                ----------------------------------------
+                when DONE       =>  if(en='0' and clr='1')  then
+                                        nxt_state   <= IDLE;
+                                    end if;
+                ----------------------------------------
+                -- coverage off
+                when others =>  nxt_state   <= IDLE;
+                -- coverage on
+                ----------------------------------------
+            end case;
+        end process;
+        ------------------------------------------------
         
-        nxt_state   <= cur_state;    --
-                                
-        show_cntr   <= '0';     --  
-        cntr_clr    <= '0';     -- Default assignments (otherwise these would model latches)
-        cntr_en     <= '0';     --
-        det_clr     <= '0';     --
-        det_en      <= '0';     --
+        -- FSM outputs
+        show_cntr   <=  '1' when (cur_state = DONE) else '0';    
+        cntr_clr    <=  '1' when (cur_state = IDLE) else '0';
+        cntr_en     <=  '1' when (cur_state = COUNTING) else '0';
+        det_clr     <=  '1' when (cur_state = IDLE) else '0';
+        det_en      <=  '1' when ((cur_state = ENABLED) or (cur_state = COUNTING)) else '0';
         
-        case(cur_state) is
-            ------------------------------------------
-            when IDLE =>
-                            
-                if(en_fsm = '1' and clr_fsm = '0')  then
-                    nxt_state   <= FSM_ENABLED;
-                end if;
-
-            ------------------------------------------
-            when FSM_ENABLED =>
+        
+        ----------------------------------------
+        L_STATE_REG:    process(clk,rstn)  is
+        begin
+            if(rstn = '0')  then
+                cur_state   <= IDLE;
                 
-                det_en  <= '1';
+            elsif(rising_edge(clk)) then
+                cur_state   <= nxt_state;
                 
-                if(en_fsm = '0' and clr_fsm = '1')  then
-                    nxt_state   <= IDLE;
-                    
-                elsif(de_caught = '1')  then
-                    nxt_state   <= DE_DET_AND_CNTR_ENABLED;
-                
-                end if;
-            ------------------------------------------
-            when DE_DET_AND_CNTR_ENABLED =>
-                
-                cntr_en <= '1';
-                --det_en  <= '1';
-                
-                if(en_fsm = '0' and clr_fsm = '1')  then
-                    nxt_state   <= IDLE;
-                    
-                elsif(de_caught = '1')  then
-                    nxt_state   <= DE_CAUGHT_AND_WAIT_FOR_CLR;
-                    
-                
-                end if;
-            ------------------------------------------
-            when DE_CAUGHT_AND_WAIT_FOR_CLR =>
-            
-                show_cntr   <= '1';
-                
-                if(en_fsm = '0' and clr_fsm = '1')  then
-
-
-                    det_clr     <= '1';
-                    cntr_clr    <= '1';
-                    
-                    nxt_state   <= IDLE;
-                    
-                end if;
-                
-            ------------------------------------------
-            -- When the FSM reached an undefined state.
-            -- Excluding it from CCov
-            
-            -- coverage off
-            when others =>
-            
-                report "?" severity failure;
-                nxt_state   <= IDLE;
-            -- coverage on
-            ------------------------------------------
-        end case;
+            end if;
+        end process;
+        ----------------------------------------
+    end block;
     
-    end process;
-
-    ------------------------------------------
-    -- Modeling the state-register.
-    
-    L_STATE_REG_P:  process(clk, rstn)  is
-    begin
-        if(rstn = '0')  then
-            cur_state   <= IDLE;
-        elsif(rising_edge(clk)) then
-            cur_state   <= nxt_state;
-        end if;
-    end process;
-    ------------------------------------------
 end architecture;
