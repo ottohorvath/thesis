@@ -35,8 +35,8 @@ is
         constant    super_name      :   in      string;     --
                                                             -- Setup phase executing procedure: 
         variable    clk_en_in_v     :   in      std_logic;  --  - welcome message + clock gen. + reset gen.
-        signal      clk_en_out      :   out     std_logic;  -- 
-        signal      rst_out         :   out     std_logic   --
+        signal      clk_en_out      :   out     std_logic  -- 
+        
     ); 
     --------------------------------------------------
     
@@ -68,11 +68,13 @@ is
                 constant    super_name      :   in  string;
 
                 signal      rtl_in_if       :   out rtl_in_if_t ;
-                signal      tb_if           :   in  tb_if_t     ;
+                signal      clk             :   in  std_logic     ;
+                signal      rst_req         :   out std_logic     ;
+                
                 signal      cd              :   out check_descriptor_array (0 to check_no_max_c-1);                
                 
                 signal      put_it          :   out std_logic   ;
-                signal      get_it          :   in  std_logic   ;
+                signal      got_it          :   in  std_logic   ;
                 signal      passed          :   in  std_logic   ;                
                 signal      id              :   out integer        
             )
@@ -82,27 +84,35 @@ is
         constant    super_name  :   in      string;
         
         signal      rtl_in_if   :   out     rtl_in_if_t ;
-        signal      tb_if       :   in      tb_if_t     ;
+        signal      clk             :   in  std_logic     ;
+        signal      rst_req         :   out std_logic     ;
+        
         signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1);
         
         signal      put_it      :   out     std_logic   ;
-        signal      get_it      :   in      std_logic   ;
+        signal      got_it      :   in      std_logic   ;
         signal      passed      :   in      std_logic   ;
         signal      id          :   out     integer    
     );
     --------------------------------------------------
     
     
-
+    ------------------------------------------
+    procedure   processor_wr(                        -- Processor write with std_logic data
+        constant    din     :   in  std_logic;
+        signal      clk     :   in  std_logic;
+        signal      wdata   :   out std_logic;
+        signal      wr      :   out std_logic
+    );
+    ------------------------------------------
     
-    
-    
-    
-    
-    
-    
-    
-    
+    procedure   processor_wr(                       -- Processor write with slv data
+        constant    din     :   in  std_logic_vector;
+        signal      clk     :   in  std_logic;
+        signal      wdata   :   out std_logic_vector;
+        signal      wr      :   out std_logic
+    );
+    ------------------------------------------
     
     
     
@@ -142,11 +152,12 @@ is
                 constant    super_name      :   in  string;
 
                 signal      rtl_in_if       :   out rtl_in_if_t ;
-                signal      tb_if           :   in  tb_if_t     ;
+                signal      clk             :   in  std_logic     ;
+                signal      rst_req         :   out std_logic     ;
                 signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);
                 
                 signal      put_it          :   out std_logic   ;
-                signal      get_it          :   in  std_logic   ;
+                signal      got_it          :   in  std_logic   ;
                 signal      passed          :   in  std_logic   ;
                 signal      id              :   out integer    
             )
@@ -156,12 +167,15 @@ is
         constant    super_name  :   in      string;
         
         signal      rtl_in_if   :   out     rtl_in_if_t ;
-        signal      tb_if       :   in      tb_if_t     ;
+        signal      clk             :   in  std_logic     ;
+        signal      rst_req         :   out std_logic     ;
+        
+        
         signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1);
         
        
         signal      put_it      :   out     std_logic   ;
-        signal      get_it      :   in      std_logic   ;
+        signal      got_it      :   in      std_logic   ;
         signal      passed      :   in      std_logic   ;
         signal      id          :   out     integer    
     )is
@@ -171,10 +185,11 @@ is
     
         -- Run 'called_tc' generic procedure: the actual resolved procedure name will be like this: <RTL>_test
         called_tc(rtl_name,scope,           rtl_in_if   ,
-                                            tb_if       ,
+                                            clk         ,
+                                            rst_req     ,
                                             cd          ,
                                             put_it      ,
-                                            get_it      ,
+                                            got_it      ,
                                             passed      ,
                                             id          );
     
@@ -188,8 +203,8 @@ is
         constant    super_name      :   in      string;
         
         variable    clk_en_in_v     :   in      std_logic;
-        signal      clk_en_out      :   out     std_logic;
-        signal      rst_out         :   out     std_logic
+        signal      clk_en_out      :   out     std_logic
+        
     )is
         constant    this            :           string  :=  "setup";
         constant    scope           :           string  :=  super_name &"."& this;
@@ -199,7 +214,6 @@ is
         
         clk_gen(scope,      clk_en_in_v,clk_en_out);    -- Clock generating
         
-        rst_gen(scope,      rst_out);                   -- Generating a short reset pulse
 
     end procedure;
     ------------------------------------------------------------------------------
@@ -233,25 +247,46 @@ is
     ------------------------------------------------------------------------------
     
     
+    ------------------------------------------
+    procedure   processor_wr(                      
+        constant    din     :   in  std_logic;
+        signal      clk     :   in  std_logic;
+        signal      wdata   :   out std_logic;
+        signal      wr      :   out std_logic
+    )is
+    begin
+        
+        wait_re(clk);
+        ----------------
+        wdata   <= din;
+        wr      <= '1';
+        wait_re(clk);
+        ---------------
+        wr      <= '0';
+        
+    end procedure;
+    ------------------------------------------
     
- 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    ------------------------------------------
+    procedure   processor_wr(                      
+        constant    din     :   in  std_logic_vector;
+        signal      clk     :   in  std_logic;
+        signal      wdata   :   out std_logic_vector;
+        signal      wr      :   out std_logic
+    )is
+    begin
+        
+        wait_re(clk);
+        ----------------
+        wdata   <= din;
+        wr      <= '1';
+        wait_re(clk);
+        ---------------
+        wr      <= '0';
+        
+    end procedure;
+    ------------------------------------------
     
     
     

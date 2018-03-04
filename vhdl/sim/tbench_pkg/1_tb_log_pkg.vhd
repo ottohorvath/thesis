@@ -73,7 +73,11 @@ package tb_log_pkg  is
     
     
     
-    
+    procedure perror(
+        constant    name:   in  string;
+        constant    exp:    in  string;
+        constant    act:    in  string
+    );
     
     
     
@@ -233,10 +237,17 @@ package body tb_log_pkg is
     
     
     
+    procedure perror(
+        constant    name:   in  string;
+        constant    exp:    in  string;
+        constant    act:    in  string
+    ) is
     
+    begin
     
-    
-    
+        print(name &" [ERROR] Expected = "&exp &" Actual = "&act,1);
+        
+    end procedure;
     
     
     

@@ -35,12 +35,13 @@ package tb_utils_pkg is
         clk     :   std_logic;                          --
         clk_en  :   std_logic;                          -- Reset and clock grouped together.
         rstn    :   std_logic;                          --
+        rstn_req:   std_logic;
     end record;
     
     
     type p_hs_t     is record
         put_it  :   std_logic;   
-        get_it  :   std_logic;   
+        got_it  :   std_logic;   
         passed  :   std_logic;
         id      :   integer  ; 
     end record;
@@ -56,12 +57,13 @@ package tb_utils_pkg is
     signal      tb_if       :   tb_if_t :=(             --
         clk     =>  '1',                                --
         clk_en  =>  '0',                                -- Testbench resouce related signals.
-        rstn    =>  '1'                                 --
+        rstn    =>  '1',                                 --
+        rstn_req=>  '0'
     );                                                  --
     
     signal p_handshake      :   p_hs_t  :=(             --
         put_it  =>  '0',                                --
-        get_it  =>  '0',                                -- Handshake signals between the two main process
+        got_it  =>  '0',                                -- Handshake signals between the two main process
         passed  =>  '0',
         id      =>   0                                  --
     );                                                  --
@@ -84,7 +86,7 @@ package tb_utils_pkg is
     procedure   rst_gen(                                    --
         constant    super_name      :   in      string;     --
                                                             -- Reset generating procedure.
-        signal      rst_out         :   out     std_logic   --
+        signal      rst_req         :   out     std_logic   --
     );                                                      --
    
     --------------------------------------------------
@@ -94,6 +96,22 @@ package tb_utils_pkg is
         variable    en_in_v         :   in      std_logic;  -- concurrent assignment in '<RTL>_tb'.
         signal      en_o            :   out     std_logic   --
     );
+    
+    --------------------------------------------------      --
+    function slv(    
+        N: natural; 
+        B: std_logic
+    )   return std_logic_vector;                            -- Replacate std_logic-s to slv, like Verilog's replicate {32{1b1}} operator
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 end package;
@@ -122,7 +140,31 @@ end package;
 
 package body tb_utils_pkg is
 
-
+    ------------------------------------------------------------------------------
+    function slv(
+        N:      natural;
+        B:      std_logic
+    )   return  std_logic_vector
+    is
+        variable result: std_logic_vector(1 to N);
+    begin
+        for i in 1 to N loop
+            result(i) := B;
+        end loop;
+        
+        return result;
+    end;
+    ------------------------------------------------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -156,19 +198,20 @@ package body tb_utils_pkg is
     procedure   rst_gen(
         constant    super_name  :   in      string;
         
-        signal      rst_out     :   out     std_logic
+        signal      rst_req     :   out     std_logic
     )is
         constant    this        :           string  :=  "rst_gen";
         constant    scope       :           string  :=  super_name &"."& this;
     begin
     
-        wait for    1 ns;
-        rst_out     <=  '0';
-        print(scope &": Reset is asserted.", 1);
+
+        rst_req <= '1';
         
-        wait for    1 ns;
-        rst_out     <=  '1';
-        print(scope &": Reset is de-asserted.", 1);
+        wait for 1 ns;
+        
+        rst_req <= '0';
+        
+        wait for 1 ns;
         
     end procedure;
     ------------------------------------------------------------------------------

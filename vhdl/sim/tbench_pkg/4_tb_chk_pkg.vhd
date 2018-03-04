@@ -43,7 +43,7 @@ is
                 signal      tb_if           :   in  tb_if_t     ;
                 
                 signal      put_it          :   in  std_logic   ;   
-                signal      get_it          :   out std_logic   ;
+                signal      got_it          :   out std_logic   ;
                 signal      passed          :   out std_logic   ;
                 signal      id              :   in  integer   
             )
@@ -56,7 +56,7 @@ is
         signal      tb_if       :   in      tb_if_t     ;
         
         signal      put_it      :   in      std_logic   ;
-        signal      get_it      :   out     std_logic   ;
+        signal      got_it      :   out     std_logic   ;
         signal      passed      :   out     std_logic   ;
         signal      id          :   in      integer   
     );
@@ -94,7 +94,7 @@ is
                 signal      tb_if           :   in  tb_if_t     ; 
                 
                 signal      put_it          :   in  std_logic   ;
-                signal      get_it          :   out std_logic   ;
+                signal      got_it          :   out std_logic   ;
                 signal      passed          :   out std_logic   ;
                 signal      id              :   in  integer   
                 
@@ -108,7 +108,7 @@ is
         signal      tb_if       :   in      tb_if_t     ;
         
         signal      put_it      :   in      std_logic   ;
-        signal      get_it      :   out     std_logic   ;
+        signal      got_it      :   out     std_logic   ;
         signal      passed      :   out     std_logic   ;
         signal      id          :   in      integer   
         
@@ -121,7 +121,7 @@ is
         called_chk(rtl_name,scope,          rtl_out_if  ,
                                             tb_if       , 
                                             put_it      ,
-                                            get_it      ,
+                                            got_it      ,
                                             passed      ,
                                             id          );
         
