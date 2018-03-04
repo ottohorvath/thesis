@@ -53,7 +53,7 @@ begin
     L_FSM:  block
     begin
         ----------------------------------------
-        L_NEXT_STATE:   process(cur_state)   is
+        L_NEXT_STATE:   process(cur_state,en,clr)   is
         begin
 
             nxt_state   <= cur_state;
