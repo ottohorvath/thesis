@@ -25,7 +25,9 @@ entity timer is
         
         wr              :   in  std_logic;
         wdata           :   in  std_logic_vector(1  downto  0);
+        -- coverage off t
         rdata           :   out std_logic_vector(CNTR_WIDTH-1   downto  0);
+        -- coverage on
         signal_from_DUV :   in  std_logic
     );
 end entity timer;
@@ -38,9 +40,11 @@ architecture rtl of timer is
     signal  din         :   std_logic_vector(1  downto  0);
     signal  nxt_din     :   std_logic_vector(1  downto  0);
     
+    -- coverage off t
     signal  cntr_dout_mux :   std_logic_vector(CNTR_WIDTH-1 downto 0);
-    
     signal  cntr_dout_w :   std_logic_vector(CNTR_WIDTH-1 downto 0);
+    -- coverage on
+    
     signal  show_cntr_w :   std_logic;
     
     signal  cntr_en_w   :   std_logic;
@@ -123,8 +127,8 @@ begin
                 port map(
                     clk         =>  clk         ,
                     rstn        =>  rstn        ,
-                    en_fsm      =>  din(0)      ,
-                    clr_fsm     =>  din(1)      ,
+                    en          =>  din(0)      ,
+                    clr         =>  din(1)      ,
                     de_caught   =>  de_caught_w ,
                     show_cntr   =>  show_cntr_w ,
                     cntr_clr    =>  cntr_clr_w  ,
