@@ -1,21 +1,17 @@
 ---------------------------------------------------------------------------
 --
--- Author: Otto Horvath           
---                                
+-- Author: Otto Horvath
+--
 ---------------------------------------------------------------------------
 --
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ---------------------------------------------------------------------------
 
 library ieee                    ;
 use     ieee.std_logic_1164.all ;
 use     ieee.numeric_std.all    ;
-
-
-
-
 
 ---------------------------------------------------------------------------
 entity de_det is
@@ -33,128 +29,89 @@ end entity de_det;
 
 
 ---------------------------------------------------------------------------
-architecture rtl of de_det is   
-
+architecture rtl of de_det is
 
     type    state_t is (
         IDLE        ,
-        ENABLED     ,
-        SAMPLING
+        ENABLED
     );
-    signal  state       :           state_t;
-    
+    signal  cur_state:  state_t;
+    signal  nxt_state:  state_t;
+
     signal  en_sampling :           std_logic;
-    signal  sample      :           std_logic;
     signal  sig_changed :           std_logic;
-    
+
+    signal  sample      :           std_logic;
 begin
-    
-    
-    det_out <=  sig_changed;      
-    
-    
+
+
+    -- Driving FSM output to primer output
+    det_out <=  sig_changed;
+
+
     ---------------------------------------------------------------
-    L_FSM:  process(clk,rstn)   is
+    L_FSM:  block
     begin
-        if(rstn = '0')  then
-            state           <= IDLE;
-            en_sampling     <= '0';
-            sig_changed     <= '0';
-            
-            
-        elsif(rising_edge(clk)) then
-        
-            case(state) is
+        ----------------------------------------
+        L_NEXT_STATE:   process(cur_state)   is
+        begin
+
+            nxt_state   <= cur_state;
+
+            case(cur_state) is
                 ----------------------------------------
-                when IDLE       => sig_changed  <= '0';
-                                   en_sampling  <= '0';
-                                   
-                                   
-                                   if(en = '1')   then
-                                       state    <= ENABLED;
-                                   end if;
+                when IDLE       =>  if(en = '1' and clr = '0')   then
+                                        nxt_state   <= ENABLED;
+                                    end if;
                 ----------------------------------------
-                when ENABLED    => en_sampling  <= '1';
-                                    
-                                   state        <= SAMPLING;
+                when ENABLED    =>  if(clr = '1' and en = '0')  then
+                                        nxt_state   <= IDLE;
+                                    end if;
                 ----------------------------------------
-                when SAMPLING   => if(sample /= sig)   then--
-                                      sig_changed <= '1';  --
-                                   else                    -- Dual edge detector :D
-                                      sig_changed <= '0';  --
-                                   end if;                 --
-                                                           
-                                   if(clr = '1')  then
-                                      state     <= IDLE;
-                                   end if;
-                ----------------------------------------
-                when others     =>  state <= IDLE;
-                
+                -- coverage off
+                when others     =>  nxt_state <= IDLE;
+                -- coverage on
             end case;
-        end if;
-        
-        
-        
-    
-    end process;
+        end process;
+        ----------------------------------------
+
+        -- FSM outputs
+        en_sampling <=  '1' when( cur_state = ENABLED )   else '0';
+        sig_changed <=  '1' when((cur_state = ENABLED) and (sig /= sample)) else '0';
+
+        ----------------------------------
+        L_STATE_REG: process (clk,rstn) is
+        begin
+            if(rstn='0')    then
+                cur_state   <= IDLE;
+
+            elsif(rising_edge(clk)) then
+                cur_state   <= nxt_state;
+
+            end if;
+        end process;
+        ----------------------------------
+
+    end block;
     ---------------------------------------------------------------
-    
-    
+
+
     ---------------------------------------------------------------
     L_SAMPLER:  process(clk,rstn)  is
     begin
         if(rstn = '0')  then
             sample <= '0';
-            
+
         elsif(rising_edge(clk)) then
             -----------------------------
             if(en_sampling = '1')   then
                 sample  <= sig;
-                
+
             end if;
             -----------------------------
         end if;
     end process;
     ---------------------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 end architecture rtl;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
