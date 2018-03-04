@@ -32,13 +32,14 @@ end entity cntr;
 
 ---------------------------------------------------------------------------
 architecture rtl of cntr is
-
+    
+    -- coverage off t
     signal q:   std_logic_vector(WIDTH-1    downto  0);
+    -- coverage on
+    
     
 begin
 
-    --assert(WIDTH <= 0)
-    --    report "The width of the counter should be a positive !" severity failure;
     
     -------------------------------------------------------
     L_CNTR_P:   process(clk, rstn)  is
@@ -58,8 +59,12 @@ begin
             
         end if;
     end process;
-
+    
+    
+    
+    
     number_of_cycles    <= q;
+    
     -------------------------------------------------------
 
 end architecture rtl;
