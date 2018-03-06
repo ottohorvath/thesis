@@ -46,18 +46,18 @@ architecture    rtl of config_reg_if_fsm   is
     type    state_t    is(
         IDLE            ,
 
-        ST_RD_ADDR      ,   --
-        INIT_RD_TRANS   ,   --
-        EXTD_RD_TRANS   ,   --  States related to a read transaction.
-        WAIT_FOR_RD_ACK ,   --
-        CAPTURE_RD_DATA ,   --
+        ST_RADDR      ,   --
+        INIT_RD   ,   --
+        EXTD_RD   ,   --  States related to a read transaction.
+        WAIT_RACK ,   --
+        CAPT_RDATA ,   --
 
-        ST_WR_ADDR      ,   --
-        ST_WR_DATA      ,   --
-        INIT_WR_TRANS   ,   --  States related to a wr transaction.
-        GEN_WR_TRANS    ,   --
-        EXTD_WR_TRANS   ,   --
-        WAIT_FOR_WR_ACK     --
+        ST_WADDR      ,   --
+        ST_WDATA      ,   --
+        INIT_WR   ,   --  States related to a wr transaction.
+        GEN_WR    ,   --
+        EXTD_WR   ,   --
+        WAIT_WACK     --
     );
     signal  cur_state           :   state_t;
     signal  nxt_state           :   state_t;
@@ -76,63 +76,71 @@ begin
             case(cur_state) is
                 -----------------------------------------------------
                 when IDLE           =>  if(wr = '1' and wdata = std_logic_vector(resize(signed(RD_START), DW)) ) then
-                                            nxt_state   <=  ST_RD_ADDR;         -- Read indicator
+                                            nxt_state   <=  ST_RADDR;         -- Read indicator
                                         end if;
                                         if(wr = '1' and wdata = std_logic_vector(resize(signed(WR_START), DW)) ) then
-                                            nxt_state   <=  ST_WR_ADDR;         -- Write indicator
+                                            nxt_state   <=  ST_WADDR;         -- Write indicator
                                         end if;
-                --=============================================================
-                --=============================================================
-                when ST_RD_ADDR     =>  if(wr = '1')    then                 --
-                                            nxt_state   <= INIT_RD_TRANS;    --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when INIT_RD_TRANS  =>  if(ACK_NEEDED)  then                 --
-                                            nxt_state   <= WAIT_FOR_RD_ACK;  -- Read related states
-                                        else                                 --
-                                            nxt_state   <= CAPTURE_RD_DATA;  --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when WAIT_FOR_RD_ACK=>  if(ack_from_DUV = '1')  then         --
-                                            nxt_state   <= EXTD_RD_TRANS;    --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when EXTD_RD_TRANS  =>  if(ack_from_DUV = '1')  then         --
-                                            nxt_state   <= IDLE;             --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when CAPTURE_RD_DATA=>  nxt_state   <= IDLE;                  --
-                --=============================================================
-                --=============================================================
-                when ST_WR_ADDR     =>  if(wr = '1')    then                 --
-                                            nxt_state   <=  ST_WR_DATA;      --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when ST_WR_DATA     =>  if(wr = '1')    then                 --
-                                            nxt_state   <=  INIT_WR_TRANS;   --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when INIT_WR_TRANS  =>  if(ACK_NEEDED)  then                 --
-                                            nxt_state   <=  WAIT_FOR_WR_ACK; --
-                                        else                                 -- Write related states
-                                            nxt_state   <=  GEN_WR_TRANS;    --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when WAIT_FOR_WR_ACK=>  if(ack_from_DUV = '1')  then         --
-                                            nxt_state   <=  GEN_WR_TRANS;    --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when GEN_WR_TRANS   =>  if(ACK_NEEDED)  then                 --
-                                            nxt_state   <= EXTD_WR_TRANS;    --
-                                        else                                 --
-                                            nxt_state   <= IDLE;             --
-                                        end if;                              --
-                -----------------------------------------------------        --
-                when EXTD_WR_TRANS  =>  if(ack_from_DUV = '1')  then         --
-                                            nxt_state   <= IDLE;             --
-                                        end if;                              --
-                --=============================================================
-                --=============================================================
+                --===================================================
+
+
+
+                --===================================================--
+                when ST_RADDR   =>  if(wr = '1')    then             --
+                                        nxt_state   <= INIT_RD;      --
+                                    end if;                          --
+                -------------------------------------------------------
+                when INIT_RD    =>  if(ACK_NEEDED)  then             --
+                                        nxt_state   <= WAIT_RACK;    --
+                                    else                             --
+                                        nxt_state   <= CAPT_RDATA;   --
+                                    end if;                          -- Read-related signals
+                -------------------------------------------------------
+                when WAIT_RACK  =>  if(ack_from_DUV = '1')  then     --
+                                        nxt_state   <= EXTD_RD;      --
+                                    end if;                          --
+                -------------------------------------------------------
+                when EXTD_RD    =>  if(ack_from_DUV = '1')  then     --
+                                        nxt_state   <= IDLE;         --
+                                    end if;                          --
+                -------------------------------------------------------
+                when CAPT_RDATA =>  nxt_state       <= IDLE;         --
+                --===================================================--
+
+
+                --===================================================--
+                when ST_WADDR   =>  if(wr = '1')    then             --
+                                        nxt_state   <=  ST_WDATA;    --
+                                    end if;                          --
+                -------------------------------------------------------
+                when ST_WDATA   =>  if(wr = '1')    then             --
+                                        nxt_state   <=  INIT_WR;     --
+                                    end if;                          --
+                -------------------------------------------------------
+                when INIT_WR    =>  if(ACK_NEEDED)  then             --
+                                        nxt_state   <=  WAIT_WACK;   --
+                                    else                             --
+                                        nxt_state   <=  GEN_WR;      --
+                                    end if;                          -- Write-related signals
+                ------------------------------------------------------- 
+                when WAIT_WACK  =>  if(ack_from_DUV = '1')  then     --
+                                        nxt_state   <=  GEN_WR;      --
+                                    end if;                          --
+                -------------------------------------------------------
+                when GEN_WR     =>  if(ACK_NEEDED)  then             --
+                                        nxt_state   <= EXTD_WR;      --
+                                    else                             --
+                                        nxt_state   <= IDLE;         --
+                                    end if;                          --
+                -------------------------------------------------------
+                when EXTD_WR    =>  if(ack_from_DUV = '1')  then     --
+                                        nxt_state   <= IDLE;         --
+                                    end if;                          --
+                --===================================================--
+
+
+
+                --===================================================
 
                 -----------------------------------------------------
                 -- coverage off
@@ -148,45 +156,65 @@ begin
         -- FSM outputs
         L_NO_ACK: if(ACK_NEEDED = false)  generate
             --------------------------------------------------
-            cs      <=  '1' when( cur_state = INIT_RD_TRANS   or
-                                  cur_state = CAPTURE_RD_DATA or
-                                  
-                                  cur_state = INIT_WR_TRANS   or
-                                  cur_state = GEN_WR_TRANS
+            cs      <=  '1' when( cur_state = INIT_RD       or
+                                  cur_state = CAPT_RDATA    or
+
+                                  cur_state = INIT_WR       or
+                                  cur_state = GEN_WR
                                 ) else '0';
             --------------------------------------------------
-            rstrb   <=  '1' when( cur_state = CAPTURE_RD_DATA
+            rstrb   <=  '1' when( cur_state = CAPT_RDATA
                                 ) else '0';
             --------------------------------------------------
-            wstrb   <=  '1' when( cur_state = GEN_WR_TRANS
+            wstrb   <=  '1' when( cur_state = GEN_WR
+                                ) else '0';
+            --------------------------------------------------
+            addr_en <=  '1' when( cur_state = ST_RADDR      or
+                                  cur_state = ST_WADDR
+                                ) else '0';
+            --------------------------------------------------
+            wdata_en<=  '1' when( cur_state = ST_WDATA
+                                ) else '0';
+            --------------------------------------------------
+            rdata_en<=  '1' when( cur_state = CAPT_RDATA
                                 ) else '0';
             --------------------------------------------------
         end generate;
-        
+
         -- FSM outputs
         L_ACK: if(ACK_NEEDED = true)  generate
             --------------------------------------------------
-            cs      <=  '1' when( cur_state = INIT_RD_TRANS   or
-                                  cur_state = CAPTURE_RD_DATA or
-                                  cur_state = WAIT_FOR_RD_ACK or
-                                  cur_state = EXTD_RD_TRANS   or
-                                  
-                                  cur_state = INIT_WR_TRANS   or
-                                  cur_state = GEN_WR_TRANS    or
-                                  cur_state = WAIT_FOR_WR_ACK or
-                                  cur_state = EXTD_WR_TRANS
+            cs      <=  '1' when( cur_state = INIT_RD       or
+                                  cur_state = CAPT_RDATA    or
+                                  cur_state = WAIT_RACK     or
+                                  cur_state = EXTD_RD       or
+
+                                  cur_state = INIT_WR       or
+                                  cur_state = GEN_WR        or
+                                  cur_state = WAIT_WACK     or
+                                  cur_state = EXTD_WR
                                 ) else '0';
             --------------------------------------------------
-            rstrb   <=  '1' when( cur_state = CAPTURE_RD_DATA or
-                                  cur_state = EXTD_RD_TRANS
+            rstrb   <=  '1' when( cur_state = CAPT_RDATA    or
+                                  cur_state = EXTD_RD
                                 ) else '0';
             --------------------------------------------------
-            wstrb   <=  '1' when( cur_state = GEN_WR_TRANS    or
-                                  cur_state = EXTD_WR_TRANS
+            wstrb   <=  '1' when( cur_state = GEN_WR        or
+                                  cur_state = EXTD_WR
+                                ) else '0';
+            --------------------------------------------------
+            addr_en <=  '1' when( cur_state = ST_RADDR      or
+                                  cur_state = ST_WADDR
+                                ) else '0';
+            --------------------------------------------------
+            wdata_en<=  '1' when( cur_state = ST_WDATA
+                                ) else '0';
+            --------------------------------------------------
+            rdata_en<=  '1' when( cur_state = CAPT_RDATA
                                 ) else '0';
             --------------------------------------------------
         end generate;
-        
+
 
         -----------------------------------------------------
         L_STATE:    process(clk,rstn)   is
