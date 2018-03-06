@@ -21,9 +21,9 @@ use     ieee.numeric_std.all    ;
 entity config_reg_if_fsm is
     generic(
         ACK_NEEDED  :       boolean :=  false   ;               -- Synthesis parameter
-        DW          :       natural :=  32      ;               -- Proc.-side IF data width
-        RD_START    :       std_logic_vector(DW-1 downto 0);    -- Read transaction indicator
-        WR_START    :       std_logic_vector(DW-1 downto 0)     -- wr transaction indicator
+        DW          :       integer :=  32      ;               -- Proc.-side IF data width
+        RD_START    :       std_logic_vector(63 downto 0);      -- Read transaction indicator
+        WR_START    :       std_logic_vector(63 downto 0)       -- wr transaction indicator
     );
     port(
         clk         :   in  std_logic;
@@ -75,10 +75,10 @@ begin
 
             case(cur_state) is
                 -----------------------------------------------------
-                when IDLE           =>  if(wr = '1' and wdata = RD_START) then
+                when IDLE           =>  if(wr = '1' and wdata = std_logic_vector(resize(signed(RD_START), DW)) ) then
                                             nxt_state   <=  ST_RD_ADDR;         -- Read indicator
                                         end if;
-                                        if(wr = '1' and wdata = WR_START) then
+                                        if(wr = '1' and wdata = std_logic_vector(resize(signed(WR_START), DW)) ) then
                                             nxt_state   <=  ST_WR_ADDR;         -- Write indicator
                                         end if;
                 --=============================================================
@@ -101,7 +101,7 @@ begin
                                             nxt_state   <= IDLE;             --
                                         end if;                              --
                 -----------------------------------------------------        --
-                when CAPTURE_RD_DATA=>  nxt_state   <= IDLE                  --
+                when CAPTURE_RD_DATA=>  nxt_state   <= IDLE;                  --
                 --=============================================================
                 --=============================================================
                 when ST_WR_ADDR     =>  if(wr = '1')    then                 --
