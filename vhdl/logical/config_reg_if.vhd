@@ -21,13 +21,12 @@ entity config_reg_if is
     generic(
         ACK_NEEDED      :       boolean :=  false   ;
         REG_LAYER       :       boolean :=  false   ;
+        
+        DW              :       integer :=  32      ;
+        AW              :       integer :=  32      ;
 
-        DW              :       natural :=  32      ;
-        RD_START        :       std_logic_vector(31 downto 0):=     X"FFFF0000";
-        WR_START        :       std_logic_vector(31 downto 0):=     X"0000FFFF";
-
-        DW              :       natural :=  32      ;
-        AW              :       natural :=  32
+        RD_START        :       std_logic_vector(63 downto 0):=     X"00000000FFFF0000"; -- WorkAround: Can't use 'DW' here, so made it wide enough
+        WR_START        :       std_logic_vector(63 downto 0):=     X"000000000000FFFF"  -- 
     );
     port(
         clk             :   in  std_logic;
@@ -85,7 +84,8 @@ begin
                 end if;
                 
             end if;
-        end if;
+        end process;
+        
         -------------------------------------------------
         rdata <=    rdata_reg       when(rd = '1')   else
                     (others => '0');
@@ -107,7 +107,7 @@ begin
                 end if;
                 
             end if;
-        end if;
+        end process;
         -------------------------------------------------
         process(clk) is
         begin
@@ -118,7 +118,7 @@ begin
                 end if;
                 
             end if;
-        end if;
+        end process;
         -------------------------------------------------
     
     end block;
@@ -136,7 +136,7 @@ begin
                 cs_reg  <= fsm_cs;
                 
             end if;
-        end if;
+        end process;
         -------------------------------------------------
         cs_to_DUV  <= cs_reg;
         -------------------------------------------------
@@ -149,7 +149,7 @@ begin
                 wstrb_reg  <= fsm_wstrb;
                 
             end if;
-        end if;
+        end process;
         -------------------------------------------------
         wstrb_to_DUV    <= wstrb_reg;
         -------------------------------------------------
@@ -162,7 +162,7 @@ begin
                 rstrb_reg  <= fsm_rstrb;
                 
             end if;
-        end if;
+        end process;
         -------------------------------------------------
         rstrb_to_DUV    <= rstrb_reg;
         -------------------------------------------------
@@ -186,7 +186,7 @@ begin
                 ACK_NEEDED      =>  ACK_NEEDED  ,
                 DW              =>  DW          ,
                 RD_START        =>  RD_START    ,
-                WR_START        =>  WD_START
+                WR_START        =>  WR_START
             )
             port map(
                 clk             => clk          ,
