@@ -1,11 +1,11 @@
+    ---------------------------------------------------------------------------
+--
+-- Author: Otto Horvath
+--
 ---------------------------------------------------------------------------
 --
--- Author: Otto Horvath           
---                                
----------------------------------------------------------------------------
+-- Description: ~
 --
--- Description: ~ 
---                
 --
 ---------------------------------------------------------------------------
 
@@ -20,182 +20,190 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity mem_if_fsm is
     generic(
-        ACK_NEEDED          :       boolean :=  false   ;                                       -- DUV-side acknowledge input for different memories 
-        
-        P_DATA_W            :       natural :=  32      ;                                       -- Proc.-side IF data width
-        RD_START            :       std_logic_vector(31 downto 0):=     X"FFFF0000";            -- Read transaction indicator
-        WR_START            :       std_logic_vector(31 downto 0):=     X"0000FFFF"             -- Write transaction indicator   
+        ACK_NEEDED  :       boolean :=  false   ;               -- Synthesis parameter
+        DW          :       integer :=  32      ;               -- Proc.-side IF data width
+        RD_START    :       std_logic_vector(63 downto 0);      -- Read transaction indicator
+        WR_START    :       std_logic_vector(63 downto 0)       -- wr transaction indicator
     );
     port(
-        clk                 :   in  std_logic;
-        rstn                :   in  std_logic;
-        
-        write               :   in  std_logic;
-        writedata           :   in  std_logic_vector(P_DATA_W-1 downto 0);
-        
-        ack_from_DUV        :   in  std_logic;
-        
-        rd_strobe           :   out std_logic;      
-        wr_strobe           :   out std_logic;      
-        
-        addr_reg_en         :   out std_logic; 
-        wr_data_reg_en      :   out std_logic; 
-        rd_data_reg_en      :   out std_logic 
+        clk         :   in  std_logic;
+        rstn        :   in  std_logic;
+        wr          :   in  std_logic;
+        wdata       :   in  std_logic_vector(DW-1 downto 0);
+        ack_from_DUV:   in  std_logic;
+        rstrb       :   out std_logic;
+        wstrb       :   out std_logic;
+        addr_en     :   out std_logic;
+        wdata_en    :   out std_logic;
+        rdata_en    :   out std_logic
     );
 end entity mem_if_fsm;
 ---------------------------------------------------------------------------
 
 architecture    rtl of mem_if_fsm   is
-    
+
     type    state_t    is(
-        IDLE            ,
-        
-        ST_RD_ADDR      ,   --
-        GEN_RD_TRANS    ,   --
-        WAIT_FOR_RD_ACK ,   -- States related to a read transaction
-        WAIT_FOR_RD_DATA,   --
-        CAPTURE_RD_DATA ,   --
-        
-        ST_WR_ADDR      ,   -- 
-        ST_WR_DATA      ,   -- 
-        GEN_WR_TRANS    ,   -- States related to a write transaction
-        WAIT_FOR_WR_ACK     -- 
-        
+        IDLE        ,   -- Default state
+
+        ST_RADDR    ,   --
+        INIT_RD     ,   --
+        WAIT_RACK   ,   --  States related to a read transaction.
+        CAPT_RDATA  ,   --
+
+        ST_WADDR    ,   --
+        ST_WDATA    ,   --
+        INIT_WR     ,   --  States related to a wr transaction.
+        WAIT_WACK       --
+
     );
-    signal  curr_state           :   state_t;
-    signal  next_state           :   state_t;
-    
+    signal  cur_state           :   state_t;
+    signal  nxt_state           :   state_t;
+
 begin
 
-    -----------------------------------------------------------------
-    L_LOGIC:
-        process(curr_state, writedata, write, ack_from_DUV)   is
-        begin
-            
-            addr_reg_en     <=  '0' ;                                --
-            wr_data_reg_en  <=  '0' ;                                --
-            rd_data_reg_en  <=  '0' ;                                --
-            rd_strobe       <=  '0' ;                                -- Default assignments (otherwise these would model latches)
-            wr_strobe       <=  '0' ;                                --
-            next_state      <=  curr_state;                                --
-            
-            case(curr_state)    is
-                -----------------------------------------------------
-                -- Setting the control signals to their default values.
-                when    IDLE   =>
+    L_FSM:  block
+    begin
 
-                    if(write = '1' and writedata = RD_START)    then -- If the processor wants to READ something.
-                        next_state  <= ST_RD_ADDR;
-                    end if;
-                    if(write = '1' and writedata = WR_START)    then -- If the processor wants to WRITE something.
-                        next_state  <= ST_WR_ADDR;
-                    end if;
-                    
+        ----------------------------------------------------------------------
+        L_NEXT_STATE:   process(cur_state,wr,wdata,ack_from_DUV) is
+        begin
+
+            nxt_state   <= cur_state;
+
+            case(cur_state) is
                 -----------------------------------------------------
-                -- Waiting for the address, from which it will be read the data out.
-                when    ST_RD_ADDR    =>
+                when IDLE       =>  if(wr = '1' and wdata = std_logic_vector(resize(signed(RD_START), DW)) ) then
+                                        nxt_state   <=  ST_RADDR;         -- Read indicator
+                                    end if;
+                                    if(wr = '1' and wdata = std_logic_vector(resize(signed(WR_START), DW)) ) then
+                                        nxt_state   <=  ST_WADDR;         -- Write indicator
+                                    end if;
+                --===================================================
                 
-                    if(write = '1') then
-                        addr_reg_en <= '1';
-                        next_state  <= GEN_RD_TRANS;
-                    end if;
-                    
-                -----------------------------------------------------
-                -- Asserting the read strobe signal to the mem. Initiating a read transaction.
-                when    GEN_RD_TRANS    =>
                 
-                    rd_strobe   <= '1';
-                    
-                    if(ACK_NEEDED)  then                             -- If the ack. input is needed in the design. Additional state will be synthesized.
-                        next_state  <= WAIT_FOR_RD_ACK;
-                    else
-                        next_state  <= WAIT_FOR_RD_DATA;             -- Otherwise, just synthesize a small FSM.            
-                    end if;
-                    
-                -----------------------------------------------------
-                -- This state is only available, when the ACK_NEEDED parameter is set to TRUE.
-                when    WAIT_FOR_RD_ACK    =>
-                    
-                    if(ack_from_DUV = '1')    then                         -- Waiting, until the acknowledgement from the mem. is not arrived.
-                        next_state  <= CAPTURE_RD_DATA;
-                    end if;
-                    
-                -----------------------------------------------------
-                -- This state is only available, when the ACK_NEEDED parameter is set to FALSE. 
-                when WAIT_FOR_RD_DATA   =>
-                    
-                    next_state      <= CAPTURE_RD_DATA;              -- One clock-cycle delay, giving some time for the memory to output its data.
-                    
-                -----------------------------------------------------
-                -- This state implements a one-cycle delay, which is required for the memory.
-                when    CAPTURE_RD_DATA    =>
+                --===================================================--
+                when ST_RADDR   =>  if(wr = '1')    then             --
+                                        nxt_state   <= INIT_RD;      --
+                                    end if;                          --
+                -------------------------------------------------------  
+                when INIT_RD    =>  if(ACK_NEEDED)  then             --  
+                                        nxt_state   <= WAIT_RACK;    -- Read-related states
+                                    else                             --
+                                        nxt_state   <= CAPT_RDATA;   --
+                                    end if;                          --  
+                -------------------------------------------------------  
+                when WAIT_RACK  =>  if(ack_from_DUV = '1')  then     --    
+                                        nxt_state   <= CAPT_RDATA;   --
+                                    end if;                          --
+                -------------------------------------------------------  
+                when CAPT_RDATA =>  nxt_state   <= IDLE;             --   
+                --===================================================--
                 
-                    rd_data_reg_en  <= '1';                          -- The read DATA will be captured.
-                    next_state      <= IDLE;
                 
-                -----------------------------------------------------
-                -- Waiting for the address.
-                when    ST_WR_ADDR  =>
-                    
-                    if(write = '1') then
-                        addr_reg_en <= '1';                          -- The write ADDRESS will be stored.
-                        next_state  <= ST_WR_DATA;
-                    end if;
-                    
-                -----------------------------------------------------
-                -- Waiting for the data.
-                when    ST_WR_DATA  =>
+                --===================================================--
+                when ST_WADDR   =>  if(wr = '1')    then             --
+                                        nxt_state   <=  ST_WDATA;    --
+                                    end if;                          --
+                -------------------------------------------------------  
+                when ST_WDATA   =>  if(wr = '1')    then             --
+                                        nxt_state   <=  INIT_WR;     --
+                                    end if;                          --
+                -------------------------------------------------------  
+                when INIT_WR    =>  if(ACK_NEEDED)  then             -- Write-related states   
+                                        nxt_state   <=  WAIT_WACK;   --
+                                    else                             --
+                                        nxt_state   <=  IDLE;        --
+                                    end if;                          --
+                -------------------------------------------------------  
+                when WAIT_WACK  =>  if(ack_from_DUV = '1')  then     --    
+                                        nxt_state   <=  IDLE;        --
+                                    end if;                          --  
+                --===================================================--
                 
-                    if(write = '1') then
-                        wr_data_reg_en  <= '1';                      -- The write DATA will be stored.
-                        next_state      <= GEN_WR_TRANS;
-                    end if;
-                    
-                -----------------------------------------------------
-                -- Asserting the write strobe signal. Initiating a write transaction.
-                when    GEN_WR_TRANS    =>
-                    
-                    wr_strobe   <= '1';                              -- Signaling the memory to write the data which has been placed on the write bus.
-                    
-                    if(ACK_NEEDED)  then
-                        next_state      <= WAIT_FOR_WR_ACK;          -- Will wait for its response.
-                    else
-                        next_state      <= IDLE;                     -- Otherwise, the transaction can be finished.
-                    end if;
-                -----------------------------------------------------
-                -- Waiting for the acknowledgement.
-                when    WAIT_FOR_WR_ACK    =>
                 
-                    if(ack_from_DUV = '1')  then                     -- Waiting for the response.
-                        wr_strobe       <= '0'  ;
-                        next_state      <= IDLE ;
-                    end if;
-                
+                --===================================================
+
                 -----------------------------------------------------
-                -- When the FSM reached an undefined state.
-                when others =>	
-                
-                    report "?" severity failure;
-                    next_state  <=  IDLE;                            -- Then it is better to reset itself.   
-                    
+                -- coverage off
+                when others =>  nxt_state   <= IDLE;
+                -- coverage on
                 -----------------------------------------------------
             end case;
         end process;
-    -----------------------------------------------------------------
-    
-    
-    
-    ------------------------------------------
-    L_STATE:
-        process(clk,rstn)   is
+        ----------------------------------------------------------------------
+        
+        
+        
+        
+        
+        
+
+
+        -- FSM outputs
+        L_NO_ACK: if(ACK_NEEDED = false)  generate
+            --------------------------------------------------
+            rstrb   <=  '1' when( cur_state = INIT_RD
+                                ) else '0';
+            --------------------------------------------------
+            wstrb   <=  '1' when( cur_state = INIT_WR
+                                ) else '0';
+            --------------------------------------------------
+            addr_en <=  '1' when( cur_state = ST_RADDR      or
+                                  cur_state = ST_WADDR
+                                ) else '0';
+            --------------------------------------------------
+            wdata_en<=  '1' when( cur_state = ST_WDATA
+                                ) else '0';
+            --------------------------------------------------
+            rdata_en<=  '1' when( cur_state = CAPT_RDATA
+                                ) else '0';
+            --------------------------------------------------
+        end generate;
+        
+        
+        
+        
+        
+        -- FSM outputs
+        L_ACK: if(ACK_NEEDED = true)  generate
+            --------------------------------------------------
+            rstrb   <=  '1' when( cur_state = INIT_RD       or
+                                  cur_state = WAIT_RACK
+                                ) else '0';
+            --------------------------------------------------
+            wstrb   <=  '1' when( cur_state = INIT_WR       or
+                                  cur_state = WAIT_WACK
+                                ) else '0';
+            --------------------------------------------------
+            addr_en <=  '1' when( cur_state = ST_RADDR      or
+                                  cur_state = ST_WADDR
+                                ) else '0';
+            --------------------------------------------------
+            wdata_en<=  '1' when( cur_state = ST_WDATA
+                                ) else '0';
+            --------------------------------------------------
+            rdata_en<=  '1' when( cur_state = CAPT_RDATA
+                                ) else '0';
+            --------------------------------------------------
+        end generate;
+        
+
+        
+        
+        
+        
+        -----------------------------------------------------
+        L_STATE:    process(clk,rstn)   is
         begin
             if(rstn = '0')  then
-                curr_state  <= IDLE;
-                
+                cur_state  <= IDLE;
+
             elsif(rising_edge(clk)) then
-                curr_state  <= next_state;
-                
+                cur_state  <= nxt_state;
+
             end if;
         end process;
-    ------------------------------------------
-end architecture rtl;
+        -----------------------------------------------------
+    end block;
+
+end architecture;

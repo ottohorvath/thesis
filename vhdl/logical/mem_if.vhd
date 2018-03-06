@@ -1,11 +1,11 @@
--------------------------------------------------------------------------
---
--- Author: Otto Horvath           
---                                
 ---------------------------------------------------------------------------
 --
--- Description: ~ 
---                
+-- Author: Otto Horvath
+--
+---------------------------------------------------------------------------
+--
+-- Description: ~
+--
 --
 ---------------------------------------------------------------------------
 
@@ -19,202 +19,170 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity mem_if is
     generic(
-        ACK_NEEDED          :       boolean :=  false   ;                                       -- DUV-side acknowledge input for different memories 
-                
-        P_DATA_W            :       natural :=  32      ;                                       -- Proc.-side IF data width
-        RD_START            :       std_logic_vector(31 downto 0):=     X"FFFF0000";            -- Read transaction indicator
-        WR_START            :       std_logic_vector(31 downto 0):=     X"0000FFFF";            -- Write transaction indicator
-            
-        D_DATA_W            :       natural :=  32      ;                                       -- DUV-side IF data width
-        D_ADDR_W            :       natural :=  32                                              -- DUV-side IF address width
+        ACK_NEEDED      :       boolean :=  false   ;
+        REG_LAYER       :       boolean :=  false   ;
+        
+        DW              :       integer :=  32      ;
+        AW              :       integer :=  32      ;
+
+        RD_START        :       std_logic_vector(63 downto 0):=     X"00000000FFFF0000"; -- WorkAround: Can't use 'DW' here, so made it wide enough
+        WR_START        :       std_logic_vector(63 downto 0):=     X"000000000000FFFF"  -- 
     );
     port(
-        clk                 :   in  std_logic;
-        rstn                :   in  std_logic;
+        clk             :   in  std_logic;
+        rstn            :   in  std_logic;
         -----------------------------------------------------------------
-        write               :   in  std_logic;                              --              
-        writedata           :   in  std_logic_vector(P_DATA_W-1   downto 0);-- 
-        read                :   in  std_logic;                              -- MMIO Slave IF
-        readdata            :   out std_logic_vector(P_DATA_W-1   downto 0);-- 
-        -----------------------------------------------------------------   
-        write_strobe_to_DUV :   out std_logic;                              --                     
-        read_strobe_to_DUV  :   out std_logic;                              -- 
-        data_to_DUV         :   out std_logic_vector(D_DATA_W-1   downto 0);-- Simple memory read/write IF
-        addr_to_DUV         :   out std_logic_vector(D_ADDR_W-1   downto 0);-- 
-        data_from_DUV       :   in  std_logic_vector(D_DATA_W-1   downto 0);-- 
+        wr              :   in  std_logic                           ;--
+        wdata           :   in  std_logic_vector(DW-1   downto 0)   ;--
+        rd              :   in  std_logic                           ;-- MMIO Slave IF
+        rdata           :   out std_logic_vector(DW-1   downto 0)   ;--
         -----------------------------------------------------------------
-        ack_from_DUV        :   in  std_logic                               -- Ack. input, when ACK_NEEDED is set to TRUE
+        wstrb_to_DUV    :   out std_logic                           ;--
+        rstrb_to_DUV    :   out std_logic                           ;--
+        wdata_to_DUV    :   out std_logic_vector(DW-1   downto 0)   ;-- 
+        addr_to_DUV     :   out std_logic_vector(AW-1   downto 0)   ;--
+        rdata_from_DUV  :   in  std_logic_vector(DW-1   downto 0)   ;--
+        -----------------------------------------------------------------
+        ack_from_DUV    :   in  std_logic                            -- Ack. input, when ACK_NEEDED is set to TRUE
     );
 end entity mem_if;
 ---------------------------------------------------------------------------
 
-
----------------------------------------------------------------------------
 architecture rtl of mem_if is
+
+    signal  fsm_addr_en :   std_logic;
+    signal  fsm_wdata_en:   std_logic;
+    signal  fsm_rdata_en:   std_logic;
+
+    signal  fsm_rstrb   :   std_logic;
+    signal  fsm_wstrb   :   std_logic;
+
+    signal  rdata_reg   :   std_logic_vector(DW-1 downto 0);
+    signal  wdata_reg   :   std_logic_vector(DW-1 downto 0);
+    signal  addr_reg    :   std_logic_vector(AW-1 downto 0);
     
-    signal  addr_reg        :   std_logic_vector(D_ADDR_W-1   downto 0);    -- Address storing register for read trans.
-    signal  addr_reg_en     :   std_logic;                                  -- The enable input for it.
     
-    signal  wr_data_reg     :   std_logic_vector(D_DATA_W-1   downto 0);    -- Data storing register for write trans.
-    signal  wr_data_reg_en  :   std_logic;                                  -- The enable input for it.
-    
-    signal  rd_data_reg     :   std_logic_vector(D_DATA_W-1   downto 0);    -- Data from the memory
-    signal  rd_data_reg_en  :   std_logic;                                  -- The enable input for it.
-    
-    signal  read_q          :   std_logic;                                  -- For storing two consecutive (read = 1) events.
-    signal  read_q_xor      :   std_logic;                                  -- For toggling the read_q flop.
-    
+    signal  wstrb_reg   :   std_logic;
+    signal  rstrb_reg   :   std_logic;
+
+
 begin
-
     -----------------------------------------------------
-    L_RD_IF:
-        process(clk, rstn)  is
+    L_RD_IF: block
+    begin
+        -------------------------------------------------
+        process(clk) is
         begin
-            if(rstn = '0')  then
-                read_q  <= '0';
-                
-            elsif(rising_edge(clk)) then
-                read_q  <= read_q_xor;
-                
-            end if;
-        end process;
-    
-        read_q_xor  <=  read xor read_q;                   -- Toggling the read_q flop. Basically, a controllable inverter. 
-                
-        readdata    <=  std_logic_vector(resize( signed(rd_data_reg), P_DATA_W )) when (read_q = '1') else
-                        (others => '0');
-    -----------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
-
-    -----------------------------------------------------
-    L_ADDR_REG:
-        process(clk,rstn)   is
-        begin
-            if(rstn = '0')  then
-                addr_reg    <= (others => '0');
-                
-            elsif(rising_edge(clk)) then
+            if(rising_edge(clk))    then
             
-                if(addr_reg_en = '1')   then
-                    addr_reg    <= std_logic_vector(resize( signed(writedata),  D_DATA_W));
+                if(fsm_rdata_en = '1')   then
+                    rdata_reg   <= rdata_from_DUV;
                 end if;
                 
             end if;
         end process;
+        
+        -------------------------------------------------
+        rdata <=    rdata_reg       when(rd = '1')   else
+                    (others => '0');
+        -------------------------------------------------
+    end block;
     -----------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
+
     
     -----------------------------------------------------
-    L_WR_DATA_REG:
-        process(clk,rstn)   is
+    L_WR_IF: block
+    begin
+        -------------------------------------------------
+        process(clk) is
         begin
-            if(rstn = '0')  then
-                wr_data_reg    <= (others => '0');
-                
-            elsif(rising_edge(clk)) then
-                
-                if(wr_data_reg_en = '1')   then
-                    wr_data_reg    <= std_logic_vector(resize( signed(writedata),  D_DATA_W));
-                end if;
-                
-            end if;
-        end process;
-    -----------------------------------------------------    
-    
-    
-    
-    
-    
-    
-    
-    
-    -----------------------------------------------------
-    L_RD_DATA_REG:
-        process(clk,rstn)   is
-        begin
-            if(rstn = '0')  then
-                rd_data_reg    <= (others => '0');
-                
-            elsif(rising_edge(clk)) then
+            if(rising_edge(clk))    then
             
-                if(rd_data_reg_en = '1')    then
-                    rd_data_reg    <= data_from_DUV;
+                if(fsm_wdata_en = '1')   then
+                    wdata_reg   <= wdata;
                 end if;
                 
             end if;
         end process;
-    -----------------------------------------------------    
+        -------------------------------------------------
+        process(clk) is
+        begin
+            if(rising_edge(clk))    then
+            
+                if(fsm_addr_en = '1')    then
+                    addr_reg   <= std_logic_vector(resize(signed(wdata), AW)); -- Resizing to address width
+                end if;
+                
+            end if;
+        end process;
+        -------------------------------------------------
     
+    end block;
+    -----------------------------------------------------
     
+    -----------------------------------------------------
+    L_REG_LAYER: if(REG_LAYER = true)    generate
+        -------------------------------------------------
+        process(clk,rstn) is
+        begin
+            if(rstn = '0')  then
+                wstrb_reg   <= '0';
+                
+            elsif(rising_edge(clk))    then
+                wstrb_reg  <= fsm_wstrb;
+                
+            end if;
+        end process;
+        -------------------------------------------------
+        wstrb_to_DUV    <= wstrb_reg;
+        -------------------------------------------------
+        process(clk,rstn) is
+        begin
+            if(rstn = '0')  then
+                rstrb_reg   <= '0';
+                
+            elsif(rising_edge(clk))    then
+                rstrb_reg  <= fsm_rstrb;
+                
+            end if;
+        end process;
+        -------------------------------------------------
+        rstrb_to_DUV    <= rstrb_reg;
+        -------------------------------------------------
+    end generate;
+    -----------------------------------------------------
     
+    -----------------------------------------------------
+    L_NO_REG_LAYER: if(REG_LAYER = false)   generate
+        wstrb_to_DUV    <= fsm_wstrb;
+        rstrb_to_DUV    <= fsm_rstrb;
+    end generate;
+    -----------------------------------------------------
     
-    
-    
-    
-    
+
     -----------------------------------------------------
     -- 	Instantiating the 'mem_if_fsm' FSM.
     L_FSM:
         entity work.mem_if_fsm(rtl)
             generic map(
-                ACK_NEEDED      => ACK_NEEDED   ,
-                P_DATA_W        => P_DATA_W     ,
-                RD_START        => RD_START     ,
-                WR_START        => WR_START
+                ACK_NEEDED      =>  ACK_NEEDED  ,
+                DW              =>  DW          ,
+                RD_START        =>  RD_START    ,
+                WR_START        =>  WR_START
             )
             port map(
-                clk             => clk                  ,                 
-                rstn            => rstn                 ,    
-                write           => write                ,    
-                writedata       => writedata            ,    
-                ack_from_DUV    => ack_from_DUV         ,    
-                rd_strobe       => read_strobe_to_DUV   ,    
-                wr_strobe       => write_strobe_to_DUV  ,    
-                addr_reg_en     => addr_reg_en          ,    
-                wr_data_reg_en  => wr_data_reg_en       ,    
-                rd_data_reg_en  => rd_data_reg_en   
+                clk             => clk          ,
+                rstn            => rstn         ,
+                wr              => wr           ,
+                wdata           => wdata        ,
+                ack_from_DUV    => ack_from_DUV ,
+                rstrb           => fsm_rstrb    ,
+                wstrb           => fsm_wstrb    ,
+                addr_en         => fsm_addr_en  ,
+                wdata_en        => fsm_wdata_en ,
+                rdata_en        => fsm_rdata_en
             );
     -----------------------------------------------------
-    
-
-    -----------------------------------------------------
-    L_OUTPUT_ASSIGNMENTS:
-        data_to_DUV <=  wr_data_reg ;
-        addr_to_DUV <=  addr_reg    ;
-    -----------------------------------------------------
-
-    
 
 end architecture rtl;
----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
