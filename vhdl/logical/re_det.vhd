@@ -86,7 +86,7 @@ begin
                         L_RE_DET_REG:   process(clk,rstn) is
                                         begin
                                             if(rstn = '0')  then
-                                                re_det_reg <= '0';
+                                                re_det_reg <= '1';
 
                                             elsif(rising_edge(clk)) then
 
