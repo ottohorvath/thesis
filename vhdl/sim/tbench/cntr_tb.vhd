@@ -159,7 +159,7 @@ begin
                     en              =>  rtl_in_if.en        ,      
                     clr             =>  rtl_in_if.clr       ,  
                    
-                    number_of_cycles=>  rtl_out_if.noc
+                    cntr_out        =>  rtl_out_if.noc
                 );
     -----------------------------------------------------------------------------------------
     
