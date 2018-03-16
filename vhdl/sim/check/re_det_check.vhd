@@ -123,10 +123,7 @@ is
                                         
                         end if;            
             -------------------------------------------------
-            when 2  =>  wait_re(tb_if.clk);
-                        wait_re(tb_if.clk);
-            
-                        if(rtl_out_if.rdata /= '1') then            
+            when 2  =>  if(rtl_out_if.rdata /= '1') then            
                                                  -- Exp      --Act            
                             perror(scope&".0",  str('1'),   str(rtl_out_if.rdata));            
                             errors := errors + 1;            

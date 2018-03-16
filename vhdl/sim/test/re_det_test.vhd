@@ -207,23 +207,36 @@ is
                         wait_re(clk);
                         rtl_in_if.signal_from_DUV   <= '0';
             -------------------------------------------------
-            when 2  =>  init_check(id_in, "Checking the enabled module", cd);            
+            when 2  =>  init_check(id_in, "Checking the enabled module by generating a rising-edge event", cd);            
                                     
                         rst_gen(scope, rst_req);    -- Reseting            
-                                    
+                        ------------------------------------
+                        -- Waiting for the next clock edge
                         wait_re(clk);
-                        
+                        ------------------------------------
                         rtl_in_if.signal_from_DUV   <= '0';
                         rtl_in_if.wr                <= '1';
                         rtl_in_if.wdata             <= B"01";
                         wait_re(clk);
-                        
+                        ------------------------------------
+                        -- Signals are updated
                         rtl_in_if.wr                <= '0';
-                        rtl_in_if.signal_from_DUV   <= '0';           
                         wait_re(clk);
-                        
+                        ------------------------------------
+                        -- The module no should be enabled
+                        -- Now it can catch an event
                         rtl_in_if.signal_from_DUV   <= '1';           
-                        
+                        wait_re(clk);
+                        ------------------------------------
+                        -- 'signal_from_DUV' is now updated
+                        wait_re(clk);
+                        ------------------------------------
+                        -- The rising-edge detector's output
+                        -- should be now '1'
+                        wait_re(clk);
+                        ------------------------------------
+                        -- In this cycle, the module shall signal
+                        -- the successful capture on its rdata output
              
 
 
