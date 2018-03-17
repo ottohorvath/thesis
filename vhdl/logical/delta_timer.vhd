@@ -15,9 +15,9 @@ use     ieee.numeric_std.all    ;
 
 
 ---------------------------------------------------------------------------
-entity timer is
+entity delta_timer is
     generic(
-        CNTR_WIDTH      :   integer:=   32
+        CNTR_WIDTH      :   integer:=   7
     );
     port(
         clk             :   in  std_logic;
@@ -30,12 +30,12 @@ entity timer is
         -- coverage on
         signal_from_DUV :   in  std_logic
     );
-end entity timer;
+end entity delta_timer;
 ---------------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------------
-architecture rtl of timer is
+architecture rtl of delta_timer is
 
     signal  din         :   std_logic_vector(1  downto  0);
     signal  nxt_din     :   std_logic_vector(1  downto  0);
@@ -60,7 +60,7 @@ begin
 
 
 
---================================ Sequential BEGIN ==================================
+
 
 
     L_WR_IF: process(clk, rstn)  is
@@ -74,7 +74,6 @@ begin
                 din <= nxt_din;
             end if;
         end process;
---================================ Sequential END ====================================
 
 
 
@@ -84,7 +83,8 @@ begin
 
 
 
---================================ Combinatorial BEGIN ========================================
+
+
     nxt_din         <=  wdata       when (wr = '1')  else
                         din;
     -------------------------------------------------
@@ -93,13 +93,13 @@ begin
     -------------------------------------------------
     cntr_dout_mux   <=  cntr_dout_w     when (show_cntr_w = '1') else
                         (others => '0');
---================================ Combinatorial END ========================================
 
 
 
 
 
---================================ Instantiations BEGIN =====================================
+
+
 
     L_DE_DET: entity work.de_det(rtl)
                 port map(
@@ -123,7 +123,7 @@ begin
                     cntr_out            => cntr_dout_w
                 );
 
-    L_FSM:  entity work.timer_fsm(rtl)
+    L_FSM:  entity work.delta_timer_fsm(rtl)
                 port map(
                     clk         =>  clk         ,
                     rstn        =>  rstn        ,
@@ -137,24 +137,7 @@ begin
                     det_en      =>  det_en_w
                 );
 
---================================ Instantiations END =====================================
 
-
-
-    -- synthesis translate_off
-	L_CHECKS_BK:   block
-    begin
-
-        L_RESET_CHECK:  process is
-        begin
-            wait until rising_edge(rstn);
-
-            assert(din = b"00") report "Reset value error: 'din'" severity failure;
-
-        end process;
-
-    end block;
-	-- synthesis translate_on
 
 
 

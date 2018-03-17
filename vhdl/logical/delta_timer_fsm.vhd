@@ -13,7 +13,7 @@ library ieee                    ;
 use     ieee.std_logic_1164.all ;
 use     ieee.numeric_std.all    ;
 
-entity timer_fsm is
+entity delta_timer_fsm is
     port(
         clk         :   in      std_logic;
         rstn        :   in      std_logic;
@@ -26,10 +26,10 @@ entity timer_fsm is
         det_clr     :   out     std_logic;
         det_en      :   out     std_logic
     );
-end entity timer_fsm;
+end entity delta_timer_fsm;
 
 
-architecture rtl of timer_fsm   is
+architecture rtl of delta_timer_fsm   is
 
     type state_t is(
         IDLE    ,
@@ -44,21 +44,21 @@ architecture rtl of timer_fsm   is
 
 
 begin
-    
+
     L_FSM:  block
     begin
         ------------------------------------------------
         L_NEXT_STATE:   process(cur_state,en,clr,de_caught) is
         begin
-            
+
             nxt_state   <= cur_state;
-            
+
             case(cur_state) is
                 ----------------------------------------
                 when IDLE       =>  if(en='1' and clr='0')  then
                                         nxt_state   <= ENABLED;
                                     end if;
-                ----------------------------------------                
+                ----------------------------------------
                 when ENABLED    =>  if(en='0' and clr='1')  then
                                         nxt_state   <= IDLE;
                                     elsif(de_caught = '1')  then
@@ -82,27 +82,27 @@ begin
             end case;
         end process;
         ------------------------------------------------
-        
+
         -- FSM outputs
-        show_cntr   <=  '1' when (cur_state = DONE) else '0';    
+        show_cntr   <=  '1' when (cur_state = DONE) else '0';
         cntr_clr    <=  '1' when (cur_state = IDLE) else '0';
         cntr_en     <=  '1' when (cur_state = COUNTING) else '0';
         det_clr     <=  '1' when (cur_state = IDLE) else '0';
         det_en      <=  '1' when ((cur_state = ENABLED) or (cur_state = COUNTING)) else '0';
-        
-        
+
+
         ----------------------------------------
         L_STATE_REG:    process(clk,rstn)  is
         begin
             if(rstn = '0')  then
                 cur_state   <= IDLE;
-                
+
             elsif(rising_edge(clk)) then
                 cur_state   <= nxt_state;
-                
+
             end if;
         end process;
         ----------------------------------------
     end block;
-    
+
 end architecture;
