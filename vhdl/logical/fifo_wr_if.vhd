@@ -27,7 +27,11 @@ entity fifo_wr_if is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
-
+        
+        trig_in         :       in  std_logic                           ;-- 
+        trig_out_0      :       out std_logic                           ;-- Trigger IF    
+        trig_out_1      :       out std_logic                           ;-- 
+        
         rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(DWIDTH-1  downto 0);
@@ -88,6 +92,12 @@ architecture rtl of fifo_wr_if is
     signal      fifo_full_reg   :   std_logic;
     
     
+    -- Trigger output registers
+    -- ========================
+    signal      trig_out_0_reg      :   std_logic;
+    signal      trig_out_1_reg      :   std_logic;
+    
+    
 
 begin
 
@@ -129,7 +139,8 @@ begin
     L_DUV_SIDE: block
                 begin
                     ---------------------------------------------
-                    L_FULL_REG:     if(REG_LAYER = true)    generate
+                    L__REG:     if(REG_LAYER = true)    generate
+                                        -------------------------------------
                                         process(clk,rstn) is
                                         begin
                                             if(rstn = '0')    then
@@ -140,16 +151,43 @@ begin
 
                                             end if;
                                         end process;
-
+                                        -------------------------------------
+                                        process(clk,rstn) is
+                                        begin
+                                            if(rstn = '0')    then
+                                                trig_out_0_reg  <= '0';
+                                        
+                                            elsif(rising_edge(clk)) then
+                                                trig_out_0_reg  <= enabled;
+                                        
+                                            end if;
+                                        end process;
+                                        -------------------------------------
+                                        process(clk,rstn) is
+                                        begin
+                                            if(rstn = '0')    then
+                                                trig_out_1_reg  <= '0';
+                                        
+                                            elsif(rising_edge(clk)) then
+                                                trig_out_1_reg  <= rcvd_data;
+                                        
+                                            end if;
+                                        end process;
+                                        -------------------------------------
+    
                                         -- Drive the output from register
-                                        full_to_DUV    <= fifo_full_reg;
+                                        full_to_DUV     <= fifo_full_reg;
+                                        trig_out_0      <= trig_out_0_reg;
+                                        trig_out_1      <= trig_out_1_reg;
 
                                     end generate;
                     ---------------------------------------------
                     L_NO_REG_LAYER: if(REG_LAYER = false)   generate
 
                                         -- Drive output signal from FSM
-                                        full_to_DUV    <= fifo_full;
+                                        full_to_DUV     <= fifo_full;
+                                        trig_out_0      <= enabled  ;
+                                        trig_out_1      <= rcvd_data;
 
                                     end generate;
                     ---------------------------------------------
@@ -165,6 +203,7 @@ begin
                 port map(
                     clk             =>  clk         ,
                     rstn            =>  rstn        ,
+                    trig_in_fsm     =>  trig_in     ,
                     wr              =>  wr          ,
                     wdata           =>  wdata       ,
                     fifo_wr         =>  wr_from_DUV ,

@@ -25,6 +25,7 @@ entity fifo_wr_if_fsm is
     port(
         clk         :   in  std_logic;
         rstn        :   in  std_logic;
+        trig_in_fsm :   in  std_logic;
         wr          :   in  std_logic;
         wdata       :   in  std_logic_vector(DW-1 downto 0);
         fifo_wr     :   in  std_logic;
@@ -61,26 +62,32 @@ begin
 
             case(cur_state) is
                 -----------------------------------------------------
-                when IDLE       =>  if( wdata(2 downto 0) = "001" and wr='1')  then
+                when IDLE       =>  if( (wdata(2 downto 0) = b"001" and wr='1') or
+                                        (trig_in_fsm = '1')
+                                      )  then
                                         nxt_state   <= ENABLED;
                                     end if;
                 -----------------------------------------------------
                 -- Clearing has prioprity
-                when ENABLED    =>  if( wdata(2 downto 0) = "010" and wr='1' ) then
+                when ENABLED    =>  if( wdata(2 downto 0) = b"010" and wr='1' ) then
                                         nxt_state   <= IDLE;
                                     elsif( fifo_wr = '1')           then
                                         nxt_state   <= RCVD_DATA;
                                     end if;
                 -----------------------------------------------------
                 -- Clearing has prioprity
-                when RCVD_DATA  =>  if( wdata(2 downto 0) = "010" and wr='1' ) then
+                when RCVD_DATA  =>  if( wdata(2 downto 0) = b"010" and wr='1' ) then
                                         nxt_state   <= IDLE;
-                                    elsif( wdata(2 downto 0) = "100" and wr='1' ) then
+                                    elsif( wdata(2 downto 0) = b"100" and wr='1' ) then
                                         nxt_state   <= SHOW_DATA;
                                     end if;
                 -----------------------------------------------------
-                when SHOW_DATA  =>  if( wdata(2 downto 0) = "001" and wr='1' )   then
+                -- Clearing has prioprity
+                -- Could be useful to be able to send back to enabled immediately
+                when SHOW_DATA  =>  if( wdata(2 downto 0) = "010" and wr='1' )   then
                                         nxt_state   <= IDLE;
+                                    elsif(wdata(2 downto 0) = b"001" and wr='1') then
+                                        nxt_state   <= ENABLED;
                                     end if;
                 -----------------------------------------------------
                 -- coverage off
