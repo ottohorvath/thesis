@@ -30,14 +30,14 @@ use work.tb_tc_pkg.all      ;   -- Includes for the 'tc' process.
 
 
 
-package timer_test
+package delta_timer_test
 is
 
     -- Typedefs for IF signals for driving the DUT's inputs--
     
     
     
-    type timer_in_if_t   is record
+    type delta_timer_in_if_t   is record
     
         wr              :   std_logic;
         wdata           :   std_logic_vector(1 downto 0);
@@ -46,9 +46,9 @@ is
     end record;
     --------------------------------------------------------
     
-    constant    timer_num_of_tcs_c    :   integer := 3;     -- Number of testcases
+    constant    delta_timer_num_of_tcs_c    :   integer := 3;     -- Number of testcases
    
-    signal      rtl_in_if           :   timer_in_if_t     ;
+    signal      rtl_in_if           :   delta_timer_in_if_t     ;
     
     
     
@@ -63,7 +63,7 @@ is
         
         constant    id_in           :   in      integer;
         
-        signal      rtl_in_if       :   out     timer_in_if_t ;
+        signal      rtl_in_if       :   out     delta_timer_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
@@ -77,12 +77,12 @@ is
     --------------------------------------------------
     
     --------------------------------------------------
-    -- The main test runner for RTL named 'timer'
-    procedure   timer_test(
+    -- The main test runner for RTL named 'delta_timer'
+    procedure   delta_timer_test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_in_if       :   out     timer_in_if_t ;   
+        signal      rtl_in_if       :   out     delta_timer_in_if_t ;   
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
@@ -109,15 +109,15 @@ end package;
 
 
 
-package body timer_test
+package body delta_timer_test
 is
 
     --------------------------------------------------
-    procedure   timer_test(    
+    procedure   delta_timer_test(    
         constant    rtl_name        :   in      string;    
         constant    super_name      :   in      string;    
             
-        signal      rtl_in_if       :   out     timer_in_if_t ;       
+        signal      rtl_in_if       :   out     delta_timer_in_if_t ;       
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
@@ -130,11 +130,11 @@ is
         signal      passed          :   in      std_logic   ;
         signal      id              :   out     integer    
     )is
-        constant    this            :           string  :=  "timer_test";
+        constant    this            :           string  :=  "delta_timer_test";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         
-        for id_v in 0 to (timer_num_of_tcs_c - 1)   loop        
+        for id_v in 0 to (delta_timer_num_of_tcs_c - 1)   loop        
                     
             test(    rtl_name,scope,      id_v        , 
                                         rtl_in_if   ,
@@ -157,7 +157,7 @@ is
         
         constant    id_in           :   in      integer;
         
-        signal      rtl_in_if       :   out     timer_in_if_t ;
+        signal      rtl_in_if       :   out     delta_timer_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         

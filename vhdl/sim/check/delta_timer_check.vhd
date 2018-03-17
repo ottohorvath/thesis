@@ -30,7 +30,7 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 
 
 
-package timer_check
+package delta_timer_check
 is
     ------- Typedefs for output RTL IF signals -------------------
     
@@ -38,7 +38,7 @@ is
     
     alias w is cntr_width_test;         -- Using other refrence name to ease source code readability
     
-    type timer_out_if_t   is record
+    type delta_timer_out_if_t   is record
     
         rdata   :   std_logic_vector(w-1 downto 0);
         
@@ -48,16 +48,16 @@ is
     
     
     
-    signal      rtl_out_if  :   timer_out_if_t    ;
+    signal      rtl_out_if  :   delta_timer_out_if_t    ;
     
     
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
-    procedure   timer_check(
+    procedure   delta_timer_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_out_if      :   in      timer_out_if_t    ;
+        signal      rtl_out_if      :   in      delta_timer_out_if_t    ;
         signal      tb_if           :   in      tb_if_t         ;
         
         signal      put_it          :   in      std_logic   ;
@@ -75,16 +75,16 @@ end package;
 
 
 
-package body timer_check
+package body delta_timer_check
 is
 
     --------------------------------------------------
     -- The main checker for RTL named 'wtf'
-    procedure   timer_check(
+    procedure   delta_timer_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_out_if      :   in      timer_out_if_t    ;
+        signal      rtl_out_if      :   in      delta_timer_out_if_t    ;
         signal      tb_if           :   in      tb_if_t         ;
         
         signal      put_it          :   in      std_logic   ;
@@ -96,7 +96,7 @@ is
         variable    errors          :           integer := 0;
         variable    noc             :           integer := 0;   -- Num of checks per Test ID
         
-        constant    this            :           string  :=  "timer_check";
+        constant    this            :           string  :=  "delta_timer_check";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         

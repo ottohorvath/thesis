@@ -30,14 +30,14 @@ use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
 
 
 
-use work.timer_test.all   ;
-use work.timer_check.all  ;
+use work.delta_timer_fsm_test.all   ;
+use work.delta_timer_fsm_check.all  ;
 
 
 
 
 -----------------------------------------------------------------------------------------------
-entity timer_tb is
+entity delta_timer_fsm_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
     
@@ -51,7 +51,7 @@ end entity;
 -----------------------------------------------------------------------------------------------
 
 
-architecture bhv of timer_tb is
+architecture bhv of delta_timer_fsm_tb is
     
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
     
@@ -62,9 +62,9 @@ architecture bhv of timer_tb is
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
             
-            rtl_in_if_t         =>  timer_in_if_t     ,       -- type
-            called_tc           =>  timer_test        ,       -- procedure
-            called_tc_name      =>  "timer_test"              -- constant string
+            rtl_in_if_t         =>  delta_timer_fsm_in_if_t     ,       -- type
+            called_tc           =>  delta_timer_fsm_test        ,       -- procedure
+            called_tc_name      =>  "delta_timer_fsm_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
     
@@ -73,9 +73,9 @@ architecture bhv of timer_tb is
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
             
-            rtl_out_if_t        =>  timer_out_if_t    ,       -- type
-            called_chk          =>  timer_check       ,       -- procedure
-            called_chk_name     =>  "timer_check"             -- constant string
+            rtl_out_if_t        =>  delta_timer_fsm_out_if_t    ,       -- type
+            called_chk          =>  delta_timer_fsm_check       ,       -- procedure
+            called_chk_name     =>  "delta_timer_fsm_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
 begin
@@ -146,21 +146,23 @@ begin
     
     
     -----------------------------------------------------------------------------------------
-    timer:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
+    delta_timer_fsm:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
-    L_DUT:  entity work.timer(rtl)
-                generic map(
-                    CNTR_WIDTH  =>  cntr_width_test
-                )
+    L_DUT:  entity work.delta_timer_fsm(rtl)
+                
                 port map(
-                    clk             =>  tb_if.clk       ,
-                    rstn            =>  tb_if.rstn      ,
+                    clk             =>  tb_if.clk           ,
+                    rstn            =>  tb_if.rstn          ,
                     
-                    wr              =>  rtl_in_if.wr    ,
-                    wdata           =>  rtl_in_if.wdata ,
-                    signal_from_DUV =>  rtl_in_if.signal_from_DUV,
+                    en              =>  rtl_in_if.en_fsm    ,      
+                    clr             =>  rtl_in_if.clr_fsm   ,  
+                    de_caught       =>  rtl_in_if.de_caught ,  
                     
-                    rdata           =>  rtl_out_if.rdata
+                    show_cntr       =>  rtl_out_if.show_cntr,
+                    cntr_clr        =>  rtl_out_if.cntr_clr ,
+                    cntr_en         =>  rtl_out_if.cntr_en  ,
+                    det_clr         =>  rtl_out_if.det_clr  ,
+                    det_en          =>  rtl_out_if.det_en   
                     
                 );
     -----------------------------------------------------------------------------------------

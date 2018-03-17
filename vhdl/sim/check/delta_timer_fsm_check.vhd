@@ -30,7 +30,7 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 
 
 
-package timer_fsm_check
+package delta_timer_fsm_check
 is
     ------- Typedefs for output RTL IF signals -------------------
     
@@ -38,7 +38,7 @@ is
     
     
     
-    type timer_fsm_out_if_t   is record
+    type delta_timer_fsm_out_if_t   is record
     
         show_cntr   :   std_logic;
         cntr_clr    :   std_logic;
@@ -51,16 +51,16 @@ is
     
     
     
-    signal      rtl_out_if  :   timer_fsm_out_if_t    ;
+    signal      rtl_out_if  :   delta_timer_fsm_out_if_t    ;
     
     
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
-    procedure   timer_fsm_check(
+    procedure   delta_timer_fsm_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_out_if      :   in      timer_fsm_out_if_t    ;
+        signal      rtl_out_if      :   in      delta_timer_fsm_out_if_t    ;
         signal      tb_if           :   in      tb_if_t         ;
         
         signal      put_it          :   in      std_logic   ;
@@ -78,16 +78,16 @@ end package;
 
 
 
-package body timer_fsm_check
+package body delta_timer_fsm_check
 is
 
     --------------------------------------------------
     -- The main checker for RTL named 'wtf'
-    procedure   timer_fsm_check(
+    procedure   delta_timer_fsm_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_out_if      :   in      timer_fsm_out_if_t    ;
+        signal      rtl_out_if      :   in      delta_timer_fsm_out_if_t    ;
         signal      tb_if           :   in      tb_if_t         ;
         
         signal      put_it          :   in      std_logic   ;
@@ -99,7 +99,7 @@ is
         variable    errors          :           integer := 0;
         variable    noc             :           integer := 0;   -- Num of checks per Test ID
         
-        constant    this            :           string  :=  "timer_fsm_check";
+        constant    this            :           string  :=  "delta_timer_fsm_check";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         
