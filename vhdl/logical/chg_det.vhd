@@ -14,7 +14,7 @@ use     ieee.std_logic_1164.all ;
 use     ieee.numeric_std.all    ;
 
 ---------------------------------------------------------------------------
-entity de_det is
+entity chg_det is
 
     port(
         clk             :   in  std_logic;
@@ -24,12 +24,12 @@ entity de_det is
         sig             :   in  std_logic;
         det_out         :   out std_logic
     );
-end entity de_det;
+end entity chg_det;
 ---------------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------------
-architecture rtl of de_det is
+architecture rtl of chg_det is
 
     type    state_t is (
         IDLE        ,
