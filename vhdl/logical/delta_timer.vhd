@@ -101,7 +101,7 @@ begin
 
 
 
-    L_DE_DET: entity work.de_det(rtl)
+    L_CHG_DET: entity work.chg_det(rtl)
                 port map(
                     clk      => clk         ,
                     rstn     => rstn        ,
