@@ -28,6 +28,7 @@ entity fifo_rd_if_fsm is
         wr          :   in  std_logic;
         wdata       :   in  std_logic_vector(DW-1 downto 0);
         fifo_rd     :   in  std_logic;
+        trig_in_fsm :   in  std_logic;
         wdata_reg_en:   out std_logic;
         empty       :   out std_logic;
         got_read_out:   out std_logic;
@@ -60,24 +61,33 @@ begin
 
             case(cur_state) is
                 -----------------------------------------------------
-                when IDLE           =>      if( wdata(1 downto 0) = "01"    and wr = '1') then
+                -- Another component can also enable the module via 'trig_in_fsm'
+                when IDLE           =>      if( (wdata(1 downto 0) = b"01" and wr = '1') or
+                                                (trig_in_fsm = '1')
+                                            ) then
                                                 nxt_state   <= ENABLED;
                                             end if;
                 -----------------------------------------------------
-                when ENABLED        =>      if( wdata(1 downto 0) = "10"    and wr = '1')  then
+                -- Clearing has prioprity
+                when ENABLED        =>      if( wdata(1 downto 0) = b"10"    and wr = '1')  then
                                                 nxt_state   <= IDLE;
                                             elsif( wr = '1') then
                                                 nxt_state   <= RDATA_PRESENT;
                                             end if;
                 -----------------------------------------------------
-                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = "10"    and wr = '1')  then
+                -- Clearing has prioprity
+                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b"10"    and wr = '1')  then
                                                 nxt_state   <= IDLE;
                                             elsif(fifo_rd = '1')  then
                                                 nxt_state   <= RDATA_GOT_READ_OUT;
                                             end if;
                 -----------------------------------------------------
-                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = "10"    and wr = '1') then
+                -- Clearing has prioprity
+                -- Could be useful to be able to send back to enabled immediately
+                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b"10"    and wr = '1') then
                                                 nxt_state   <= IDLE;
+                                            elsif(wdata(1 downto 0) = b"01"    and wr = '1')    then
+                                                nxt_state   <= ENABLED;
                                             end if;
                 -----------------------------------------------------
                 -- coverage off

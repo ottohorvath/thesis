@@ -28,6 +28,10 @@ entity fifo_rd_if is
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
 
+        trig_in         :       in  std_logic                           ;--
+        trig_out_0      :       out std_logic                           ;-- Trigger IF
+        trig_out_1      :       out std_logic                           ;--
+
         rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(DWIDTH-1  downto 0);
@@ -87,6 +91,11 @@ architecture rtl of fifo_rd_if is
     signal      fifo_empty_reg      :   std_logic;
 
 
+    -- Trigger output registers
+    -- ========================
+    signal      trig_out_0_reg      :   std_logic;
+    signal      trig_out_1_reg      :   std_logic;
+
 begin
 
     -------------------------------------------------------------
@@ -116,6 +125,7 @@ begin
                 begin
                     ---------------------------------------------
                     L_EMPTY_REG:    if(REG_LAYER = true)    generate
+                                        -------------------------------------
                                         process(clk,rstn) is
                                         begin
                                             if(rstn = '0')    then
@@ -126,16 +136,44 @@ begin
 
                                             end if;
                                         end process;
+                                        -------------------------------------
+                                        process(clk,rstn) is
+                                        begin
+                                            if(rstn = '0')    then
+                                                trig_out_0_reg  <= '0';
+
+                                            elsif(rising_edge(clk)) then
+                                                trig_out_0_reg  <= enabled_from_fsm;
+
+                                            end if;
+                                        end process;
+                                        -------------------------------------
+                                        process(clk,rstn) is
+                                        begin
+                                            if(rstn = '0')    then
+                                                trig_out_1_reg  <= '0';
+
+                                            elsif(rising_edge(clk)) then
+                                                trig_out_1_reg  <= data_got_read_out;
+
+                                            end if;
+                                        end process;
+                                        -------------------------------------
 
                                         -- Drive the output from register
-                                        empty_to_DUV    <= fifo_empty_reg;
+                                        empty_to_DUV    <=  fifo_empty_reg;
+                                        trig_out_0      <=  trig_out_0_reg;
+                                        trig_out_1      <=  trig_out_1_reg;
+
 
                                     end generate;
                     ---------------------------------------------
                     L_NO_REG_LAYER: if(REG_LAYER = false)   generate
 
                                         -- Drive output signal from FSM
-                                        empty_to_DUV    <= fifo_empty;
+                                        empty_to_DUV    <=  fifo_empty;
+                                        trig_out_0      <=  enabled_from_fsm;
+                                        trig_out_1      <=  data_got_read_out;
 
                                     end generate;
                     ---------------------------------------------
@@ -155,6 +193,7 @@ begin
                 port map(
                     clk             =>  clk                 ,
                     rstn            =>  rstn                ,
+                    trig_in_fsm     =>  trig_in             ,
                     wr              =>  wr                  ,
                     wdata           =>  wdata               ,
                     fifo_rd         =>  rd_from_DUV         ,
