@@ -30,14 +30,14 @@ use work.tb_tc_pkg.all      ;   -- Includes for the 'tc' process.
 
 
 
-package de_det_test
+package chg_det_test
 is
 
     -- Typedefs for IF signals for driving the DUT's inputs--
     
     
     
-    type de_det_in_if_t   is record
+    type chg_det_in_if_t   is record
     
         en  :  std_logic;
         clr :  std_logic;
@@ -46,9 +46,9 @@ is
     end record;
     --------------------------------------------------------
     
-    constant    de_det_num_of_tcs_c    :   integer := 3;     -- Number of testcases
+    constant    chg_det_num_of_tcs_c    :   integer := 3;     -- Number of testcases
    
-    signal      rtl_in_if           :   de_det_in_if_t     ;
+    signal      rtl_in_if           :   chg_det_in_if_t     ;
     
     
     
@@ -63,7 +63,7 @@ is
         
         constant    id_in           :   in      integer;
         
-        signal      rtl_in_if       :   out     de_det_in_if_t ;
+        signal      rtl_in_if       :   out     chg_det_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
@@ -77,12 +77,12 @@ is
     --------------------------------------------------
     
     --------------------------------------------------
-    -- The main test runner for RTL named 'de_det'
-    procedure   de_det_test(
+    -- The main test runner for RTL named 'chg_det'
+    procedure   chg_det_test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_in_if       :   out     de_det_in_if_t ;   
+        signal      rtl_in_if       :   out     chg_det_in_if_t ;   
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
@@ -109,15 +109,15 @@ end package;
 
 
 
-package body de_det_test
+package body chg_det_test
 is
 
     --------------------------------------------------
-    procedure   de_det_test(    
+    procedure   chg_det_test(    
         constant    rtl_name        :   in      string;    
         constant    super_name      :   in      string;    
             
-        signal      rtl_in_if       :   out     de_det_in_if_t ;       
+        signal      rtl_in_if       :   out     chg_det_in_if_t ;       
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
@@ -130,11 +130,11 @@ is
         signal      passed          :   in      std_logic   ;
         signal      id              :   out     integer    
     )is
-        constant    this            :           string  :=  "de_det_test";
+        constant    this            :           string  :=  "chg_det_test";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         
-        for id_v in 0 to (de_det_num_of_tcs_c - 1)   loop        
+        for id_v in 0 to (chg_det_num_of_tcs_c - 1)   loop        
                     
             test(    rtl_name,scope,      id_v        , 
                                         rtl_in_if   ,
@@ -157,7 +157,7 @@ is
         
         constant    id_in           :   in      integer;
         
-        signal      rtl_in_if       :   out     de_det_in_if_t ;
+        signal      rtl_in_if       :   out     chg_det_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         

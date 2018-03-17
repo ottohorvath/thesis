@@ -30,14 +30,14 @@ use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
 
 
 
-use work.de_det_test.all   ;
-use work.de_det_check.all  ;
+use work.chg_det_test.all   ;
+use work.chg_det_check.all  ;
 
 
 
 
 -----------------------------------------------------------------------------------------------
-entity de_det_tb is
+entity chg_det_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
     
@@ -51,7 +51,7 @@ end entity;
 -----------------------------------------------------------------------------------------------
 
 
-architecture bhv of de_det_tb is
+architecture bhv of chg_det_tb is
     
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
     
@@ -62,9 +62,9 @@ architecture bhv of de_det_tb is
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
             
-            rtl_in_if_t         =>  de_det_in_if_t     ,       -- type
-            called_tc           =>  de_det_test        ,       -- procedure
-            called_tc_name      =>  "de_det_test"              -- constant string
+            rtl_in_if_t         =>  chg_det_in_if_t     ,       -- type
+            called_tc           =>  chg_det_test        ,       -- procedure
+            called_tc_name      =>  "chg_det_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
     
@@ -73,9 +73,9 @@ architecture bhv of de_det_tb is
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
             
-            rtl_out_if_t        =>  de_det_out_if_t    ,       -- type
-            called_chk          =>  de_det_check       ,       -- procedure
-            called_chk_name     =>  "de_det_check"             -- constant string
+            rtl_out_if_t        =>  chg_det_out_if_t    ,       -- type
+            called_chk          =>  chg_det_check       ,       -- procedure
+            called_chk_name     =>  "chg_det_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
 begin
@@ -146,9 +146,9 @@ begin
     
     
     -----------------------------------------------------------------------------------------
-    de_det:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
+    chg_det:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
-    L_DUT:  entity work.de_det(rtl)
+    L_DUT:  entity work.chg_det(rtl)
                 
                 port map(
                     clk             =>  tb_if.clk       ,

@@ -30,7 +30,7 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 
 
 
-package de_det_check
+package chg_det_check
 is
     ------- Typedefs for output RTL IF signals -------------------
     
@@ -38,7 +38,7 @@ is
     
     
     
-    type de_det_out_if_t   is record
+    type chg_det_out_if_t   is record
     
         det_out :   std_logic;
         
@@ -47,16 +47,16 @@ is
     
     
     
-    signal      rtl_out_if  :   de_det_out_if_t    ;
+    signal      rtl_out_if  :   chg_det_out_if_t    ;
     
     
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
-    procedure   de_det_check(
+    procedure   chg_det_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_out_if      :   in      de_det_out_if_t    ;
+        signal      rtl_out_if      :   in      chg_det_out_if_t    ;
         signal      tb_if           :   in      tb_if_t         ;
         
         signal      put_it          :   in      std_logic   ;
@@ -74,16 +74,16 @@ end package;
 
 
 
-package body de_det_check
+package body chg_det_check
 is
 
     --------------------------------------------------
     -- The main checker for RTL named 'wtf'
-    procedure   de_det_check(
+    procedure   chg_det_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         
-        signal      rtl_out_if      :   in      de_det_out_if_t    ;
+        signal      rtl_out_if      :   in      chg_det_out_if_t    ;
         signal      tb_if           :   in      tb_if_t         ;
         
         signal      put_it          :   in      std_logic   ;
@@ -95,7 +95,7 @@ is
         variable    errors          :           integer := 0;
         variable    noc             :           integer := 0;   -- Num of checks per Test ID
         
-        constant    this            :           string  :=  "de_det_check";
+        constant    this            :           string  :=  "chg_det_check";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         
