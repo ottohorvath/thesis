@@ -139,7 +139,7 @@ begin
     L_DUV_SIDE: block
                 begin
                     ---------------------------------------------
-                    L__REG:     if(REG_LAYER = true)    generate
+                    L_REG:     if(REG_LAYER = true)    generate
                                         -------------------------------------
                                         process(clk,rstn) is
                                         begin
