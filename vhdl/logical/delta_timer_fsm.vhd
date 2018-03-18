@@ -19,7 +19,7 @@ entity delta_timer_fsm is
         rstn        :   in      std_logic;
         en          :   in      std_logic;
         clr         :   in      std_logic;
-        de_caught   :   in      std_logic;
+        chg_caught  :   in      std_logic;
         show_cntr   :   out     std_logic;
         cntr_clr    :   out     std_logic;
         cntr_en     :   out     std_logic;
@@ -48,7 +48,7 @@ begin
     L_FSM:  block
     begin
         ------------------------------------------------
-        L_NEXT_STATE:   process(cur_state,en,clr,de_caught) is
+        L_NEXT_STATE:   process(cur_state,en,clr,chg_caught) is
         begin
 
             nxt_state   <= cur_state;
@@ -61,13 +61,13 @@ begin
                 ----------------------------------------
                 when ENABLED    =>  if(en='0' and clr='1')  then
                                         nxt_state   <= IDLE;
-                                    elsif(de_caught = '1')  then
+                                    elsif(chg_caught = '1')  then
                                         nxt_state   <= COUNTING;
                                     end if;
                 ----------------------------------------
                 when COUNTING   =>  if(en='0' and clr='1')  then
                                         nxt_state   <= IDLE;
-                                    elsif(de_caught = '1')  then
+                                    elsif(chg_caught = '1')  then
                                         nxt_state   <= DONE;
                                     end if;
                 ----------------------------------------

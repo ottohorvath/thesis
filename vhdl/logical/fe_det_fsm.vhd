@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------
 --
--- Author: Otto Horvath           
---                                
+-- Author: Otto Horvath
+--
 ---------------------------------------------------------------------------
 --
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ---------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ entity fe_det_fsm is
 end entity fe_det_fsm;
 
 architecture rtl of fe_det_fsm is
-    
+
     type state_t is(
         IDLE        ,
         ENABLED     ,
@@ -90,7 +90,7 @@ begin
         ---------------------------------------
     end block;
 
-    
-    
-    
+
+
+
 end architecture rtl;

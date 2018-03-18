@@ -122,7 +122,7 @@ begin
                                     else                             --
                                         nxt_state   <=  GEN_WR;      --
                                     end if;                          -- Write-related signals
-                ------------------------------------------------------- 
+                -------------------------------------------------------
                 when WAIT_WACK  =>  if(ack_from_DUV = '1')  then     --
                                         nxt_state   <=  GEN_WR;      --
                                     end if;                          --

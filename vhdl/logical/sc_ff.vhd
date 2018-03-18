@@ -1,23 +1,23 @@
 ---------------------------------------------------------------------------
 --
--- Author: Otto Horvath           
---                                
+-- Author: Otto Horvath
+--
 ---------------------------------------------------------------------------
 --
 -- Description: ~ This module is implementing a D-FF style operation with only
 --                'set' and 'clr' inputs to change the output 'q'.
 --
 --              ~ It is built around a rising-edge D flop.
---             
---              ~ The storage inside is reset to logic 0 by default with an 
+--
+--              ~ The storage inside is reset to logic 0 by default with an
 --                async. active LOW reset input pin 'rstn'.
---                              
+--
 --              ~ Whenever 'set' input is asserted for one 'clk' cycle, it makes
 --                the output 'q' to logic 1, regardless what was its prev. value.
 --
 --              ~ The same can be said for the 'clr' input, with the only difference
 --                that it flips the output 'q' to logic 0.
---                
+--
 --              ~ At all other cases of the 'set' and 'clr' inputs, the output 'q'
 --                remains unchanged.
 ---------------------------------------------------------------------------
@@ -30,7 +30,7 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity sc_ff  is
     --generic(
-    --    
+    --
     --);
     port(
         clk     :   in  std_logic;
@@ -48,7 +48,8 @@ end entity sc_ff;
 
 ---------------------------------------------------------------------------
 architecture rtl  of  sc_ff is
-    
+
+    signal  int_q   :   std_logic;
 begin
 
 
@@ -56,53 +57,23 @@ begin
     L_SEQ_P:    process(clk, rstn)  is
         begin
             if(rstn = '0')  then
-                q   <= '0';                         -- Reset to 0
-                
+                int_q   <= '0';                         -- Reset to 0
+
             elsif(rising_edge(clk)) then
-                
+
                 if(set = '1' and clr = '0') then    -- When the flop must be logic 1
-                    q <= '1';
+                    int_q <= '1';
                 end if;
-                
+
                 if(set = '0' and clr = '1') then    -- When the flop must be logic 0
-                    q <= '0';
+                    int_q <= '0';
                 end if;
-                
+
             end if;
         end process;
+
+        q   <= int_q;                   -- Driving the output
     --------------------------------------------------------
-    
-    
-    
-    -- synthesis translate_off
-	L_CHECKS_BK:   block
-    begin
-    
-        L_RESET_CHECK:  process is
-        begin
-            wait until rising_edge(rstn);
-            
-            assert(q = '0')    report "Reset value error: 'q'"    severity failure;
-            
-            
-        end process;
-        
-    end block;
-	-- synthesis translate_on
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 end architecture rtl;
 ---------------------------------------------------------------------------
