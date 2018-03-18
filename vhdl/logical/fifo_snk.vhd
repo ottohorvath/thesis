@@ -26,6 +26,8 @@ entity fifo_snk is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
+        
+        trig_out        :       out std_logic                           ;
 
         rd              :       in  std_logic                           ;-- Read side
         rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
@@ -67,6 +69,9 @@ architecture rtl of fifo_snk is
     signal  fifo_rdata  :   std_logic_vector(DWIDTH-1 downto 0) ;
     ------------------------------------------------------------------------------
 begin
+    
+    L_TRIG:     trig_out    <= fifo_empty;
+    
     
     -------------------------------------------------------
     L_CFG_REG:  process (clk, rstn) is

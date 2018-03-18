@@ -27,6 +27,8 @@ entity fifo_src is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
+        
+        trig_out        :       out std_logic                           ;
 
         rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
         wr              :       in  std_logic                           ;
@@ -58,6 +60,8 @@ architecture rtl of fifo_src is
     signal  full_int    :   std_logic   ;   -- Feeding 'full' to processor on 'rdata' LSB
 
 begin
+
+    L_TRIG:     trig_out    <= full_int;
 
     ------------------------------------------------------
     L_RDATA:    rdata   <= slv(DWIDTH-1, '0') & full_int;
