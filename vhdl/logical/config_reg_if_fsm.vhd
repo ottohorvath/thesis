@@ -124,14 +124,10 @@ begin
                                     end if;                          -- Write-related signals
                 -------------------------------------------------------
                 when WAIT_WACK  =>  if(ack_from_DUV = '1')  then     --
-                                        nxt_state   <=  GEN_WR;      --
+                                        nxt_state   <=  EXTD_WR;     --
                                     end if;                          --
                 -------------------------------------------------------
-                when GEN_WR     =>  if(ACK_NEEDED)  then             --
-                                        nxt_state   <= EXTD_WR;      --
-                                    else                             --
-                                        nxt_state   <= IDLE;         --
-                                    end if;                          --
+                when GEN_WR     =>  nxt_state   <= IDLE;             --
                 -------------------------------------------------------
                 when EXTD_WR    =>  if(ack_from_DUV = '1')  then     --
                                         nxt_state   <= IDLE;         --
