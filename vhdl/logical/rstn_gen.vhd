@@ -19,6 +19,9 @@ use     ieee.numeric_std.all    ;
 
 ---------------------------------------------------------------------------
 entity rstn_gen is
+    generic(
+        REG_LAYER       :       boolean     :=  false  -- For timing closure purposes
+    );
     port(
         clk         :   in  std_logic;
         rstn        :   in  std_logic;
@@ -26,6 +29,7 @@ entity rstn_gen is
         wr          :   in  std_logic;
         wdata       :   in  std_logic_vector(1  downto  0);
         rdata       :   out std_logic;
+        trig_out    :   out std_logic;
 
         rstn_to_DUV  :   out std_logic
     );
@@ -36,141 +40,143 @@ end entity rstn_gen;
 ---------------------------------------------------------------------------
 architecture rtl of rstn_gen is
 
-    signal din          :       std_logic_vector(1  downto  0);
-    signal din_mux      :       std_logic_vector(1  downto  0);
+    -- Write Data register
+    -- ===================
+    signal  wdata_reg   :   std_logic_vector(1 downto 0);
 
-    signal write_reg    :       std_logic;                      -- One cycle delay for the 'wr' input
 
-    signal nxt_rst_reg  :       std_logic;
-    signal rst_reg      :       std_logic;
+    -- Write signal flop for one cycle delay
+    -- =====================================
+    signal  wr_reg      :   std_logic;
 
-    signal re_det_reg   :       std_logic;                      -- The flop for rise-edge detection
-    signal re_det_out   :       std_logic;                      -- Output of the rise-edge detector
 
-    signal status       :       std_logic;
+    -- Reset generating flop
+    -- =====================
+    signal  rstn_reg    :   std_logic;
+    signal  rstn_reg_nxt:   std_logic;
+
+
+    -- Rising-edge detector
+    -- ====================
+    signal re_det_reg   :   std_logic;
+    signal re_det_out   :   std_logic;
+
+
+    -- SC FF
+    -- =====
+    signal  sc_ff_out   :   std_logic;
+
+
+    -- Trigger output signals
+    -- ======================
+    signal  trig_out_reg:   std_logic;
 
 
 begin
 
     --------------------------------------------------------
     -- Feeding the 'wr' input to a flop
-    L_WRITE_FLOPPING_P:    process(clk,rstn)   is
-    begin
-        if(rstn='0')    then
-            write_reg   <= '0';
-
-
-
-        elsif(rising_edge(clk)) then
-            write_reg   <= wr;
-
-        end if;
-    end process;
+    L_WR:   block
+            begin
+                process(clk,rstn) is
+                begin
+                    if(rstn='0')    then
+                        wr_reg   <= '0';
+                    elsif(rising_edge(clk)) then
+                        wr_reg   <= wr;
+                    end if;
+                end process;
+            end block;
     --------------------------------------------------------
+    L_WDATA:    block
+                begin
+                    process(clk,rstn)  is
+                    begin
+                        if(rstn = '0')  then
+                            wdata_reg <= (others => '0');
+                        elsif( rising_edge(clk) )   then
 
+                            if(wr = '1')    then
+                                wdata_reg   <= wdata;
+                            end if;
 
-    --------------------------------------------------------
-    -- Implementing the wr interface
-    L_WR_IF_BK: block
-    begin
-
-        L_WR_IF_P: process(clk, rstn)  is
-        begin
-            if(rstn = '0')  then
-                din <= B"00";
-
-
-
-            elsif(rising_edge(clk))   then
-                din <= din_mux;
-
-            end if;
-        end process;
-
-        --------------------------------------------------
-        -- The mux on the input
-        din_mux <=  wdata    when (wr = '1')  else
-                    din;
-    end block;
-    --------------------------------------------------------
-
-
+                        end if;
+                    end process;
+                end block;
     --------------------------------------------------------
     -- Implementing the active LOW reset pulse generating logic
-    L_RSTN_GEN_BK: block
-    begin
-        rstn_to_DUV <= rst_reg;                               -- Driving the output
+    L_RSTN: block
+            begin
+                process(clk, rstn)   is
+                begin
+                    if(rstn = '0')  then
+                        -- Reseting to 1
+                        rstn_reg     <= '1';
+                    elsif(rising_edge(clk))   then
+                        rstn_reg     <= rstn_reg_nxt;
+                    end if;
+                end process;
 
-
-        L_RSTN_GEN_P:   process(clk, rstn)   is
-        begin
-            if(rstn = '0')  then
-                rst_reg     <= '1';                          -- Reset to 1 !!!
-
-
-
-            elsif(rising_edge(clk))   then
-                rst_reg     <= nxt_rst_reg;
-
-            end if;
-        end process;
-
-
-        nxt_rst_reg <= not (din(0) and write_reg);
-    end block;
+                -- Feeding in the NAND of Enable bit and the delayed 'wr' signal
+                rstn_reg_nxt    <=  not(wdata_reg(0) and wr_reg);
+                -- Driving the output
+                rstn_to_DUV     <= rstn_reg;
+            end block;
     --------------------------------------------------------
-
-
-
-
+    L_RDATA:    block
+                begin
+                    -- Drive the status of the module
+                    rdata       <=  sc_ff_out;
+                end block;
     --------------------------------------------------------
-    -- Implementing the read interface
-    L_RD_IF_BK: block
-    begin
-        rdata    <=  status;
-    end block;
+    L_TRIG:     block
+                begin
+                    L_REG:  if(REG_LAYER = true)    generate
+                                process(clk,rstn) is
+                                begin
+                                    if(rstn = '0')  then
+                                        trig_out_reg    <= '0';
+                                    elsif(rising_edge(clk)) then
+                                        trig_out_reg    <= re_det_out;
+                                    end if;
+                                end process;
+
+                                -- Drive trig_out from flop
+                                trig_out    <= trig_out_reg;
+                            end generate;
+
+                    L_NOREG:if(REG_LAYER = false)   generate
+
+                                -- Drive it directly
+                                trig_out    <= re_det_out;
+                            end generate;
+                end block;
     --------------------------------------------------------
+    L_STATUS:   block
+                begin
+                    process(clk, rstn)  is
+                    begin
+                        if(rstn = '0')  then
+                            -- Reset to 1 !!!
+                            re_det_reg  <= '1';
+                        elsif(rising_edge(clk)) then
+                            re_det_reg  <= rstn_reg;
 
+                        end if;
+                    end process;
 
+                    -- Drive the detector output
+                    re_det_out  <= (re_det_reg and not(rstn_reg));
 
-
-
-
-
-    --------------------------------------------------------
-    -- Implementing the status
-
-    L_STATUS_BK:   block
-    begin
-        re_det_out  <= (re_det_reg and not(rst_reg));
-
-        --------------------------------------------------
-        -- The flop for rise-edge detection
-        L_STATUS_RE_DET_P:  process(clk, rstn)  is
-        begin
-            if(rstn = '0')  then
-                re_det_reg  <= '1';                          -- Reset to 1 !!!
-
-
-
-            elsif(rising_edge(clk)) then
-                re_det_reg  <= rst_reg;
-
-            end if;
-        end process;
-
-        L_STATUS_SC_FF: entity work.sc_ff(rtl)
-                --generic map(
-                --
-                --)
-                port map(
-                    clk     => clk         ,
-                    rstn    => rstn        ,
-                    set     => re_det_out  ,                    -- Driving with output of the rise-edge detector
-                    clr     => din(1)      ,
-                    q       => status
-                );
-    end block;
+                    L_SC_FF:    entity work.sc_ff(rtl)
+                        port map(
+                            clk     => clk         ,
+                            rstn    => rstn        ,
+                            set     => re_det_out  ,
+                            clr     => wdata_reg(1),
+                            q       => sc_ff_out
+                        );
+                end block;
     --------------------------------------------------------
 
 
