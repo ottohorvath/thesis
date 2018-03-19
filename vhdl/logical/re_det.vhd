@@ -19,12 +19,16 @@ use     ieee.numeric_std.all    ;
 
 ---------------------------------------------------------------------------
 entity re_det is
+    generic(
+        REG_LAYER       :       boolean     :=  false  -- For timing closure purposes
+    );
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
         wr              :   in  std_logic;
         wdata           :   in  std_logic_vector(1  downto  0);
         rdata           :   out std_logic;
+        trig_out        :   out std_logic;
         signal_from_DUV :   in  std_logic
     );
 end entity re_det;
@@ -52,6 +56,11 @@ architecture rtl of re_det is
     -- Signals from FSM
     -- ===================
     signal      fsm_re_caught       :   std_logic;
+    
+    
+    -- Trigger output signals
+    -- ======================
+    signal      trig_out_reg        :   std_logic;
 
 begin
     ---------------------------------------------------------------------
@@ -72,6 +81,29 @@ begin
                                         end if;
                                     end process;
                     -----------------------------------------------------
+                end block;
+    ---------------------------------------------------------------------
+    L_TRIG:     block
+                begin
+                    L_REG:  if(REG_LAYER = true)    generate
+                                process(clk,rstn) is
+                                begin
+                                    if(rstn = '0')  then
+                                        trig_out_reg    <= '0';
+                                    elsif(rising_edge(clk)) then
+                                        trig_out_reg    <= fsm_re_caught;
+                                    end if;
+                                end process;
+                                
+                                -- Drive trig_out from flop
+                                trig_out    <= trig_out_reg;
+                            end generate;
+                    
+                    L_NOREG:if(REG_LAYER = false)   generate
+                                
+                                -- Drive it directly
+                                trig_out    <= fsm_re_caught;
+                            end generate;
                 end block;
     ---------------------------------------------------------------------
     L_RDATA:    block
