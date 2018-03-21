@@ -37,6 +37,19 @@ architecture rtl of cntr is
     signal q:   std_logic_vector(WIDTH-1    downto  0);
     -- coverage on
 
+    function and_reduc(
+        slv :   in std_logic_vector
+    ) return std_logic
+    is
+        variable res_v : std_logic;
+    begin
+        for i in slv'range loop
+            res_v := res_v and slv(i);
+        end loop;
+
+        return res_v;
+    end function;
+
 
 begin
 
@@ -50,7 +63,10 @@ begin
         elsif(rising_edge(clk)) then
 
             if(en = '1')  then
-                q   <= std_logic_vector(unsigned(q) + 1);
+                -- Prevent from overflow
+                if (not( and_reduc(q) ) = '1')  then
+                    q   <= std_logic_vector(unsigned(q) + 1);
+                end if;
             end if;
 
             if (clr = '1')    then
