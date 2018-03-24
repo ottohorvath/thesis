@@ -41,7 +41,7 @@ is
 
         en_fsm       :   std_logic;
         clr_fsm      :   std_logic;
-        de_caught    :   std_logic;
+        chg_caught    :   std_logic;
 
     end record;
     --------------------------------------------------------
@@ -179,7 +179,7 @@ is
 
         rtl_in_if.en_fsm      <= '0';
         rtl_in_if.clr_fsm     <= '0';
-        rtl_in_if.de_caught   <= '0';
+        rtl_in_if.chg_caught   <= '0';
         wait for 1 ns;
 
 
@@ -241,7 +241,7 @@ is
                         -- The FSM should be in 'IDLE' state now!
 
             -------------------------------------------------
-            when 3  =>  init_check(id_in, "Checking after reset if a HIGH pulse on the 'de_caught' does not toggle the FSM outputs", cd);
+            when 3  =>  init_check(id_in, "Checking after reset if a HIGH pulse on the 'chg_caught' does not toggle the FSM outputs", cd);
 
                         rst_gen(scope, rst_req); -- Reseting
 
@@ -250,10 +250,10 @@ is
                         -- The FSM should be in 'IDLE' state now!
 
                         ---------------------------
-                        rtl_in_if.de_caught   <= '1';   -- Signal from dual edge detector
+                        rtl_in_if.chg_caught   <= '1';   -- Signal from dual edge detector
                         wait_re(clk);
                         ---------------------------
-                        rtl_in_if.de_caught   <= '0';   -- Signal from dual edge detector
+                        rtl_in_if.chg_caught   <= '0';   -- Signal from dual edge detector
                         wait_re(clk);                   -- The approriate output is changed by now
                         ---------------------------
                         
@@ -295,7 +295,7 @@ is
                         -- The FSM should be in 'IDLE' state now!
 
             -------------------------------------------------
-            when 5  =>  init_check(id_in, "Checking after the FSM is enabled that it can capture 'de_caught' pulse", cd);
+            when 5  =>  init_check(id_in, "Checking after the FSM is enabled that it can capture 'chg_caught' pulse", cd);
 
                         rst_gen(scope, rst_req); -- Reseting
 
@@ -325,10 +325,10 @@ is
                         ---------------------------
 
                         ---------------------------
-                        rtl_in_if.de_caught    <= '1';
+                        rtl_in_if.chg_caught    <= '1';
                         wait_re(clk);
                         ---------------------------
-                        rtl_in_if.de_caught    <= '0';
+                        rtl_in_if.chg_caught    <= '0';
                         wait_re(clk);
                         ---------------------------
 
@@ -337,7 +337,7 @@ is
 
 
             -------------------------------------------------
-            when 6  =>  init_check(id_in, "Checking the 'show_cntr' control output with two 'de_caught' pulses and also clearing after", cd);
+            when 6  =>  init_check(id_in, "Checking the 'show_cntr' control output with two 'chg_caught' pulses and also clearing after", cd);
 
                         rst_gen(scope, rst_req); -- Reseting
 
@@ -359,20 +359,20 @@ is
 
                         
                         ---------------------------
-                        rtl_in_if.de_caught    <= '1';  --
+                        rtl_in_if.chg_caught    <= '1';  --
                         wait_re(clk);                   -- Generating pulse from dual edge detector
                         ---------------------------                            
-                        rtl_in_if.de_caught    <= '0';  --
+                        rtl_in_if.chg_caught    <= '0';  --
                         wait_re(clk);
                         ---------------------------
 
                         -- The FSM should be in 'COUNTING' state now!
                         
                         ---------------------------
-                        rtl_in_if.de_caught    <= '1';  --
+                        rtl_in_if.chg_caught    <= '1';  --
                         wait_re(clk);                   -- Generating pulse from dual edge detector
                         --------------------------- 
-                        rtl_in_if.de_caught    <= '0';
+                        rtl_in_if.chg_caught    <= '0';
                         wait_re(clk);
                         ---------------------------
                         
@@ -420,10 +420,10 @@ is
                         -- The FSM should be in 'ENABLED' state now!
                         
                         ---------------------------
-                        rtl_in_if.de_caught    <= '1';  --
+                        rtl_in_if.chg_caught    <= '1';  --
                         wait_re(clk);                   -- Generating pulse from dual edge detector
                         ---------------------------
-                        rtl_in_if.de_caught    <= '0';  
+                        rtl_in_if.chg_caught    <= '0';  
                         wait_re(clk);
                         ---------------------------
 
