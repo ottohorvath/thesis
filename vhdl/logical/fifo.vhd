@@ -27,11 +27,15 @@ entity fifo is
 
         empty       :       out std_logic                           ;--
         rd          :       in  std_logic                           ;-- Read side
+        -- coverage off t
         rdata       :       out std_logic_vector(DWIDTH-1 downto 0) ;--
+        -- coverage on
 
         full        :       out std_logic                           ;--
         wr          :       in  std_logic                           ;-- Write side
+        -- coverage off t
         wdata       :       in  std_logic_vector(DWIDTH-1 downto 0)  --
+        -- coverage on
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
