@@ -156,7 +156,7 @@ begin
                     
                     en              =>  rtl_in_if.en_fsm    ,      
                     clr             =>  rtl_in_if.clr_fsm   ,  
-                    de_caught       =>  rtl_in_if.de_caught ,  
+                    chg_caught       =>  rtl_in_if.chg_caught ,  
                     
                     show_cntr       =>  rtl_out_if.show_cntr,
                     cntr_clr        =>  rtl_out_if.cntr_clr ,
