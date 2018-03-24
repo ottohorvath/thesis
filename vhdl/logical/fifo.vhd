@@ -88,9 +88,11 @@ begin
             -------------------------------------------------
             -- Downstream logic
 
+            rdata       <= payload(to_integer(rd_ptr_v));       -- Placing the pointed data slot to the output
+            
             if(rd = '1' and empty_v /= '1') then                    -- If it isn't empty, and the downstream side wants to read out
 
-                rdata       <= payload(to_integer(rd_ptr_v));       -- Placing the pointed data slot to the output
+                
 
                 rd_ptr_v    := rd_ptr_v + 1;                        -- Incrementing the read pointer
 
