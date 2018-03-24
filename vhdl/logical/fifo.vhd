@@ -38,16 +38,38 @@ end entity;
 architecture rtl of fifo is
 
     type data_t is
-        array (0 to (2**DEPTH)-1) of std_logic_vector(DWIDTH-1 downto 0);
+        array (0 to DEPTH-1) of std_logic_vector(DWIDTH-1 downto 0);
 
     signal  payload: data_t;                                                -- FIFO slots
-
+    
+    
+    -----------------------------------------------------------------
+    function clog2  (
+        arg     :   in  natural
+    )   return          natural 
+    is
+        variable nbits : integer;
+        variable num   : integer;
+    begin
+        num   := arg;
+        nbits := 0;
+        
+        while num > 1 loop
+        
+            nbits   := nbits +1;
+            num     := num / 2;
+            
+        end loop;
+        
+        return nbits;
+    end function;  
+    -----------------------------------------------------------------
 begin
     ------------------------------------------------------------------
-    process(clk, rstn)  is
+    L_FIFO:    process(clk, rstn)  is
 
-        variable rd_ptr_v   :   unsigned(DEPTH-1 downto 0);
-        variable wr_ptr_v   :   unsigned(DEPTH-1 downto 0);
+        variable rd_ptr_v   :   unsigned(clog2(DEPTH)-1 downto 0);
+        variable wr_ptr_v   :   unsigned(clog2(DEPTH)-1 downto 0);
 
         variable full_v     :   std_logic;
         variable empty_v    :   std_logic;
@@ -63,7 +85,7 @@ begin
 
             empty       <=  '1';
             full        <=  '0';
-            rdata       <=  (others => '0');
+            --rdata       <=  (others => '0');
 
         elsif( rising_edge(clk) ) then
 
