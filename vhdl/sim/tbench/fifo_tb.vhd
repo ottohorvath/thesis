@@ -96,7 +96,7 @@ begin
                                                     tb_if.clk_en                            -- Setup the testbench.
                                                                     );                      --
                 ------------------------------------------------------
-                run_test(sync, RTL_NAME_G,this,     rtl_in_if           ,                   --
+                run_test(RTL_NAME_G,this,           rtl_in_if           ,                   --
                                                     tb_if.clk           ,
                                                     tb_if.rstn_req      ,
                                                     check_descriptor    ,-- Run the testcases for the chosen RTL
@@ -117,7 +117,7 @@ begin
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(sync,RTL_NAME_G,this,     rtl_out_if          ,                       --
+                run_check(RTL_NAME_G,this,          rtl_out_if          ,                       --
                                                     tb_if               ,                       -- 
                                                     p_handshake.put_it  ,                       --
                                                     p_handshake.got_it  ,                       --

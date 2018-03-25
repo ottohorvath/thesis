@@ -19,7 +19,6 @@ use ieee.std_logic_1164.all	;
 use work.tb_log_pkg.all     ;
 use work.tb_utils_pkg.all   ;
 use work.tb_report_pkg.all  ;
-use work.tb_sync_pkg.all    ;
 
 
 use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
@@ -58,7 +57,6 @@ is
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
     procedure   fifo_check(
-        variable    sv              :   inout   shared_sync;
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
 
@@ -86,7 +84,6 @@ is
     --------------------------------------------------
     -- The main checker for RTL named 'wtf'
     procedure   fifo_check(
-        variable    sv              :   inout   shared_sync;
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
 
@@ -110,7 +107,6 @@ is
     begin
 
 
-
         wait on put_it;             -- Waiting on the 'tc' process
 
         errors := 0;                -- Initializing error indicator
@@ -127,7 +123,9 @@ is
                                 rtl_out_if.empty    /=  '1'
                             )   then
                                                    -- Exp      --Act
-                                perror(scope&".0",  str('0'),   str(rtl_out_if.rdata));
+                                perror(scope&".0",  str(x"00000000"),   str(rtl_out_if.rdata));
+                                perror(scope&".1",  str('0'),   str(rtl_out_if.full));
+                                perror(scope&".2",  str('1'),   str(rtl_out_if.empty));
                                 errors := errors + 1;
                             end if;
             -------------------------------------------------
@@ -135,7 +133,7 @@ is
                                 rtl_out_if.rdata /=  x"00000001"
                             ) then
                                                     -- Exp      --Act
-                                perror(scope&".0",  str('0'),   str(rtl_out_if.rdata));
+                                perror(scope&".0",  str(x"00000001"),   str(rtl_out_if.rdata));
                                 errors := errors + 1;
                             end if;
             -------------------------------------------------
@@ -143,57 +141,53 @@ is
                                 rtl_out_if.rdata /=  x"00000002"
                             ) then
                                                     -- Exp      --Act
-                                perror(scope&".0",  str('0'),   str(rtl_out_if.rdata));
+                                perror(scope&".0",  str(x"00000002"),   str(rtl_out_if.rdata));
                                 errors := errors + 1;
                             end if;
             -------------------------------------------------
             when    3   =>  
                             
-                            sv.start_checking;
-                            
-                            sv.checking_it;
-                            
-                            print(scope &": Checking DONE!",1);
-                            sv.checking_done;
-                            
+                            got_it  <= '0'; wait for 0 ps;
+                            loop
+                                -- Looping until the FIFO is full
+                                -- Test process is responsible for read out the
+                                -- contents of it
+                                
+                                
+                                
+                                if rtl_out_if.empty = '1'    then
+                                
+                                    got_it  <=  '1';
+                                    exit;
+                                    
+                                end if;
+                                
+                                wait on put_it;
+                                
+                                
+                            end loop;
 
-            
---                            loop
---                                -- Looping until the FIFO is full
---                                -- Test process is responsible for read out the
---                                -- contents of it
---
---                                if rtl_out_if.full = '0'    then
---                                    got_it  <= not got_it;
---                                    exit;
---                                else
---                                    wait for 1 ps;
---                                end if;
---
---                            end loop;
---                            
---                            print(scope &": WAIT",1);
---                            wait;
---                            -----------------------
---
---                            wait on put_it;
---                            i   := 0;
---                            ipp := 1;
---                            for i in 0 to DEPTH_C-1 loop
---                                if(
---                                    rtl_out_if.rdata /=  std_logic_vector(to_unsigned(ipp , DWIDTH_C) )
---                                ) then
---                                                              -- Exp      --Act
---                                    perror(scope&"."&str(ipp),  str(ipp),   str(rtl_out_if.rdata));
---                                    errors := errors + 1;
---                                end if;
---                                ----------------------------------------------------------
---                                got_it  <= not(got_it);     -- Signalling back to the 'tc' process
---                                wait on put_it;             -- Waiting on the 'tc' process
---                                ----------------------------------------------------------
---
---                                ipp := ipp + 1;
---                            end loop;
+                            -----------------------
+                            -----------------------
+                            wait on put_it;
+                            
+                            i   := 0;
+                            ipp := 1;
+                            for i in 0 to DEPTH_C-1 loop
+                                if(
+                                    rtl_out_if.rdata /=  std_logic_vector(to_unsigned(ipp , DWIDTH_C) )
+                                ) then
+                                                              -- Exp      --Act
+                                    perror(scope&"."&str(ipp),  str(ipp),   str(rtl_out_if.rdata));
+                                    errors := errors + 1;
+                                end if;
+                                ----------------------------------------------------------
+                                got_it  <= not(got_it);     -- Signalling back to the 'tc' process
+                                wait on put_it;             -- Waiting on the 'tc' process
+                                ----------------------------------------------------------
+
+                                ipp := ipp + 1;
+                            end loop;
 
 
             -------------------------------------------------
@@ -220,23 +214,6 @@ is
         got_it  <= not(got_it);      -- Signalling back to the 'tc' process
     end procedure;
     --------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 end package body;

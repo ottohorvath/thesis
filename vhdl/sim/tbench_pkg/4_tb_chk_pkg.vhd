@@ -89,7 +89,6 @@ is
 
             procedure   called_chk
             (
-                variable    sv              :   inout   shared_sync;
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
 
