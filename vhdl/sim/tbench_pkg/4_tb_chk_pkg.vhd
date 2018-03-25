@@ -19,6 +19,7 @@ use ieee.std_logic_1164.all	;
 use work.tb_log_pkg.all     ;
 use work.tb_utils_pkg.all   ;
 use work.tb_report_pkg.all  ;
+use work.tb_sync_pkg.all    ;
 ----------------------------------------
 
 
@@ -35,7 +36,8 @@ is
             constant    called_chk_name     :       string;                 -- The name of the 'called_process' in string
             
             procedure   called_chk
-            (                                                               -- Procedure responsible for running one check which is indexed by 'id'
+            (   -- Procedure responsible for running one check which is indexed by 'id'
+                variable    sv              :   inout   shared_sync;
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
 
@@ -48,7 +50,8 @@ is
                 signal      id              :   in  integer   
             )
         )
-    (       
+    (   
+        variable    sv              :   inout   shared_sync;
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
         
@@ -86,7 +89,8 @@ is
             constant    called_chk_name     :       string;           
             
             procedure   called_chk
-            (                                                          
+            (   
+                variable    sv              :   inout   shared_sync;
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
     
@@ -100,7 +104,7 @@ is
                 
             )
         )
-    (       
+    (   variable    sv              :   inout   shared_sync;    
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
         
@@ -118,7 +122,7 @@ is
     begin
         
         -- Run 'called_chk' generic procedure: the actual resolved procedure name will be like this: <RTL>_check
-        called_chk(rtl_name,scope,          rtl_out_if  ,
+        called_chk(sv, rtl_name,scope,      rtl_out_if  ,
                                             tb_if       , 
                                             put_it      ,
                                             got_it      ,
