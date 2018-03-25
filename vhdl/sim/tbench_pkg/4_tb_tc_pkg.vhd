@@ -19,7 +19,6 @@ use ieee.std_logic_1164.all	;
 use work.tb_log_pkg.all     ;
 use work.tb_utils_pkg.all   ;
 use work.tb_report_pkg.all  ;
-use work.tb_sync_pkg.all    ;
 ----------------------------------------
 
 
@@ -64,8 +63,7 @@ is
             constant    called_tc_name      :       string;             -- The name of the 'called_process' in string
             
             procedure   called_tc
-            (   
-                variable    sv              :   inout   shared_sync;    -- Procedure responsible for running one testcase which is indexed by 'id'
+            (                                                           -- Procedure responsible for running one testcase which is indexed by 'id'
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
 
@@ -76,12 +74,12 @@ is
                 signal      cd              :   out check_descriptor_array (0 to check_no_max_c-1);                
                 
                 signal      put_it          :   out std_logic   ;
-                signal      got_it          :   in  std_logic   ;
+                signal      get_it          :   in  std_logic   ;
                 signal      passed          :   in  std_logic   ;                
                 signal      id              :   out integer        
             )
         )
-    (   variable    sv              :   inout   shared_sync;    
+    (       
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
         
@@ -92,29 +90,23 @@ is
         signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1);
         
         signal      put_it      :   out     std_logic   ;
-        signal      got_it      :   in      std_logic   ;
+        signal      get_it      :   in      std_logic   ;
         signal      passed      :   in      std_logic   ;
         signal      id          :   out     integer    
     );
     --------------------------------------------------
     
     
-    ------------------------------------------
-    procedure   processor_wr(                        -- Processor write with std_logic data
-        constant    din     :   in  std_logic;
-        signal      clk     :   in  std_logic;
-        signal      wdata   :   out std_logic;
-        signal      wr      :   out std_logic
-    );
-    ------------------------------------------
+
     
-    procedure   processor_wr(                       -- Processor write with slv data
-        constant    din     :   in  std_logic_vector;
-        signal      clk     :   in  std_logic;
-        signal      wdata   :   out std_logic_vector;
-        signal      wr      :   out std_logic
-    );
-    ------------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -149,7 +141,7 @@ is
             constant    called_tc_name      :       string;            
             
             procedure   called_tc
-            (   variable    sv              :   inout   shared_sync;                             
+            (                                
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
 
@@ -159,12 +151,12 @@ is
                 signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);
                 
                 signal      put_it          :   out std_logic   ;
-                signal      got_it          :   in  std_logic   ;
+                signal      get_it          :   in  std_logic   ;
                 signal      passed          :   in  std_logic   ;
                 signal      id              :   out integer    
             )
         )
-    (   variable    sv              :   inout   shared_sync;
+    (
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
         
@@ -177,7 +169,7 @@ is
         
        
         signal      put_it      :   out     std_logic   ;
-        signal      got_it      :   in      std_logic   ;
+        signal      get_it      :   in      std_logic   ;
         signal      passed      :   in      std_logic   ;
         signal      id          :   out     integer    
     )is
@@ -186,12 +178,12 @@ is
     begin
     
         -- Run 'called_tc' generic procedure: the actual resolved procedure name will be like this: <RTL>_test
-        called_tc(sv, rtl_name,scope,       rtl_in_if   ,
+        called_tc(rtl_name,scope,           rtl_in_if   ,
                                             clk         ,
                                             rst_req     ,
                                             cd          ,
                                             put_it      ,
-                                            got_it      ,
+                                            get_it      ,
                                             passed      ,
                                             id          );
     
@@ -249,48 +241,25 @@ is
     ------------------------------------------------------------------------------
     
     
-    ------------------------------------------
-    procedure   processor_wr(                      
-        constant    din     :   in  std_logic;
-        signal      clk     :   in  std_logic;
-        signal      wdata   :   out std_logic;
-        signal      wr      :   out std_logic
-    )is
-    begin
-        
-        
-        ----------------
-        wdata   <= din;
-        wr      <= '1';
-        wait_re(clk);
-        ---------------
-        wr      <= '0';
-        wait_re(clk);
-        
-    end procedure;
-    ------------------------------------------
+    
+ 
     
     
-    ------------------------------------------
-    procedure   processor_wr(                      
-        constant    din     :   in  std_logic_vector;
-        signal      clk     :   in  std_logic;
-        signal      wdata   :   out std_logic_vector;
-        signal      wr      :   out std_logic
-    )is
-    begin
-        
-        
-        ----------------
-        wdata   <= din;
-        wr      <= '1';
-        wait_re(clk);
-        ---------------
-        wr      <= '0';
-        wait_re(clk);
-        
-    end procedure;
-    ------------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
