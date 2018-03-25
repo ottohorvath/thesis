@@ -21,7 +21,7 @@ file_ext            =   ".vhd"                  # VHDL file extension
 # 'vsim' args
 rtl_ver             =   "-93"                   # VHDL version for RTL compilation
 tb_ver              =   "-2008"                 # VHDL version for TB compilation
-sim_resolution      =   "ns"                    # Simulation resolution time unit
+sim_resolution      =   "ps"                    # Simulation resolution time unit
 
 # RTLs
 rtl_src_dir         =   "../../logical/"        # Rel. path to the RTL source files
@@ -322,7 +322,7 @@ def vsim_for_sim(tb_name, log_file):
 def vsim_for_sim_gui(tb_name, log_file):
 
     subprocess.call('vsim -t 1'+sim_resolution                      +   # Starting Questa in GUI and setting the simulation time resolution
-                    ' -do "log -r /*; run -all; quit;"'             +   # Recursively log all signals for easier Waveform debugging
+                    ' -do "set NoQuitOnFinish 1; log -r /*; run -all;"' +   # Recursively log all signals for easier Waveform debugging
                     ' -default_radix hexadecimal'                   +   # Setting default radix
                     ' -logfile "'+log_file+tb_name+'_log.log"'      +   # Specifing the simulation log files
                     ' work.'+tb_name+'_opt '                    # Load in the optimized testbench
