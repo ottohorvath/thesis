@@ -22,7 +22,6 @@ use ieee.std_logic_1164.all	;
 use work.tb_utils_pkg.all       ;
 use work.tb_log_pkg.all         ;
 use work.tb_report_pkg.all      ;
-use work.tb_sync_pkg.all        ;
 
 use work.tb_tc_pkg.all          ;   -- Includes for the 'tc' process.
 use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
@@ -82,10 +81,6 @@ architecture bhv of fifo_tb is
     -----------------------------------------------------------------------------------
     
         
-    ----------------------------------------
-    -- Shared variable for process synchronizing
-    shared variable sync:   shared_sync;
-    ----------------------------------------
     
 begin
 
@@ -132,16 +127,7 @@ begin
             end process;
     -----------------------------------------------------------------------------------------
     
-    sv:     process is
-                
-            begin
-                
-                sync.set_clk_event(0);
-                wait until rising_edge(tb_if.clk);
-                sync.set_clk_event(1);
 
-            end process;
-    
     
     
     -----------------------------------------------------------------------------------------
