@@ -17,7 +17,7 @@ use     ieee.numeric_std.all    ;
 
 
 ---------------------------------------------------------------------------
-entity modesel_mux is
+entity mode_sel_mux is
     generic(
         WIDTH   :       natural := 32                                      -- Width of one input lane
     );
@@ -26,11 +26,11 @@ entity modesel_mux is
         data_o  :   out std_logic_vector(WIDTH-1        downto  0);
         sel     :   in  std_logic                                          -- Only two input lanes will be implemented (Normal, Test)
     );
-end entity modesel_mux;
+end entity mode_sel_mux;
 ---------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------
-architecture rtl of modesel_mux is
+architecture rtl of mode_sel_mux is
 
 begin
 
