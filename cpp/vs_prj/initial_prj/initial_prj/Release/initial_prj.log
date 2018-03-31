@@ -1,0 +1,24 @@
+﻿Build started 31-Mar-18 2:40:50 PM.
+     1>Project "E:\questa_sim\cpp\vs_prj\initial_prj\initial_prj\initial_prj.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release\initial_prj.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\initial_prj.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\questa_sim\cpp\vs_prj\initial_prj\Release\initial_prj.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\initial_prj.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\questa_sim\cpp\vs_prj\initial_prj\Release\initial_prj.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\questa_sim\cpp\vs_prj\initial_prj\Release\initial_prj.lib" /MACHINE:X86 Release\main.obj
+         Release\stdafx.obj
+         Generating code
+         Finished generating code
+         initial_prj.vcxproj -> E:\questa_sim\cpp\vs_prj\initial_prj\Release\initial_prj.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\questa_sim\cpp\vs_prj\initial_prj\Release\initial_prj.exe;#1" /manifest Release\initial_prj.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\initial_prj.unsuccessfulbuild".
+         Touching "Release\initial_prj.lastbuildstate".
+     1>Done Building Project "E:\questa_sim\cpp\vs_prj\initial_prj\initial_prj\initial_prj.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.05
