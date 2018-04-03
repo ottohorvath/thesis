@@ -4,7 +4,7 @@
 --
 ---------------------------------------------------------------------------
 --
--- Description: ~ Generic D flip-flop with adjustable reseting sensitivity
+-- Description: ~ Generic "Reset D flip-flop" with adjustable reseting sensitivity
 --
 --
 ---------------------------------------------------------------------------
@@ -15,7 +15,7 @@ use     ieee.numeric_std.all    ;
 
 
 ---------------------------------------------------------------------------
-entity flop is
+entity reset_flop is
     generic(
         ACTIVE_LOW  :   boolean :=  true
     );
@@ -25,20 +25,20 @@ entity flop is
         d           :   in  std_logic;
         q           :   out std_logic
     );
-end entity flop;
+end entity reset_flop;
 ---------------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------------
-architecture rtl of flop is
+architecture rtl of reset_flop is
 
     -- D flop
     -- =======
-    signal  flop    :   std_logic;
+    signal  reset_flop    :   std_logic;
 
 begin
     ---------------------------------------------
-    L_Q :   q   <=  flop;
+    L_Q :   q   <=  reset_flop;
     ---------------------------------------------
     L_ALOW: if(ACTIVE_LOW = true)   generate
                 ---------------------------------
@@ -46,9 +46,9 @@ begin
                 begin
 
                     if( rst = '0')  then
-                        flop    <=  '0';
+                        reset_flop    <=  '0';
                     elsif(rising_edge(clk)) then
-                        flop    <=  d;
+                        reset_flop    <=  d;
                     end if;
 
                 end process;
@@ -61,9 +61,9 @@ begin
                 begin
 
                     if( rst = '1')  then
-                        flop    <=  '0';
+                        reset_flop    <=  '1';
                     elsif(rising_edge(clk)) then
-                        flop    <=  d;
+                        reset_flop    <=  d;
                     end if;
 
                 end process;

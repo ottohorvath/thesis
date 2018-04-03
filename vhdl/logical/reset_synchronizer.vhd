@@ -4,7 +4,7 @@
 --
 ---------------------------------------------------------------------------
 --
--- Description: ~ Generic synchronizer for de-asserting async. reset
+-- Description: ~ Generic reset synchronizer for de-asserting async. reset
 --
 --
 ---------------------------------------------------------------------------
@@ -33,7 +33,7 @@ end entity reset_synchronizer;
 architecture rtl of reset_synchronizer is
 
     -- Wires between the intermediate flops.
-    -- Only interesting if SYNC_LVL is bigger than 2.
+    -- Only interesting if SYNC_LVL is greater than 2.
     -- ==============================================
     signal  intermediate_wire:  std_logic_vector(SYNC_LVL-2 downto 0);
 
@@ -53,7 +53,7 @@ begin
                         const_logic_value   <=  '0';
                     end generate;
     ----------------------------------------------------------
-    L_FIRST:    entity  work.flop(rtl)
+    L_FIRST:    entity  work.reset_flop(rtl)
                     generic map(
                         ACTIVE_LOW  =>  ACTIVE_LOW
                     )
@@ -64,7 +64,7 @@ begin
                         q     =>  intermediate_wire(0)
                     );
     ----------------------------------------------------------
-    L_LAST :    entity  work.flop(rtl)
+    L_LAST :    entity  work.reset_flop(rtl)
                     generic map(
                         ACTIVE_LOW  =>  ACTIVE_LOW
                     )
@@ -79,7 +79,7 @@ begin
                     ------------------------------------
                     L_IF:   if(SYNC_LVL > 2)  generate
                         --------------------------------
-                        L_U:    entity work.flop(rtl)
+                        L_U:    entity work.reset_flop(rtl)
                                     generic map(
                                         ACTIVE_LOW  =>  ACTIVE_LOW
                                     )
