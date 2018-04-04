@@ -19,15 +19,15 @@ use     ieee.numeric_std.all    ;
 
 ---------------------------------------------------------------------------
 entity fifo_wr_if_fsm is
-    generic(
-        DW          :       integer :=  32  -- Data width
-    );
+--    generic(
+--        DW          :       integer :=  32  -- Data width
+--    );
     port(
         clk         :   in  std_logic;
         rstn        :   in  std_logic;
         trig_in_fsm :   in  std_logic;
         wr          :   in  std_logic;
-        wdata       :   in  std_logic_vector(DW-1 downto 0);
+        wdata       :   in  std_logic_vector(2 downto 0);
         fifo_wr     :   in  std_logic;
         show_data_fsm:   out std_logic;
         rdata_reg_en:   out std_logic;
@@ -55,7 +55,7 @@ begin
     begin
 
         ----------------------------------------------------------------------
-        L_NEXT_STATE:   process(cur_state,wr,wdata,fifo_wr) is
+        L_NEXT_STATE:   process(cur_state,wr,wdata,fifo_wr,trig_in_fsm) is
         begin
 
             nxt_state   <= cur_state;
