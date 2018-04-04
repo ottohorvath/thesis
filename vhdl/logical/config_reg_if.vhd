@@ -71,6 +71,14 @@ architecture rtl of config_reg_if is
 
 
 begin
+
+    L_DUV_IF:   block
+                begin
+                    addr_to_DUV     <=  addr_reg;
+                    wdata_to_DUV    <=  wdata_reg;
+                end block;
+
+
     -----------------------------------------------------
     L_RD_IF: block
     begin
