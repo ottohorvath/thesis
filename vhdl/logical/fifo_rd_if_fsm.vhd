@@ -54,7 +54,7 @@ begin
     begin
 
         ----------------------------------------------------------------------
-        L_NEXT_STATE:   process(cur_state,wr,wdata,fifo_rd) is
+        L_NEXT_STATE:   process(cur_state,wr,wdata,fifo_rd,trig_in_fsm) is
         begin
 
             nxt_state   <= cur_state;
