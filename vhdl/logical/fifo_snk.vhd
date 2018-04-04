@@ -71,8 +71,8 @@ architecture rtl of fifo_snk is
 begin
     
     L_TRIG:     trig_out    <= fifo_empty;
-    
-    
+    -------------------------------------------------------
+    L_FIFO_RD:  fifo_rd     <= rd;
     -------------------------------------------------------
     L_CFG_REG:  process (clk, rstn) is
                 begin
