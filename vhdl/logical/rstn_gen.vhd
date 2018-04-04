@@ -166,7 +166,7 @@ begin
                     end process;
 
                     -- Drive the detector output
-                    re_det_out  <= (re_det_reg and not(rstn_reg));
+                    re_det_out  <= (not(re_det_reg) and rstn_reg);
 
                     L_SC_FF:    entity work.sc_ff(rtl)
                         port map(
