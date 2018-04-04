@@ -101,7 +101,7 @@ begin
                                     end if;                          --
                 -------------------------------------------------------
                 when EXTD_RD    =>  if(ack_from_DUV = '1')  then     --
-                                        nxt_state   <= IDLE;         --
+                                        nxt_state   <= CAPT_RDATA;   --
                                     end if;                          --
                 -------------------------------------------------------
                 when CAPT_RDATA =>  nxt_state       <= IDLE;         --
