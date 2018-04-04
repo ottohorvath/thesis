@@ -41,7 +41,7 @@ architecture rtl of cntr is
         slv :   in std_logic_vector
     ) return std_logic
     is
-        variable res_v : std_logic;
+        variable res_v : std_logic:= '1';
     begin
         for i in slv'range loop
             res_v := res_v and slv(i);
@@ -64,7 +64,7 @@ begin
 
             if(en = '1')  then
                 -- Prevent from overflow
-                if (not( and_reduc(q) ) = '1')  then
+                if (not(and_reduc(q)) = '1')  then
                     q   <= std_logic_vector(unsigned(q) + 1);
                 end if;
             end if;
