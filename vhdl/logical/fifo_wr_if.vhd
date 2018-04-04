@@ -34,7 +34,7 @@ entity fifo_wr_if is
         
         rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
         wr              :       in  std_logic                           ;
-        wdata           :       in  std_logic_vector(DWIDTH-1  downto 0);
+        wdata           :       in  std_logic_vector(2  downto 0);
 
         full_to_DUV     :       out std_logic                           ;--
         wr_from_DUV     :       in  std_logic                           ;-- Write side
@@ -197,9 +197,9 @@ begin
 
     -------------------------------------------------------------
     L_FSM:  entity  work.fifo_wr_if_fsm(rtl)
-                generic map(
-                    DW              =>  DWIDTH
-                )
+--                generic map(
+--                    DW              =>  DWIDTH
+--                )
                 port map(
                     clk             =>  clk         ,
                     rstn            =>  rstn        ,
