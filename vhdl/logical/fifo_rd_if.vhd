@@ -22,7 +22,7 @@ use     ieee.numeric_std.all    ;
 entity fifo_rd_if is
     generic (
         REG_LAYER       :           boolean :=  false;  -- For timing closure purposes
-        DWIDTH          :           integer :=  32      -- Data width
+        DW              :           integer :=  32      -- Data width
     );
     port (
         clk             :       in  std_logic                           ;
@@ -32,13 +32,13 @@ entity fifo_rd_if is
         trig_out_0      :       out std_logic                           ;-- Trigger IF
         trig_out_1      :       out std_logic                           ;--
 
-        rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
+        rdata           :       out std_logic_vector(DW-1 downto 0) ;   
         wr              :       in  std_logic                           ;
-        wdata           :       in  std_logic_vector(DWIDTH-1  downto 0);
+        wdata           :       in  std_logic_vector(DW-1  downto 0);
 
         empty_to_DUV    :       out std_logic                           ;--
         rd_from_DUV     :       in  std_logic                           ;-- Read side
-        rdata_to_DUV    :       out std_logic_vector(DWIDTH-1 downto 0)  --
+        rdata_to_DUV    :       out std_logic_vector(DW-1 downto 0)      --
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
@@ -69,13 +69,13 @@ architecture rtl of fifo_rd_if is
     -- [0]: Shows if the module is enabled
     -- [1]: Shows the value of 'empty_to_DUV'
     -- [2]: Shows if data got read out
-    signal      rdata_int_w     :   std_logic_vector(DWIDTH-1 downto 0);
+    signal      rdata_int_w     :   std_logic_vector(DW-1 downto 0);
 
 
     -- Write Data Register
     -- ===================
     -- Stores write data which will be eventually read out by the DUV
-    signal      wdata_reg       :   std_logic_vector(DWIDTH-1 downto 0);
+    signal      wdata_reg       :   std_logic_vector(DW-1 downto 0);
     signal      wdata_reg_en    :   std_logic;
 
 
@@ -102,7 +102,7 @@ begin
     L_WDATA_REG:    process(clk,rstn) is
                     begin
                         if(rstn = '0')  then
-                            wdata_reg   <= slv(DWIDTH, '0');
+                            wdata_reg   <= slv(DW, '0');
 
                         elsif( rising_edge(clk))    then
 
@@ -115,7 +115,7 @@ begin
     -------------------------------------------------------------
     L_RDATA:    block
                 begin
-                    rdata   <=  slv(DWIDTH-3, '0')  &
+                    rdata   <=  slv(DW-3, '0')  &
                                 data_got_read_out   &   -- [2]
                                 fifo_empty          &   -- [1]
                                 enabled_from_fsm    ;   -- [0]
@@ -188,7 +188,7 @@ begin
     -------------------------------------------------------------
     L_FSM:  entity  work.fifo_rd_if_fsm(rtl)
                 generic map(
-                    DW              =>  DWIDTH
+                    DW              =>  DW
                 )
                 port map(
                     clk             =>  clk                 ,

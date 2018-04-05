@@ -22,7 +22,7 @@ use     ieee.numeric_std.all    ;
 entity fifo_wr_if is
     generic (
         REG_LAYER       :           boolean :=  false;  -- For timing closure purposes
-        DWIDTH          :           integer :=  32      -- Data width
+        DW              :           integer :=  32      -- Data width
     );
     port (
         clk             :       in  std_logic                           ;
@@ -32,13 +32,13 @@ entity fifo_wr_if is
         trig_out_0      :       out std_logic                           ;-- Trigger IF    
         trig_out_1      :       out std_logic                           ;-- 
         
-        rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
+        rdata           :       out std_logic_vector(DW-1 downto 0) ;
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(2  downto 0);
 
         full_to_DUV     :       out std_logic                           ;--
         wr_from_DUV     :       in  std_logic                           ;-- Write side
-        wdata_from_DUV  :       in std_logic_vector(DWIDTH-1 downto 0)  --
+        wdata_from_DUV  :       in std_logic_vector(DW-1 downto 0)  
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
@@ -68,15 +68,15 @@ architecture rtl of fifo_wr_if is
     -- =============
     -- 1: Selects the register which contains data written in by the DUV
     -- 0: Selects status signals from the FSM
-    signal      rdata_mux       :   std_logic_vector(DWIDTH-1 downto 0);
-    signal      rdata_mux_1     :   std_logic_vector(DWIDTH-1 downto 0);
-    signal      rdata_mux_0     :   std_logic_vector(DWIDTH-1 downto 0);
+    signal      rdata_mux       :   std_logic_vector(DW-1 downto 0);
+    signal      rdata_mux_1     :   std_logic_vector(DW-1 downto 0);
+    signal      rdata_mux_0     :   std_logic_vector(DW-1 downto 0);
 
 
     -- Read Data Register
     -- ===================
     -- Stores the data which is written by the DUV, which will be eventually read by the Processor
-    signal      rdata_reg       :   std_logic_vector(DWIDTH-1 downto 0);
+    signal      rdata_reg       :   std_logic_vector(DW-1 downto 0);
     signal      rdata_reg_en    :   std_logic;
     
     
@@ -108,7 +108,7 @@ begin
                     L_RDATA_REG:    process(clk,rstn) is
                                     begin
                                         if( rstn='0' )then
-                                            rdata_reg   <= slv(DWIDTH,'0');
+                                            rdata_reg   <= slv(DW,'0');
                                             
                                         elsif( rising_edge(clk) ) then
                                             
@@ -122,7 +122,7 @@ begin
                     ---------------------------------------------
                     rdata_mux_1 <=  rdata_reg;
                     
-                    rdata_mux_0 <=  slv(DWIDTH-3,'0')   &
+                    rdata_mux_0 <=  slv(DW-3,'0')   &
                                     rcvd_data           &   -- [2]
                                     fifo_full           &   -- [1]
                                     enabled             ;   -- [0]
@@ -198,7 +198,7 @@ begin
     -------------------------------------------------------------
     L_FSM:  entity  work.fifo_wr_if_fsm(rtl)
 --                generic map(
---                    DW              =>  DWIDTH
+--                    DW              =>  DW
 --                )
                 port map(
                     clk             =>  clk         ,
