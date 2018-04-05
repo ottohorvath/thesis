@@ -17,14 +17,14 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity cntr is
     generic(
-        WIDTH           :   natural:= 7
+        CW              :   natural:= 7
     );
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
         en              :   in  std_logic;
         clr             :   in  std_logic;
-        cntr_out        :   out std_logic_vector(WIDTH-1    downto  0)
+        cntr_out        :   out std_logic_vector(CW-1    downto  0)
     );
 end entity cntr;
 ---------------------------------------------------------------------------
@@ -34,7 +34,7 @@ end entity cntr;
 architecture rtl of cntr is
 
     -- coverage off t
-    signal q:   std_logic_vector(WIDTH-1    downto  0);
+    signal q:   std_logic_vector(CW-1    downto  0);
     -- coverage on
 
     function and_reduc(

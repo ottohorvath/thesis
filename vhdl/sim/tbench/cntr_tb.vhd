@@ -150,7 +150,7 @@ begin
     -----------------------------------------------------------------------------------------
     L_DUT:  entity work.cntr(rtl)
                 generic map(
-                    WIDTH   => w
+                    CW   => w
                 )
                 port map(
                     clk             =>  tb_if.clk           ,

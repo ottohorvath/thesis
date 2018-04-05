@@ -17,9 +17,9 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity evnt_cntr is
     generic(
-        SIG_W           :   integer:=   1;       -- Width of the input signal which is watched
+        SIG_W           :   integer:=   1;       -- CW of the input signal which is watched
         REG_LAYER       :   boolean:=   false;
-        CNTR_WIDTH      :   integer:=   7
+        CW              :   integer:=   7
     );
     port(
         clk             :   in  std_logic;
@@ -28,7 +28,7 @@ entity evnt_cntr is
         wr              :   in  std_logic;
         wdata           :   in  std_logic_vector(1  downto  0);
         -- coverage off t
-        rdata           :   out std_logic_vector(CNTR_WIDTH-1   downto  0);
+        rdata           :   out std_logic_vector(CW-1   downto  0);
         -- coverage on
         signal_from_DUV :   in  std_logic_vector(SIG_W-1 downto 0);
         trig_in         :   in  std_logic;
@@ -49,7 +49,7 @@ architecture rtl of evnt_cntr is
     -- Signals from/to 'cntr'
     -- ===================
     -- coverage off t
-    signal  cntr_out_w  :   std_logic_vector(CNTR_WIDTH-1 downto 0);
+    signal  cntr_out_w  :   std_logic_vector(CW-1 downto 0);
     -- coverage on
     signal  cntr_en_w   :   std_logic;
 
@@ -185,7 +185,7 @@ begin
     ---------------------------------------------------------------------
     L_CNTR:     entity work.cntr(rtl)
                     generic map(
-                        WIDTH       =>  CNTR_WIDTH
+                        CW       =>  CW
                     )
                     port map(
                         clk         => clk          ,

@@ -21,7 +21,7 @@ use     ieee.numeric_std.all    ;
 entity fifo_snk is
     generic (
         DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
-        DWIDTH      :       integer                 :=  32           -- Data width
+        DW          :       integer                 :=  32           -- Data width
     );
     port (
         clk             :       in  std_logic                           ;
@@ -30,13 +30,13 @@ entity fifo_snk is
         trig_out        :       out std_logic                           ;
 
         rd              :       in  std_logic                           ;-- Read side
-        rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
+        rdata           :       out std_logic_vector(DW-1 downto 0) ;--
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(1  downto 0)       ;
         
         full_to_DUV     :       out std_logic                           ;-- 
         wr_from_DUV     :       in  std_logic                           ;-- Write side
-        wdata_from_DUV  :       in  std_logic_vector(DWIDTH-1 downto 0)  --
+        wdata_from_DUV  :       in  std_logic_vector(DW-1 downto 0)  --
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
@@ -59,14 +59,14 @@ architecture rtl of fifo_snk is
     
     
     ------------------------------------------------------------------------------
-    -- conf_reg = B"01" : Showing the FIFO's 'empty' signal in the LSB: { DWIDTH-1{1b0}, empty}}
+    -- conf_reg = B"01" : Showing the FIFO's 'empty' signal in the LSB: { DW-1{1b0}, empty}}
     -- conf_reg = B"10" : Showing the FIFO's 'rdata' vector
     -- conf_reg = others: Showing zeros 
     signal  conf_reg    :   std_logic_vector(1 downto 0)        ;
     
     signal  fifo_rd     :   std_logic                           ;
     signal  fifo_empty  :   std_logic                           ;
-    signal  fifo_rdata  :   std_logic_vector(DWIDTH-1 downto 0) ;
+    signal  fifo_rdata  :   std_logic_vector(DW-1 downto 0) ;
     ------------------------------------------------------------------------------
 begin
     
@@ -91,16 +91,16 @@ begin
     L_RDATA_MUX:block
                 begin
                     
-                    rdata   <=  slv(DWIDTH-1,'0') & fifo_empty when conf_reg = B"01"  else  -- Showing the FIFO-s empty signal
+                    rdata   <=  slv(DW-1,'0') & fifo_empty when conf_reg = B"01"  else  -- Showing the FIFO-s empty signal
                                 fifo_rdata                     when conf_reg = B"10"  else  -- Showing FIFO rdata
-                                slv(DWIDTH,'0');                                            -- Otherwise, DWIDTH{1b0}} 
+                                slv(DW,'0');                                            -- Otherwise, DW{1b0}} 
     
                 end block;
     -------------------------------------------------------
     L_GEN_FIFO: entity work.fifo(rtl)
                     generic map(
                         DEPTH       =>  DEPTH           ,
-                        DWIDTH      =>  DWIDTH
+                        DW      =>  DW
                     )    
                     port map(    
                         clk         =>  clk             ,

@@ -19,7 +19,7 @@ use     ieee.numeric_std.all    ;
 entity fifo is
     generic (
         DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
-        DWIDTH      :       integer                 :=  32          -- Data width
+        DW          :       integer                 :=  32          -- Data width
     );
     port (
         clk         :       in  std_logic                           ;
@@ -28,13 +28,13 @@ entity fifo is
         empty       :       out std_logic                           ;--
         rd          :       in  std_logic                           ;-- Read side
         -- coverage off t
-        rdata       :       out std_logic_vector(DWIDTH-1 downto 0) ;--
+        rdata       :       out std_logic_vector(DW-1 downto 0) ;--
         -- coverage on
 
         full        :       out std_logic                           ;--
         wr          :       in  std_logic                           ;-- Write side
         -- coverage off t
-        wdata       :       in  std_logic_vector(DWIDTH-1 downto 0)  --
+        wdata       :       in  std_logic_vector(DW-1 downto 0)  --
         -- coverage on
     );
 end entity;
@@ -42,7 +42,7 @@ end entity;
 architecture rtl of fifo is
 
     type data_t is
-        array (0 to DEPTH-1) of std_logic_vector(DWIDTH-1 downto 0);
+        array (0 to DEPTH-1) of std_logic_vector(DW-1 downto 0);
 
     signal  payload: data_t;                                                -- FIFO slots
     

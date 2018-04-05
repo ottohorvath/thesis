@@ -22,7 +22,7 @@ use     ieee.numeric_std.all    ;
 entity fifo_src is
     generic (
         DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
-        DWIDTH      :       integer                 :=  32           -- Data width
+        DW          :       integer                 :=  32           -- Data width
     );
     port (
         clk             :       in  std_logic                           ;
@@ -30,13 +30,13 @@ entity fifo_src is
         
         trig_out        :       out std_logic                           ;
 
-        rdata           :       out std_logic_vector(DWIDTH-1 downto 0) ;--
+        rdata           :       out std_logic_vector(DW-1 downto 0) ;--
         wr              :       in  std_logic                           ;
-        wdata           :       in  std_logic_vector(DWIDTH-1  downto 0);
+        wdata           :       in  std_logic_vector(DW-1  downto 0);
         
         empty_to_DUV    :       out std_logic                           ;-- 
         rd_from_DUV     :       in  std_logic                           ;-- Write side
-        rdata_to_DUV    :       out std_logic_vector(DWIDTH-1 downto 0)  --
+        rdata_to_DUV    :       out std_logic_vector(DW-1 downto 0)  --
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
@@ -64,13 +64,13 @@ begin
     L_TRIG:     trig_out    <= full_int;
 
     ------------------------------------------------------
-    L_RDATA:    rdata   <= slv(DWIDTH-1, '0') & full_int;
+    L_RDATA:    rdata   <= slv(DW-1, '0') & full_int;
 
     -------------------------------------------------------
     L_GEN_FIFO: entity work.fifo(rtl)
                     generic map(
                         DEPTH       =>  DEPTH           ,
-                        DWIDTH      =>  DWIDTH  
+                        DW      =>  DW  
                     )    
                     port map(    
                         clk         =>  clk             ,
