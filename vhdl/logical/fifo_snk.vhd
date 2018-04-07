@@ -59,17 +59,20 @@ architecture rtl of fifo_snk is
     
     
     ------------------------------------------------------------------------------
-    -- conf_reg = B"01" : Showing the FIFO's 'empty' signal in the LSB: { DW-1{1b0}, empty}}
+    -- conf_reg = B"01" : Showing the FIFO's 'full' and 'empty' signal in the LSB: { DW-2{1b0},full, empty}}
     -- conf_reg = B"10" : Showing the FIFO's 'rdata' vector
     -- conf_reg = others: Showing zeros 
     signal  conf_reg    :   std_logic_vector(1 downto 0)        ;
     
     signal  fifo_rd     :   std_logic                           ;
     signal  fifo_empty  :   std_logic                           ;
+    signal  fifo_full   :   std_logic                           ;
     signal  fifo_rdata  :   std_logic_vector(DW-1 downto 0) ;
     ------------------------------------------------------------------------------
 begin
     
+    L_FULL:     full_to_DUV <= fifo_full;
+    -------------------------------------------------------
     L_TRIG:     trig_out    <= fifo_empty;
     -------------------------------------------------------
     L_FIFO_RD:  fifo_rd     <= rd;
@@ -91,7 +94,7 @@ begin
     L_RDATA_MUX:block
                 begin
                     
-                    rdata   <=  slv(DW-1,'0') & fifo_empty when conf_reg = B"01"  else  -- Showing the FIFO-s empty signal
+                    rdata   <=  slv(DW-2,'0') & fifo_full & fifo_empty when conf_reg = B"01"  else  -- Showing the FIFO-s empty signal
                                 fifo_rdata                     when conf_reg = B"10"  else  -- Showing FIFO rdata
                                 slv(DW,'0');                                            -- Otherwise, DW{1b0}} 
     
@@ -108,7 +111,7 @@ begin
                         empty       =>  fifo_empty      ,
                         rd          =>  fifo_rd         ,
                         rdata       =>  fifo_rdata      ,
-                        full        =>  full_to_DUV     ,
+                        full        =>  fifo_full       ,
                         wr          =>  wr_from_DUV     ,
                         wdata       =>  wdata_from_DUV  
                     );
