@@ -154,7 +154,7 @@ begin
     L_DUT:  entity work.fifo(rtl)
                 generic map(
                     DEPTH       =>  DEPTH_C ,
-                    DWIDTH      =>  DWIDTH_C
+                    DW          =>  DWIDTH_C
                 )
                 port map(
                     clk         =>  tb_if.clk       ,

@@ -155,6 +155,7 @@ begin
                     wr          =>  rtl_in_if.wr            ,
                     wdata       =>  rtl_in_if.wdata         ,
                     rdata       =>  rtl_out_if.rdata        ,
+                    trig_out    =>  rtl_out_if.trig_out     ,
                     rstn_to_DUV =>  rtl_out_if.rstn_to_DUV
                 );
     -----------------------------------------------------------------------------------------

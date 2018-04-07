@@ -150,12 +150,12 @@ begin
     -----------------------------------------------------------------------------------------
     L_DUT:  entity work.delta_timer(rtl)
                 generic map(
-                    CNTR_WIDTH  =>  cntr_width_test
+                    CW              =>  cntr_width_test
                 )
                 port map(
                     clk             =>  tb_if.clk       ,
                     rstn            =>  tb_if.rstn      ,
-                    
+                    trig_in         =>  '0',
                     wr              =>  rtl_in_if.wr    ,
                     wdata           =>  rtl_in_if.wdata ,
                     signal_from_DUV =>  rtl_in_if.signal_from_DUV,
