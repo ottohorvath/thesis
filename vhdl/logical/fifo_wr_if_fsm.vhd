@@ -104,7 +104,9 @@ begin
                                     ) else '0';
         -------------------------------------------------------------
         full            <=  '1' when( cur_state = RCVD_DATA or
-                                      cur_state = SHOW_DATA
+                                      cur_state = SHOW_DATA or
+                                      cur_state = IDLE  -- Right after reset, it should be full to block writes, because
+                                                        --
                                     ) else '0';
         -------------------------------------------------------------
         rcvd_data_fsm   <=  '1' when( cur_state = RCVD_DATA
