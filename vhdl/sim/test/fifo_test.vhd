@@ -366,15 +366,6 @@ is
 
         print(scope &": Stimulus FINISHED ...", 1);
 
-        
-        if(passed = '1')    then
-            test_result(id_in, "passed");
-        else
-            test_result(id_in, "failed");
-        end if;
-
-
-
         log_check(id_in,cd, passed);
         
 

@@ -142,7 +142,7 @@ is
         ---------------------------------------------------------------------------------------------------
     begin
 
-        
+        passed  <= '0';     
 
         errors := 0;                -- Initializing error indicator
 
@@ -150,7 +150,7 @@ is
             -------------------------------------------------
 
             when    0   =>  wait on put_it;             -- Waiting on the 'tc' process
-                            passed  <= '0';
+
                             
                                 -- EXP   -- ACT
                             check('0',  rtl_out_if.full,      0);
@@ -161,7 +161,7 @@ is
 --                            got_it  <= not(got_it);
             -------------------------------------------------
             when    1   =>  wait on put_it;             -- Waiting on the 'tc' process
-                            passed  <= '0';
+
                                     -- EXP          -- ACT
                             --check(x"00000001",  rtl_out_if.rdata,       0);
                             check('0',          rtl_out_if.full,        1);
@@ -173,8 +173,7 @@ is
  --                           got_it  <= not(got_it);      
             -------------------------------------------------
             when    2   =>  wait on put_it;             -- Waiting on the 'tc' process
-                            passed  <= '0';
-                            
+
                             
                             
                             
@@ -186,7 +185,7 @@ is
 
             -------------------------------------------------
             when    3   =>  wait on put_it;             -- Waiting on the 'tc' process
-                            passed  <= '0';
+
 
                             loop
                                 -- Looping until the FIFO is full
@@ -253,11 +252,17 @@ is
 
 
 
+        -------------------------------------
         if( errors /= 0) then
-            passed <= '0';
+            passed <= '0';  
+            wait for 1 ps;
+            test_result(id, "failed");
         else
             passed <= '1';
+            wait for 1 ps;
+            test_result(id, "passed");
         end if;
+        -------------------------------------
 
         got_it  <= not(got_it);
 
