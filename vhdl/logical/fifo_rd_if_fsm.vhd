@@ -86,7 +86,9 @@ begin
                 -- Could be useful to be able to send back to enabled immediately
                 when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b"10"    and wr = '1') then
                                                 nxt_state   <= IDLE;
-                                            elsif(wdata(1 downto 0) = b"01"    and wr = '1')    then
+                                            elsif(  (wdata(1 downto 0) = b"01" and wr = '1') or
+                                                    (trig_in_fsm = '1')
+                                            ) then
                                                 nxt_state   <= ENABLED;
                                             end if;
                 -----------------------------------------------------
