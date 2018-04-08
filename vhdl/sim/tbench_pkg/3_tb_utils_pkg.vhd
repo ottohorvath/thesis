@@ -39,13 +39,6 @@ package tb_utils_pkg is
     end record;
     
     
-    type p_hs_t     is record
-        put_it  :   std_logic;   
-        got_it  :   std_logic;   
-        passed  :   std_logic;
-        id      :   integer  ; 
-    end record;
-    
     --------------------------------------------------
     
     
@@ -60,13 +53,7 @@ package tb_utils_pkg is
         rstn    =>  '1',                                 --
         rstn_req=>  '0'
     );                                                  --
-    
-    signal p_handshake      :   p_hs_t  :=(             --
-        put_it  =>  '0',                                --
-        got_it  =>  '0',                                -- Handshake signals between the two main process
-        passed  =>  '0',
-        id      =>   0                                  --
-    );                                                  --
+
     ---------------------------------------------------
     
     
