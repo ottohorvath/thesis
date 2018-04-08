@@ -159,56 +159,64 @@ is
         banner(id_in);              -- Testcase banner
 
 
---        case (id_in) is
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---            -------------------------------------------------
---            when 1  =>  init_check(id_in, "Checking the enable of the module and after the clearing of it", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        
---                        rtl_in_if.en    <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        wait_re(clk);
---                        -------------------------------------
---                        
---                        -- The module now should be enabled
---                        
---                        print(scope &": Stimulus generated ...", 1);
---                        
---                        -------------------------------------
---                        put_it  <= not(put_it);
---                        wait on got_it; 
---                        -------------------------------------
---                        rtl_in_if.en    <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        wait_re(clk);
---                        -------------------------------------
---                        
---                        -- Now the counter should be stopped
---                        rtl_in_if.clr   <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.clr   <= '0';
---                        wait_re(clk);
---                        
---                        
---                        
---                        
---                        
---                        
---            -------------------------------------------------
---            when others =>
---        end case;
+        case (id_in) is
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                            
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        req_to_check(sv);
+                        
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking the enable of the module and after the clearing of it", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        
+                        rtl_in_if.en    <= '1';
+                        wait for 1 ps;
+                        
+                        wait_re(clk);
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        
+                        -- The module now should be enabled
+                        -------------------------------------
+                        req_to_check(sv);
+                        
+                        -------------------------------------
+                        rtl_in_if.en    <= '0';
+                        wait for 1 ps;
+                        
+                        wait_re(clk);
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        
+                        -- Now the counter should be stopped
+                        rtl_in_if.clr   <= '1';
+                        wait for 1 ps;
+                        
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.clr   <= '0';
+                        wait for 1 ps;
+                        
+                        wait_re(clk);     
+                        
+                        -------------------------------------
+                        req_to_check(sv);
+                        
+            -------------------------------------------------
+            when others =>
+        end case;
 
 
         ------------------------------

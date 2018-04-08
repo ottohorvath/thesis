@@ -155,71 +155,78 @@ is
         banner(id_in);              -- Testcase banner
         
         
---        case (id_in) is 
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---            -------------------------------------------------
---            when 1  =>  init_check(id_in, "Checking the write IF and the generated reset", cd);             
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        
---                        rtl_in_if.wr    <= '1';
---                        rtl_in_if.wdata <= B"01";
---                        wait for 1  ps;
---                        
---                        wait_re(clk);
---                        
---                        rtl_in_if.wr    <= '0';
---                        wait for 1  ps;
---            -------------------------------------------------
---            when 2  =>  init_check(id_in, "Checking clearing the module after enabling", cd);             
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        
---                        rtl_in_if.wr    <= '1';
---                        rtl_in_if.wdata <= B"01";
---                        wait for 1 ps;
---                        
---                        wait_re(clk);
---                        rtl_in_if.wr    <= '0';
---                        wait for 1 ps;
---                        
---                        wait_re(tb_if.clk);
---                        wait_re(tb_if.clk);
---                        wait_re(tb_if.clk);
---                        
---                        
---                        
---                        rtl_in_if.wr    <= '1';
---                        rtl_in_if.wdata <= B"10";
---                        wait for 1 ps;
---                        
---                        wait_re(clk);
---                        rtl_in_if.wr    <= '0';
---                        wait for 1 ps;
---                        
---            -------------------------------------------------
---            
---            
---            
---            
---            
---            
---
---
---            
---                        
---            -------------------------------------------------        
---            when others =>
---        end case;
+        case (id_in) is 
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        
+                        
+                        sv.init(id_in);
+                        
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking the write IF and the generated reset", cd);             
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        
+                        rtl_in_if.wr    <= '1';
+                        rtl_in_if.wdata <= B"01";
+                        wait for 1  ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.wr    <= '0';
+                        wait for 1  ps;
+                        ------------------------------------
+                        
+                        sv.init(id_in);
+                        
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Checking clearing the module after enabling", cd);             
+                        sv.init(id_in);
+                        
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.wr    <= '1';
+                        rtl_in_if.wdata <= B"01";
+                        wait for 1 ps;
+                        ------------------------------------                        
+                        wait_re(clk);
+                        rtl_in_if.wr    <= '0';
+                        wait for 1 ps;
+                        ------------------------------------ 
+                        wait_re(tb_if.clk);
+                        wait_re(tb_if.clk);
+                        wait_re(tb_if.clk);
+                        ------------------------------------ 
+                        rtl_in_if.wr    <= '1';
+                        rtl_in_if.wdata <= B"10";
+                        wait for 1 ps;
+                        ------------------------------------ 
+                        wait_re(clk);
+                        ------------------------------------ 
+                        rtl_in_if.wr    <= '0';
+                        wait for 1 ps;
+                        ------------------------------------
+
+                        
+                        sv.init(id_in);
+                        
+                        
+            -------------------------------------------------        
+            when others =>
+        end case;
 
         ------------------------------
         print(scope &": Testcase FINISHED ...", 1);

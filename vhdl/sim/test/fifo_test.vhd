@@ -176,11 +176,8 @@ is
 
                         req_to_check(sv);
 
-
-
             -------------------------------------------------
             when 2  =>  init_check(id_in, "Writing the FIFO full and reading everything out. Checking if the rdata is the same as the wdata written in", cd);
-
                         sv.init(id_in);
 
                         wait_re(clk);

@@ -160,72 +160,90 @@ is
         banner(id_in);              -- Testcase banner
         
         
---        case (id_in) is 
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The module now should be in 'IDLE'
---            -------------------------------------------------            
---            when 1  =>  init_check(id_in, "Checking basic functionality: enabling and then generating signal events", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The module now should be in 'IDLE'
---                        -------------------------------------
---                        processor_wr("01",clk,rtl_in_if.wdata,rtl_in_if.wr);
---                        -------------------------------------
---                        -- Write has been completed
---                        -------------------------------------
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The module now should be in 'ENABLED'
---                        -------------------------------------
---                        
---                        -- Generating first a rising edge then a falling one
---                        rtl_in_if.signal_from_DUV       <= '0';
---                        wait_re(clk);
---                        rtl_in_if.signal_from_DUV       <= '1';
---                        wait_re(clk);
---                        
---                        -------------------------------------
---                        -- The module now should be in 'COUNTING'
---                        -------------------------------------
---                        
---                        rtl_in_if.signal_from_DUV       <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        
---                        -------------------------------------
---                        -- The module now should be in 'DONE'
---                        -------------------------------------
---                        wait_re(clk);
---                        
---                        -- The counter should be standing on 1
---            -------------------------------------------------            
---            when 2  =>  init_check(id_in, "Checking basic functionality: after it is done it can be cleared", cd);
---                        
---                        processor_wr("10",clk,rtl_in_if.wdata,rtl_in_if.wr);
---                        -------------------------------------
---                        -- Write has been completed
---                        -------------------------------------
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The module now should be in 'IDLE'
---                        -------------------------------------
---                        
---                        -- The counter should be standing on 0
---                        
---                        
---                        
---            -------------------------------------------------        
---            when others =>
---        end case;
+        case (id_in) is 
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                        
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The module now should be in 'IDLE'
+                        req_to_check(sv);
+                        
+            -------------------------------------------------            
+            when 1  =>  init_check(id_in, "Checking basic functionality: enabling and then generating signal events", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The module now should be in 'IDLE'
+                        -------------------------------------
+                        processor_wr("01",clk,rtl_in_if.wdata,rtl_in_if.wr);
+                        
+                        -------------------------------------
+                        -- Write has been completed
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The module now should be in 'ENABLED'
+                        -------------------------------------
+                        
+                        -- Generating first a rising edge then a falling one
+                        rtl_in_if.signal_from_DUV       <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.signal_from_DUV       <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        
+                        -------------------------------------
+                        -- The module now should be in 'COUNTING'
+                        -------------------------------------
+                        
+                        rtl_in_if.signal_from_DUV       <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        
+                        -------------------------------------
+                        -- The module now should be in 'DONE'
+                        -------------------------------------
+                        wait_re(clk);
+                        
+                        -- The counter should be standing on 1
+                        
+                        req_to_check(sv);
+                        
+            -------------------------------------------------            
+            when 2  =>  init_check(id_in, "Checking basic functionality: after it is done it can be cleared", cd);
+                        sv.init(id_in);
+                        
+                        
+                        processor_wr("10",clk,rtl_in_if.wdata,rtl_in_if.wr);
+                        -------------------------------------
+                        -- Write has been completed
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The module now should be in 'IDLE'
+                        -------------------------------------
+                        
+                        -- The counter should be standing on 0
+                        
+                        req_to_check(sv);
+                        
+            -------------------------------------------------        
+            when others =>
+        end case;
             
         ------------------------------
         print(scope &": Testcase FINISHED ...", 1);

@@ -153,69 +153,103 @@ is
         banner(id_in);              -- Testcase banner
         
         
---        case (id_in) is 
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---            -------------------------------------------------
---            when 1  =>  init_check(id_in, "Checking the 'set' control input", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        
---                        rtl_in_if.clr   <= '0'; 
---                        rtl_in_if.set   <= '1'; --  Setting
---                        wait_re(clk);
---                        
---                        rtl_in_if.set   <= '0'; 
---                        wait_re(clk);
---            -------------------------------------------------
---            when 2  =>  init_check(id_in, "Checking the 'clr' control input", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        
---                        rtl_in_if.clr   <= '0'; 
---                        rtl_in_if.set   <= '1'; --  Setting
---                        wait_re(clk);
---                        
---                        rtl_in_if.clr   <= '1'; --  Clearing
---                        rtl_in_if.set   <= '0'; 
---                        wait_re(clk);
---                        
---                        rtl_in_if.clr   <= '0';
---                        wait_re(clk);
---            -------------------------------------------------
---            when 3  =>  init_check(id_in, "Checking when both control inputs are HIGH: output should remain unchanged", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        
---                        rtl_in_if.clr   <= '0'; 
---                        rtl_in_if.set   <= '1'; --  Setting
---                        wait_re(clk);
---                        
---                        rtl_in_if.clr   <= '1'; --  Both controls are high: the module is enabled, but should not be cleared
---                        rtl_in_if.set   <= '1'; --  
---                        wait_re(clk);
---                        
---                        
---                        wait_re(clk);           -- The output should be '1'
---            
---            
---
---
---            
---                        
---            -------------------------------------------------        
---            when others =>
---        end case;
+        case (id_in) is 
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        
+                        
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking the 'set' control input", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.clr   <= '0'; 
+                        rtl_in_if.set   <= '1'; --  Setting
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.set   <= '0'; 
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        
+                        
+                        req_to_check(sv);
+                        
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Checking the 'clr' control input", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.clr   <= '0'; 
+                        rtl_in_if.set   <= '1'; --  Setting
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.clr   <= '1'; --  Clearing
+                        rtl_in_if.set   <= '0'; 
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.clr   <= '0';
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        
+                        
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------
+            when 3  =>  init_check(id_in, "Checking when both control inputs are HIGH: output should remain unchanged", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req); -- Reseting
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.clr   <= '0'; 
+                        rtl_in_if.set   <= '1'; --  Setting
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        rtl_in_if.clr   <= '1'; --  Both controls are high: the module is enabled, but should not be cleared
+                        rtl_in_if.set   <= '1'; --  
+                        wait for 1 ps;
+                        ----------------------------------
+                        wait_re(clk);
+                        ----------------------------------
+                        wait_re(clk);           -- The output should be '1'
+                        ----------------------------------
+                        
+                        
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------        
+            when others =>
+        end case;
             
         ------------------------------
         print(scope &": Testcase FINISHED ...", 1);

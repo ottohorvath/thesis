@@ -162,131 +162,209 @@ is
         banner(id_in);              -- Testcase banner
 
 
---        case (id_in) is
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---
---                        -- The FSM should be in 'IDLE' state now!
---            -------------------------------------------------            
---            when 1 =>   init_check(id_in, "Checking if it can capture the rising-edge event after it has been enabled", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'IDLE' state now!
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'ENABLED' state now!
---                        -------------------------------------
---                        rtl_in_if.sig_from_re_det   <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.sig_from_re_det   <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'CAPTURED' state now!
---            -------------------------------------------------            
---            when 2 =>   init_check(id_in, "Checking if it can be sent back to idle when it is enabled", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'IDLE' state now!
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'ENABLED' state now!
---                        -------------------------------------
---                        rtl_in_if.clr_fsm            <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.clr_fsm            <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'IDLE' state now!
---                        -------------------------------------
---                        rtl_in_if.sig_from_re_det   <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.sig_from_re_det   <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'IDLE' state now!
---                        -------------------------------------
---            -------------------------------------------------
---            when 3 =>   init_check(id_in, "Checking if if it is not triggered for falling-edge after it has been enabled", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'IDLE' state now!
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '1';
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '0';
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'ENABLED' state now!
---                        -------------------------------------
---            -------------------------------------------------            
---            when 4 =>   init_check(id_in, "Checking if if it can be sent back to IDLE when it captured an event", cd);
---                        
---                        rst_gen(scope, rst_req); -- Reseting
---                        
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'IDLE' state now!
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.en_fsm            <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'ENABLED' state now!
---                        -------------------------------------
---                        rtl_in_if.sig_from_re_det   <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.sig_from_re_det   <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---                        -- The FSM should be in 'CAPTURED' state now!
---                        -------------------------------------
---                        rtl_in_if.clr_fsm            <= '1';
---                        wait_re(clk);
---                        -------------------------------------
---                        rtl_in_if.clr_fsm            <= '0';
---                        wait_re(clk);
---                        -------------------------------------
---            
---                        
---                        
---                        
---                        
---            -------------------------------------------------
---            when others =>
---        end case;
+        case (id_in) is
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+
+
+                        req_to_check(sv);
+
+
+
+            -------------------------------------------------
+            when 1 =>   init_check(id_in, "Checking if it can capture the rising-edge event after it has been enabled", cd);
+                        sv.init(id_in);
+
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'IDLE' state now!
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'ENABLED' state now!
+                        -------------------------------------
+                        rtl_in_if.sig_from_re_det   <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.sig_from_re_det   <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'CAPTURED' state now!
+
+
+
+
+                        req_to_check(sv);
+
+
+
+
+            -------------------------------------------------
+            when 2 =>   init_check(id_in, "Checking if it can be sent back to idle when it is enabled", cd);
+                        sv.init(id_in);
+
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'IDLE' state now!
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'ENABLED' state now!
+                        -------------------------------------
+                        rtl_in_if.clr_fsm            <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.clr_fsm            <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'IDLE' state now!
+                        -------------------------------------
+                        rtl_in_if.sig_from_re_det   <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.sig_from_re_det   <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'IDLE' state now!
+                        -------------------------------------
+
+
+
+
+                        req_to_check(sv);
+
+
+
+            -------------------------------------------------
+            when 3 =>   init_check(id_in, "Checking if if it is not triggered for falling-edge after it has been enabled", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'IDLE' state now!
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'ENABLED' state now!
+                        -------------------------------------
+
+
+
+
+                        req_to_check(sv);
+
+
+
+
+            -------------------------------------------------
+            when 4 =>   init_check(id_in, "Checking if if it can be sent back to IDLE when it captured an event", cd);
+                        sv.init(id_in);
+
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'IDLE' state now!
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.en_fsm            <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'ENABLED' state now!
+                        -------------------------------------
+                        rtl_in_if.sig_from_re_det   <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.sig_from_re_det   <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        -- The FSM should be in 'CAPTURED' state now!
+                        -------------------------------------
+                        rtl_in_if.clr_fsm            <= '1';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+                        rtl_in_if.clr_fsm            <= '0';
+                        wait for 1 ps;
+                        -------------------------------------
+                        wait_re(clk);
+                        -------------------------------------
+
+
+                        req_to_check(sv);
+
+
+
+
+            -------------------------------------------------
+            when others =>
+        end case;
 
         ------------------------------
         print(scope &": Testcase FINISHED ...", 1);

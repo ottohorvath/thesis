@@ -157,78 +157,117 @@ is
         banner(id_in);              -- Testcase banner
         
         
---        case (id_in) is 
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---                        
---                        rst_gen(scope, rst_req);    -- Reseting
---                        
---                wait_re(clk);
---            -------------------------------------------------
---            when 1  =>  init_check(id_in, "Checking the disabled module: it should not be sensitive to signal changes", cd);            
---                                    
---                        rst_gen(scope, rst_req);    -- Reseting            
---                                    
---                        wait_re(clk);                       --
---                        rtl_in_if.signal_from_DUV   <= '1'; --
---                                                            -- Generating falling edge event
---                        wait_re(clk);                       --
---                        rtl_in_if.signal_from_DUV   <= '0'; --
---                        
---                        wait_re(clk);
---                        rtl_in_if.signal_from_DUV   <= '1';
---            -------------------------------------------------
---            when 2  =>  init_check(id_in, "Checking the enabled module", cd);            
---                                    
---                        rst_gen(scope, rst_req);    -- Reseting            
---                                    
---                        wait_re(clk);
---                        
---                        rtl_in_if.signal_from_DUV   <= '1';     --
---                        rtl_in_if.wr                <= '1';     -- Initiating write to enable the module
---                        rtl_in_if.wdata             <= B"01";   --
---                        wait_re(clk);                           --
---                        
---                        rtl_in_if.wr                <= '0';
---                        wait_re(clk);
---                        
---                        
---                        
---                        rtl_in_if.signal_from_DUV   <= '0';     --
---                        wait_re(clk);                           -- Generating falling edge event
---                        
---                        rtl_in_if.signal_from_DUV   <= '1';           
---                        
---             
---
---
---            -------------------------------------------------
---            when 3  =>  init_check(id_in, "Checking the clear of the module", cd);            
---                                    
---                        rst_gen(scope, rst_req);    -- Reseting            
---                                    
---                        wait_re(clk);
---                        
---                        rtl_in_if.signal_from_DUV   <= '1';     --
---                        rtl_in_if.wr                <= '1';     -- Initiating write to enable the module
---                        rtl_in_if.wdata             <= B"01";   --
---                        wait_re(clk);                           --
---                        
---                        rtl_in_if.wr                <= '0';
---                        wait_re(clk);
---                        
---                        rtl_in_if.signal_from_DUV   <= '0';     -- Generating fallling edge event
---
---                        rtl_in_if.wr                <= '1';     -- 
---                        rtl_in_if.wdata             <= B"10";   -- 
---                        wait_re(clk);                           -- Initiating write to clear the module
---                        rtl_in_if.wr                <= '0';     -- 
---
---            
---                        
---            -------------------------------------------------        
---            when others =>  -- Empty case
---        end case;
+        case (id_in) is 
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req);    -- Reseting
+                        
+                        wait_re(clk);
+                        --------------------------------------
+                        
+                        
+                        req_to_check(sv);
+                        
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking the disabled module: it should not be sensitive to signal changes", cd);            
+                        sv.init(id_in);
+
+                        
+                        rst_gen(scope, rst_req);    -- Reseting            
+                        wait_re(clk);                       --
+                        --------------------------------------
+                        
+                        
+                        rtl_in_if.signal_from_DUV   <= '1'; --
+                        wait for 1 ps;                      -- Generating falling edge event
+                        --------------------------------------
+                        wait_re(clk);                       --
+                        --------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '0'; --
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);
+                        --------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '1';
+                        wait for 1 ps;
+                        --------------------------------------
+                        
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Checking the enabled module", cd);            
+                        sv.init(id_in);
+                                    
+                        rst_gen(scope, rst_req);    -- Reseting            
+                        wait_re(clk);
+                        --------------------------------------
+                        
+                        rtl_in_if.signal_from_DUV   <= '1';     --
+                        rtl_in_if.wr                <= '1';     -- Initiating write to enable the module
+                        rtl_in_if.wdata             <= B"01";   --
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);                         
+                        --------------------------------------
+                        
+                        rtl_in_if.wr                <= '0';
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);
+                        --------------------------------------                        
+                        rtl_in_if.signal_from_DUV   <= '0';   
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);                           -- Generating falling edge event
+                        --------------------------------------
+                        
+                        rtl_in_if.signal_from_DUV   <= '1';
+                        wait for 1 ps;
+                        --------------------------------------
+                        
+                
+                        req_to_check(sv);
+    
+            -------------------------------------------------
+            when 3  =>  init_check(id_in, "Checking the clear of the module", cd);
+                        sv.init(id_in);
+                                    
+                        rst_gen(scope, rst_req);    -- Reseting            
+                        wait_re(clk);
+                        --------------------------------------
+                       
+                        rtl_in_if.signal_from_DUV   <= '1';     --
+                        rtl_in_if.wr                <= '1';     -- Initiating write to enable the module
+                        rtl_in_if.wdata             <= B"01";   --
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);                         
+                        --------------------------------------
+                        rtl_in_if.wr                <= '0';
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);
+                        --------------------------------------
+                        
+                        rtl_in_if.signal_from_DUV   <= '0';     -- Generating fallling edge event
+                        rtl_in_if.wr                <= '1';     -- 
+                        rtl_in_if.wdata             <= B"10"; 
+                        wait for 1 ps;
+                        --------------------------------------
+                        wait_re(clk);                           -- Initiating write to clear the module
+                        --------------------------------------
+                        rtl_in_if.wr                <= '0';     -- 
+                        wait for 1 ps;
+                        --------------------------------------
+                        
+                        req_to_check(sv);
+                        
+            -------------------------------------------------        
+            when others =>  -- Empty case
+        end case;
             
         ------------------------------
         print(scope &": Testcase FINISHED ...", 1);

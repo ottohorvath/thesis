@@ -167,262 +167,334 @@ is
         banner(id_in);              -- Testcase banner
 
 
---        case (id_in) is
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---
---                        -- The FSM should be in 'IDLE' state now!
---
---
---            -------------------------------------------------
---            when 1  =>  init_check(id_in, "Checking the enable of the FSM", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---                        --------------------------
---                        rtl_in_if.en_fsm    <= '1'; -- Enabling the FSM
---                        rtl_in_if.clr_fsm   <= '0'; -- The clearing is disabled now
---                        wait_re(clk);
---                        --------------------------
---                        rtl_in_if.en_fsm    <= '0'; -- Enabling the FSM
---                        wait_re(clk);               -- The approriate output is changed by now
---                        --------------------------
---
---                        -- The FSM should be in 'ENABLED' state now!
---
---
---
---            -------------------------------------------------
---            when 2  =>  init_check(id_in, "Checking the clearing of the FSM after reset: control outputs of the clearings should not change", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---                        ---------------------------
---
---                        -- The FSM should be in 'IDLE' state now!
---
---                        ---------------------------
---                        rtl_in_if.en_fsm    <= '0';
---                        rtl_in_if.clr_fsm   <= '1'; -- The clearing is enabled now
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.clr_fsm   <= '0';
---                        wait_re(clk);               -- The approriate output would be changed by now
---                        ---------------------------
---
---                        -- The FSM should be in 'IDLE' state now!
---
---            -------------------------------------------------
---            when 3  =>  init_check(id_in, "Checking after reset if a HIGH pulse on the 'chg_caught' does not toggle the FSM outputs", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---
---                        -- The FSM should be in 'IDLE' state now!
---
---                        ---------------------------
---                        rtl_in_if.chg_caught   <= '1';   -- Signal from dual edge detector
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.chg_caught   <= '0';   -- Signal from dual edge detector
---                        wait_re(clk);                   -- The approriate output is changed by now
---                        ---------------------------
---                        
---                        -- The FSM should be in the same state!
---                        
---                        
---            -------------------------------------------------
---            when 4  =>  init_check(id_in, "Checking if the FSM can be sent back to IDLE when it is enabled", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---                        ---------------------------
---
---                        rtl_in_if.en_fsm      <= '1';
---                        rtl_in_if.clr_fsm     <= '0';
---                        wait_re(clk);
---                        ---------------------------
---                        print(scope &": Stimulus generated ...", 1);
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '0';
---                        wait_re(clk);                 -- The approriate output is changed by now
---                        ---------------------------
---
---                        -- The FSM should be in 'ENABLED' state now!
---
---                        ---------------------------
---                        put_it  <= not(put_it);       -- Let this first event be caught by the checker process
---                        wait on got_it;               --
---                        ---------------------------
---
---                        ---------------------------
---                        rtl_in_if.clr_fsm    <= '1';
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.clr_fsm    <= '0';
---                        wait_re(clk);
---
---                        -- The FSM should be in 'IDLE' state now!
---
---            -------------------------------------------------
---            when 5  =>  init_check(id_in, "Checking after the FSM is enabled that it can capture 'chg_caught' pulse", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---                        ---------------------------
---                        
---                        -- The FSM should be in 'IDLE' state now!
---                        
---                        
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '1';
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '0';
---                        wait_re(clk);                 -- The approriate output would be changed by now
---                        ---------------------------
---
---                        -- The FSM should be in 'ENABLED' state now!
---
---                        print(scope &": Stimulus generated ...", 1);
---
---                        ---------------------------
---
---
---                        put_it  <= not(put_it);       -- Let this first stage be caught by the checker process
---                        wait on got_it;               --
---                        ---------------------------
---
---                        ---------------------------
---                        rtl_in_if.chg_caught    <= '1';
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.chg_caught    <= '0';
---                        wait_re(clk);
---                        ---------------------------
---
---                        -- The FSM should be in 'COUNTING' state now!
---
---
---
---            -------------------------------------------------
---            when 6  =>  init_check(id_in, "Checking the 'show_cntr' control output with two 'chg_caught' pulses and also clearing after", cd);
---
---                        rst_gen(scope, rst_req); -- Reseting
---
---                        wait_re(clk);
---                        ---------------------------
---                        
---                        -- The FSM should be in 'IDLE' state now!
---                        
---                        
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '1';
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '0';
---                        wait_re(clk);                 -- The approriate output is changed by now
---                        ---------------------------
---                        
---                        -- The FSM should be in 'ENABLED' state now!
---
---                        
---                        ---------------------------
---                        rtl_in_if.chg_caught    <= '1';  --
---                        wait_re(clk);                   -- Generating pulse from dual edge detector
---                        ---------------------------                            
---                        rtl_in_if.chg_caught    <= '0';  --
---                        wait_re(clk);
---                        ---------------------------
---
---                        -- The FSM should be in 'COUNTING' state now!
---                        
---                        ---------------------------
---                        rtl_in_if.chg_caught    <= '1';  --
---                        wait_re(clk);                   -- Generating pulse from dual edge detector
---                        --------------------------- 
---                        rtl_in_if.chg_caught    <= '0';
---                        wait_re(clk);
---                        ---------------------------
---                        
---                        -- The FSM should be in 'DONE' state now!
---                        
---                        
---                        ---------------------------
---                        put_it  <= not(put_it);
---                        wait on got_it;
---                        ---------------------------
---
---                        ---------------------------
---                        rtl_in_if.clr_fsm   <= '1';
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.clr_fsm   <= '0';
---                        wait_re(clk);
---                        ---------------------------
---                        
---                        -- The FSM should be in 'IDLE' state now!
---                        
---                        
---
---            -------------------------------------------------
---            when 7  =>  init_check(id_in, "Checking if the FSM can be sent to IDLE while it is waiting for one more pulse from the detector", cd);
---    
---                        rst_gen(scope, rst_req); -- Reseting
---    
---                        wait_re(clk);
---                        ---------------------------
---                        
---                        -- The FSM should be in 'IDLE' state now!
---                        
---                        
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '1';
---                        rtl_in_if.clr_fsm      <= '1';
---                        wait_re(clk);
---                        ---------------------------
---                        rtl_in_if.en_fsm      <= '0';
---                        wait_re(clk);                 -- The approriate output is changed by now
---                        ---------------------------
---                        
---                        
---                        -- The FSM should be in 'ENABLED' state now!
---                        
---                        ---------------------------
---                        rtl_in_if.chg_caught    <= '1';  --
---                        wait_re(clk);                   -- Generating pulse from dual edge detector
---                        ---------------------------
---                        rtl_in_if.chg_caught    <= '0';  
---                        wait_re(clk);
---                        ---------------------------
---
---                        
---                        -- The FSM should be in 'COUNTING' state now!
---                        
---                        
---                        ---------------------------
---                        rtl_in_if.clr_fsm   <= '1';  --
---                        wait_re(clk);                --
---                        ---------------------------  -- Generating clear during the counter is enabled
---                        rtl_in_if.clr_fsm   <= '0';  
---                        wait_re(clk);                
---                        ---------------------------
---                        
---                        -- The FSM should be in 'IDLE' state now!
---                        
---                        
---            -------------------------------------------------
---            when others =>
---        end case;
+        case (id_in) is
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+
+                        -- The FSM should be in 'IDLE' state now!
+                        
+                        
+                        req_to_check(sv);
+
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking the enable of the FSM", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+                        --------------------------
+                        rtl_in_if.en_fsm    <= '1'; -- Enabling the FSM
+                        rtl_in_if.clr_fsm   <= '0'; -- The clearing is disabled now
+                        wait for 1 ps;
+                        --------------------------
+                        wait_re(clk);
+                        --------------------------
+                        rtl_in_if.en_fsm    <= '0'; -- Enabling the FSM
+                        wait for 1 ps;
+                        --------------------------
+                        wait_re(clk);               -- The approriate output is changed by now
+                        --------------------------
+
+                        -- The FSM should be in 'ENABLED' state now!
+
+                        req_to_check(sv);
+
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Checking the clearing of the FSM after reset: control outputs of the clearings should not change", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+                        ---------------------------
+                        rtl_in_if.en_fsm    <= '0';
+                        rtl_in_if.clr_fsm   <= '1'; -- The clearing is enabled now
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.clr_fsm   <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);               -- The approriate output would be changed by now
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+                        
+                        
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------
+            when 3  =>  init_check(id_in, "Checking after reset if a HIGH pulse on the 'chg_caught' does not toggle the FSM outputs", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+
+                        -- The FSM should be in 'IDLE' state now!
+
+                        ---------------------------
+                        rtl_in_if.chg_caught   <= '1';   -- Signal from dual edge detector
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.chg_caught   <= '0';   -- Signal from dual edge detector
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                   -- The approriate output is changed by now
+                        ---------------------------
+
+                        -- The FSM should be in the same state!
+
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------
+            when 4  =>  init_check(id_in, "Checking if the FSM can be sent back to IDLE when it is enabled", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+                        ---------------------------
+
+                        rtl_in_if.en_fsm      <= '1';
+                        rtl_in_if.clr_fsm     <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        
+                        ---------------------------
+                        rtl_in_if.en_fsm      <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                 -- The approriate output is changed by now
+                        ---------------------------
+
+                        -- The FSM should be in 'ENABLED' state now!
+
+                        ---------------------------
+                        -- Let this first event be caught by the checker process
+                        req_to_check(sv);
+                        ---------------------------
+
+                        ---------------------------
+                        rtl_in_if.clr_fsm    <= '1';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.clr_fsm    <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+
+                        -- The FSM should be in 'IDLE' state now!
+
+                        req_to_check(sv);
+
+
+            -------------------------------------------------
+            when 5  =>  init_check(id_in, "Checking after the FSM is enabled that it can capture 'chg_caught' pulse", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+
+                        ---------------------------
+                        rtl_in_if.en_fsm      <= '1';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.en_fsm      <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                 -- The approriate output would be changed by now
+                        ---------------------------
+
+                        -- The FSM should be in 'ENABLED' state now!
+
+
+                        -- Let this first stage be caught by the checker process
+                        req_to_check(sv);
+                        ---------------------------
+
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '1';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'COUNTING' state now!
+
+                        req_to_check(sv);
+
+
+            -------------------------------------------------
+            when 6  =>  init_check(id_in, "Checking the 'show_cntr' control output with two 'chg_caught' pulses and also clearing after", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+
+                        ---------------------------
+                        rtl_in_if.en_fsm      <= '1';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.en_fsm      <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                 -- The approriate output is changed by now
+                        ---------------------------
+
+                        -- The FSM should be in 'ENABLED' state now!
+
+
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '1';  --
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                   -- Generating pulse from dual edge detector
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '0';  --
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'COUNTING' state now!
+
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '1';  --
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                   -- Generating pulse from dual edge detector
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '0';
+                        wait for 1 ps;
+
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'DONE' state now!
+
+
+                        ---------------------------
+
+                        req_to_check(sv);
+
+                        ---------------------------
+
+                        ---------------------------
+                        rtl_in_if.clr_fsm   <= '1';
+                        wait for 1 ps;
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.clr_fsm   <= '0';
+                        wait for 1 ps;
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+
+                        req_to_check(sv);
+
+
+
+            -------------------------------------------------
+            when 7  =>  init_check(id_in, "Checking if the FSM can be sent to IDLE while it is waiting for one more pulse from the detector", cd);
+                        sv.init(id_in);
+                        rst_gen(scope, rst_req); -- Reseting
+
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+
+                        ---------------------------
+                        rtl_in_if.en_fsm    <= '1';
+                        rtl_in_if.clr_fsm   <= '1';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+                        rtl_in_if.en_fsm      <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                 -- The approriate output is changed by now
+                        ---------------------------
+
+
+                        -- The FSM should be in 'ENABLED' state now!
+
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '1';  --
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                   -- Generating pulse from dual edge detector
+                        ---------------------------
+                        rtl_in_if.chg_caught    <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+
+
+                        -- The FSM should be in 'COUNTING' state now!
+
+
+                        ---------------------------
+                        rtl_in_if.clr_fsm   <= '1';  --
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);                --
+                        ---------------------------  -- Generating clear during the counter is enabled
+                        rtl_in_if.clr_fsm   <= '0';
+                        wait for 1 ps;
+                        ---------------------------
+                        wait_re(clk);
+                        ---------------------------
+
+                        -- The FSM should be in 'IDLE' state now!
+
+
+
+                        req_to_check(sv);
+
+
+
+            -------------------------------------------------
+            when others =>
+        end case;
 
             ------------------------------
         print(scope &": Testcase FINISHED ...", 1);

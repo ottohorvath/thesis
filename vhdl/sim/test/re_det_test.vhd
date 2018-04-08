@@ -158,89 +158,139 @@ is
         banner(id_in);              -- Testcase banner
         
         
---        case (id_in) is 
---            -------------------------------------------------
---            when 0  =>  init_check(id_in, "Checking the reset values", cd);
---                        
---                        rst_gen(scope, rst_req);    -- Reseting
---                        
---                        wait_re(clk);
---            -------------------------------------------------
---            when 1  =>  init_check(id_in, "Checking the disabled module: it should not be sensitive to signal changes", cd);            
---                                    
---                        rst_gen(scope, rst_req);    -- Reseting            
---                                    
---                        wait_re(clk);
---                        rtl_in_if.signal_from_DUV   <= '0';
---                        
---                        wait_re(clk);
---                        rtl_in_if.signal_from_DUV   <= '1';
---                        
---                        wait_re(clk);
---                        rtl_in_if.signal_from_DUV   <= '0';
---            -------------------------------------------------
---            when 2  =>  init_check(id_in, "Checking the enabled module by generating a rising-edge event", cd);            
---                                    
---                        rst_gen(scope, rst_req);    -- Reseting            
---                        ------------------------------------
---                        -- Waiting for the next clock edge
---                        wait_re(clk);
---                        ------------------------------------
---                        rtl_in_if.signal_from_DUV   <= '0';
---                        rtl_in_if.wr                <= '1';
---                        rtl_in_if.wdata             <= B"01";
---                        wait_re(clk);
---                        ------------------------------------
---                        -- Signals are updated
---                        rtl_in_if.wr                <= '0';
---                        wait_re(clk);
---                        ------------------------------------
---                        -- The module no should be enabled
---                        -- Now it can catch an event
---                        rtl_in_if.signal_from_DUV   <= '1';           
---                        wait_re(clk);
---                        ------------------------------------
---                        -- 'signal_from_DUV' is now updated
---                        wait_re(clk);
---                        ------------------------------------
---                        -- The rising-edge detector's output
---                        -- should be now '1'
---                        wait_re(clk);
---                        ------------------------------------
---                        -- In this cycle, the module shall signal
---                        -- the successful capture on its rdata output
---             
---
---
---            -------------------------------------------------
---            when 3  =>  init_check(id_in, "Checking the clear of the module", cd);            
---                                    
---                        rst_gen(scope, rst_req);    -- Reseting            
---                                    
---                        wait_re(clk);
---                        
---                        rtl_in_if.signal_from_DUV   <= '0';
---                        rtl_in_if.wr                <= '1';
---                        rtl_in_if.wdata             <= B"01";
---                        wait_re(clk);
---                        
---                        rtl_in_if.wr                <= '0';
---                        rtl_in_if.signal_from_DUV   <= '0';           
---                        wait_re(clk);
---                        
---                        rtl_in_if.signal_from_DUV   <= '1';
---
---                        
---                        rtl_in_if.wr                <= '1';
---                        rtl_in_if.wdata             <= B"10";
---                        wait_re(clk);
---                        rtl_in_if.wr                <= '0';
---
---            
---                        
---            -------------------------------------------------        
---            when others =>
---        end case;
+        case (id_in) is 
+            -------------------------------------------------
+            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+                        sv.init(id_in);
+                        
+                        
+                        rst_gen(scope, rst_req);    -- Reseting
+                        wait_re(clk);
+                        ------------------------------------
+                        
+                        req_to_check(sv);
+                        
+                        
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking the disabled module: it should not be sensitive to signal changes", cd);            
+                        sv.init(id_in);
+                        
+                        
+                        rst_gen(scope, rst_req);    -- Reseting            
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '0';
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '1';
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '0';
+                        wait for 1 ps;
+                        ------------------------------------
+                        
+                        
+                        req_to_check(sv);
+                        
+                        
+                        
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Checking the enabled module by generating a rising-edge event", cd);            
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req);    -- Reseting            
+                        ------------------------------------
+                        
+                        ------------------------------------
+                        -- Waiting for the next clock edge
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '0';
+                        rtl_in_if.wr                <= '1';
+                        rtl_in_if.wdata             <= B"01";
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        -- Signals are updated
+                        rtl_in_if.wr                <= '0';
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        -- The module no should be enabled
+                        -- Now it can catch an event
+                        rtl_in_if.signal_from_DUV   <= '1';
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        -- 'signal_from_DUV' is now updated
+                        wait_re(clk);
+                        ------------------------------------
+                        -- The rising-edge detector's output
+                        -- should be now '1'
+                        wait_re(clk);
+                        ------------------------------------
+                        -- In this cycle, the module shall signal
+                        -- the successful capture on its rdata output
+                        ------------------------------------
+                        
+                        
+                        
+                        req_to_check(sv);
+
+
+            -------------------------------------------------
+            when 3  =>  init_check(id_in, "Checking the clear of the module", cd);            
+                        sv.init(id_in);
+                        
+                        rst_gen(scope, rst_req);    -- Reseting            
+                        ------------------------------------
+                        
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '0';
+                        rtl_in_if.wr                <= '1';
+                        rtl_in_if.wdata             <= B"01";
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        
+                        
+                        ------------------------------------
+                        rtl_in_if.wr                <= '0';
+                        rtl_in_if.signal_from_DUV   <= '0'; 
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.signal_from_DUV   <= '1';
+                        wait for 1 ps;
+                        ------------------------------------
+                        rtl_in_if.wr                <= '1';
+                        rtl_in_if.wdata             <= B"10";
+                        wait for 1 ps;
+                        ------------------------------------
+                        wait_re(clk);
+                        ------------------------------------
+                        rtl_in_if.wr                <= '0';
+                        wait for 1 ps;
+                        ------------------------------------
+            
+                        req_to_check(sv);
+            
+                        
+            -------------------------------------------------        
+            when others =>
+        end case;
             
         ------------------------------
         print(scope &": Testcase FINISHED ...", 1);
