@@ -55,14 +55,10 @@ is
     procedure   fe_det_fsm_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sv              :   inout   synchronizer_t;
         
-        signal      rtl_out_if      :   in      fe_det_fsm_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         ;
-        
-        signal      put_it          :   in      std_logic   ;
-        signal      got_it          :   out     std_logic   ;
-        signal      passed          :   out     std_logic   ;
-        signal      id              :   in      integer   
+        signal      rtl_out_if      :   in      fe_det_fsm_out_if_t;
+        signal      tb_if           :   in      tb_if_t         
     );
     --------------------------------------------------
     
@@ -82,87 +78,39 @@ is
     procedure   fe_det_fsm_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sv              :   inout   synchronizer_t;
         
-        signal      rtl_out_if      :   in      fe_det_fsm_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         ;
-        
-        signal      put_it          :   in      std_logic   ;
-        signal      got_it          :   out     std_logic   ;
-        signal      passed          :   out     std_logic   ;
-        signal      id              :   in      integer   
+        signal      rtl_out_if      :   in      fe_det_fsm_out_if_t;
+        signal      tb_if           :   in      tb_if_t         
     )is
-        
-        variable    errors          :           integer := 0;
-        variable    noc             :           integer := 0;   -- Num of checks per Test ID
         
         constant    this            :           string  :=  "fe_det_fsm_check";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         
-        
+        wait_for_next_check(sv);
 
-        wait on put_it;             -- Waiting on the 'tc' process
-        
-        errors := 0;                -- Initializing error indicator    
-        
-        print(scope &": Checking ID = "& str(id),   1);
-        
-        
-        
-        case (id)   is
-            -------------------------------------------------
-            when 0 | 2 | 3 | 4  =>  if(rtl_out_if.fe_caught /= '0') then
-                                               -- Exp         --Act
-                            perror(scope&".0",  str('0'),   str(rtl_out_if.fe_caught));
-                            errors := errors + 1;
-                        end if;
-            -------------------------------------------------
-            when 1  =>  if(rtl_out_if.fe_caught /= '1') then                        
-                                            -- Exp         --Act                        
-                            perror(scope&".0",  str('1'),   str(rtl_out_if.fe_caught));                        
-                            errors := errors + 1;                        
-                        end if;
-            -------------------------------------------------               
-            when others =>
-        end case;
+--        case (sv.get_tc_id)   is
+--            -------------------------------------------------
+--            when 0 | 2 | 3 | 4  =>  if(rtl_out_if.fe_caught /= '0') then
+--                                               -- Exp         --Act
+--                            perror(scope&".0",  str('0'),   str(rtl_out_if.fe_caught));
+--                            errors := errors + 1;
+--                        end if;
+--            -------------------------------------------------
+--            when 1  =>  if(rtl_out_if.fe_caught /= '1') then                        
+--                                            -- Exp         --Act                        
+--                            perror(scope&".0",  str('1'),   str(rtl_out_if.fe_caught));                        
+--                            errors := errors + 1;                        
+--                        end if;
+--            -------------------------------------------------               
+--            when others =>
+--        end case;
       
         
         
-        -------------------------------------
-        if( errors /= 0) then
-            passed <= '0';  
-            wait for 0 ns;
-            test_result(id, "failed");
-        else
-            passed <= '1';
-            wait for 0 ns;
-            test_result(id, "passed");
-        end if;
-        -------------------------------------
-        
-        
-       
-        
-        got_it  <= not(got_it);      -- Signalling back to the 'tc' process
     end procedure;
     --------------------------------------------------
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
 
 end package body;

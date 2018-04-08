@@ -38,7 +38,7 @@ is
     
         rdata       :   std_logic;
         rstn_to_DUV :   std_logic;
-        
+        trig_out    :   std_logic;
     end record;
     --------------------------------------------------
     
@@ -52,14 +52,10 @@ is
     procedure   rstn_gen_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sv              :   inout   synchronizer_t;
         
-        signal      rtl_out_if      :   in      rstn_gen_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         ;
-        
-        signal      put_it          :   in      std_logic   ;
-        signal      got_it          :   out     std_logic   ;
-        signal      passed          :   out     std_logic   ;
-        signal      id              :   in      integer   
+        signal      rtl_out_if      :   in      rstn_gen_out_if_t;
+        signal      tb_if           :   in      tb_if_t           
     );
     --------------------------------------------------
     
@@ -79,142 +75,67 @@ is
     procedure   rstn_gen_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sv              :   inout   synchronizer_t;
         
-        signal      rtl_out_if      :   in      rstn_gen_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         ;
-        
-        signal      put_it          :   in      std_logic   ;
-        signal      got_it          :   out     std_logic   ;
-        signal      passed          :   out     std_logic   ;
-        signal      id              :   in      integer   
+        signal      rtl_out_if      :   in      rstn_gen_out_if_t;
+        signal      tb_if           :   in      tb_if_t          
     )is
-        
-        variable    errors          :           integer := 0;
-        variable    noc             :           integer := 0;   -- Num of checks per Test ID
-        
+
         constant    this            :           string  :=  "rstn_gen_check";
         constant    scope           :           string  :=  super_name &"."& this;
+        ---------------------------------------------------
+
     begin
-        
-        
 
-        wait on put_it;             -- Waiting on the 'tc' process
         
-        errors := 0;                -- Initializing error indicator    
+        wait_for_next_check(sv);
         
-        print(scope &": Checking ID = "& str(id),   1);
-        
-        
-        
-        case (id)   is
-            -------------------------------------------------
-            when 0  =>  if( rtl_out_if.rdata /= '0' ) then
-                                                -- Exp      --Act
-                            perror(scope&".0",  str('0'),   str(rtl_out_if.rdata));
-                            errors := errors + 1;
-                            
-                        end if;
-                        
-                        if( rtl_out_if.rstn_to_DUV /= '1' ) then
-                            
-                                                --Exp       --Act
-                            perror(scope&".1",  str('1'),   str(rtl_out_if.rstn_to_DUV));
-                            errors := errors + 1;
-                            
-                        end if;
-            -------------------------------------------------
-            when 1  =>  wait_re(tb_if.clk);
-                        wait_re(tb_if.clk);
-                        
-                        
-
-                        
-                        if( rtl_out_if.rstn_to_DUV /= '0' ) then
-                                                -- Exp      --Act
-                            perror(scope&".0",  str('0'),   str(rtl_out_if.rstn_to_DUV));
-                            errors := errors + 1;
-                            
-                        end if;
-                        
-                        wait_re(tb_if.clk);
-                        
-                        
-                        if( rtl_out_if.rdata /= '1' ) then
-                                                -- Exp      --Act
-                            perror(scope&".1",  str('1'),   str(rtl_out_if.rdata));
-                            errors := errors + 1;
-                            
-                        end if;
-
-            -------------------------------------------------            
-            when 2  =>  if( rtl_out_if.rdata /= '1' ) then
-                                                -- Exp      --Act
-                            perror(scope&".0",  str('1'),   str(rtl_out_if.rdata));
-                            errors := errors + 1;
-                            
-                        end if;
-                        
-                        wait_re(tb_if.clk);
-                        
-                        
-                        
-                        if( rtl_out_if.rdata /= '1' ) then
-                                                -- Exp      --Act
-                            perror(scope&".1",  str('1'),   str(rtl_out_if.rdata));
-                            errors := errors + 1;
-                            
-                        end if;
-                        
-                        wait_re(tb_if.clk);
-                        
-                        
-                        if( rtl_out_if.rdata /= '0' ) then
-                                                -- Exp      --Act
-                            perror(scope&".2",  str('0'),   str(rtl_out_if.rdata));
-                            errors := errors + 1;
-                            
-                        end if; 
-            -------------------------------------------------     
-            when others =>
-        end case;
+--       case (sv.get_tc_id)   is
+--           -------------------------------------------------
+--           when 0  =>  
+--                       wait for 1 ps;
+--                           -- EXP   -- ACT
+--                       check('0',  rtl_out_if.rdata        ,   0);
+--                       check('1',  rtl_out_if.rstn_to_DUV  ,   1);
+--           -------------------------------------------------
+--           when 1  =>  wait_re(tb_if.clk);
+--                       wait for 1 ps;
+--                       
+--                           -- EXP   -- ACT
+--                       check('0',  rtl_out_if.rstn_to_DUV,   0);
+--                       
+--                       
+--                       wait_re(tb_if.clk);
+--                       wait for 1 ps;
+--                       
+--                           -- EXP   -- ACT
+--                       check('1',  rtl_out_if.trig_out,   1);
+--                       
+--                       wait_re(tb_if.clk);
+--                       wait for 1 ps;
+--                       
+--                           -- EXP   -- ACT
+--                       check('1',  rtl_out_if.rdata,   2);
+--
+--
+--           -------------------------------------------------            
+--           when 2  =>  --wait_re(tb_if.clk);
+--                       --wait for 1 ps;
+--                       
+--                           -- EXP   -- ACT
+--                       check('1',  rtl_out_if.rdata,   0);
+--                       
+--                       wait_re(tb_if.clk);
+--                       wait for 1 ps;
+--                       
+--                           -- EXP   -- ACT
+--                       check('0',  rtl_out_if.rdata,   1);
+--                       
+--           -------------------------------------------------     
+--           when others =>
+--       end case;
       
-        
-        
-        -------------------------------------
-        if( errors /= 0) then
-            passed <= '0';  
-            wait for 0 ns;
-            test_result(id, "failed");
-        else
-            passed <= '1';
-            wait for 0 ns;
-            test_result(id, "passed");
-        end if;
-        -------------------------------------
-        
-        
-       
-        
-        got_it  <= not(got_it);      -- Signalling back to the 'tc' process
+
     end procedure;
     --------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
 end package body;

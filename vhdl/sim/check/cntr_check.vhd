@@ -57,14 +57,10 @@ is
     procedure   cntr_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sv              :   inout   synchronizer_t;
         
-        signal      rtl_out_if      :   in      cntr_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         ;
-        
-        signal      put_it          :   in      std_logic   ;
-        signal      got_it          :   out     std_logic   ;
-        signal      passed          :   out     std_logic   ;
-        signal      id              :   in      integer   
+        signal      rtl_out_if      :   in      cntr_out_if_t;
+        signal      tb_if           :   in      tb_if_t       
     );
     --------------------------------------------------
     
@@ -84,18 +80,12 @@ is
     procedure   cntr_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sv              :   inout   synchronizer_t;
         
-        signal      rtl_out_if      :   in      cntr_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         ;
-        
-        signal      put_it          :   in      std_logic   ;
-        signal      got_it          :   out     std_logic   ;
-        signal      passed          :   out     std_logic   ;
-        signal      id              :   in      integer   
+        signal      rtl_out_if      :   in      cntr_out_if_t;
+        signal      tb_if           :   in      tb_if_t      
     )is
         
-        variable    errors          :           integer := 0;
-        variable    exp_val         :           integer := 0;   -- Num of checks per Test ID
         
         constant    this            :           string  :=  "cntr_check";
         constant    scope           :           string  :=  super_name &"."& this;
@@ -103,113 +93,72 @@ is
         
 
         
-
-        wait on put_it;             -- Waiting on the 'tc' process
-        
-        errors := 0;                -- Initializing error indicator    
-        
-        print(scope &": Checking ID = "& str(id),   1);
+        wait_for_next_check(sv);
         
         
-        
-        case (id)   is
-            -------------------------------------------------
-            when 0  =>  if( rtl_out_if.noc /= slv(w,'0') ) then
-                                                -- Exp      --Act
-                            perror(scope&".0",  str(slv(w,'0')),   str(rtl_out_if.noc));
-                            errors := errors + 1;
-                        end if;
-            -------------------------------------------------
-            -- Fast checking the counter if it is counting properly
-            when 1  =>  exp_val := 1;
-                        
-                        
-                        while(exp_val <3) loop
-                            if(to_integer(unsigned(rtl_out_if.noc)) /= exp_val)   then
-                                                    -- Exp      --Act
-                                perror(scope&".0",  str(exp_val),   str(rtl_out_if.noc));
-                                errors := errors + 1;
-                                
-                                exit;
-                            end if;
-                            
-                            exp_val := exp_val + 1;
-                            
-                            wait on rtl_out_if.noc; -- Wait on change
-                            
-                        end loop;
-                        
-                        ----------------------------------
-                        got_it  <= not(got_it);
-                        wait on put_it;
-                        ----------------------------------
-                        
-                        -- Waiting on the change
-                        
-                        
-                        
-                        if(rtl_out_if.noc /= slv(w,'0'))   then
-                                                -- Exp      --Act
-                            perror(scope&".1",  str(slv(w,'0')),   str(rtl_out_if.noc));
-                            errors := errors + 1;
-                            
-                            
-                        end if;
-                        
-                        
-                        
-                        
-            -------------------------------------------------
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            -------------------------------------------------
-            when others =>
-        end case;
+--        case (sv.get_tc_id)   is
+--            -------------------------------------------------
+--            when 0  =>  if( rtl_out_if.noc /= slv(w,'0') ) then
+--                                                -- Exp      --Act
+--                            perror(scope&".0",  str(slv(w,'0')),   str(rtl_out_if.noc));
+--                            errors := errors + 1;
+--                        end if;
+--            -------------------------------------------------
+--            -- Fast checking the counter if it is counting properly
+--            when 1  =>  exp_val := 1;
+--                        
+--                        
+--                        while(exp_val <3) loop
+--                            if(to_integer(unsigned(rtl_out_if.noc)) /= exp_val)   then
+--                                                    -- Exp      --Act
+--                                perror(scope&".0",  str(exp_val),   str(rtl_out_if.noc));
+--                                errors := errors + 1;
+--                                
+--                                exit;
+--                            end if;
+--                            
+--                            exp_val := exp_val + 1;
+--                            
+--                            wait on rtl_out_if.noc; -- Wait on change
+--                            
+--                        end loop;
+--                        
+--                        ----------------------------------
+--                        got_it  <= not(got_it);
+--                        wait on put_it;
+--                        ----------------------------------
+--                        
+--                        -- Waiting on the change
+--                        
+--                        
+--                        
+--                        if(rtl_out_if.noc /= slv(w,'0'))   then
+--                                                -- Exp      --Act
+--                            perror(scope&".1",  str(slv(w,'0')),   str(rtl_out_if.noc));
+--                            errors := errors + 1;
+--                            
+--                            
+--                        end if;
+--                        
+--                        
+--                        
+--                        
+--            -------------------------------------------------
+--            
+--            
+--            
+--            
+--            
+--            
+--            
+--            
+--            
+--            -------------------------------------------------
+--            when others =>
+--        end case;
       
         
-        
-        -------------------------------------
-        if( errors /= 0) then
-            passed <= '0';  
-            wait for 0 ns;
-            test_result(id, "failed");
-        else
-            passed <= '1';
-            wait for 0 ns;
-            test_result(id, "passed");
-        end if;
-        -------------------------------------
-        
-        
-       
-        
-        got_it  <= not(got_it);      -- Signalling back to the 'tc' process
     end procedure;
     --------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
 
 end package body;
