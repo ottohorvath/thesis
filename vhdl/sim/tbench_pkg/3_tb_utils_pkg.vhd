@@ -107,9 +107,44 @@ package tb_utils_pkg is
     
     
     
+    type synchronizer_t is protected
+        ----------------------------------------
+        -- Used from 'tc' process
+        procedure       init(
+            constant id: in integer
+        );
+        impure function get_passed      return std_logic;
+        impure function get_chk_done    return bit;
+        impure function get_caught      return bit;
+        procedure       set_chk_enabled(
+            variable    val:    bit
+        );
+        
+        ----------------------------------------
+        -- Used from 'chk' process
+        procedure       set_caught( val: in bit);
+        procedure       check_done;
+        procedure       set_chk_done(
+            variable    val:    bit
+        );
+        procedure       compare(
+            constant    exp :   in  std_logic;
+            constant    act :   in  std_logic
+        );
+        
+        procedure       compare(
+            constant    exp :   in  std_logic_vector;
+            constant    act :   in  std_logic_vector
+        );
+         
+        impure function get_chk_enabled return bit;
+        impure function get_tc_id       return integer;
+        
+        ----------------------------------------
+    end protected synchronizer_t;
     
     
-    
+
     
     
     
@@ -118,27 +153,159 @@ end package;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 package body tb_utils_pkg is
+
+    type synchronizer_t is protected body
+        
+        variable    tc_id           :   integer;
+        
+        variable    chk_error_cntr  :   integer :=  0;
+        variable    chk_compare_cntr:   integer :=  0;
+        
+        variable    caught          :   bit     :=  '0';     
+        
+        variable    chk_done        :   bit;
+        variable    chk_enabled     :   bit;
+        -----------------------------------------
+        -----------------------------------------
+        -----------------------------------------
+                
+        impure function get_chk_done 
+            return bit
+        is
+        begin
+            return chk_done;
+        end function;
+        -----------------------------------------
+        procedure       set_chk_enabled(
+            variable    val:    bit
+        )is
+        begin
+            chk_enabled := val;
+        end procedure;        
+        -----------------------------------------
+        procedure       set_chk_done(
+            variable    val:    bit
+        )is
+        begin
+            chk_done := val;
+        end procedure;
+        -----------------------------------------
+        impure function get_caught 
+            return bit
+        is
+        begin
+            return caught;
+        end function;
+        -----------------------------------------
+        impure function get_chk_enabled 
+            return bit
+        is
+        begin
+            return chk_enabled;
+        end function;
+        -----------------------------------------
+        impure function get_tc_id 
+            return integer
+        is
+        begin
+            return tc_id;
+        end function;
+        -----------------------------------------
+        impure function get_passed 
+            return std_logic
+        is
+            variable ret:   std_logic;
+        begin
+            if(chk_error_cntr = 0)  then
+                ret :=  '1';
+            else
+                ret :=  '0';
+            end if;
+            
+            return ret;
+        end function;
+        -----------------------------------------
+        procedure       init(
+            id: in integer
+        )is
+        begin
+            tc_id           :=  id;
+            chk_error_cntr  :=  0;
+            chk_compare_cntr:=  0;
+            chk_enabled     :=  '0';
+        end procedure;
+        -----------------------------------------
+        procedure   set_caught( val: in bit)
+        is
+        begin
+            caught    := val;
+        end procedure;
+        -----------------------------------------
+        procedure   check_done  is
+        begin
+            chk_done    := '1';
+        end procedure;
+        -----------------------------------------
+        -----------------------------------------
+        -----------------------------------------
+        procedure       compare(
+            constant    exp :   in  std_logic;
+            constant    act :   in  std_logic
+        ) is
+        begin
+            if(exp /= act)  then
+                work.tb_log_pkg.perror(
+                    "Comparison #"& str(chk_compare_cntr),
+                    str(exp),
+                    str(act)
+                );
+                
+                chk_error_cntr := chk_error_cntr + 1;
+            end if;
+            
+            
+            chk_compare_cntr := chk_compare_cntr + 1;
+        end procedure;
+        -----------------------------------------
+        procedure       compare(
+            constant    exp :   in  std_logic_vector;
+            constant    act :   in  std_logic_vector
+        ) is
+        begin
+            if(exp /= act)  then
+                -- Print error to stdout
+                work.tb_log_pkg.perror(
+                    "Comparison #"& str(chk_compare_cntr),
+                    str(exp),
+                    str(act)
+                );
+                
+                chk_error_cntr := chk_error_cntr + 1;
+            end if;
+
+            -- Increasing comparsion counter
+            chk_compare_cntr := chk_compare_cntr + 1;
+        end procedure;
+        -----------------------------------------
+    end protected body synchronizer_t;
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     ------------------------------------------------------------------------------
     function slv(

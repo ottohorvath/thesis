@@ -245,7 +245,7 @@ package body tb_log_pkg is
     
     begin
     
-        print(name &" [ERROR] Expected = "&exp &" Actual = "&act,1);
+        print(name & CR &"[ERROR] Expected = "&exp &" Actual = "&act,1);
         
     end procedure;
     

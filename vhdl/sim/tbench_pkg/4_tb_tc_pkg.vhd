@@ -67,33 +67,31 @@ is
                     -- Procedure responsible for running one testcase which is indexed by 'id'
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
+                variable    sync_sv         :   inout  synchronizer_t;
 
                 signal      rtl_in_if       :   out rtl_in_if_t ;
                 signal      clk             :   in  std_logic     ;
                 signal      rst_req         :   out std_logic     ;
 
-                signal      cd              :   out check_descriptor_array (0 to check_no_max_c-1);
+                signal      cd              :   out check_descriptor_array (0 to check_no_max_c-1)--;
 
-                signal      put_it          :   out std_logic   ;
-                signal      got_it          :   in  std_logic   ;
-                signal      passed          :   in  std_logic   ;
-                signal      id              :   out integer
+--                signal      put_it          :   out std_logic   ;
+--                signal      got_it          :   in  std_logic   ;
+--                signal      passed          :   in  std_logic   ;
+--                signal      id              :   out integer
             )
         )
     (
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
+        variable    sync_sv         :   inout  synchronizer_t;
 
         signal      rtl_in_if   :   out     rtl_in_if_t ;
         signal      clk             :   in  std_logic     ;
         signal      rst_req         :   out std_logic     ;
 
-        signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1);
+        signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1)
 
-        signal      put_it      :   out     std_logic   ;
-        signal      got_it      :   in      std_logic   ;
-        signal      passed      :   in      std_logic   ;
-        signal      id          :   out     integer
     );
     --------------------------------------------------
 
@@ -116,8 +114,9 @@ is
     ------------------------------------------
 
 
-
-
+    procedure req_to_check(
+        variable    sync_sv :   inout  synchronizer_t
+    );
 
 
 end package;
@@ -151,48 +150,37 @@ is
             (
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
+                variable    sync_sv         :   inout  synchronizer_t;
 
                 signal      rtl_in_if       :   out rtl_in_if_t ;
                 signal      clk             :   in  std_logic     ;
                 signal      rst_req         :   out std_logic     ;
-                signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);
-
-                signal      put_it          :   out std_logic   ;
-                signal      got_it          :   in  std_logic   ;
-                signal      passed          :   in  std_logic   ;
-                signal      id              :   out integer
+                signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1)
             )
         )
     (
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
+        variable    sync_sv         :   inout  synchronizer_t;
 
         signal      rtl_in_if   :   out     rtl_in_if_t ;
         signal      clk             :   in  std_logic     ;
         signal      rst_req         :   out std_logic     ;
 
 
-        signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1);
+        signal      cd          :   out     check_descriptor_array (0 to check_no_max_c-1)--;
 
-
-        signal      put_it      :   out     std_logic   ;
-        signal      got_it      :   in      std_logic   ;
-        signal      passed      :   in      std_logic   ;
-        signal      id          :   out     integer
     )is
         constant    this        :           string  :=  new_run_name;
         constant    scope       :           string  :=  super_name &"."& new_run_name;
     begin
 
         -- Run 'called_tc' generic procedure: the actual resolved procedure name will be like this: <RTL>_test
-        called_tc( rtl_name,scope,       rtl_in_if   ,
+        called_tc( rtl_name,scope,sync_sv,  rtl_in_if   ,
                                             clk         ,
                                             rst_req     ,
-                                            cd          ,
-                                            put_it      ,
-                                            got_it      ,
-                                            passed      ,
-                                            id          );
+                                            cd          );
+
 
     end procedure;
     --------------------------------------------------
@@ -290,6 +278,47 @@ is
 
     end procedure;
     ------------------------------------------
+
+
+
+    procedure req_to_check(
+        variable    sync_sv :   inout  synchronizer_t
+    )   is
+        variable    en :   bit :=  '1';
+        variable    clr:   bit :=  '0';
+    begin
+
+
+        -- Before start looping, just set the status
+        sync_sv.set_chk_enabled(en);
+
+        -- Wait for 'req_to_check' call from 'tc' process
+        loop
+
+            wait for 1 ps;
+
+            if(sync_sv.get_chk_done = '1')    then
+
+                sync_sv.set_chk_enabled(clr);
+
+                exit;
+            end if;
+        end loop;
+    end procedure;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

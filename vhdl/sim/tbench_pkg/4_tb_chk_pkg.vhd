@@ -39,36 +39,33 @@ is
 
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
+                variable    sync_sv         :   inout  synchronizer_t;
 
                 signal      rtl_out_if      :   in  rtl_out_if_t;       -- Watching DUT's output ports
-                signal      tb_if           :   in  tb_if_t     ;
-
-                signal      put_it          :   in  std_logic   ;
-                signal      got_it          :   out std_logic   ;
-                signal      passed          :   out std_logic   ;
-                signal      id              :   in  integer
+                signal      tb_if           :   in  tb_if_t
             )
         )
     (
 
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
+        variable    sync_sv     :   inout  synchronizer_t;
 
         signal      rtl_out_if  :   in      rtl_out_if_t;
-        signal      tb_if       :   in      tb_if_t     ;
-
-        signal      put_it      :   in      std_logic   ;
-        signal      got_it      :   out     std_logic   ;
-        signal      passed      :   out     std_logic   ;
-        signal      id          :   in      integer
+        signal      tb_if       :   in      tb_if_t
     );
     --------------------------------------------------
 
 
 
 
+    procedure wait_for_next_check(
+        variable    sync_sv :   inout  synchronizer_t
+    );
 
-
+    procedure check_done(
+        variable    sync_sv :   inout  synchronizer_t
+    );
 
 
 
@@ -91,51 +88,64 @@ is
             (
                 constant    rtl_name        :   in  string;
                 constant    super_name      :   in  string;
+                variable    sync_sv         :   inout  synchronizer_t;
 
                 signal      rtl_out_if      :   in  rtl_out_if_t;
-                signal      tb_if           :   in  tb_if_t     ;
-
-                signal      put_it          :   in  std_logic   ;
-                signal      got_it          :   out std_logic   ;
-                signal      passed          :   out std_logic   ;
-                signal      id              :   in  integer
-
+                signal      tb_if           :   in  tb_if_t
             )
         )
     (
         constant    rtl_name    :   in      string;
         constant    super_name  :   in      string;
+        variable    sync_sv         :   inout  synchronizer_t;
 
         signal      rtl_out_if  :   in      rtl_out_if_t;
-        signal      tb_if       :   in      tb_if_t     ;
-
-        signal      put_it      :   in      std_logic   ;
-        signal      got_it      :   out     std_logic   ;
-        signal      passed      :   out     std_logic   ;
-        signal      id          :   in      integer
-
+        signal      tb_if       :   in      tb_if_t
     )is
         constant    this        :           string  :=  new_run_name;
         constant    scope       :           string  :=  super_name &"."& new_run_name;
+
     begin
 
         -- Run 'called_chk' generic procedure: the actual resolved procedure name will be like this: <RTL>_check
-        called_chk( rtl_name,scope,      rtl_out_if  ,
-                                            tb_if       ,
-                                            put_it      ,
-                                            got_it      ,
-                                            passed      ,
-                                            id          );
+        called_chk( rtl_name,scope,sync_sv,      rtl_out_if  ,
+                                            tb_if       );
 
     end procedure;
     ------------------------------------------------------------------------------
 
 
+    procedure wait_for_next_check(
+        variable    sync_sv :   inout  synchronizer_t
+    )   is
+        variable    zero :   bit :=  '0';
+    begin
+
+        -- Before start looping, just set the status
+        sync_sv.set_chk_done(zero);
+
+        -- Wait for 'req_to_check' call from 'tc' process
+        loop
+            if(sync_sv.get_chk_enabled = '1' )    then
+                exit;
+            else
+                wait for 1 ps;
+            end if;
+        end loop;
+    end procedure;
 
 
+    procedure check_done(
+        variable    sync_sv :   inout  synchronizer_t
+    )   is
+        variable    one :   bit :=  '1';
+    begin
+        -- Before start looping, just set the status
+        sync_sv.set_chk_done(one);
 
+        wait for 1 ps;
 
-
+    end procedure;
 
 
 
