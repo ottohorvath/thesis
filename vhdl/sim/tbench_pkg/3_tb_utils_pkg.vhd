@@ -136,6 +136,12 @@ package tb_utils_pkg is
             constant    exp :   in  std_logic_vector;
             constant    act :   in  std_logic_vector
         );
+        
+        procedure       compare(
+            constant    exp :   in  integer;
+            constant    act :   in  integer
+        );
+        
          
         impure function get_chk_enabled return bit;
         impure function get_tc_id       return integer;
@@ -271,6 +277,26 @@ package body tb_utils_pkg is
         procedure       compare(
             constant    exp :   in  std_logic_vector;
             constant    act :   in  std_logic_vector
+        ) is
+        begin
+            if(exp /= act)  then
+                -- Print error to stdout
+                work.tb_log_pkg.perror(
+                    "Comparison #"& str(chk_compare_cntr),
+                    str(exp),
+                    str(act)
+                );
+                
+                chk_error_cntr := chk_error_cntr + 1;
+            end if;
+
+            -- Increasing comparsion counter
+            chk_compare_cntr := chk_compare_cntr + 1;
+        end procedure;
+        -----------------------------------------
+        procedure       compare(
+            constant    exp :   in  integer;
+            constant    act :   in  integer
         ) is
         begin
             if(exp /= act)  then
