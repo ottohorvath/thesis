@@ -57,19 +57,14 @@ is
     procedure   test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
-        
+        variable    sv              :   inout   synchronizer_t;
         constant    id_in           :   in      integer;
         
         signal      rtl_in_if       :   out     clk_gen_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
-        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);        
-        
-        signal      put_it          :   out     std_logic   ;
-        signal      get_it          :   in      std_logic   ;
-        signal      passed          :   in      std_logic   ;
-        signal      id_out          :   out     integer     
+        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1)
     );
     --------------------------------------------------
     
@@ -78,18 +73,14 @@ is
     procedure   clk_gen_test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
+        variable    sync_sv         :   inout   synchronizer_t;
         
         signal      rtl_in_if       :   out     clk_gen_in_if_t ;   
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
         
-        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);
-        
-        signal      put_it          :   out     std_logic   ;
-        signal      get_it          :   in      std_logic   ;
-        signal      passed          :   in      std_logic   ;
-        signal      id              :   out     integer    
+        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1)
     );
     --------------------------------------------------
     
@@ -113,19 +104,13 @@ is
     procedure   clk_gen_test(    
         constant    rtl_name        :   in      string;    
         constant    super_name      :   in      string;    
-            
+        variable    sync_sv         :   inout   synchronizer_t;
         signal      rtl_in_if       :   out     clk_gen_in_if_t ;       
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
-        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);
+        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1)
         
-        
-        
-        signal      put_it          :   out     std_logic   ;
-        signal      get_it          :   in      std_logic   ;
-        signal      passed          :   in      std_logic   ;
-        signal      id              :   out     integer    
     )is
         constant    this            :           string  :=  "clk_gen_test";
         constant    scope           :           string  :=  super_name &"."& this;
@@ -133,15 +118,11 @@ is
         
         for id_v in 0 to (clk_gen_num_of_tcs_c - 1)   loop        
                     
-            test(    rtl_name,scope,      id_v        , 
+            test(    rtl_name,scope,sync_sv,      id_v        , 
                                         rtl_in_if   ,
                                         clk         ,
                                         rst_req     ,
-                                        cd          ,
-                                        put_it      ,
-                                        get_it      ,
-                                        passed      ,
-                                        id          );                                
+                                        cd          );                               
         end loop;
 
     end procedure;
@@ -151,20 +132,14 @@ is
     procedure   test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
-        
+        variable    sv         :   inout   synchronizer_t;
         constant    id_in           :   in      integer;
         
         signal      rtl_in_if       :   out     clk_gen_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
         
-        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1);
-        
-        
-        signal      put_it          :   out     std_logic   ;
-        signal      get_it          :   in      std_logic   ;
-        signal      passed          :   in      std_logic   ;
-        signal      id_out          :   out     integer    
+        signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1)
     )is 
         
         
@@ -175,98 +150,99 @@ is
     begin
         rtl_in_if.wr                    <= '0';
         rtl_in_if.wdata                 <= (others => '0');
-        wait for 1 ns;
+        wait for 1 ps;
         
         
-        id_out  <= id_in;
-
         
         banner(id_in);              -- Testcase banner
         
         
-        case (id_in) is 
-            -------------------------------------------------
-            when 0  =>  init_check(id_in, "Checking the reset values", cd);
-                        
-                        rst_gen(scope, rst_req); -- Reseting
-                        
-                        wait_re(clk);
-                        
-                        
-            -------------------------------------------------        
-            when 1  =>  init_check(id_in, "Checking, if the enabled status is set", cd);
-                        
-                        rst_gen(scope, rst_req); -- Reseting
-                        
-                        rtl_in_if.wdata <= B"01";                        
-                        rtl_in_if.wr    <= '1';
-                        wait_re(clk);
-                        rtl_in_if.wr    <= '0';
-                        
-            -------------------------------------------------        
-            when 2  =>  init_check(id_in, "Checking the running clock after enabling the module", cd);
-                        
-                        rst_gen(scope, rst_req); -- Reseting
-                        
-                        rtl_in_if.wdata <= B"01";                        
-                        rtl_in_if.wr    <= '1';            
-                        wait_re(clk);            
-                        rtl_in_if.wr    <= '0';
-                        
-            -------------------------------------------------
-            when 3  =>  init_check(id_in, "Checking the clearing of the module", cd);
-                        
-                        rst_gen(scope, rst_req); -- Reseting
-                        
-                        rtl_in_if.wdata <= B"01";-- Enabling                        
-                        rtl_in_if.wr    <= '1';  --           
-                        wait_re(clk);
-                        
-                        rtl_in_if.wr    <= '1';  -- Clearing
-                        rtl_in_if.wdata <= B"10";-- Clearing
-                        wait_re(clk);            
-                        rtl_in_if.wr    <= '0';
-                        
-            -------------------------------------------------
-            when 4  =>  init_check(id_in, "Checking if running clock can be shutted down", cd);
-                        
-                        rst_gen(scope, rst_req); -- Reseting
-                        
-                        rtl_in_if.wdata <= B"01";-- Enabling                        
-                        rtl_in_if.wr    <= '1';  --           
-                        wait_re(clk);
-                        rtl_in_if.wr    <= '0';
-                        
-                        
-                        wait_re(clk);
-                        wait_re(clk);
-                        wait_re(clk);
-                        wait_re(clk);
-                        
-                        rtl_in_if.wr    <= '1';  -- Clearing
-                        rtl_in_if.wdata <= B"10";-- Clearing
-                        wait_re(clk);            
-                        rtl_in_if.wr    <= '0';
-                        
-            -------------------------------------------------
+--        case (id_in) is 
+--            -------------------------------------------------
+--            when 0  =>  init_check(id_in, "Checking the reset values", cd);
+--                        
+--                        rst_gen(scope, rst_req); -- Reseting
+--                        
+--                        wait_re(clk);
+--                        
+--                        
+--            -------------------------------------------------        
+--            when 1  =>  init_check(id_in, "Checking, if the enabled status is set", cd);
+--                        
+--                        rst_gen(scope, rst_req); -- Reseting
+--                        
+--                        rtl_in_if.wdata <= B"01";                        
+--                        rtl_in_if.wr    <= '1';
+--                        wait_re(clk);
+--                        rtl_in_if.wr    <= '0';
+--                        
+--            -------------------------------------------------        
+--            when 2  =>  init_check(id_in, "Checking the running clock after enabling the module", cd);
+--                        
+--                        rst_gen(scope, rst_req); -- Reseting
+--                        
+--                        rtl_in_if.wdata <= B"01";                        
+--                        rtl_in_if.wr    <= '1';            
+--                        wait_re(clk);            
+--                        rtl_in_if.wr    <= '0';
+--                        
+--            -------------------------------------------------
+--            when 3  =>  init_check(id_in, "Checking the clearing of the module", cd);
+--                        
+--                        rst_gen(scope, rst_req); -- Reseting
+--                        
+--                        rtl_in_if.wdata <= B"01";-- Enabling                        
+--                        rtl_in_if.wr    <= '1';  --           
+--                        wait_re(clk);
+--                        
+--                        rtl_in_if.wr    <= '1';  -- Clearing
+--                        rtl_in_if.wdata <= B"10";-- Clearing
+--                        wait_re(clk);            
+--                        rtl_in_if.wr    <= '0';
+--                        
+--            -------------------------------------------------
+--            when 4  =>  init_check(id_in, "Checking if running clock can be shutted down", cd);
+--                        
+--                        rst_gen(scope, rst_req); -- Reseting
+--                        
+--                        rtl_in_if.wdata <= B"01";-- Enabling                        
+--                        rtl_in_if.wr    <= '1';  --           
+--                        wait_re(clk);
+--                        rtl_in_if.wr    <= '0';
+--                        
+--                        
+--                        wait_re(clk);
+--                        wait_re(clk);
+--                        wait_re(clk);
+--                        wait_re(clk);
+--                        
+--                        rtl_in_if.wr    <= '1';  -- Clearing
+--                        rtl_in_if.wdata <= B"10";-- Clearing
+--                        wait_re(clk);            
+--                        rtl_in_if.wr    <= '0';
+--                        
+--            -------------------------------------------------
+--            
+--                        
+--                        
+--                        
+--                        
+--                        
+--            -------------------------------------------------        
+--            when others =>
+--        end case;
             
-                        
-                        
-                        
-                        
-                        
-            -------------------------------------------------        
-            when others =>
-        end case;
-            
-        print(scope &": Stimulus generated ...", 1);
-            
-        put_it  <= not(put_it);     -- Signaled to 'chk' process    
-        wait on get_it;             -- Waiting on the 'chk' process    
-             
 
-        
-        log_check(id_in,cd, passed);
+        ------------------------------
+        print(scope &": Testcase FINISHED ...", 1);
+        ------------------------------
+        if( sv.get_passed = '1') then
+            test_result(sv.get_tc_id, "passed");
+        else
+            test_result(sv.get_tc_id, "failed");
+        end if;
+        ------------------------------
+        log_check(id_in,cd, sv.get_passed);
             
     end procedure;
     --------------------------------------------------
