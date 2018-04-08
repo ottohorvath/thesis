@@ -58,7 +58,7 @@ is
         variable    sv              :   inout   synchronizer_t;
 
         signal      rtl_out_if      :   in      chg_det_out_if_t;
-        signal      tb_if           :   in      tb_if_t         
+        signal      tb_if           :   in      tb_if_t
     );
     --------------------------------------------------
 
@@ -81,47 +81,38 @@ is
         variable    sv              :   inout   synchronizer_t;
 
         signal      rtl_out_if      :   in      chg_det_out_if_t;
-        signal      tb_if           :   in      tb_if_t         
+        signal      tb_if           :   in      tb_if_t
     )is
-
-        variable    errors          :           integer := 0;
-        variable    noc             :           integer := 0;   -- Num of checks per Test ID
 
         constant    this            :           string  :=  "chg_det_check";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
 
-        
-        
+
+
         wait_for_next_check(sv);
 
 
---        case (sv.get_tc_id)   is
---            -------------------------------------------------
---            when 0  =>  if( rtl_out_if.det_out /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('0'),   str(rtl_out_if.det_out));
---                            errors := errors + 1;
---
---                        end if;
---            -------------------------------------------------
---            when 1  =>  if( rtl_out_if.det_out /= '1' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.det_out));
---                            errors := errors + 1;
---
---                        end if;
---
---            -------------------------------------------------
---            when 2  =>  if( rtl_out_if.det_out /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('0'),   str(rtl_out_if.det_out));
---                            errors := errors + 1;
---
---                        end if;
---            -------------------------------------------------
---            when others =>
---        end case;
+        case (sv.get_tc_id)   is
+            -------------------------------------------------
+            when 0  =>        -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.det_out);
+
+                        check_done(sv);
+            -------------------------------------------------
+            when 1  =>        -- EXP   -- ACT
+                        sv.compare('1',  rtl_out_if.det_out);
+
+                        check_done(sv);
+
+            -------------------------------------------------
+            when 2  =>        -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.det_out);
+
+                        check_done(sv);
+            -------------------------------------------------
+            when others =>
+        end case;
 
     end procedure;
     --------------------------------------------------

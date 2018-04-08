@@ -86,6 +86,7 @@ is
         signal      tb_if           :   in      tb_if_t      
     )is
         
+        variable    exp_val         :           integer;
         
         constant    this            :           string  :=  "cntr_check";
         constant    scope           :           string  :=  super_name &"."& this;
@@ -96,66 +97,36 @@ is
         wait_for_next_check(sv);
         
         
---        case (sv.get_tc_id)   is
---            -------------------------------------------------
---            when 0  =>  if( rtl_out_if.noc /= slv(w,'0') ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str(slv(w,'0')),   str(rtl_out_if.noc));
---                            errors := errors + 1;
---                        end if;
---            -------------------------------------------------
---            -- Fast checking the counter if it is counting properly
---            when 1  =>  exp_val := 1;
---                        
---                        
---                        while(exp_val <3) loop
---                            if(to_integer(unsigned(rtl_out_if.noc)) /= exp_val)   then
---                                                    -- Exp      --Act
---                                perror(scope&".0",  str(exp_val),   str(rtl_out_if.noc));
---                                errors := errors + 1;
---                                
---                                exit;
---                            end if;
---                            
---                            exp_val := exp_val + 1;
---                            
---                            wait on rtl_out_if.noc; -- Wait on change
---                            
---                        end loop;
---                        
---                        ----------------------------------
---                        got_it  <= not(got_it);
---                        wait on put_it;
---                        ----------------------------------
---                        
---                        -- Waiting on the change
---                        
---                        
---                        
---                        if(rtl_out_if.noc /= slv(w,'0'))   then
---                                                -- Exp      --Act
---                            perror(scope&".1",  str(slv(w,'0')),   str(rtl_out_if.noc));
---                            errors := errors + 1;
---                            
---                            
---                        end if;
---                        
---                        
---                        
---                        
---            -------------------------------------------------
---            
---            
---            
---            
---            
---            
---            
---            
---            
---            -------------------------------------------------
---            when others =>
---        end case;
+        case (sv.get_tc_id)   is
+            -------------------------------------------------
+            when 0  =>              -- EXP   -- ACT
+                        sv.compare(slv(w,'0'),  rtl_out_if.noc);
+                        
+                        check_done(sv);
+            -------------------------------------------------
+            -- Fast checking the counter if it is counting properly
+            when 1  =>  
+                        
+                        exp_val := 1;
+                        while(exp_val <3) loop
+                                        -- EXP  -- ACT
+                            sv.compare(exp_val, to_integer(unsigned(rtl_out_if.noc)) );
+                            
+                            exp_val := exp_val + 1;
+                            wait_re(tb_if.clk); 
+                            
+                        end loop;
+                        check_done(sv);
+                        
+                        wait_for_next_check(sv);
+                        
+                                    -- EXP   -- ACT
+                        sv.compare(slv(w,'0'),  rtl_out_if.noc);
+                        
+                        check_done(sv);
+            -------------------------------------------------
+            when others =>
+        end case;
       
         
     end procedure;

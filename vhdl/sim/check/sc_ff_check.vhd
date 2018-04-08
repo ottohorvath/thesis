@@ -85,40 +85,33 @@ is
         
         wait_for_next_check(sv);
         
---        case (sv.get_tc_id)   is
---            -------------------------------------------------
---            when 0  =>  if( rtl_out_if.q /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('0'),   str(rtl_out_if.q));
---                            errors := errors + 1;
---                            
---                        end if;
---
---            -------------------------------------------------
---            when 1  =>  if( rtl_out_if.q /= '1' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.q));
---                            errors := errors + 1;
---                            
---                        end if;
---            -------------------------------------------------
---            when 2  =>  if( rtl_out_if.q /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('0'),   str(rtl_out_if.q));
---                            errors := errors + 1;
---                            
---                        end if;
---            -------------------------------------------------
---            when 3  =>  if( rtl_out_if.q /= '1' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.q));
---                            errors := errors + 1;
---                            
---                        end if;
---            
---            when others =>
---        end case;
---      
+        case (sv.get_tc_id)   is
+            -------------------------------------------------
+            when 0  =>  
+                            -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.q);
+                        
+                        check_done(sv);
+            -------------------------------------------------
+            when 1  =>  
+                            -- EXP   -- ACT
+                        sv.compare('1',  rtl_out_if.q);
+                        
+                        check_done(sv);
+            -------------------------------------------------
+            when 2  =>      -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.q);
+                        
+                        check_done(sv);
+            -------------------------------------------------
+            when 3  =>      -- EXP   -- ACT
+                        sv.compare('1',  rtl_out_if.q);
+                        
+                        check_done(sv);
+            -------------------------------------------------
+            when others =>
+        end case;
+      
     end procedure;
     --------------------------------------------------
     

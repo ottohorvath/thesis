@@ -110,8 +110,6 @@ is
                             sv.compare('1',  rtl_out_if.empty);
 
                             check_done(sv);
-
-
             -------------------------------------------------
             when    1   =>
                                     -- EXP          -- ACT
@@ -120,11 +118,6 @@ is
                             sv.compare('1',          rtl_out_if.empty);
 
                             check_done(sv);
-
-
-
-
-
           -------------------------------------------------
           when    2   =>
 

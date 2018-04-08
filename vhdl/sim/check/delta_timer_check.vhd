@@ -89,30 +89,28 @@ is
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         
-    wait_for_next_check(sv);
+        wait_for_next_check(sv);
         
---        case (sv.get_tc_id)   is
---            -------------------------------------------------
---            when 0 | 2  =>  if( rtl_out_if.rdata /= slv(w,'0') ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str(slv(w,'0')),   str(rtl_out_if.rdata));
---                            errors := errors + 1;
---                            
---                        end if;
---            -------------------------------------------------
---            when 1  =>  if( rtl_out_if.rdata /= X"00000001" ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str(X"00000001"),   str(rtl_out_if.rdata));
---                            errors := errors + 1;
---                            
---                        end if;
---            -------------------------------------------------
---                        
---                        
---            
---                        
---            when others =>
---        end case;
+        case (sv.get_tc_id)   is
+            -------------------------------------------------
+            when 0 | 2  =>  
+                                    -- EXP          -- ACT
+                            sv.compare(slv(w,'0'),  rtl_out_if.rdata);
+                            
+                            check_done(sv);
+            -------------------------------------------------
+            when 1  =>  
+                                    -- EXP          -- ACT
+                            sv.compare(x"00000001",  rtl_out_if.rdata);
+                            
+                            check_done(sv);
+            -------------------------------------------------
+                        
+                        
+            
+                        
+            when others =>
+        end case;
       
     end procedure;
     --------------------------------------------------

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------------
--- Author: Otto Horvath           
+-- Author: Otto Horvath
 ----------------------------------------------------------------------------------------
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ----------------------------------------------------------------------------------------
 library ieee				;
@@ -33,43 +33,43 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 package delta_timer_fsm_check
 is
     ------- Typedefs for output RTL IF signals -------------------
-    
-    
-    
-    
-    
+
+
+
+
+
     type delta_timer_fsm_out_if_t   is record
-    
+
         show_cntr   :   std_logic;
         cntr_clr    :   std_logic;
         cntr_en     :   std_logic;
         det_clr     :   std_logic;
         det_en      :   std_logic;
-        
+
     end record;
     --------------------------------------------------
-    
-    
-    
+
+
+
     signal      rtl_out_if  :   delta_timer_fsm_out_if_t    ;
-    
-    
+
+
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
     procedure   delta_timer_fsm_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sv              :   inout   synchronizer_t;
-        
+
         signal      rtl_out_if      :   in      delta_timer_fsm_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         
+        signal      tb_if           :   in      tb_if_t
     );
     --------------------------------------------------
-    
-    
-    
-    
-    
+
+
+
+
+
 end package;
 
 
@@ -83,156 +83,102 @@ is
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sv              :   inout   synchronizer_t;
-        
+
         signal      rtl_out_if      :   in      delta_timer_fsm_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t           
+        signal      tb_if           :   in      tb_if_t
     )is
-        
+
         constant    this            :           string  :=  "delta_timer_fsm_check";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
 
         wait_for_next_check(sv);
-        
-        
---        case (sv.get_tc_id)   is
---            -------------------------------------------------
---            -- The check is the same for all three cases
---            when 0 | 2 | 3 =>  
---                        if( rtl_out_if.show_cntr /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".0",  str('0'),   str(rtl_out_if.show_cntr));
---                            errors := errors + 1;
---                        end if;
---                        
---
---                        if( rtl_out_if.cntr_clr /= '1' ) then
---                                                -- Exp      --Act
---                            perror(scope&".1",  str('1'),   str(rtl_out_if.cntr_clr));
---                            errors := errors + 1;
---                        end if;
---                        
---                        if( rtl_out_if.cntr_en /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".2",  str('0'),   str(rtl_out_if.cntr_en));
---                            errors := errors + 1;
---                        end if;
---                        
---                        if( rtl_out_if.det_clr /= '1' ) then
---                                                -- Exp      --Act
---                            perror(scope&".3",  str('1'),   str(rtl_out_if.det_clr));
---                            errors := errors + 1;
---                        end if;
---                        
---                        if( rtl_out_if.det_en /= '0' ) then
---                                                -- Exp      --Act
---                            perror(scope&".4",  str('0'),   str(rtl_out_if.det_en));
---                            errors := errors + 1;
---                        end if;        
---
---            -------------------------------------------------
---            -- Checking the output signals related to ENABLED state
---            when 1  =>  if( rtl_out_if.det_en /= '1' ) then           
---                                                -- Exp      --Act     
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.det_en));  
---                            errors := errors + 1;                   
---                        end if;                  
---                              
---            -------------------------------------------------            
---            when 4  =>  
---            
---                        if( rtl_out_if.det_en /= '1' ) then          
---                                                -- Exp      --Act            
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.det_en));            
---                            errors := errors + 1;            
---                        end if;
---                        
---                        ---------------------------
---                        got_it  <= not(got_it);
---                        wait on put_it;
---                        ---------------------------
---                        
---                        print(scope &": Checking ID = "& str(id),   1);
---                        
---                        if( rtl_out_if.det_en /= '0' ) then       
---                                                -- Exp      --Act            
---                            perror(scope&".1",  str('0'),   str(rtl_out_if.det_en));            
---                            errors := errors + 1;            
---                        end if;
---            -------------------------------------------------            
---            when 5  =>  
---            
---                        if( rtl_out_if.det_en /= '1' ) then        
---                                                -- Exp      --Act            
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.det_en));            
---                            errors := errors + 1;            
---                        end if;
---                        
---                        ---------------------------
---                        got_it  <= not(got_it);
---                        wait on put_it;
---                        ---------------------------
---                        
---                        print(scope &": Checking ID = "& str(id),   1);
---                        
---                        
---                        if( rtl_out_if.cntr_en /= '1' ) then        
---                                                -- Exp      --Act            
---                            perror(scope&".1",  str('1'),   str(rtl_out_if.cntr_en));            
---                            errors := errors + 1;            
---                        end if;
---                        
---                        if( rtl_out_if.det_en /= '1' ) then       
---                                                -- Exp      --Act            
---                            perror(scope&".2",  str('1'),   str(rtl_out_if.det_en));            
---                            errors := errors + 1;            
---                        end if;
---              
---             -------------------------------------------------               
---             when 6  =>             
---                        
---                        if( rtl_out_if.show_cntr /= '1' ) then                   
---                                                -- Exp      --Act                       
---                            perror(scope&".0",  str('1'),   str(rtl_out_if.show_cntr));                       
---                            errors := errors + 1;                       
---                        end if;           
---                                   
---                        ---------------------------
---                        got_it  <= not(got_it); 
---                        wait on put_it;
---                        ---------------------------
---                        
---                        
---                        
---                        if( rtl_out_if.show_cntr /= '0' ) then        
---                                                -- Exp      --Act                    
---                            perror(scope&".1",  str('1'),   str(rtl_out_if.show_cntr));               
---                            errors := errors + 1;                       
---                        end if;           
---                        
---                        
---            -------------------------------------------------               
---            when 7  =>             
---                       
---                        if( rtl_out_if.det_en /= '0' ) then        
---                                                -- Exp      --Act                    
---                            perror(scope&".0",  str('0'),   str(rtl_out_if.det_en));               
---                            errors := errors + 1;                       
---                        end if;           
---                                   
---            
---                        if( rtl_out_if.cntr_en /= '0' ) then        
---                                                -- Exp      --Act                  
---                            perror(scope&".1",  str('0'),   str(rtl_out_if.cntr_en));             
---                            errors := errors + 1;                       
---                        end if;           
---
---            -------------------------------------------------               
---            when others =>
---        end case;
-      
-        
+
+
+        case (sv.get_tc_id)   is
+            -------------------------------------------------
+            -- The check is the same for all three cases
+            when 0 | 2 | 3 =>
+                                        -- EXP          -- ACT
+                                sv.compare('0',         rtl_out_if.show_cntr );
+                                sv.compare('1',         rtl_out_if.cntr_clr);
+                                sv.compare('0',         rtl_out_if.cntr_en);
+                                sv.compare('1',         rtl_out_if.det_clr);
+                                sv.compare('0',         rtl_out_if.det_en);
+
+                                check_done(sv);
+
+            -------------------------------------------------
+            -- Checking the output signals related to ENABLED state
+            when 1  =>
+                                        -- EXP          -- ACT
+                                sv.compare('1',         rtl_out_if.det_en);
+
+                                check_done(sv);
+
+            -------------------------------------------------
+            when 4  =>
+                                        -- EXP          -- ACT
+                                sv.compare('1',         rtl_out_if.det_en);
+
+                                check_done(sv);
+                                ---------------------------
+
+                                wait_for_next_check(sv);
+
+                                ---------------------------
+
+                                        -- EXP          -- ACT
+                                sv.compare('0',         rtl_out_if.det_en);
+
+                                check_done(sv);
+            -------------------------------------------------
+            when 5  =>
+                                        -- EXP          -- ACT
+                                sv.compare('1',         rtl_out_if.det_en);
+
+                                check_done(sv);
+                                ---------------------------
+
+                                wait_for_next_check(sv);
+
+                                ---------------------------
+                                        -- EXP          -- ACT
+                                sv.compare('1',         rtl_out_if.cntr_en);
+                                sv.compare('1',         rtl_out_if.det_en);
+
+                                check_done(sv);
+
+             -------------------------------------------------
+             when 6  =>
+                                        -- EXP          -- ACT
+                                sv.compare('1',         rtl_out_if.show_cntr);
+
+                                check_done(sv);
+                                ---------------------------
+
+                                wait_for_next_check(sv);
+
+                                ---------------------------
+
+                                        -- EXP          -- ACT
+                                sv.compare('0',         rtl_out_if.show_cntr);
+
+                                check_done(sv);
+
+            -------------------------------------------------
+            when 7  =>
+                                        -- EXP          -- ACT
+                                sv.compare('0',         rtl_out_if.cntr_en);
+                                sv.compare('0',         rtl_out_if.det_en);
+
+                                check_done(sv);
+            -------------------------------------------------
+            when others =>
+        end case;
+
+
     end procedure;
     --------------------------------------------------
-    
+
 end package body;

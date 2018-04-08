@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------------
--- Author: Otto Horvath           
+-- Author: Otto Horvath
 ----------------------------------------------------------------------------------------
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ----------------------------------------------------------------------------------------
 library ieee				;
@@ -33,36 +33,36 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 package rstn_gen_check
 is
     ------- Typedefs for output RTL IF signals -------------------
-    
+
     type rstn_gen_out_if_t   is record
-    
+
         rdata       :   std_logic;
         rstn_to_DUV :   std_logic;
         trig_out    :   std_logic;
     end record;
     --------------------------------------------------
-    
-    
-    
+
+
+
     signal      rtl_out_if  :   rstn_gen_out_if_t    ;
-    
-    
+
+
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
     procedure   rstn_gen_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sv              :   inout   synchronizer_t;
-        
+
         signal      rtl_out_if      :   in      rstn_gen_out_if_t;
-        signal      tb_if           :   in      tb_if_t           
+        signal      tb_if           :   in      tb_if_t
     );
     --------------------------------------------------
-    
-    
-    
-    
-    
+
+
+
+
+
 end package;
 
 
@@ -76,9 +76,9 @@ is
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sv              :   inout   synchronizer_t;
-        
+
         signal      rtl_out_if      :   in      rstn_gen_out_if_t;
-        signal      tb_if           :   in      tb_if_t          
+        signal      tb_if           :   in      tb_if_t
     )is
 
         constant    this            :           string  :=  "rstn_gen_check";
@@ -87,55 +87,53 @@ is
 
     begin
 
-        
-        wait_for_next_check(sv);
-        
---       case (sv.get_tc_id)   is
---           -------------------------------------------------
---           when 0  =>  
---                       wait for 1 ps;
---                           -- EXP   -- ACT
---                       check('0',  rtl_out_if.rdata        ,   0);
---                       check('1',  rtl_out_if.rstn_to_DUV  ,   1);
---           -------------------------------------------------
---           when 1  =>  wait_re(tb_if.clk);
---                       wait for 1 ps;
---                       
---                           -- EXP   -- ACT
---                       check('0',  rtl_out_if.rstn_to_DUV,   0);
---                       
---                       
---                       wait_re(tb_if.clk);
---                       wait for 1 ps;
---                       
---                           -- EXP   -- ACT
---                       check('1',  rtl_out_if.trig_out,   1);
---                       
---                       wait_re(tb_if.clk);
---                       wait for 1 ps;
---                       
---                           -- EXP   -- ACT
---                       check('1',  rtl_out_if.rdata,   2);
---
---
---           -------------------------------------------------            
---           when 2  =>  --wait_re(tb_if.clk);
---                       --wait for 1 ps;
---                       
---                           -- EXP   -- ACT
---                       check('1',  rtl_out_if.rdata,   0);
---                       
---                       wait_re(tb_if.clk);
---                       wait for 1 ps;
---                       
---                           -- EXP   -- ACT
---                       check('0',  rtl_out_if.rdata,   1);
---                       
---           -------------------------------------------------     
---           when others =>
---       end case;
-      
 
+        wait_for_next_check(sv);
+
+        case (sv.get_tc_id)   is
+            -------------------------------------------------
+            when 0  =>
+                            -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.rdata);
+                        sv.compare('1',  rtl_out_if.rstn_to_DUV);
+
+                        check_done(sv);
+            -------------------------------------------------
+            when 1  =>  wait_re(tb_if.clk);
+
+                            -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.rstn_to_DUV);
+                        -------------------------------------
+                        wait_re(tb_if.clk);
+
+                                -- EXP   -- ACT
+                        sv.compare('1',  rtl_out_if.trig_out);
+                        -------------------------------------
+                        wait_re(tb_if.clk);
+
+                            -- EXP   -- ACT
+                        sv.compare('1',  rtl_out_if.rdata);
+                        -------------------------------------
+
+                        check_done(sv);
+
+            -------------------------------------------------
+            when 2  =>      -- EXP   -- ACT
+                        sv.compare('1',  rtl_out_if.rdata);
+
+                        wait_re(tb_if.clk);
+                        -------------------------------------
+                            -- EXP   -- ACT
+                        sv.compare('0',  rtl_out_if.rdata);
+
+                        wait_re(tb_if.clk);
+                        -------------------------------------
+
+                        check_done(sv);
+
+            -------------------------------------------------
+            when others =>
+        end case;
     end procedure;
     --------------------------------------------------
 end package body;
