@@ -78,6 +78,8 @@ architecture bhv of rstn_gen_tb is
             called_chk_name     =>  "rstn_gen_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
+        -- Shared variable between 'tc' and 'chk' process
+    shared variable sync_sv :   synchronizer_t;
 begin
 
 
@@ -92,14 +94,10 @@ begin
                                                     tb_if.clk_en                            -- Setup the testbench.
                                                                     );                      --
                 ------------------------------------------------------
-                run_test(RTL_NAME_G,this,           rtl_in_if           ,                   --
+                run_test(RTL_NAME_G,this,sync_sv,   rtl_in_if           ,                   --
                                                     tb_if.clk           ,
                                                     tb_if.rstn_req      ,
-                                                    check_descriptor    ,-- Run the testcases for the chosen RTL
-                                                    p_handshake.put_it  ,                   --
-                                                    p_handshake.got_it  ,                   --
-                                                    p_handshake.passed  ,                   --
-                                                    p_handshake.id      );                  --
+                                                    check_descriptor    );-- Run the testcases for the chosen RTL
                 ------------------------------------------------------
                 report_and_exit(RTL_NAME_G,this,    RGR_G           , 
                                                     check_descriptor);                      -- Generate report based on results and exit.
@@ -113,12 +111,8 @@ begin
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(RTL_NAME_G,this,          rtl_out_if          ,                       --
-                                                    tb_if               ,                       -- 
-                                                    p_handshake.put_it  ,                       --
-                                                    p_handshake.got_it  ,                       --
-                                                    p_handshake.passed  ,                       -- Run the checks for the tests
-                                                    p_handshake.id      );                      --
+                run_check(RTL_NAME_G,this,sync_sv,  rtl_out_if          ,                       --
+                                                    tb_if               );                       -- 
                 ------------------------------------------------------
             end process;
     -----------------------------------------------------------------------------------------
