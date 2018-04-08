@@ -323,7 +323,7 @@ def vsim_for_sim_gui(tb_name, log_file):
 
     subprocess.call('vsim -t 1'+sim_resolution                                  +   # Starting Questa in GUI and setting the simulation time resolution
                     ' -do "set NoQuitOnFinish 1; log -r /*;'                    +   # Recursively log all signals for easier Waveform debugging
-                    ' add wave -position insertpoint sim:/cntr_tb/sync_sv;'     +   # Add shared variable to waveform before simulation is started to be able to see its content
+                    ' add wave -position insertpoint sim:/'+tb_name+'/sync_sv;' +   # Add shared variable to waveform before simulation is started to be able to see its content
                     ' add wave -position insertpoint sim:/'+tb_name+'/L_DUT/*;' +   # Open up and add DUT signals to the waveform
                     ' run -all;"'                                               +   
                     ' -default_radix hexadecimal'                               +   # Setting default radix
