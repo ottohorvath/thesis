@@ -30,14 +30,14 @@ use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
 
 
 
-use work.mem_if_test.all   ;
-use work.mem_if_check.all  ;
+use work.reset_synchronizer_test.all   ;
+use work.reset_synchronizer_check.all  ;
 
 
 
 
 -----------------------------------------------------------------------------------------------
-entity mem_if_tb is
+entity reset_synchronizer_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
 
@@ -51,32 +51,20 @@ end entity;
 -----------------------------------------------------------------------------------------------
 
 
-architecture bhv of mem_if_tb is
+architecture bhv of reset_synchronizer_tb is
 
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
-    
-    constant    ack_needed_c    :   boolean :=  false;
-    constant    dw_c            :   integer :=  32;
-    constant    aw_c            :   integer :=  32;
-    
-    constant    rdstart_c       :   std_logic_vector(63 downto 0) := x"0000000012340000";
-    constant    wrstart_c       :   std_logic_vector(63 downto 0) := x"0000000012345678";
-    
-    
-    
-    
-    
-    
-    
+
+
 
     --------- Initializing the generic parameters  ----------
     procedure run_test is new tc
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
 
-            rtl_in_if_t         =>  mem_if_in_if_t     ,       -- type
-            called_tc           =>  mem_if_test        ,       -- procedure
-            called_tc_name      =>  "mem_if_test"              -- constant string
+            rtl_in_if_t         =>  reset_synchronizer_in_if_t     ,       -- type
+            called_tc           =>  reset_synchronizer_test        ,       -- procedure
+            called_tc_name      =>  "reset_synchronizer_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
 
@@ -85,9 +73,9 @@ architecture bhv of mem_if_tb is
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
 
-            rtl_out_if_t        =>  mem_if_out_if_t    ,       -- type
-            called_chk          =>  mem_if_check       ,       -- procedure
-            called_chk_name     =>  "mem_if_check"             -- constant string
+            rtl_out_if_t        =>  reset_synchronizer_out_if_t    ,       -- type
+            called_chk          =>  reset_synchronizer_check       ,       -- procedure
+            called_chk_name     =>  "reset_synchronizer_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
 
@@ -152,30 +140,15 @@ begin
 
 
     -----------------------------------------------------------------------------------------
-    mem_if:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
+    reset_synchronizer:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
-    L_DUT:  entity work.mem_if(rtl)
-                generic map(
-                    ACK_NEEDED      =>  ack_needed_c,
-                    REG_LAYER       =>  false       ,
-                    RD_START        =>  rdstart_c   ,
-                    WR_START        =>  wrstart_c   ,             
-                    DW              =>  dw_c        ,
-                    AW              =>  aw_c        
-                )
+    L_DUT:  entity work.reset_synchronizer(rtl)
+                --generic map(
+                --)
                 port map(
                     clk             =>  tb_if.clk               ,
-                    rstn            =>  tb_if.rstn              ,
-                    wr              =>  rtl_in_if.wr            ,
-                    wdata           =>  rtl_in_if.wdata         ,
-                    rd              =>  rtl_in_if.rd            ,
-                    rdata           =>  rtl_out_if.rdata        ,
-                    wstrb_to_DUV    =>  rtl_out_if.wstrb_to_DUV ,
-                    rstrb_to_DUV    =>  rtl_out_if.rstrb_to_DUV ,
-                    wdata_to_DUV    =>  rtl_out_if.wdata_to_DUV ,
-                    addr_to_DUV     =>  rtl_out_if.addr_to_DUV  ,
-                    rdata_from_DUV  =>  rtl_in_if.rdata_from_DUV,
-                    ack_from_DUV    =>  rtl_in_if.ack 
+                    raw_rst         =>  tb_if.rstn              ,
+                    synced_rst      =>  rtl_out_if.synced_rst
                 );
     -----------------------------------------------------------------------------------------
 
