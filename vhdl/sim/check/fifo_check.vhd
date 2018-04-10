@@ -108,61 +108,47 @@ is
                                 -- EXP   -- ACT
                             sv.compare('0',  rtl_out_if.full);
                             sv.compare('1',  rtl_out_if.empty);
+                            sv.assertion(Is_X(rtl_out_if.rdata));
 
                             check_done(sv);
             -------------------------------------------------
             when    1   =>
                                     -- EXP          -- ACT
-                            sv.compare(x"00000001",  rtl_out_if.rdata);
+                            sv.compare(slv(32,1),   rtl_out_if.rdata);
+                            sv.compare('1',          rtl_out_if.full);
+                            sv.compare('0',          rtl_out_if.empty);
+
+                            check_done(sv);
+            -------------------------------------------------
+            when    2   =>
+                            for i in 0 to 7 loop
+                                        -- EXP          -- ACT
+                                sv.compare(slv(32,i+1),    rtl_out_if.rdata);
+                                
+                                if( i = 0)  then
+                                
+                                    sv.compare('1',          rtl_out_if.full);
+                                    sv.compare('0',          rtl_out_if.empty);
+                                else
+                                    sv.compare('0',          rtl_out_if.full);
+                                    sv.compare('0',          rtl_out_if.empty);
+                                end if;
+                                check_done(sv);
+                                
+                                wait_for_next_check(sv);
+                            end loop;
+                            
+                            sv.compare(slv(32,1),    rtl_out_if.rdata);
                             sv.compare('0',          rtl_out_if.full);
                             sv.compare('1',          rtl_out_if.empty);
 
                             check_done(sv);
-          -------------------------------------------------
-          when    2   =>
-
-
-                        loop
-                            -- Looping until the FIFO is full
-                            -- Test process is responsible for read out the
-                            -- contents of it
-
-                            ----------------------------------
-                            if(rtl_out_if.empty = '1')then
-                                sv.set_caught('1');
-                                check_done(sv);
-                                exit;
-
-                            end if;
-                            ----------------------------------
-
-                            wait_for_next_check(sv);
-
-                        end loop;
-
-                        wait_for_next_check(sv);
-
-                        sv.set_caught('0');
-
-
-                        -- Just checking if the 'full' flag is popped out
-                        sv.compare('1', rtl_out_if.full);
-                        check_done(sv);
-
-                        -----------------------
-                        -----------------------
-                        i   := 0;
-                        ipp := 1;
-                        for i in 0 to DEPTH_C-1 loop
-
-                            wait_for_next_check(sv);
-
-                            sv.compare(std_logic_vector(to_unsigned(ipp,DWIDTH_C)), rtl_out_if.rdata);
-                            check_done(sv);
-
-                            ipp := ipp + 1;
-
-                        end loop;
+                            
+                            
+                            
+                            
+                            
+                            
             -------------------------------------------------
             when others =>
         end case;
