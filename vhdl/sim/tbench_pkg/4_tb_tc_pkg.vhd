@@ -113,6 +113,21 @@ is
     );
     ------------------------------------------
 
+    procedure   fifo_wr(
+        constant    din     :   in  std_logic_vector;
+        signal      clk     :   in  std_logic;
+        signal      wdata   :   out std_logic_vector;
+        signal      wr      :   out std_logic
+    );
+    ------------------------------------------
+
+    procedure   fifo_rd(
+        signal      clk     :   in  std_logic;
+        signal      rd      :   out std_logic
+    );
+
+
+
 
     procedure req_to_check(
         variable    sync_sv :   inout  synchronizer_t
@@ -249,10 +264,13 @@ is
         ----------------
         wdata   <= din;
         wr      <= '1';
+        wait for 1 ps;
         wait_re(clk);
         ---------------
+        wait  for 1 ps;
         wr      <= '0';
-        wait_re(clk);
+        wdata   <=  'X';
+        wait for 1 ps;
 
     end procedure;
     ------------------------------------------
@@ -267,20 +285,43 @@ is
     )is
     begin
 
-
         ----------------
-        wdata   <= din;
+        wdata   <=  din;
         wr      <= '1';
+        wait  for 1 ps;
         wait_re(clk);
         ---------------
         wr      <= '0';
-        wait_re(clk);
+        wdata   <=  slv(wdata'length, 'X');
+        wait  for 1 ps;
 
     end procedure;
     ------------------------------------------
 
+    ------------------------------------------
+    procedure   fifo_wr(
+        constant    din     :   in  std_logic_vector;
+        signal      clk     :   in  std_logic;
+        signal      wdata   :   out std_logic_vector;
+        signal      wr      :   out std_logic
+    )is
+    begin
 
+        ----------------
+        wdata   <=  din;
+        wr      <= '1';
+        wait  for 1 ps;
+        wait_re(clk);
+        ---------------
+        wr      <= '0';
+        wdata   <=  slv(wdata'length, 'X');
+        wait  for 1 ps;
 
+    end procedure;
+    ------------------------------------------
+
+    ------------------------------------------
+    -- Blocking procedure used by 'tc' process
     procedure req_to_check(
         variable    sync_sv :   inout  synchronizer_t
     )   is
@@ -309,7 +350,24 @@ is
 
 
 
+    ------------------------------------------
+    procedure   fifo_rd(
+        signal      clk     :   in  std_logic;
+        signal      rd      :   out std_logic
+    )is
+    begin
 
+        ----------------
+        rd      <= '1';
+        wait  for 1 ps;
+        wait_re(clk);
+        wait  for 1 ps;
+        ---------------
+        rd      <= '0';
+        wait  for 1 ps;
+
+    end procedure;
+    ------------------------------------------
 
 
 
