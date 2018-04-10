@@ -33,15 +33,25 @@ entity mem_if is
         rstn            :   in  std_logic;
         -----------------------------------------------------------------
         wr              :   in  std_logic                           ;--
+        -- coverage off t
         wdata           :   in  std_logic_vector(DW-1   downto 0)   ;--
+        -- coverage on
         rd              :   in  std_logic                           ;-- MMIO Slave IF
+        -- coverage off t
         rdata           :   out std_logic_vector(DW-1   downto 0)   ;--
+        -- coverage on
         -----------------------------------------------------------------
         wstrb_to_DUV    :   out std_logic                           ;--
         rstrb_to_DUV    :   out std_logic                           ;--
+        -- coverage off t
         wdata_to_DUV    :   out std_logic_vector(DW-1   downto 0)   ;--
+        -- coverage on
+        -- coverage off t
         addr_to_DUV     :   out std_logic_vector(AW-1   downto 0)   ;--
+        -- coverage on
+        -- coverage off t
         rdata_from_DUV  :   in  std_logic_vector(DW-1   downto 0)   ;--
+        -- coverage on
         -----------------------------------------------------------------
         ack_from_DUV    :   in  std_logic                            -- Ack. input, when ACK_NEEDED is set to TRUE
     );
@@ -56,11 +66,12 @@ architecture rtl of mem_if is
 
     signal  fsm_rstrb   :   std_logic;
     signal  fsm_wstrb   :   std_logic;
-
+    
+    -- coverage off t
     signal  rdata_reg   :   std_logic_vector(DW-1 downto 0);
     signal  wdata_reg   :   std_logic_vector(DW-1 downto 0);
     signal  addr_reg    :   std_logic_vector(AW-1 downto 0);
-
+    -- coverage on
 
     signal  wstrb_reg   :   std_logic;
     signal  rstrb_reg   :   std_logic;

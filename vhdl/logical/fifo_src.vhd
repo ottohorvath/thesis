@@ -27,16 +27,19 @@ entity fifo_src is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
-        
         trig_out        :       out std_logic                           ;
-
+        -- coverage off t
         rdata           :       out std_logic_vector(DW-1 downto 0) ;--
+        -- coverage on
         wr              :       in  std_logic                           ;
+        -- coverage off t
         wdata           :       in  std_logic_vector(DW-1  downto 0);
-        
+        -- coverage on
         empty_to_DUV    :       out std_logic                           ;-- 
         rd_from_DUV     :       in  std_logic                           ;-- Write side
+        -- coverage off t
         rdata_to_DUV    :       out std_logic_vector(DW-1 downto 0)  --
+        -- coverage on
     );
 end entity;
 ---------------------------------------------------------------------------------------------------

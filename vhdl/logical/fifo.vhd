@@ -15,6 +15,7 @@ use     ieee.std_logic_1164.all ;
 use     ieee.numeric_std.all    ;
 
 
+
 ---------------------------------------------------------------------------
 entity fifo is
     generic (
@@ -28,7 +29,7 @@ entity fifo is
         empty       :       out std_logic                           ;--
         rd          :       in  std_logic                           ;-- Read side
         -- coverage off t
-        rdata       :       out std_logic_vector(DW-1 downto 0) ;--
+        rdata       :       buffer std_logic_vector(DW-1 downto 0) ;--
         -- coverage on
 
         full        :       out std_logic                           ;--
@@ -40,109 +41,100 @@ entity fifo is
 end entity;
 ---------------------------------------------------------------------------------------------------
 architecture rtl of fifo is
-
-    type data_t is
-        array (0 to DEPTH-1) of std_logic_vector(DW-1 downto 0);
-
-    signal  payload: data_t;                                                -- FIFO slots
-    
-    
     -----------------------------------------------------------------
     function clog2  (
         arg     :   in  natural
-    )   return          natural 
+    )   return          natural
     is
         variable nbits : integer;
         variable num   : integer;
     begin
         num   := arg;
         nbits := 0;
-        
+
         while num > 1 loop
-        
+
             nbits   := nbits +1;
             num     := num / 2;
-            
+
         end loop;
-        
+
         return nbits;
-    end function;  
+    end function;
     -----------------------------------------------------------------
+
+
+    type data_t is  array (0 to DEPTH-1) of std_logic_vector(DW-1 downto 0);
+
+    -- FIFO slots
+    -- ==========
+    signal  payload : data_t;
+
+
+    -- FIFO occupancy counter, wider with 1 bit than clog(DEPTH)
+    -- because its MSB will be used for indicating full flag
+    -- ======================================================
+    signal  occupancy   :   std_logic_vector(clog2(DEPTH) downto 0);
+
+    -- Address pointer, it is 1 bit wider than clog(DEPTH), too
+    -- because it will be used for empty flag generation
+    -- ======================================================
+    signal  addr        :   std_logic_vector(clog2(DEPTH) downto 0);
+
+
+
 begin
     ------------------------------------------------------------------
-    L_FIFO:    process(clk, rstn)  is
-
-        variable rd_ptr_v   :   unsigned(clog2(DEPTH)-1 downto 0);
-        variable wr_ptr_v   :   unsigned(clog2(DEPTH)-1 downto 0);
-
-        variable full_v     :   std_logic;
-        variable empty_v    :   std_logic;
-
-    begin
-
-        if(rstn = '0')  then
-            rd_ptr_v    :=  (others => '0');
-            wr_ptr_v    :=  (others => '0');
-
-            full_v      :=  '0';    -- In reset state it is not full
-            empty_v     :=  '1';    -- But it is empty
-
-            empty       <=  '1';
-            full        <=  '0';
-            --rdata       <=  (others => '0');
-
-        elsif( rising_edge(clk) ) then
-
-            -------------------------------------------------
-            -- Upstream logic
-
-            if(wr = '1' and full_v /= '1')  then                    -- If it isn't full, and the upstream wants to write in data
-
-                payload(to_integer(wr_ptr_v)) <= wdata  ;           -- Just store down the wdata
-
-                wr_ptr_v    := wr_ptr_v + 1;                        -- Incrementing the write pointer
-
-                if(wr_ptr_v = rd_ptr_v) then                        -- And then (in the same cycle) if they are the same then the FIFO just got
-                    full_v  := '1';                                 -- fully occupied
-                else
-                    full_v  := '0';                                 -- Otherwise, there is still more to come
-                end if;
-
-                empty_v := '0';                                     -- If it wasn't full then it also couldn't be empty
-
-            end if;
-            -------------------------------------------------
-            -- Downstream logic
-
-            rdata       <= payload(to_integer(rd_ptr_v));       -- Placing the pointed data slot to the output
-            
-            if(rd = '1' and empty_v /= '1') then                    -- If it isn't empty, and the downstream side wants to read out
-
-                
-
-                rd_ptr_v    := rd_ptr_v + 1;                        -- Incrementing the read pointer
-
-                if(wr_ptr_v = rd_ptr_v) then                        -- After it (in the same cycle) if the two pointers are pointing to the same slot
-                    empty_v := '1';                                 -- after the read, then the FIFO got emptied out
-                else
-                    empty_v := '0';                                 -- Otherwise, there is still something inside
-                end if;
-
-                full_v := '0';                                      -- If it wasn't empty, then it also couldn't be full
-            end if;
-            -------------------------------------------------
-
-            -- Driving the control outputs
-            empty       <= empty_v      ;
-            full        <= full_v       ;
-
-        end if;
-    end process;
+    L_SHR:      process(clk)  is
+                begin
+                    if( rising_edge(clk) ) then
+                        if(wr = '1')    then
+                            for i in 1 to DEPTH-1 loop
+                                payload(i)  <= payload(i-1);
+                            end loop;
+                            payload(0)  <=  wdata;
+                        end if;
+                    end if;
+                end process;
     ------------------------------------------------------------------
-
-
-
-
+    L_OCCUP:    process(clk, rstn)  is
+                begin
+                    if(rstn = '0')  then
+                        occupancy   <= (others =>'0');
+                    elsif( rising_edge(clk) ) then
+                        -- Increment occupancy on write
+                        if(wr = '1' and rd = '0')    then
+                            occupancy   <=  std_logic_vector(unsigned(occupancy) + 1);
+                        end if;
+                        -- Decrement on read
+                        if(wr = '0' and rd = '1')    then
+                            occupancy   <=  std_logic_vector(unsigned(occupancy) - 1);
+                        end if;
+                    end if;
+                end process;
+    ------------------------------------------------------------------
+    L_ADDR:     process(clk, rstn)  is
+                begin
+                    if(rstn = '0')  then
+                        addr   <= (others =>'1');
+                    elsif( rising_edge(clk) ) then
+                        -- Increment occupancy on write
+                        if(wr = '1' and rd = '0')    then
+                            addr   <=  std_logic_vector(unsigned(addr) + 1);
+                        end if;
+                        -- Decrement on read
+                        if(wr = '0' and rd = '1')    then
+                            addr   <=  std_logic_vector(unsigned(addr) - 1);
+                        end if;
+                    end if;
+                end process;
+    ------------------------------------------------------------------
+    L_OUTPUTS:  block
+                begin
+                    empty   <=  addr(clog2(DEPTH));
+                    full    <=  occupancy(clog2(DEPTH));
+                    rdata   <=  payload(    to_integer(unsigned(addr(clog2(DEPTH)-1 downto 0))) );
+                end block;
 
 
 end architecture;
