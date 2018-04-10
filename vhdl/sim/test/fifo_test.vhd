@@ -155,7 +155,7 @@ is
 
         rtl_in_if.wr                    <= '0';
         rtl_in_if.rd                    <= '0';
-        rtl_in_if.wdata                 <= (others => '0');
+        rtl_in_if.wdata                 <= (others => 'X');
         wait for 1 ps;
 
         banner(id_in);              -- Testcase banner
@@ -172,83 +172,62 @@ is
                         rst_gen(scope, rst_req); -- Reseting
 
                         wait_re(clk);
-
-
+                        ---------------------------------
                         req_to_check(sv);
 
             -------------------------------------------------
-            when 2  =>  init_check(id_in, "Writing the FIFO full and reading everything out. Checking if the rdata is the same as the wdata written in", cd);
+            when 1  =>  init_check(id_in, "Writing the FIFO full and checking the full and rdata outputs", cd);
                         sv.init(id_in);
-
-                        wait_re(clk);
 
                         rst_gen(scope, rst_req); -- Reseting
 
                         wait_re(clk);
                         ---------------------------------
-
-                        -- Reading out every content from the FIFO
-
-                        loop
-                            ----------------------------------
-                            rtl_in_if.rd    <= '1';
-                                wait for 1 ps;
-                            wait_re(clk);
-                                wait for 1 ps;
-                            ----------------------------------
-                            rtl_in_if.rd    <= '0';
-                                wait for 1 ps;
-                            ----------------------------------
-
-                            req_to_check(sv);
-
-                            if(sv.get_caught = '1') then
-                                exit;
-                            end if;
+                        -- The FIFO's depth is 8
+                        for i in 0 to 7 loop
+                            fifo_wr(
+                                slv(32,i+1),
+                                clk,
+                                rtl_in_if.wdata,
+                                rtl_in_if.wr
+                            );
                         end loop;
-
-                        -- When that is completed, just write Full
-
-                        i   := 0;
-                        ipp := 1;
-                        for i in 0 to DEPTH_C-1 loop
-
-                            ----------------------------------
-                            rtl_in_if.wr    <= '1';
-                            rtl_in_if.wdata <=  std_logic_vector(to_unsigned(ipp , DWIDTH_C) ) ;
-                            wait for 1 ps;
-                            wait_re(clk);
-                            ----------------------------------
-                            wait for 1 ps;
-                            rtl_in_if.wr    <= '0';
-
-                            ----------------------------------
-                            ipp :=  ipp+1;
-                        end loop;
-
-
-                        -- Just send the full FIFO for checking
+                        
                         req_to_check(sv);
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Writing the FIFO full and then reading out until it gets emptied", cd);
+                        sv.init(id_in);
 
+                        rst_gen(scope, rst_req); -- Reseting
 
-                        -- Then read out everything
-                        i   := 0;
-                        for i in 0 to DEPTH_C-1 loop
-                            ----------------------------------
-                            rtl_in_if.rd    <= '1';
-                            wait for 1 ps;
-                            wait_re(clk);
-                            wait for 1 ps;
-                            ----------------------------------
-                            rtl_in_if.rd    <= '0';
-                            wait for 1 ps;
-                            ----------------------------------
-
-                            req_to_check(sv);
-                            ----------------------------------
-
+                        wait_re(clk);
+                        ---------------------------------
+                        -- The FIFO's depth is 8
+                        for i in 0 to 7 loop
+                            fifo_wr(
+                                slv(32,i+1),
+                                clk,
+                                rtl_in_if.wdata,
+                                rtl_in_if.wr
+                            );
                         end loop;
+                        
+                        for i in 0 to 7 loop
+                        
+                            req_to_check(sv);
 
+                            fifo_rd(
+                                clk,
+                                rtl_in_if.rd
+                            );
+                        end loop;
+                        
+                        
+                        
+                        req_to_check(sv);
+                        
+                        
+                        
             -------------------------------------------------
             when others =>
         end case;
@@ -267,21 +246,6 @@ is
 
     end procedure;
     --------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

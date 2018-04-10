@@ -54,12 +54,6 @@ is
    
     signal      rtl_in_if           :   mem_if_fsm_in_if_t     ;
     
-    
-    
-    
-    
-    
-    
     --------------------------------------------------
     procedure   test(
         constant    rtl_name        :   in      string;
