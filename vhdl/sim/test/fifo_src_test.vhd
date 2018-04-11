@@ -157,7 +157,7 @@ is
 
         rtl_in_if.wr            <= '0';
         rtl_in_if.rd_from_DUV   <= '0';
-        rtl_in_if.wdata         <= (others  =>  'X');
+        rtl_in_if.wdata         <= (others  =>  'Z');
         wait for 1 ps;
 
 

@@ -159,8 +159,8 @@ is
         
         rtl_in_if.wr                    <= '0';
         rtl_in_if.ack                   <= '0';
-        rtl_in_if.wdata                 <= (others => '0');
-        rtl_in_if.rdata_from_DUV        <= (others => '0');
+        rtl_in_if.wdata                 <= (others => 'Z');
+        rtl_in_if.rdata_from_DUV        <= (others => 'Z');
         rtl_in_if.rd                    <= '0';
         
         wait for 1 ps;   

@@ -148,7 +148,7 @@ is
         constant    scope           :           string  :=  super_name &"."& this;
     begin
         rtl_in_if.wr    <= '0';
-        rtl_in_if.wdata <= (others => '0'); 
+        rtl_in_if.wdata <= (others => 'Z'); 
         wait for 1 ps;
 
         

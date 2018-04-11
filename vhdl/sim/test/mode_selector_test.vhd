@@ -147,7 +147,7 @@ is
     begin
         
         rtl_in_if.wr    <= '0';
-        rtl_in_if.wdata <= (others => '0');
+        rtl_in_if.wdata <= (others => 'Z');
         wait for 1 ps;   
         
         banner(id_in);              -- Testcase banner
