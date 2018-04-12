@@ -37,8 +37,6 @@ package tb_utils_pkg is
         rstn    :   std_logic;                          --
         rstn_req:   std_logic;
     end record;
-
-
     --------------------------------------------------
 
 
@@ -46,13 +44,6 @@ package tb_utils_pkg is
     ----------- Declared objects for the package ------
 
     constant    clk_per_c   :   time    := 10 ns;       -- Clock period used across the testbench.
-
-    signal      tb_if       :   tb_if_t :=(             --
-        clk     =>  '1',                                --
-        clk_en  =>  '0',                                -- Testbench resouce related signals.
-        rstn    =>  '1',                                 --
-        rstn_req=>  '0'
-    );                                                  --
 
     ---------------------------------------------------
 
@@ -434,8 +425,9 @@ package body tb_utils_pkg is
     )is
         constant    this        :           string  :=  "rst_gen";
         constant    scope       :           string  :=  super_name &"."& this;
+        
+        
     begin
-
 
         rst_req <= '1';
 

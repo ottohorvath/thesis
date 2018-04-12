@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -269,7 +269,7 @@ is
         ---------------
         wait  for 1 ps;
         wr      <= '0';
-        wdata   <=  'X';
+        wdata   <=  'Z';
         wait for 1 ps;
 
     end procedure;
@@ -292,7 +292,7 @@ is
         wait_re(clk);
         ---------------
         wr      <= '0';
-        wdata   <=  slv(wdata'length, 'X');
+        wdata   <=  slv(wdata'length, 'Z');
         wait  for 1 ps;
 
     end procedure;
@@ -314,7 +314,7 @@ is
         wait_re(clk);
         ---------------
         wr      <= '0';
-        wdata   <=  slv(wdata'length, 'X');
+        wdata   <=  slv(wdata'length, 'Z');
         wait  for 1 ps;
 
     end procedure;

@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -38,21 +38,13 @@ is
             (   -- Procedure responsible for running one check which is indexed by 'id'
 
                 constant    rtl_name        :   in  string;
-                constant    super_name      :   in  string;
-                variable    sync_sv         :   inout  synchronizer_t;
-
-                signal      rtl_out_if      :   in  rtl_out_if_t;       -- Watching DUT's output ports
-                signal      tb_if           :   in  tb_if_t
+                constant    super_name      :   in  string
             )
         )
     (
 
         constant    rtl_name    :   in      string;
-        constant    super_name  :   in      string;
-        variable    sync_sv     :   inout  synchronizer_t;
-
-        signal      rtl_out_if  :   in      rtl_out_if_t;
-        signal      tb_if       :   in      tb_if_t
+        constant    super_name  :   in      string
     );
     --------------------------------------------------
 
@@ -87,20 +79,12 @@ is
             procedure   called_chk
             (
                 constant    rtl_name        :   in  string;
-                constant    super_name      :   in  string;
-                variable    sync_sv         :   inout  synchronizer_t;
-
-                signal      rtl_out_if      :   in  rtl_out_if_t;
-                signal      tb_if           :   in  tb_if_t
+                constant    super_name      :   in  string
             )
         )
     (
         constant    rtl_name    :   in      string;
-        constant    super_name  :   in      string;
-        variable    sync_sv         :   inout  synchronizer_t;
-
-        signal      rtl_out_if  :   in      rtl_out_if_t;
-        signal      tb_if       :   in      tb_if_t
+        constant    super_name  :   in      string
     )is
         constant    this        :           string  :=  new_run_name;
         constant    scope       :           string  :=  super_name &"."& new_run_name;
@@ -108,8 +92,7 @@ is
     begin
 
         -- Run 'called_chk' generic procedure: the actual resolved procedure name will be like this: <RTL>_check
-        called_chk( rtl_name,scope,sync_sv,      rtl_out_if  ,
-                                            tb_if       );
+        called_chk( rtl_name,scope );
 
     end procedure;
     ------------------------------------------------------------------------------
