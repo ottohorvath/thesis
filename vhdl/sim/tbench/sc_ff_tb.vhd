@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------------------------
--- Author: Otto Horvath           
+-- Author: Otto Horvath
 -------------------------------------------------------------------------------------------------
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 -----------------------------------------------------------------------------------------------
 library ieee				;
@@ -40,9 +40,9 @@ use work.sc_ff_check.all  ;
 entity sc_ff_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
-    
+
         constant    RTL_NAME_G  :           string;         -- RTL name
-        
+
         constant    CLI_G       :           integer := 0;   --
         constant    GUI_G       :           integer := 0;   -- Simulation type indicators.
         constant    RGR_G       :           integer := 0    --
@@ -52,27 +52,27 @@ end entity;
 
 
 architecture bhv of sc_ff_tb is
-    
+
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
-    
-    
-    
+
+
+
     --------- Initializing the generic parameters  ----------
     procedure run_test is new tc
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
-            
+
             rtl_in_if_t         =>  sc_ff_in_if_t     ,       -- type
             called_tc           =>  sc_ff_test        ,       -- procedure
             called_tc_name      =>  "sc_ff_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
-    
+
     --------- Initializing the generic parameters  ----------
     procedure run_check is new chk
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
-            
+
             rtl_out_if_t        =>  sc_ff_out_if_t    ,       -- type
             called_chk          =>  sc_ff_check       ,       -- procedure
             called_chk_name     =>  "sc_ff_check"             -- constant string
@@ -80,17 +80,28 @@ architecture bhv of sc_ff_tb is
     -----------------------------------------------------------------------------------
         -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
+
+
+    signal  rtl_out_if      :   sc_ff_out_if_t;
+
+    signal      tb_if       :   tb_if_t :=( --
+        clk     =>  '1',                    --
+        clk_en  =>  '0',                    -- Testbench resouce related signals.
+        rstn    =>  '1',                    --
+        rstn_req=>  '0'                     --
+    );                                      --
+
 begin
 
 
     -----------------------------------------------------------------------------------------
-    tc:     process is 
+    tc:     process is
                 constant    this                :   string      :=  "process_tc";
-                
+
                 variable    clock_enable_v      :   std_logic   :=  clk_enabled_c;          -- Clock enable, enabled by default
             begin
                 ------------------------------------------------------
-                setup(RTL_NAME_G,this,              clock_enable_v  ,                       -- 
+                setup(RTL_NAME_G,this,              clock_enable_v  ,                       --
                                                     tb_if.clk_en                            -- Setup the testbench.
                                                                     );                      --
                 ------------------------------------------------------
@@ -99,46 +110,45 @@ begin
                                                     tb_if.rstn_req      ,
                                                     check_descriptor    );-- Run the testcases for the chosen RTL
                 ------------------------------------------------------
-                report_and_exit(RTL_NAME_G,this,    RGR_G           , 
+                report_and_exit(RTL_NAME_G,this,    RGR_G           ,
                                                     check_descriptor);                      -- Generate report based on results and exit.
                 ------------------------------------------------------
-            end process;      
-    -----------------------------------------------------------------------------------------        
-    
-    
-    -----------------------------------------------------------------------------------------        
+            end process;
+    -----------------------------------------------------------------------------------------
+
+
+    -----------------------------------------------------------------------------------------
     chk:    process is
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(RTL_NAME_G,this,sync_sv,  rtl_out_if          ,                       --
-                                                    tb_if               );                       -- 
+                run_check(RTL_NAME_G,this);
                 ------------------------------------------------------
             end process;
     -----------------------------------------------------------------------------------------
-    
-    
-    
-    
-    
+
+
+
+
+
     -----------------------------------------------------------------------------------------
     rst_gen:    process is
                     constant    this            :   string      :=  "process_rst_gen";
                 begin
-                    
+
                     wait on tb_if.rstn_req;
-                    
+
                     if(tb_if.rstn_req = '1')    then
                         tb_if.rstn     <=  '0'; print(this &": Reset is asserted.", 1);
                     else
                         tb_if.rstn     <=  '1'; print(this &": Reset is de-asserted.", 1);
                     end if;
-                    
+
                 end process;
     -----------------------------------------------------------------------------------------
-    
-    
-    
+
+
+
     -----------------------------------------------------------------------------------------
     sc_ff:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
@@ -149,10 +159,10 @@ begin
                     set         =>  rtl_in_if.set   ,
                     clr         =>  rtl_in_if.clr   ,
                     q           =>  rtl_out_if.q
-                    
+
                 );
     -----------------------------------------------------------------------------------------
-    
+
 end architecture;
 
 

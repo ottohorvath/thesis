@@ -54,11 +54,11 @@ end entity;
 architecture bhv of mem_if_fsm_tb is
 
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
-    
-    
-    
-    
-    
+
+
+
+
+
 
     --------- Initializing the generic parameters  ----------
     procedure run_test is new tc
@@ -84,6 +84,16 @@ architecture bhv of mem_if_fsm_tb is
 
     -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
+
+    signal  rtl_out_if      :   mem_if_fsm_out_if_t;
+
+    signal      tb_if       :   tb_if_t :=( --
+        clk     =>  '1',                    --
+        clk_en  =>  '0',                    -- Testbench resouce related signals.
+        rstn    =>  '1',                    --
+        rstn_req=>  '0'                     --
+    );                                      --
+
 begin
 
 
@@ -115,8 +125,7 @@ begin
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(RTL_NAME_G,this,sync_sv,  rtl_out_if          ,  --
-                                                    tb_if               );
+                run_check(RTL_NAME_G,this);
                 ------------------------------------------------------
             end process;
     -----------------------------------------------------------------------------------------
@@ -150,7 +159,7 @@ begin
                     ACK_NEEDED  =>  ack_needed_c        ,
                     DW          =>  dw_c                ,
                     RD_START    =>  rdstart_c           ,
-                    WR_START    =>  wrstart_c           
+                    WR_START    =>  wrstart_c
                 )
                 port map(
                     clk         =>  tb_if.clk           ,

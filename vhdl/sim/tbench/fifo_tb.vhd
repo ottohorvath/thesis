@@ -82,6 +82,17 @@ architecture bhv of fifo_tb is
 
     -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
+
+    signal      rtl_out_if  :   fifo_out_if_t    ;
+
+    signal      tb_if       :   tb_if_t :=( --
+        clk     =>  '1',                    --
+        clk_en  =>  '0',                    -- Testbench resouce related signals.
+        rstn    =>  '1',                    --
+        rstn_req=>  '0'                     --
+    );                                      --
+
+
 begin
 
 
@@ -113,8 +124,7 @@ begin
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(RTL_NAME_G,this,sync_sv,  rtl_out_if          ,  --
-                                                    tb_if               );
+                run_check(RTL_NAME_G,this);
                 ------------------------------------------------------
             end process;
     -----------------------------------------------------------------------------------------
@@ -134,11 +144,8 @@ begin
                     else
                         tb_if.rstn     <=  '1'; print(this &": Reset is de-asserted.", 1);
                     end if;
-
                 end process;
     -----------------------------------------------------------------------------------------
-
-
 
     -----------------------------------------------------------------------------------------
     fifo:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';

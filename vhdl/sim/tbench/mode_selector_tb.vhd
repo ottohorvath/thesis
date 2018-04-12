@@ -81,6 +81,16 @@ architecture bhv of mode_selector_tb is
 
     -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
+
+    signal  rtl_out_if      :   mode_selector_out_if_t;
+
+    signal      tb_if       :   tb_if_t :=( --
+        clk     =>  '1',                    --
+        clk_en  =>  '0',                    -- Testbench resouce related signals.
+        rstn    =>  '1',                    --
+        rstn_req=>  '0'                     --
+    );                                      --
+
 begin
 
 
@@ -112,8 +122,7 @@ begin
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(RTL_NAME_G,this,sync_sv,  rtl_out_if          ,  --
-                                                    tb_if               );
+                run_check(RTL_NAME_G,this);
                 ------------------------------------------------------
             end process;
     -----------------------------------------------------------------------------------------

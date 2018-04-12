@@ -54,20 +54,20 @@ end entity;
 architecture bhv of mem_if_tb is
 
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
-    
+
     constant    ack_needed_c    :   boolean :=  false;
     constant    dw_c            :   integer :=  32;
     constant    aw_c            :   integer :=  32;
-    
+
     constant    rdstart_c       :   std_logic_vector(63 downto 0) := x"0000000012340000";
     constant    wrstart_c       :   std_logic_vector(63 downto 0) := x"0000000012345678";
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 
     --------- Initializing the generic parameters  ----------
     procedure run_test is new tc
@@ -93,6 +93,17 @@ architecture bhv of mem_if_tb is
 
     -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
+
+
+    signal  rtl_out_if      :   mem_if_out_if_t;
+
+    signal      tb_if       :   tb_if_t :=( --
+        clk     =>  '1',                    --
+        clk_en  =>  '0',                    -- Testbench resouce related signals.
+        rstn    =>  '1',                    --
+        rstn_req=>  '0'                     --
+    );                                      --
+
 begin
 
 
@@ -124,8 +135,7 @@ begin
                 constant    this            :   string      :=  "process_chk";
             begin
                 ------------------------------------------------------
-                run_check(RTL_NAME_G,this,sync_sv,  rtl_out_if          ,  --
-                                                    tb_if               );
+                run_check(RTL_NAME_G,this);
                 ------------------------------------------------------
             end process;
     -----------------------------------------------------------------------------------------
@@ -159,9 +169,9 @@ begin
                     ACK_NEEDED      =>  ack_needed_c,
                     REG_LAYER       =>  false       ,
                     RD_START        =>  rdstart_c   ,
-                    WR_START        =>  wrstart_c   ,             
+                    WR_START        =>  wrstart_c   ,
                     DW              =>  dw_c        ,
-                    AW              =>  aw_c        
+                    AW              =>  aw_c
                 )
                 port map(
                     clk             =>  tb_if.clk               ,
@@ -175,7 +185,7 @@ begin
                     wdata_to_DUV    =>  rtl_out_if.wdata_to_DUV ,
                     addr_to_DUV     =>  rtl_out_if.addr_to_DUV  ,
                     rdata_from_DUV  =>  rtl_in_if.rdata_from_DUV,
-                    ack_from_DUV    =>  rtl_in_if.ack 
+                    ack_from_DUV    =>  rtl_in_if.ack
                 );
     -----------------------------------------------------------------------------------------
 
