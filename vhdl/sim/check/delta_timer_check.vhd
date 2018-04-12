@@ -70,13 +70,13 @@ is
 
 
         alias   sv     is
-        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+        <<variable  .delta_timer_tb.sync_sv    :   synchronizer_t>>;
 
         alias   rtl_out_if   is
-        <<signal    .fifo_tb.rtl_out_if :   delta_timer_out_if_t >>;
+        <<signal    .delta_timer_tb.rtl_out_if :   delta_timer_out_if_t >>;
 
         alias   tb_if   is
-        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
+        <<signal    .delta_timer_tb.tb_if      :   tb_if_t>>;
     begin
 
         wait_for_next_check(sv);

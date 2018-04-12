@@ -79,13 +79,13 @@ is
         constant    scope           :           string  :=  super_name &"."& this;
 
         alias   sv     is
-        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+        <<variable  .fifo_src_tb.sync_sv    :   synchronizer_t>>;
 
         alias   rtl_out_if   is
-        <<signal    .fifo_tb.rtl_out_if :   fifo_src_out_if_t >>;
+        <<signal    .fifo_src_tb.rtl_out_if :   fifo_src_out_if_t >>;
 
         alias   tb_if   is
-        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
+        <<signal    .fifo_src_tb.tb_if      :   tb_if_t>>;
     begin
 
 
