@@ -83,7 +83,7 @@ is
 
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0 | 2  =>
+            when 0 | 2  =>  wait for 1 ps;
                                     -- EXP          -- ACT
                             sv.compare(slv(w,'0'),  rtl_out_if.rdata);
 
