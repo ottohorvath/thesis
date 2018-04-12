@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -49,26 +49,13 @@ is
     end record;
     --------------------------------------------------
 
-
-
-    signal      rtl_out_if  :   fifo_out_if_t    ;
-
-
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
     procedure   fifo_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout  synchronizer_t;
-
-        signal      rtl_out_if      :   in      fifo_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t
+        constant    super_name      :   in      string
     );
     --------------------------------------------------
-
-
-
-
 
 end package;
 
@@ -81,21 +68,22 @@ is
     -- The main checker for RTL named 'wtf'
     procedure   fifo_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-
-        signal      rtl_out_if      :   in      fifo_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t
+        constant    super_name      :   in      string
     )is
-
         variable    i               :           integer :=  0;
         variable    ipp             :           integer :=  0;
 
         constant    this            :           string  :=  "fifo_check";
         constant    scope           :           string  :=  super_name &"."& this;
-                ---------------------------------------------------------------------------------------------------
-        ---------------------------------------------------------------------------------------------------
 
+        alias   sv     is
+        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+
+        alias   rtl_o   is
+        <<signal    .fifo_tb.rtl_out_if :   fifo_out_if_t >>;
+
+        alias   tb_if   is
+        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
     begin
 
 
@@ -106,49 +94,44 @@ is
 
             when    0   =>
                                 -- EXP   -- ACT
-                            sv.compare('0',  rtl_out_if.full);
-                            sv.compare('1',  rtl_out_if.empty);
-                            sv.assertion(Is_X(rtl_out_if.rdata));
+                            sv.compare('0',     rtl_o.full);
+                            sv.compare('1',     rtl_o.empty);
+                            sv.assertion(Is_X(rtl_o.rdata));
 
                             check_done(sv);
             -------------------------------------------------
             when    1   =>
                                     -- EXP          -- ACT
-                            sv.compare(slv(32,1),   rtl_out_if.rdata);
-                            sv.compare('1',          rtl_out_if.full);
-                            sv.compare('0',          rtl_out_if.empty);
+                            sv.compare(slv(32,1),   rtl_o.rdata);
+                            sv.compare('1',         rtl_o.full);
+                            sv.compare('0',         rtl_o.empty);
 
                             check_done(sv);
             -------------------------------------------------
             when    2   =>
                             for i in 0 to 7 loop
                                         -- EXP          -- ACT
-                                sv.compare(slv(32,i+1),    rtl_out_if.rdata);
-                                
+                                sv.compare(slv(32,i+1),    rtl_o.rdata);
+
                                 if( i = 0)  then
-                                
-                                    sv.compare('1',          rtl_out_if.full);
-                                    sv.compare('0',          rtl_out_if.empty);
+
+                                    sv.compare('1',          rtl_o.full);
+                                    sv.compare('0',          rtl_o.empty);
                                 else
-                                    sv.compare('0',          rtl_out_if.full);
-                                    sv.compare('0',          rtl_out_if.empty);
+                                    sv.compare('0',          rtl_o.full);
+                                    sv.compare('0',          rtl_o.empty);
                                 end if;
                                 check_done(sv);
-                                
+
                                 wait_for_next_check(sv);
                             end loop;
-                            
-                            sv.compare(slv(32,1),    rtl_out_if.rdata);
-                            sv.compare('0',          rtl_out_if.full);
-                            sv.compare('1',          rtl_out_if.empty);
+
+                            sv.compare(slv(32,1),    rtl_o.rdata);
+                            sv.compare('0',          rtl_o.full);
+                            sv.compare('1',          rtl_o.empty);
 
                             check_done(sv);
-                            
-                            
-                            
-                            
-                            
-                            
+
             -------------------------------------------------
             when others =>
         end case;

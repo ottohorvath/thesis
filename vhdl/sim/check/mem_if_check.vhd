@@ -48,25 +48,14 @@ is
         addr_to_DUV     :   std_logic_vector(ch_aw_c-1 downto 0);
         rstrb_to_DUV    :   std_logic;
         wstrb_to_DUV    :   std_logic;
-
     end record;
     --------------------------------------------------
 
-
-
-    signal      rtl_out_if  :   mem_if_out_if_t    ;
-
-
     --------------------------------------------------
-    -- The main test runner for RTL named 'wtf'
+    -- The main test runner for RTL named
     procedure   mem_if_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-
-        signal      rtl_out_if      :   in      mem_if_out_if_t;
-        signal      tb_if           :   in      tb_if_t
-
+        constant    super_name      :   in      string
     );
     --------------------------------------------------
 
@@ -82,18 +71,23 @@ package body mem_if_check
 is
 
     --------------------------------------------------
-    -- The main checker for RTL named 'wtf'
+    -- The main checker for RTL named
     procedure   mem_if_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-
-        signal      rtl_out_if      :   in      mem_if_out_if_t;
-        signal      tb_if           :   in      tb_if_t
+        constant    super_name      :   in      string
     )is
 
         constant    this            :           string  :=  "mem_if_check";
         constant    scope           :           string  :=  super_name &"."& this;
+
+        alias   sv     is
+        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+
+        alias   rtl_out_if   is
+        <<signal    .fifo_tb.rtl_out_if :   mem_if_out_if_t >>;
+
+        alias   tb_if   is
+        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
     begin
 
         wait_for_next_check(sv);

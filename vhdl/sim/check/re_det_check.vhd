@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------------
--- Author: Otto Horvath           
+-- Author: Otto Horvath
 ----------------------------------------------------------------------------------------
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ----------------------------------------------------------------------------------------
 library ieee				;
@@ -33,35 +33,23 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 package re_det_check
 is
     ------- Typedefs for output RTL IF signals -------------------
-    
+
     type re_det_out_if_t   is record
-    
         rdata       :   std_logic;
-        
     end record;
     --------------------------------------------------
-    
-    
-    
-    signal      rtl_out_if  :   re_det_out_if_t    ;
-    
-    
     --------------------------------------------------
     -- The main test runner for RTL named 'wtf'
     procedure   re_det_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-        
-        signal      rtl_out_if      :   in      re_det_out_if_t;
-        signal      tb_if           :   in      tb_if_t            
+        constant    super_name      :   in      string
     );
     --------------------------------------------------
-    
-    
-    
-    
-    
+
+
+
+
+
 end package;
 
 
@@ -73,51 +61,56 @@ is
     -- The main checker for RTL named 'wtf'
     procedure   re_det_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-        
-        signal      rtl_out_if      :   in      re_det_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t         
+        constant    super_name      :   in      string
     )is
-        
+
         constant    this            :           string  :=  "re_det_check";
         constant    scope           :           string  :=  super_name &"."& this;
+
+        alias   sv     is
+        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+
+        alias   rtl_out_if   is
+        <<signal    .fifo_tb.rtl_out_if :   re_det_out_if_t >>;
+
+        alias   tb_if   is
+        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
     begin
-        
-        
+
+
         wait_for_next_check(sv);
-        
+
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0  => 
+            when 0  =>
                             -- EXP   -- ACT
                         sv.compare('0',  rtl_out_if.rdata);
-                        
+
                         check_done(sv);
             -------------------------------------------------
             when 1  =>  wait_re(tb_if.clk);
-                        
+
                             -- EXP   -- ACT
                         sv.compare('0',  rtl_out_if.rdata);
-                        
-                        check_done(sv);          
+
+                        check_done(sv);
             -------------------------------------------------
-            when 2  =>  
+            when 2  =>
                         -- EXP   -- ACT
                         sv.compare('1',  rtl_out_if.rdata);
-                        
-                        check_done(sv);          
+
+                        check_done(sv);
             -------------------------------------------------
             when 3  =>  wait_re(tb_if.clk);
-            
+
                         -- EXP   -- ACT
                         sv.compare('1',  rtl_out_if.rdata);
-                        
-                        check_done(sv);          
-            -------------------------------------------------            
+
+                        check_done(sv);
+            -------------------------------------------------
             when others =>
         end case;
-        
+
    end procedure;
     --------------------------------------------------
 

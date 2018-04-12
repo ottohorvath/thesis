@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------------
--- Author: Otto Horvath           
+-- Author: Otto Horvath
 ----------------------------------------------------------------------------------------
--- Description: ~ 
---                
+-- Description: ~
+--
 --
 ----------------------------------------------------------------------------------------
 library ieee				;
@@ -33,35 +33,19 @@ use work.tb_chk_pkg.all     ;   -- Includes for the 'chk' process.
 package mode_selector_check
 is
     ------- Typedefs for output RTL IF signals -------------------
-    
+
     type mode_selector_out_if_t   is record
         mode_sel    :   std_logic;
         rdata       :   std_logic;
     end record;
     --------------------------------------------------
-    
-    
-    
-    signal      rtl_out_if  :   mode_selector_out_if_t    ;
-    
-    
     --------------------------------------------------
-    -- The main test runner for RTL named 'wtf'
+    -- The main test runner for RTL named
     procedure   mode_selector_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-        
-        signal      rtl_out_if      :   in      mode_selector_out_if_t;
-        signal      tb_if           :   in      tb_if_t       
-        
+        constant    super_name      :   in      string
     );
     --------------------------------------------------
-    
-    
-    
-    
-    
 end package;
 
 
@@ -73,87 +57,92 @@ is
     -- The main checker for RTL named 'wtf'
     procedure   mode_selector_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-        
-        signal      rtl_out_if      :   in      mode_selector_out_if_t;
-        signal      tb_if           :   in      tb_if_t       
+        constant    super_name      :   in      string
     )is
-        
         constant    this            :           string  :=  "mode_selector_check";
         constant    scope           :           string  :=  super_name &"."& this;
+
+        alias   sv     is
+        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+
+        alias   rtl_out_if   is
+        <<signal    .fifo_tb.rtl_out_if :   mode_selector_out_if_t >>;
+
+        alias   tb_if   is
+        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
+
     begin
-        
+
         wait_for_next_check(sv);
-        
+
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0  =>  
+            when 0  =>
                             -- EXP   -- ACT
                         sv.compare('0',  rtl_out_if.rdata);
                         sv.compare('0',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
             -------------------------------------------------
             when 1  =>      -- EXP   -- ACT
                         sv.compare('1',  rtl_out_if.rdata);
                         sv.compare('1',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
             -------------------------------------------------
             when 2  =>      -- EXP   -- ACT
                         sv.compare('0',  rtl_out_if.rdata);
                         sv.compare('0',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
-                        
+
             -------------------------------------------------
             when 3  =>      -- EXP   -- ACT
                         sv.compare('1',  rtl_out_if.rdata);
                         sv.compare('1',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
                         --------------------------
-                        
+
                         wait_for_next_check(sv);
-                        
+
                         sv.compare('1',  rtl_out_if.rdata);
                         sv.compare('1',  rtl_out_if.mode_sel);
-                        
+
                         wait_re(tb_if.clk);
                         wait for 1 ps;
-                        
+
                         sv.compare('0',  rtl_out_if.rdata);
                         sv.compare('0',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
-                        
+
             -------------------------------------------------
             when 4  =>      -- EXP   -- ACT
                         sv.compare('1',  rtl_out_if.rdata);
                         sv.compare('1',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
                         --------------------------
-                        
+
                         wait_for_next_check(sv);
-                        
+
                         sv.compare('1',  rtl_out_if.rdata);
                         sv.compare('1',  rtl_out_if.mode_sel);
-                        
+
                         wait_re(tb_if.clk);
                         wait for 1 ps;
-                        
+
                         sv.compare('1',  rtl_out_if.rdata);
                         sv.compare('1',  rtl_out_if.mode_sel);
-                        
+
                         check_done(sv);
-                        
+
             -------------------------------------------------
            when others =>
         end case;
-      
+
     end procedure;
     --------------------------------------------------
-    
+
 end package body;

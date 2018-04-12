@@ -34,12 +34,7 @@ package delta_timer_fsm_check
 is
     ------- Typedefs for output RTL IF signals -------------------
 
-
-
-
-
     type delta_timer_fsm_out_if_t   is record
-
         show_cntr   :   std_logic;
         cntr_clr    :   std_logic;
         cntr_en     :   std_logic;
@@ -49,27 +44,13 @@ is
     end record;
     --------------------------------------------------
 
-
-
-    signal      rtl_out_if  :   delta_timer_fsm_out_if_t    ;
-
-
     --------------------------------------------------
-    -- The main test runner for RTL named 'wtf'
+    -- The main test runner for RTL named
     procedure   delta_timer_fsm_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-
-        signal      rtl_out_if      :   in      delta_timer_fsm_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t
+        constant    super_name      :   in      string
     );
     --------------------------------------------------
-
-
-
-
-
 end package;
 
 
@@ -78,18 +59,24 @@ package body delta_timer_fsm_check
 is
 
     --------------------------------------------------
-    -- The main checker for RTL named 'wtf'
+    -- The main checker for RTL named
     procedure   delta_timer_fsm_check(
         constant    rtl_name        :   in      string;
-        constant    super_name      :   in      string;
-        variable    sv              :   inout   synchronizer_t;
-
-        signal      rtl_out_if      :   in      delta_timer_fsm_out_if_t    ;
-        signal      tb_if           :   in      tb_if_t
+        constant    super_name      :   in      string
     )is
-
         constant    this            :           string  :=  "delta_timer_fsm_check";
         constant    scope           :           string  :=  super_name &"."& this;
+
+
+        alias   sv     is
+        <<variable  .fifo_tb.sync_sv    :   synchronizer_t>>;
+
+        alias   rtl_out_if   is
+        <<signal    .fifo_tb.rtl_out_if :   delta_timer_fsm_out_if_t >>;
+
+        alias   tb_if   is
+        <<signal    .fifo_tb.tb_if      :   tb_if_t>>;
+
     begin
 
         wait_for_next_check(sv);
