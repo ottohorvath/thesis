@@ -325,7 +325,7 @@ def vsim_for_sim_gui(tb_name, log_file):
                     ' -do "set NoQuitOnFinish 1; log -r /*;'                    +   # Recursively log all signals for easier Waveform debugging
                     ' add wave -position insertpoint sim:/'+tb_name+'/sync_sv;' +   # Add shared variable to waveform before simulation is started to be able to see its content
                     ' add wave -position insertpoint sim:/'+tb_name+'/L_DUT/*;' +   # Open up and add DUT signals to the waveform
-                    ' run -all;"'                                               +   
+                    ' run -all;"'                                               +
                     ' -default_radix hexadecimal'                               +   # Setting default radix
                     ' -logfile "'+log_file+tb_name+'_log.log"'                  +   # Specifing the simulation log files
                     ' work.'+tb_name+'_opt '                                        # Load in the optimized testbench
