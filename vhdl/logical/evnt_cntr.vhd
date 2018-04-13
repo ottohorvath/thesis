@@ -64,34 +64,34 @@ architecture rtl of evnt_cntr is
     -- ========================
     signal  trig_in_sc_ff   :   std_logic;
     signal  sc_ff_set       :   std_logic;
-    
+
     -- Global enable signal
     -- ====================
     signal  global_en       :   std_logic;
     signal  global_clr      :   std_logic;
 
-    
+
     -- Change detector signals
     -- =======================
     signal  chg_det_reg     :   std_logic_vector(SIG_W-1 downto 0);
     signal  chg_det_en      :   std_logic;
     signal  chg_det_out     :   std_logic;
-    
+
 begin
     ---------------------------------------------------------------------
     L_GLOBAL:   block
                 begin
-                    
+
                     -- Processor or a component can enable the module
                     global_en   <=  wdata_reg(0) or  trig_in_sc_ff;
                     global_clr  <=  wdata_reg(1);
-                    
+
                     sc_ff_set   <=  trig_in;
-                    
+
                     -- Counter is incremented when the module is globally enabled
                     -- and there was a change 'signal_from_DUV' vector
                     cntr_en_w   <=  global_en   and     chg_det_out;
-                    
+
                 end block;
     ---------------------------------------------------------------------
     L_RDATA:    block
@@ -155,21 +155,21 @@ begin
     L_CHG_DET:  block
                 begin
                     chg_det_en  <=  global_en;
-                    
+
                     chg_det_out <=  '1' when( chg_det_reg /= signal_from_DUV
                                             ) else '0';
-                    
+
                     process(clk,rstn)   is
                     begin
                         if(rstn = '0')  then
                             chg_det_reg <= (others => '0');
-                            
+
                         elsif(rising_edge(clk)) then
-                            
+
                             if(chg_det_en = '1')    then
                                 chg_det_reg <= signal_from_DUV;
                             end if;
-                            
+
                         end if;
                     end process;
                 end block;
@@ -178,7 +178,7 @@ begin
                     port map(
                         clk         => clk          ,
                         rstn        => rstn         ,
-                        set         => sc_ff_set    ,  
+                        set         => sc_ff_set    ,
                         clr         => global_clr   ,
                         q           => trig_in_sc_ff
                     );

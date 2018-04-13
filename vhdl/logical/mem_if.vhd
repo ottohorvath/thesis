@@ -66,7 +66,7 @@ architecture rtl of mem_if is
 
     signal  fsm_rstrb   :   std_logic;
     signal  fsm_wstrb   :   std_logic;
-    
+
     -- coverage off t
     signal  rdata_reg   :   std_logic_vector(DW-1 downto 0);
     signal  wdata_reg   :   std_logic_vector(DW-1 downto 0);
@@ -181,7 +181,7 @@ begin
 
 
     -----------------------------------------------------
-    -- 	Instantiating the 'mem_if_fsm' FSM.
+    --  Instantiating the 'mem_if_fsm' FSM.
     L_FSM:
         entity work.mem_if_fsm(rtl)
             generic map(

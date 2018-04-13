@@ -56,8 +56,8 @@ architecture rtl of re_det is
     -- Signals from FSM
     -- ===================
     signal      fsm_re_caught       :   std_logic;
-    
-    
+
+
     -- Trigger output signals
     -- ======================
     signal      trig_out_reg        :   std_logic;
@@ -94,13 +94,13 @@ begin
                                         trig_out_reg    <= fsm_re_caught;
                                     end if;
                                 end process;
-                                
+
                                 -- Drive trig_out from flop
                                 trig_out    <= trig_out_reg;
                             end generate;
-                    
+
                     L_NOREG:if(REG_LAYER = false)   generate
-                                
+
                                 -- Drive it directly
                                 trig_out    <= fsm_re_caught;
                             end generate;

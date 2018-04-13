@@ -105,14 +105,14 @@ begin
                 begin
                     if(rstn = '0')  then
                         cg <= '0';
-                        
+
                     elsif( rising_edge(nclk) )   then
-                    
+
                         cg <= sc_ff_out;
-                        
+
                     end if;
                 end process;
-                
+
                 -- Inverting the clock
                 nclk    <= not(clk);
                 -- Gating clock and flop output

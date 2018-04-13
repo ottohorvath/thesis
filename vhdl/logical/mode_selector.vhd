@@ -34,13 +34,13 @@ architecture rtl of mode_selector is
     -- Write Data register
     -- ===================
     signal  wdata_reg   :   std_logic_vector(1  downto 0);
-    
-    
+
+
     -- SC FF output
     -- ============
     signal  sc_ff_out   :   std_logic;
 begin
-    
+
     -------------------------------------------------------------
     L_MS    :   mode_sel    <=  sc_ff_out;
     -------------------------------------------------------------

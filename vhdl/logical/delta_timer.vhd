@@ -162,7 +162,7 @@ begin
                     port map(
                         clk         => clk          ,
                         rstn        => rstn         ,
-                        set         => sc_ff_en     ,  
+                        set         => sc_ff_en     ,
                         clr         => sc_ff_clr    ,
                         q           => trig_in_sc_ff
                     );

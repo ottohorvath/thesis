@@ -33,7 +33,7 @@ architecture rtl of chg_det is
 
     signal  sample      :   std_logic;
     signal  en_sampling :   std_logic;
-    
+
 begin
 
     ---------------------------------------------------------------

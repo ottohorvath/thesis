@@ -1,14 +1,14 @@
 ---------------------------------------------------------------------------
 --
--- Author: Otto Horvath           
---                                
+-- Author: Otto Horvath
+--
 ---------------------------------------------------------------------------
 --
 -- Description: ~ Wrapper for Source-FIFO component
---              
---              ~ The Read side is read by the DUV  
---                
---              ~ The Write side is written by the processor           
+--
+--              ~ The Read side is read by the DUV
+--
+--              ~ The Write side is written by the processor
 --
 --
 ---------------------------------------------------------------------------
@@ -35,7 +35,7 @@ entity fifo_src is
         -- coverage off t
         wdata           :       in  std_logic_vector(DW-1  downto 0);
         -- coverage on
-        empty_to_DUV    :       out std_logic                           ;-- 
+        empty_to_DUV    :       out std_logic                           ;--
         rd_from_DUV     :       in  std_logic                           ;-- Write side
         -- coverage off t
         rdata_to_DUV    :       out std_logic_vector(DW-1 downto 0)  --
@@ -45,8 +45,8 @@ end entity;
 ---------------------------------------------------------------------------------------------------
 architecture rtl of fifo_src is
 
-    function slv(    
-        N: natural; 
+    function slv(
+        N: natural;
         B: std_logic
     )   return std_logic_vector  -- Replacate std_logic-s to slv, like Verilog's replicate {32{1b1}} operator
     is
@@ -55,11 +55,11 @@ architecture rtl of fifo_src is
         for i in 1 to N loop
             result(i) := B;
         end loop;
-        
+
         return result;
     end;
-    
-    
+
+
     signal  full_int    :   std_logic   ;   -- Feeding 'full' to processor on 'rdata' LSB
 
 begin
@@ -73,9 +73,9 @@ begin
     L_GEN_FIFO: entity work.fifo(rtl)
                     generic map(
                         DEPTH       =>  DEPTH           ,
-                        DW      =>  DW  
-                    )    
-                    port map(    
+                        DW      =>  DW
+                    )
+                    port map(
                         clk         =>  clk             ,
                         rstn        =>  rstn            ,
                         empty       =>  empty_to_DUV    ,
@@ -83,11 +83,11 @@ begin
                         rdata       =>  rdata_to_DUV    ,
                         full        =>  full_int        ,
                         wr          =>  wr              ,
-                        wdata       =>  wdata  
+                        wdata       =>  wdata
                     );
     -------------------------------------------------------
-    
-    
-    
-    
+
+
+
+
 end architecture;

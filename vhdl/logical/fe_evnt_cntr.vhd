@@ -63,34 +63,34 @@ architecture rtl of fe_evnt_cntr is
     -- ========================
     signal  trig_in_sc_ff   :   std_logic;
     signal  sc_ff_set       :   std_logic;
-    
+
     -- Global enable signal
     -- ====================
     signal  global_en       :   std_logic;
     signal  global_clr      :   std_logic;
 
-    
+
     -- Falling-edge detector signals
     -- =======================
     signal  fe_det_reg     :   std_logic;
     signal  fe_det_reg_en  :   std_logic;
     signal  fe_det_out     :   std_logic;
-    
+
 begin
     ---------------------------------------------------------------------
     L_GLOBAL:   block
                 begin
-                    
+
                     -- Processor or a component can enable the module
                     global_en   <=  wdata_reg(0) or  trig_in_sc_ff;
                     global_clr  <=  wdata_reg(1);
-                    
+
                     sc_ff_set   <=  trig_in;
-                    
+
                     -- Counter is incremented when the module is globally enabled
                     -- and there was a catch by the edge detector
                     cntr_en_w   <=  global_en   and     fe_det_out;
-                    
+
                 end block;
     ---------------------------------------------------------------------
     L_RDATA:    block
@@ -154,21 +154,21 @@ begin
     L_FE_DET:  block
                 begin
                     fe_det_reg_en   <=  global_en;
-                    
+
                     fe_det_out  <=  fe_det_reg and not(signal_from_DUV);
-                                    
-                    
+
+
                     process(clk,rstn)   is
                     begin
                         if(rstn = '0')  then
                             fe_det_reg <= '0';
-                            
+
                         elsif(rising_edge(clk)) then
-                            
+
                             if(fe_det_reg_en = '1')    then
                                 fe_det_reg <= signal_from_DUV;
                             end if;
-                            
+
                         end if;
                     end process;
                 end block;
@@ -177,7 +177,7 @@ begin
                     port map(
                         clk         => clk          ,
                         rstn        => rstn         ,
-                        set         => sc_ff_set    ,  
+                        set         => sc_ff_set    ,
                         clr         => global_clr   ,
                         q           => trig_in_sc_ff
                     );

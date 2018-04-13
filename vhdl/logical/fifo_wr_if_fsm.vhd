@@ -86,7 +86,7 @@ begin
                 -- Could be useful to be able to send back to enabled immediately
                 when SHOW_DATA  =>  if( wdata(2 downto 0) = "010" and wr='1' )   then
                                         nxt_state   <= IDLE;
-                                    elsif(  (wdata(2 downto 0) = b"001" and wr='1')  
+                                    elsif(  (wdata(2 downto 0) = b"001" and wr='1')
                                     ) then
                                         nxt_state   <= ENABLED;
                                     end if;
@@ -117,8 +117,8 @@ begin
         -------------------------------------------------------------
         rdata_reg_en    <=  '1' when( (cur_state = ENABLED) and (fifo_wr = '1')
                                     ) else '0';
-        
-        
+
+
 
         -----------------------------------------------------
         L_STATE:    process(clk,rstn)   is

@@ -32,7 +32,7 @@ entity fifo_rd_if is
         trig_out_0      :       out std_logic                           ;-- Trigger IF
         trig_out_1      :       out std_logic                           ;--
 
-        rdata           :       out std_logic_vector(DW-1 downto 0) ;   
+        rdata           :       out std_logic_vector(DW-1 downto 0) ;
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(DW-1  downto 0);
 

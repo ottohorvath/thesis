@@ -31,7 +31,7 @@ architecture rtl of chg_det_fsm   is
 
     type state_t is(
         IDLE    ,
-        ENABLED 
+        ENABLED
     );
 
     signal  cur_state:  state_t;

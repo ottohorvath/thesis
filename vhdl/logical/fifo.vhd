@@ -29,7 +29,7 @@ entity fifo is
         empty       :       out std_logic                           ;--
         rd          :       in  std_logic                           ;-- Read side
         -- coverage off t
-        rdata       :       buffer std_logic_vector(DW-1 downto 0) ;--
+        rdata       :       out std_logic_vector(DW-1 downto 0) ;--
         -- coverage on
 
         full        :       out std_logic                           ;--
