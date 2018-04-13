@@ -54,7 +54,7 @@ package body mode_selector_check
 is
 
     --------------------------------------------------
-    -- The main checker for RTL named 'wtf'
+    -- The main checker for RTL named ' '
     procedure   mode_selector_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string

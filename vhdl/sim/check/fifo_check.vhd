@@ -50,7 +50,7 @@ is
     --------------------------------------------------
 
     --------------------------------------------------
-    -- The main test runner for RTL named 'wtf'
+    -- The main test runner for RTL named ' '
     procedure   fifo_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string
@@ -65,7 +65,7 @@ package body fifo_check
 is
 
     --------------------------------------------------
-    -- The main checker for RTL named 'wtf'
+    -- The main checker for RTL named ' '
     procedure   fifo_check(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string
