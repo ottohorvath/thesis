@@ -5,19 +5,19 @@
 --
 --
 -----------------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 library work                ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
 
------- Packages from "../tb_framework_pkg/" ----
+------ Packages from "../tbench_pkg/" ----
 
 use work.tb_utils_pkg.all       ;
 use work.tb_log_pkg.all         ;

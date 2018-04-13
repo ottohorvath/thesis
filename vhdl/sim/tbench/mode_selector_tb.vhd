@@ -5,14 +5,14 @@
 --
 --
 -----------------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 library work                ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -158,7 +158,7 @@ begin
                     wdata       =>  rtl_in_if.wdata    ,
                     wr          =>  rtl_in_if.wr        ,
                     rdata       =>  rtl_out_if.rdata    ,
-                    mode_sel    =>  rtl_out_if.mode_sel 
+                    mode_sel    =>  rtl_out_if.mode_sel
                 );
     -----------------------------------------------------------------------------------------
 

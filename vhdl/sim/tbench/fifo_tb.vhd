@@ -5,14 +5,14 @@
 --
 --
 -----------------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 library work                ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
