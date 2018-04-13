@@ -5,17 +5,17 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
------- Packages from "../packages/" ----
+------ Packages from "../tbench_pkg/" ----
 use work.tb_log_pkg.all                 ;
 use work.tb_report_pkg.all              ;
 ----------------------------------------
@@ -324,7 +324,7 @@ package body tb_utils_pkg is
                     "True",
                     "False"
             );
-            
+
                 chk_assertion_cntr := chk_assertion_cntr + 1;
             end if;
         end procedure;
@@ -375,7 +375,7 @@ package body tb_utils_pkg is
     is
         variable result: std_logic_vector(N-1 downto 0);
     begin
-        
+
         result :=   std_logic_vector(to_unsigned(B,N));
 
         return result;
@@ -425,8 +425,8 @@ package body tb_utils_pkg is
     )is
         constant    this        :           string  :=  "rst_gen";
         constant    scope       :           string  :=  super_name &"."& this;
-        
-        
+
+
     begin
 
         rst_req <= '1';
