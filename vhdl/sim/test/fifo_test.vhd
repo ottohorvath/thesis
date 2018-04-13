@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -192,7 +192,7 @@ is
                                 rtl_in_if.wr
                             );
                         end loop;
-                        
+
                         req_to_check(sv);
             -------------------------------------------------
             when 2  =>  init_check(id_in, "Writing the FIFO full and then reading out until it gets emptied", cd);
@@ -211,9 +211,9 @@ is
                                 rtl_in_if.wr
                             );
                         end loop;
-                        
+
                         for i in 0 to 7 loop
-                        
+
                             req_to_check(sv);
 
                             fifo_rd(
@@ -221,13 +221,13 @@ is
                                 rtl_in_if.rd
                             );
                         end loop;
-                        
-                        
-                        
+
+
+
                         req_to_check(sv);
-                        
-                        
-                        
+
+
+
             -------------------------------------------------
             when others =>
         end case;

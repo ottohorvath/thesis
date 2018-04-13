@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -186,7 +186,7 @@ is
 
                         wait_re(clk);
                         -----------------------------------
-                        
+
                         -- Here, the FIFO's depth is 8
                         for i in 0 to 7 loop
                             processor_wr(
@@ -197,7 +197,7 @@ is
                             );
 
                         end loop;
-                        
+
                         req_to_check(sv);
             -------------------------------------------------
             when 2  =>  init_check(id_in, "Checking the trig_out output port by reading out after the FIFO after it was written full", cd);
@@ -207,7 +207,7 @@ is
 
                         wait_re(clk);
                         -----------------------------------
-                        
+
                         -- Here, the FIFO's depth is 8
                         for i in 0 to 7 loop
                             processor_wr(
@@ -217,9 +217,9 @@ is
                                 rtl_in_if.wr
                             );
                         end loop;
-                        
+
                         wait_re(clk);
-                        
+
                         -- Here, the FIFO's depth is 8
                         for i in 0 to 7 loop
                             fifo_rd(
@@ -232,8 +232,8 @@ is
                                 req_to_check(sv);
                             end if;
                         end loop;
-                        
-                        
+
+
                         -- The module should be in 'IDLE' state!
                         req_to_check(sv);
             -------------------------------------------------

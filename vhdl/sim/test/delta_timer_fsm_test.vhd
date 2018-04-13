@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -176,8 +176,8 @@ is
                         wait_re(clk);
 
                         -- The FSM should be in 'IDLE' state now!
-                        
-                        
+
+
                         req_to_check(sv);
 
             -------------------------------------------------
@@ -228,11 +228,11 @@ is
 
                         -- The FSM should be in 'IDLE' state now!
 
-                        
-                        
+
+
                         req_to_check(sv);
-                        
-                        
+
+
             -------------------------------------------------
             when 3  =>  init_check(id_in, "Checking after reset if a HIGH pulse on the 'chg_caught' does not toggle the FSM outputs", cd);
                         sv.init(id_in);
@@ -257,8 +257,8 @@ is
                         -- The FSM should be in the same state!
 
                         req_to_check(sv);
-                        
-                        
+
+
             -------------------------------------------------
             when 4  =>  init_check(id_in, "Checking if the FSM can be sent back to IDLE when it is enabled", cd);
                         sv.init(id_in);
@@ -273,7 +273,7 @@ is
                         ---------------------------
                         wait_re(clk);
                         ---------------------------
-                        
+
                         ---------------------------
                         rtl_in_if.en_fsm      <= '0';
                         wait for 1 ps;

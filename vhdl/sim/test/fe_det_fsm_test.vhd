@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 -----------------------------
 
 
@@ -109,7 +109,7 @@ is
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sync_sv         :   inout   synchronizer_t;
-        
+
         signal      rtl_in_if       :   out     fe_det_fsm_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
@@ -167,20 +167,20 @@ is
                 -------------------------------------------------
                 when 0  =>  init_check(id_in, "Checking the reset values", cd);
                             sv.init(id_in);
-    
+
                             rst_gen(scope, rst_req); -- Reseting
                             wait_re(clk);
                             ------------------------------------
-    
+
                             -- The FSM should be in 'IDLE' state now!
-                            
+
                             req_to_check(sv);
-                            
-                            
-                -------------------------------------------------            
+
+
+                -------------------------------------------------
                 when 1 =>   init_check(id_in, "Checking if it can capture the falling-edge event after it has been enabled", cd);
                             sv.init(id_in);
-                            
+
                             rst_gen(scope, rst_req); -- Reseting
                             wait_re(clk);
                             -------------------------------------
@@ -209,15 +209,15 @@ is
                             wait_re(clk);
                             -------------------------------------
                             -- The FSM should be in 'CAPTURED' state now!
-                            
+
                             req_to_check(sv);
-                            
-                            
-                -------------------------------------------------            
+
+
+                -------------------------------------------------
                 when 2 =>   init_check(id_in, "Checking if it can be sent back to idle when it is enabled", cd);
                             sv.init(id_in);
-                            
-                            
+
+
                             rst_gen(scope, rst_req); -- Reseting
                             wait_re(clk);
                             -------------------------------------
@@ -259,15 +259,15 @@ is
                             -------------------------------------
                             -- The FSM should be in 'IDLE' state now!1
                             -------------------------------------
-                            
-                            
+
+
                             req_to_check(sv);
-                            
-                            
+
+
                 -------------------------------------------------
                 when 3 =>   init_check(id_in, "Checking if if it is not triggered for rising-edge after it has been enabled", cd);
                             sv.init(id_in);
-                            
+
                             rst_gen(scope, rst_req); -- Reseting
                             wait_re(clk);
                             -------------------------------------
@@ -285,17 +285,17 @@ is
                             -------------------------------------
                             -- The FSM should be in 'ENABLED' state now!
                             -------------------------------------
-                            
-                            
-                            
+
+
+
                             req_to_check(sv);
-                            
-                            
-                            
-                -------------------------------------------------            
+
+
+
+                -------------------------------------------------
                 when 4 =>   init_check(id_in, "Checking if if it can be sent back to IDLE when it captured an event", cd);
                             sv.init(id_in);
-                            
+
                             rst_gen(scope, rst_req); -- Reseting
                             wait_re(clk);
                             -------------------------------------
@@ -335,8 +335,8 @@ is
                             -------------------------------------
                             wait_re(clk);
                             -------------------------------------
-                
-                            
+
+
                             req_to_check(sv);
 
                 -------------------------------------------------
