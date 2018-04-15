@@ -24,7 +24,6 @@ entity evnt_cntr is
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
-
         wr              :   in  std_logic;
         wdata           :   in  std_logic_vector(1  downto  0);
         -- coverage off t

@@ -30,14 +30,14 @@ use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
 
 
 
-use work.cntr_test.all   ;
-use work.cntr_check.all  ;
+use work.evnt_cntr_test.all   ;
+use work.evnt_cntr_check.all  ;
 
 
 
 
 -----------------------------------------------------------------------------------------------
-entity cntr_tb is
+entity evnt_cntr_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
 
@@ -51,7 +51,7 @@ end entity;
 -----------------------------------------------------------------------------------------------
 
 
-architecture bhv of cntr_tb is
+architecture bhv of evnt_cntr_tb is
 
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
 
@@ -62,9 +62,9 @@ architecture bhv of cntr_tb is
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
 
-            rtl_in_if_t         =>  cntr_in_if_t     ,       -- type
-            called_tc           =>  cntr_test        ,       -- procedure
-            called_tc_name      =>  "cntr_test"              -- constant string
+            rtl_in_if_t         =>  evnt_cntr_in_if_t     ,       -- type
+            called_tc           =>  evnt_cntr_test        ,       -- procedure
+            called_tc_name      =>  "evnt_cntr_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
 
@@ -73,15 +73,15 @@ architecture bhv of cntr_tb is
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
 
-            rtl_out_if_t        =>  cntr_out_if_t    ,       -- type
-            called_chk          =>  cntr_check       ,       -- procedure
-            called_chk_name     =>  "cntr_check"             -- constant string
+            rtl_out_if_t        =>  evnt_cntr_out_if_t    ,       -- type
+            called_chk          =>  evnt_cntr_check       ,       -- procedure
+            called_chk_name     =>  "evnt_cntr_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
         -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
 
-    signal  rtl_out_if      :   cntr_out_if_t;
+    signal      rtl_out_if  :   evnt_cntr_out_if_t;
 
     signal      tb_if       :   tb_if_t :=( --
         clk     =>  '1',                    --
@@ -149,18 +149,23 @@ begin
 
 
     -----------------------------------------------------------------------------------------
-    cntr:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
+    clk:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
-    L_DUT:  entity work.cntr(rtl)
+    L_DUT:  entity work.evnt_cntr(rtl)
                 generic map(
-                    CW   => w
+                    SIG_W               =>  1       ,
+                    REG_LAYER           =>  false   ,
+                    CW                  =>  7
                 )
                 port map(
-                    clk             =>  tb_if.clk           ,
-                    rstn            =>  tb_if.rstn          ,
-                    en              =>  rtl_in_if.en        ,
-                    clr             =>  rtl_in_if.clr       ,
-                    cntr_out        =>  rtl_out_if.noc
+                    clk                 =>  tb_if.clk                   ;
+                    rstn                =>  tb_if.rstn                  ;
+                    wr                  =>  rtl_in_if.wr                ;
+                    wdata               =>  rtl_in_if.wdata             ;
+                    rdata               =>  rtl_out_if.rdata            ;
+                    signal_from_DUV     =>  rtl_in_if.signal_from_DUV   ;
+                    trig_in             =>  rtl_in_if.trig_in           ;
+                    trig_out            =>  rtl_out_if.trig_out         
                 );
     -----------------------------------------------------------------------------------------
 
