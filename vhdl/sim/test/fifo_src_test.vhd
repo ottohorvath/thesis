@@ -157,7 +157,7 @@ is
 
         rtl_in_if.wr            <= '0';
         rtl_in_if.rd_from_DUV   <= '0';
-        rtl_in_if.wdata         <= (others  =>  'Z');
+        rtl_in_if.wdata         <= (others  =>  'X');
         wait for 1 ps;
 
 
@@ -234,7 +234,6 @@ is
                         end loop;
 
 
-                        -- The module should be in 'IDLE' state!
                         req_to_check(sv);
             -------------------------------------------------
 

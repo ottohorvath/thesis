@@ -25,33 +25,22 @@ use work.tb_tc_pkg.all      ;   -- Includes for the 'tc' process.
 ----------------------------------------
 
 
-package config_reg_if_test
+package fifo_wr_if_fsm_test
 is
-
-
-    constant    ack_needed_c    :   boolean :=  false;
-    constant    dw_c            :   integer :=  32;
-    constant    aw_c            :   integer :=  32;
-    constant    rdstart_c       :   std_logic_vector(63 downto 0) := x"0000000012340000";
-    constant    wrstart_c       :   std_logic_vector(63 downto 0) := x"0000000012345678";
-
-
-
 
     -- Typedefs for IF signals for driving the DUT's inputs--
 
-    type config_reg_if_in_if_t   is record
+    type fifo_wr_if_fsm_in_if_t   is record
+        trig_in_fsm     :   std_logic;
         wr              :   std_logic;
-        wdata           :   std_logic_vector(dw_c-1  downto 0);
-        rd              :   std_logic;
-        rdata_from_DUV  :   std_logic_vector(dw_c-1  downto 0);
-        ack_from_DUV    :   std_logic;
+        wdata           :   std_logic_vector(2 downto 0);
+        fifo_wr         :   std_logic;
     end record;
     --------------------------------------------------------
 
-    constant    config_reg_if_num_of_tcs_c    :   integer := 5;     -- Number of testcases
+    constant    fifo_wr_if_fsm_num_of_tcs_c    :   integer := 5;     -- Number of testcases
 
-    signal      rtl_in_if           :   config_reg_if_in_if_t     ;
+    signal      rtl_in_if           :   fifo_wr_if_fsm_in_if_t     ;
 
 
     --------------------------------------------------
@@ -62,7 +51,7 @@ is
 
         constant    id_in           :   in      integer;
 
-        signal      rtl_in_if       :   out     config_reg_if_in_if_t ;
+        signal      rtl_in_if       :   out     fifo_wr_if_fsm_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
 
@@ -72,13 +61,13 @@ is
     --------------------------------------------------
 
     --------------------------------------------------
-    -- The main test runner for RTL named 'config_reg_if'
-    procedure   config_reg_if_test(
+    -- The main test runner for RTL named 'fifo_wr_if_fsm'
+    procedure   fifo_wr_if_fsm_test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sync_sv         :   inout  synchronizer_t;
 
-        signal      rtl_in_if       :   out     config_reg_if_in_if_t ;
+        signal      rtl_in_if       :   out     fifo_wr_if_fsm_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
 
@@ -92,26 +81,26 @@ end package;
 
 
 
-package body config_reg_if_test
+package body fifo_wr_if_fsm_test
 is
 
     --------------------------------------------------
-    procedure   config_reg_if_test(
+    procedure   fifo_wr_if_fsm_test(
         constant    rtl_name        :   in      string;
         constant    super_name      :   in      string;
         variable    sync_sv         :   inout  synchronizer_t;
 
-        signal      rtl_in_if       :   out     config_reg_if_in_if_t ;
+        signal      rtl_in_if       :   out     fifo_wr_if_fsm_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
 
         signal      cd              :   out     check_descriptor_array (0 to check_no_max_c-1)
     )is
-        constant    this            :           string  :=  "config_reg_if_test";
+        constant    this            :           string  :=  "fifo_wr_if_fsm_test";
         constant    scope           :           string  :=  super_name &"."& this;
     begin
 
-        for id_v in 0 to (config_reg_if_num_of_tcs_c - 1)   loop
+        for id_v in 0 to (fifo_wr_if_fsm_num_of_tcs_c - 1)   loop
 
             test(rtl_name,scope,sync_sv,id_v        ,
                                         rtl_in_if   ,
@@ -131,7 +120,7 @@ is
 
         constant    id_in           :   in      integer;
 
-        signal      rtl_in_if       :   out     config_reg_if_in_if_t ;
+        signal      rtl_in_if       :   out     fifo_wr_if_fsm_in_if_t ;
         signal      clk             :   in      std_logic     ;
         signal      rst_req         :   out     std_logic     ;
 
@@ -142,11 +131,10 @@ is
         constant    scope           :           string  :=  super_name &"."& this;
     begin
 
-        rtl_in_if.wr              =>    '0';
-        rtl_in_if.wdata           =>    (others=>'X');
-        rtl_in_if.rd              =>    '0';
-        rtl_in_if.rdata_from_DUV  =>    (others=>'X');
-        rtl_in_if.ack_from_DUV    =>    '0';
+        rtl_in_if.wr               <=  '0';
+        rtl_in_if.wdata            <=  (others=>'X');
+        rtl_in_if.fifo_wr          <=  '0';
+        rtl_in_if.trig_in_fsm      <=  '0';
         wait for 1 ps;
 
 
