@@ -111,6 +111,8 @@ begin
                                                     tb_if.clk           ,
                                                     tb_if.rstn_req      ,
                                                     check_descriptor    );-- Run the testcases for the chosen RTL
+                -- Drain time
+                wait for 100 ns;
                 ------------------------------------------------------
                 report_and_exit(RTL_NAME_G,this,    RGR_G           ,
                                                     check_descriptor);                      -- Generate report based on results and exit.

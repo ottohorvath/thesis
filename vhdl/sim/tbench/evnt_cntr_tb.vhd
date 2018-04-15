@@ -108,6 +108,8 @@ begin
                                                     tb_if.clk           ,
                                                     tb_if.rstn_req      ,
                                                     check_descriptor    );-- Run the testcases for the chosen RTL
+                -- Drain time
+                wait for 100 ns;
                 ------------------------------------------------------
                 report_and_exit(RTL_NAME_G,this,    RGR_G           ,
                                                     check_descriptor);                      -- Generate report based on results and exit.
@@ -165,7 +167,7 @@ begin
                     rdata               =>  rtl_out_if.rdata            ,
                     signal_from_DUV     =>  rtl_in_if.signal_from_DUV   ,
                     trig_in             =>  rtl_in_if.trig_in           ,
-                    trig_out            =>  rtl_out_if.trig_out         
+                    trig_out            =>  rtl_out_if.trig_out
                 );
     -----------------------------------------------------------------------------------------
 

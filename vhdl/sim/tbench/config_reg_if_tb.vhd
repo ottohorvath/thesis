@@ -110,6 +110,8 @@ begin
                                                     tb_if.clk           ,
                                                     tb_if.rstn_req      ,
                                                     check_descriptor    );-- Run the testcases for the chosen RTL
+                -- Drain time
+                wait for 100 ns;
                 ------------------------------------------------------
                 report_and_exit(RTL_NAME_G,this,    RGR_G           ,
                                                     check_descriptor);                      -- Generate report based on results and exit.
@@ -160,7 +162,7 @@ begin
                     DW              =>  dw_c        ,
                     AW              =>  aw_c        ,
                     RD_START        =>  rdstart_c   ,
-                    WR_START        =>  wrstart_c   
+                    WR_START        =>  wrstart_c
                 )
                 port map(
                     clk             =>  tb_if.clk               ,
@@ -175,7 +177,7 @@ begin
                     addr_to_DUV     =>  rtl_out_if.addr_to_DUV  ,
                     rdata_from_DUV  =>  rtl_in_if.rdata_from_DUV,
                     cs_to_DUV       =>  rtl_out_if.cs_to_DUV    ,
-                    ack_from_DUV    =>  rtl_in_if.ack_from_DUV  
+                    ack_from_DUV    =>  rtl_in_if.ack_from_DUV
                 );
     -----------------------------------------------------------------------------------------
 
