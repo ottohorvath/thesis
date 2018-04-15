@@ -39,7 +39,7 @@ is
     end record;
     --------------------------------------------------------
 
-    constant    fifo_wr_if_num_of_tcs_c    :   integer := 5;     -- Number of testcases
+    constant    fifo_wr_if_num_of_tcs_c    :   integer := 3;     -- Number of testcases
 
     signal      rtl_in_if           :   fifo_wr_if_in_if_t     ;
 
@@ -156,6 +156,132 @@ is
                         -----------------------------------
 
                         req_to_check(sv);
+            -------------------------------------------------
+            when 1  =>  init_check(id_in,   "Checking the module after it is enabled"&
+                                            " with one write data from FIFO IF."&
+                                            " At the end, clearing it.", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+                        -- Enable the module
+                        processor_wr(
+                            slv(3,1),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+
+                        wait_re(clk);
+
+                        -----------------------------------
+                        -- Writing in some arbitrary data
+                        -- on fifo write IF
+                        fifo_wr(
+                            slv(32,241),
+                            clk,
+                            rtl_in_if.wdata_from_DUV,
+                            rtl_in_if.wr_from_DUV
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+
+                        wait_re(clk);
+
+                        -----------------------------------
+                        -- Should be in RCVD_DATA state
+                        -- Write in 0x04 to show data from DUV
+                        processor_wr(
+                            slv(3,4),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        
+                        wait_re(clk);
+                        
+                        -----------------------------------
+                        -- Clear the module by writing 0x01 to it
+                        -- i.e. send back to idle
+                        processor_wr(
+                            slv(3,1),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 2  =>  init_check(id_in,   "Checking the basic functionality WITH trig_in:"&
+                                            " enable the module with it, then write in one fifo data,"&
+                                            " and finally clear it.", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+                        -- Enable the module with trig_in input port
+                        rtl_in_if.trig_in <='1'; wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in <='0'; wait for 1 ps;
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        
+                        wait_re(clk);
+                        
+                        -----------------------------------
+                        -- Writing in some arbitrary data
+                        -- on fifo write IF
+                        fifo_wr(
+                            slv(32,241),
+                            clk,
+                            rtl_in_if.wdata_from_DUV,
+                            rtl_in_if.wr_from_DUV
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        
+                        wait_re(clk);
+                        
+                        -----------------------------------
+                        -- Should be in RCVD_DATA state
+                        -- Write in 0x04 to show data from DUV
+                        processor_wr(
+                            slv(3,4),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        
+                        wait_re(clk);
+                        
+                        -----------------------------------
+                        -- Clear the module by writing 0x01 to it
+                        -- i.e. send back to idle
+                        processor_wr(
+                            slv(3,1),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 
 
             when others =>

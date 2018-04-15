@@ -38,7 +38,7 @@ is
     end record;
     --------------------------------------------------------
 
-    constant    fifo_rd_if_fsm_num_of_tcs_c    :   integer := 10;     -- Number of testcases
+    constant    fifo_rd_if_fsm_num_of_tcs_c    :   integer := 9;     -- Number of testcases
 
     signal      rtl_in_if           :   fifo_rd_if_fsm_in_if_t     ;
 
@@ -339,34 +339,34 @@ is
                         wait for 1 ps;
 
                         req_to_check(sv);
-            -------------------------------------------------
-            when 7  =>  init_check(id_in, "Checking ENABLED->IDLE state transition WITHOUT trig_in", cd);
-                        sv.init(id_in);
-
-                        rst_gen(scope, rst_req); -- Reseting
-                        wait_re(clk);
-                        -----------------------------------
-                        rtl_in_if.wr               <= '1';
-                        rtl_in_if.wdata(1 downto 0)<= b"01"; wait for 1 ps;
-
-                        wait_re(clk);
-
-                        rtl_in_if.wr   <= '0';
-                        rtl_in_if.wdata<= (others => 'X'); wait for 1 ps;
-
-                        -----------------------------------
-                        rtl_in_if.wr               <= '1';
-                        rtl_in_if.wdata(1 downto 0)<= b"10"; wait for 1 ps;
-
-                        wait_re(clk);
-
-                        rtl_in_if.wr   <= '0';
-                        rtl_in_if.wdata<= (others => 'X'); wait for 1 ps;
+            ---------------------------------------------------
+            --when 7  =>  init_check(id_in, "Checking ENABLED->IDLE state transition WITHOUT trig_in", cd);
+            --            sv.init(id_in);
+            --
+            --            rst_gen(scope, rst_req); -- Reseting
+            --            wait_re(clk);
+            --            -----------------------------------
+            --            rtl_in_if.wr               <= '1';
+            --            rtl_in_if.wdata(1 downto 0)<= b"01"; wait for 1 ps;
+            --
+            --            wait_re(clk);
+            --
+            --            rtl_in_if.wr   <= '0';
+            --            rtl_in_if.wdata<= (others => 'X'); wait for 1 ps;
+            --
+            --            -----------------------------------
+            --            rtl_in_if.wr               <= '1';
+            --            rtl_in_if.wdata(1 downto 0)<= b"10"; wait for 1 ps;
+            --
+            --            wait_re(clk);
+            --
+            --            rtl_in_if.wr   <= '0';
+            --            rtl_in_if.wdata<= (others => 'X'); wait for 1 ps;
 
 
                         req_to_check(sv);
             -------------------------------------------------
-            when 8  =>  init_check(id_in, "Checking RDATA_GOT_READ_OUT->ENABLED state transition WITH trig_in", cd);
+            when 7  =>  init_check(id_in, "Checking RDATA_GOT_READ_OUT->ENABLED state transition WITH trig_in", cd);
                         sv.init(id_in);
 
                         rst_gen(scope, rst_req); -- Reseting
@@ -404,7 +404,7 @@ is
 
                         req_to_check(sv);
             -------------------------------------------------
-            when 9  =>  init_check(id_in, "Checking IDLE->ENABLED state transition WITH trig_in", cd);
+            when 8  =>  init_check(id_in, "Checking IDLE->ENABLED state transition WITH trig_in", cd);
                         sv.init(id_in);
 
                         rst_gen(scope, rst_req); -- Reseting

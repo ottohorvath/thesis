@@ -38,7 +38,7 @@ is
     end record;
     --------------------------------------------------------
 
-    constant    fifo_rd_if_num_of_tcs_c    :   integer := 5;     -- Number of testcases
+    constant    fifo_rd_if_num_of_tcs_c    :   integer := 3;     -- Number of testcases
 
     signal      rtl_in_if           :   fifo_rd_if_in_if_t     ;
 
@@ -157,6 +157,135 @@ is
                         -----------------------------------
 
                         req_to_check(sv);
+            -------------------------------------------------
+            when 1  =>  init_check(id_in,   "Checking the module with to data written in"&
+                                            " one gets read out, another one gets cleared out"&
+                                            " before it would be read out by FIFO read IF", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        -- Enable the module
+                        processor_wr(
+                            slv(32,1),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        -- Write in some dummy data
+                        processor_wr(
+                            slv(32,115),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        wait_re(clk);
+                        -- Read out the data on the FIFO read IF
+                        fifo_rd(
+                            clk,
+                            rtl_in_if.rd_from_DUV
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        -- Write data once again
+                        -- First enable the module
+                        processor_wr(
+                            slv(32,1),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        -----------------------------------
+                        -- Write in some dummy data
+                        processor_wr(
+                            slv(32,250),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        wait_re(clk);
+                        wait_re(clk);
+                        -----------------------------------
+                        -- Clear the module before the last data
+                        -- could be read out
+                        processor_wr(
+                            slv(32,2),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+
+            -------------------------------------------------
+            when 2  =>  init_check(id_in,   "Checking the module WITH trig_in signal, and write in two data"&
+                                            " one gets read out, another one stucks in"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        wait for 1 ps;
+                        -----------------------------------
+                        rtl_in_if.trig_in <= '1'; wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in <= '0'; wait for 1 ps;
+
+                        req_to_check(sv);
+                        -----------------------------------
+
+                        wait_re(clk);
+                        wait_re(clk);
+
+                        -- Write in some dummy data
+                        processor_wr(
+                            slv(32,1123),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        wait_re(clk);
+                        -- Read out the data on the FIFO read IF
+                        fifo_rd(
+                            clk,
+                            rtl_in_if.rd_from_DUV
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -----------------------------------
+                        rtl_in_if.trig_in <= '1'; wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in <= '0'; wait for 1 ps;
+                        
+                        req_to_check(sv);
+                        -----------------------------------
+                        processor_wr(
+                            slv(32,610),
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        
+
 
 
             when others =>
