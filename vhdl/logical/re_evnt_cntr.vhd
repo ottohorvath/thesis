@@ -23,7 +23,6 @@ entity re_evnt_cntr is
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
-
         wr              :   in  std_logic;
         wdata           :   in  std_logic_vector(1  downto  0);
         -- coverage off t
@@ -155,7 +154,7 @@ begin
                 begin
                     re_det_reg_en   <=  global_en;
 
-                    re_det_out  <=  re_det_reg and not(signal_from_DUV);
+                    re_det_out  <=  not(re_det_reg) and signal_from_DUV;
 
 
                     process(clk,rstn)   is
