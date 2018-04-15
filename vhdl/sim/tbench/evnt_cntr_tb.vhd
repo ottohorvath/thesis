@@ -149,22 +149,22 @@ begin
 
 
     -----------------------------------------------------------------------------------------
-    clk:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
+    clk_gen:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
     L_DUT:  entity work.evnt_cntr(rtl)
                 generic map(
-                    SIG_W               =>  1       ,
+                    SIG_W               =>  8       ,
                     REG_LAYER           =>  false   ,
                     CW                  =>  7
                 )
                 port map(
-                    clk                 =>  tb_if.clk                   ;
-                    rstn                =>  tb_if.rstn                  ;
-                    wr                  =>  rtl_in_if.wr                ;
-                    wdata               =>  rtl_in_if.wdata             ;
-                    rdata               =>  rtl_out_if.rdata            ;
-                    signal_from_DUV     =>  rtl_in_if.signal_from_DUV   ;
-                    trig_in             =>  rtl_in_if.trig_in           ;
+                    clk                 =>  tb_if.clk                   ,
+                    rstn                =>  tb_if.rstn                  ,
+                    wr                  =>  rtl_in_if.wr                ,
+                    wdata               =>  rtl_in_if.wdata             ,
+                    rdata               =>  rtl_out_if.rdata            ,
+                    signal_from_DUV     =>  rtl_in_if.signal_from_DUV   ,
+                    trig_in             =>  rtl_in_if.trig_in           ,
                     trig_out            =>  rtl_out_if.trig_out         
                 );
     -----------------------------------------------------------------------------------------

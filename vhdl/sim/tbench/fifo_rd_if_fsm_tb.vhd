@@ -30,14 +30,14 @@ use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
 
 
 
-use work.fe_det_fsm_test.all   ;
-use work.fe_det_fsm_check.all  ;
+use work.fifo_rd_if_fsm_test.all   ;
+use work.fifo_rd_if_fsm_check.all  ;
 
 
 
 
 -----------------------------------------------------------------------------------------------
-entity fe_det_fsm_tb is
+entity fifo_rd_if_fsm_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
 
@@ -51,7 +51,7 @@ end entity;
 -----------------------------------------------------------------------------------------------
 
 
-architecture bhv of fe_det_fsm_tb is
+architecture bhv of fifo_rd_if_fsm_tb is
 
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
 
@@ -62,9 +62,9 @@ architecture bhv of fe_det_fsm_tb is
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
 
-            rtl_in_if_t         =>  fe_det_fsm_in_if_t     ,       -- type
-            called_tc           =>  fe_det_fsm_test        ,       -- procedure
-            called_tc_name      =>  "fe_det_fsm_test"              -- constant string
+            rtl_in_if_t         =>  fifo_rd_if_fsm_in_if_t     ,       -- type
+            called_tc           =>  fifo_rd_if_fsm_test        ,       -- procedure
+            called_tc_name      =>  "fifo_rd_if_fsm_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
 
@@ -73,15 +73,16 @@ architecture bhv of fe_det_fsm_tb is
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
 
-            rtl_out_if_t        =>  fe_det_fsm_out_if_t    ,       -- type
-            called_chk          =>  fe_det_fsm_check       ,       -- procedure
-            called_chk_name     =>  "fe_det_fsm_check"             -- constant string
+            rtl_out_if_t        =>  fifo_rd_if_fsm_out_if_t    ,       -- type
+            called_chk          =>  fifo_rd_if_fsm_check       ,       -- procedure
+            called_chk_name     =>  "fifo_rd_if_fsm_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
+
         -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
 
-    signal  rtl_out_if      :   fe_det_fsm_out_if_t;
+    signal  rtl_out_if      :   fifo_rd_if_fsm_out_if_t;
 
     signal      tb_if       :   tb_if_t :=( --
         clk     =>  '1',                    --
@@ -89,6 +90,7 @@ architecture bhv of fe_det_fsm_tb is
         rstn    =>  '1',                    --
         rstn_req=>  '0'                     --
     );                                      --
+
 
 begin
 
@@ -151,16 +153,19 @@ begin
     -----------------------------------------------------------------------------------------
     clk_gen:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
-    L_DUT:  entity work.fe_det_fsm(rtl)
+    L_DUT:  entity work.fifo_rd_if_fsm(rtl)
 
                 port map(
-                    clk             =>  tb_if.clk           ,
-                    rstn            =>  tb_if.rstn          ,
-
-                    en              =>  rtl_in_if.en_fsm    ,
-                    clr             =>  rtl_in_if.clr_fsm   ,
-                    sig_from_fe_det =>  rtl_in_if.sig_from_fe_det ,
-                    fe_caught       =>  rtl_out_if.fe_caught
+                    clk             =>  tb_if.clk               ,
+                    rstn            =>  tb_if.rstn              ,
+                    wr              =>  rtl_in_if.wr            ,
+                    wdata           =>  rtl_in_if.wdata         ,
+                    fifo_rd         =>  rtl_in_if.fifo_rd       ,
+                    trig_in_fsm     =>  rtl_in_if.trig_in_fsm   ,
+                    wdata_reg_en    =>  rtl_out_if.wdata_reg_en ,
+                    empty           =>  rtl_out_if.empty        ,
+                    got_read_out    =>  rtl_out_if.got_read_out ,
+                    enabled_fsm     =>  rtl_out_if.enabled_fsm 
                 );
     -----------------------------------------------------------------------------------------
 

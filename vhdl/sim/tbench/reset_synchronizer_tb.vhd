@@ -149,7 +149,7 @@ begin
 
 
     -----------------------------------------------------------------------------------------
-    reset_synchronizer:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
+    clk_gen:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
     L_DUT:  entity work.reset_synchronizer(rtl)
                 --generic map(

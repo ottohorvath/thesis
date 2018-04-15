@@ -30,14 +30,14 @@ use work.tb_chk_pkg.all         ;   -- Includes for the 'chk' process.
 
 
 
-use work.fe_det_fsm_test.all   ;
-use work.fe_det_fsm_check.all  ;
+use work.re_evnt_cntr_test.all   ;
+use work.re_evnt_cntr_check.all  ;
 
 
 
 
 -----------------------------------------------------------------------------------------------
-entity fe_det_fsm_tb is
+entity re_evnt_cntr_tb is
     -- These generics are initialized by the Python script at elaboration time.
     generic(
 
@@ -51,7 +51,7 @@ end entity;
 -----------------------------------------------------------------------------------------------
 
 
-architecture bhv of fe_det_fsm_tb is
+architecture bhv of re_evnt_cntr_tb is
 
     constant    clk_enabled_c:  std_logic:= '1';            -- Clock is enabled by default.
 
@@ -62,9 +62,9 @@ architecture bhv of fe_det_fsm_tb is
         generic map(
             new_run_name        =>  "run_test"      ,       -- constant string
 
-            rtl_in_if_t         =>  fe_det_fsm_in_if_t     ,       -- type
-            called_tc           =>  fe_det_fsm_test        ,       -- procedure
-            called_tc_name      =>  "fe_det_fsm_test"              -- constant string
+            rtl_in_if_t         =>  re_evnt_cntr_in_if_t     ,       -- type
+            called_tc           =>  re_evnt_cntr_test        ,       -- procedure
+            called_tc_name      =>  "re_evnt_cntr_test"              -- constant string
         );
     -----------------------------------------------------------------------------------
 
@@ -73,15 +73,15 @@ architecture bhv of fe_det_fsm_tb is
         generic map(
             new_run_name        =>  "run_check"     ,       -- constant string
 
-            rtl_out_if_t        =>  fe_det_fsm_out_if_t    ,       -- type
-            called_chk          =>  fe_det_fsm_check       ,       -- procedure
-            called_chk_name     =>  "fe_det_fsm_check"             -- constant string
+            rtl_out_if_t        =>  re_evnt_cntr_out_if_t    ,       -- type
+            called_chk          =>  re_evnt_cntr_check       ,       -- procedure
+            called_chk_name     =>  "re_evnt_cntr_check"             -- constant string
         );
     -----------------------------------------------------------------------------------
         -- Shared variable between 'tc' and 'chk' process
     shared variable sync_sv :   synchronizer_t;
 
-    signal  rtl_out_if      :   fe_det_fsm_out_if_t;
+    signal      rtl_out_if  :   re_evnt_cntr_out_if_t;
 
     signal      tb_if       :   tb_if_t :=( --
         clk     =>  '1',                    --
@@ -151,18 +151,22 @@ begin
     -----------------------------------------------------------------------------------------
     clk_gen:    tb_if.clk  <=  not tb_if.clk  after (clk_per_c/2) when (tb_if.clk_en = '1') else '1';
     -----------------------------------------------------------------------------------------
-    L_DUT:  entity work.fe_det_fsm(rtl)
-
+    L_DUT:  entity work.re_evnt_cntr(rtl)
+                generic map(
+                    REG_LAYER           =>  false   ,
+                    CW                  =>  7
+                )
                 port map(
-                    clk             =>  tb_if.clk           ,
-                    rstn            =>  tb_if.rstn          ,
-
-                    en              =>  rtl_in_if.en_fsm    ,
-                    clr             =>  rtl_in_if.clr_fsm   ,
-                    sig_from_fe_det =>  rtl_in_if.sig_from_fe_det ,
-                    fe_caught       =>  rtl_out_if.fe_caught
+                    clk                 =>  tb_if.clk                   ,
+                    rstn                =>  tb_if.rstn                  ,
+                    wr                  =>  rtl_in_if.wr                ,
+                    wdata               =>  rtl_in_if.wdata             ,
+                    rdata               =>  rtl_out_if.rdata         ,
+                    signal_from_DUV     =>  rtl_in_if.signal_from_DUV   ,
+                    trig_in             =>  rtl_in_if.trig_in           ,
+                    trig_out            =>  rtl_out_if.trig_out
                 );
-    -----------------------------------------------------------------------------------------
+    -------------------------------------------------------------------------
 
 end architecture;
 
