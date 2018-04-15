@@ -21,30 +21,24 @@ entity config_reg_if is
     generic(
         ACK_NEEDED      :       boolean :=  false   ;
         REG_LAYER       :       boolean :=  false   ;
-
         DW              :       integer :=  32      ;
         AW              :       integer :=  32      ;
-
         RD_START        :       std_logic_vector(63 downto 0):=     X"00000000FFFF0000"; -- WorkAround: Can't use 'DW' here, so made it wide enough
         WR_START        :       std_logic_vector(63 downto 0):=     X"000000000000FFFF"  --
     );
     port(
         clk             :   in  std_logic;
         rstn            :   in  std_logic;
-        -----------------------------------------------------------------
         wr              :   in  std_logic                           ;--
         wdata           :   in  std_logic_vector(DW-1   downto 0)   ;--
         rd              :   in  std_logic                           ;-- MMIO Slave IF
         rdata           :   out std_logic_vector(DW-1   downto 0)   ;--
-        -----------------------------------------------------------------
         wstrb_to_DUV    :   out std_logic                           ;--
         rstrb_to_DUV    :   out std_logic                           ;--
         wdata_to_DUV    :   out std_logic_vector(DW-1   downto 0)   ;-- Simple config register IF
         addr_to_DUV     :   out std_logic_vector(AW-1   downto 0)   ;--
         rdata_from_DUV  :   in  std_logic_vector(DW-1   downto 0)   ;--
-        -----------------------------------------------------------------
         cs_to_DUV       :   out std_logic                           ;-- Chip Select for the config register
-        -----------------------------------------------------------------
         ack_from_DUV    :   in  std_logic                            -- Ack. input, when ACK_NEEDED is set to TRUE
     );
 end entity config_reg_if;

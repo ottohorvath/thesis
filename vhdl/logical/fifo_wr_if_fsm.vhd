@@ -23,17 +23,17 @@ entity fifo_wr_if_fsm is
 --        DW          :       integer :=  32  -- Data width
 --    );
     port(
-        clk         :   in  std_logic;
-        rstn        :   in  std_logic;
-        trig_in_fsm :   in  std_logic;
-        wr          :   in  std_logic;
-        wdata       :   in  std_logic_vector(2 downto 0);
-        fifo_wr     :   in  std_logic;
-        show_data_fsm:   out std_logic;
-        rdata_reg_en:   out std_logic;
-        full        :   out std_logic;
-        rcvd_data_fsm:   out std_logic;
-        enabled_fsm :   out std_logic
+        clk             :   in  std_logic;
+        rstn            :   in  std_logic;
+        trig_in_fsm     :   in  std_logic;
+        wr              :   in  std_logic;
+        wdata           :   in  std_logic_vector(2 downto 0);
+        fifo_wr         :   in  std_logic;
+        show_data_fsm   :   out std_logic;
+        rdata_reg_en    :   out std_logic;
+        full            :   out std_logic;
+        rcvd_data_fsm   :   out std_logic;
+        enabled_fsm     :   out std_logic
     );
 end entity fifo_wr_if_fsm;
 ---------------------------------------------------------------------------

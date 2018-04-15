@@ -64,6 +64,29 @@ architecture rtl of fifo is
     -----------------------------------------------------------------
 
 
+    function and_reduc(
+        slv :   in std_logic_vector
+    ) return std_logic
+    is
+        variable res_v : std_logic:= '1';
+    begin
+        for i in slv'range loop
+            res_v := res_v and slv(i);
+        end loop;
+
+        return res_v;
+    end function;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     type data_t is  array (0 to DEPTH-1) of std_logic_vector(DW-1 downto 0);
 
     -- FIFO slots

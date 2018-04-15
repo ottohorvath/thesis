@@ -27,15 +27,12 @@ entity fifo_rd_if is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
-
         trig_in         :       in  std_logic                           ;--
         trig_out_0      :       out std_logic                           ;-- Trigger IF
-        trig_out_1      :       out std_logic                           ;--
-
+        trig_out_1      :       out std_logic                           ;
         rdata           :       out std_logic_vector(DW-1 downto 0) ;
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(DW-1  downto 0);
-
         empty_to_DUV    :       out std_logic                           ;--
         rd_from_DUV     :       in  std_logic                           ;-- Read side
         rdata_to_DUV    :       out std_logic_vector(DW-1 downto 0)      --

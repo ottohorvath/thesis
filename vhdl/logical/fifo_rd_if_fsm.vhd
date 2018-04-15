@@ -26,7 +26,9 @@ entity fifo_rd_if_fsm is
         clk         :   in  std_logic;
         rstn        :   in  std_logic;
         wr          :   in  std_logic;
+        -- coverage off t
         wdata       :   in  std_logic_vector(DW-1 downto 0);
+        -- coverage on
         fifo_rd     :   in  std_logic;
         trig_in_fsm :   in  std_logic;
         wdata_reg_en:   out std_logic;
@@ -68,10 +70,10 @@ begin
                                                 nxt_state   <= ENABLED;
                                             end if;
                 -----------------------------------------------------
-                -- Clearing has prioprity
-                when ENABLED        =>      if( wdata(1 downto 0) = b"10"    and wr = '1')  then
-                                                nxt_state   <= IDLE;
-                                            elsif( wr = '1') then
+                when ENABLED        =>      --if( wdata(1 downto 0) = b"10"    and wr = '1')  then
+                                            --    nxt_state   <= IDLE;
+                                            --elsif( wr = '1') then
+                                            if( wr = '1') then
                                                 nxt_state   <= RDATA_PRESENT;
                                             end if;
                 -----------------------------------------------------

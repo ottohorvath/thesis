@@ -26,17 +26,18 @@ entity fifo_snk is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
-
         trig_out        :       out std_logic                           ;
-
         rd              :       in  std_logic                           ;-- Read side
+        -- coverage off t
         rdata           :       out std_logic_vector(DW-1 downto 0) ;--
+        -- coverage on
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(1  downto 0)       ;
-
         full_to_DUV     :       out std_logic                           ;--
         wr_from_DUV     :       in  std_logic                           ;-- Write side
+        -- coverage off t
         wdata_from_DUV  :       in  std_logic_vector(DW-1 downto 0)  --
+        -- coverage on
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
@@ -67,7 +68,9 @@ architecture rtl of fifo_snk is
     signal  fifo_rd     :   std_logic                           ;
     signal  fifo_empty  :   std_logic                           ;
     signal  fifo_full   :   std_logic                           ;
+    -- coverage off t
     signal  fifo_rdata  :   std_logic_vector(DW-1 downto 0) ;
+    -- coverage on
     ------------------------------------------------------------------------------
 begin
 
@@ -113,7 +116,9 @@ begin
                         rdata       =>  fifo_rdata      ,
                         full        =>  fifo_full       ,
                         wr          =>  wr_from_DUV     ,
+                        -- coverage off t
                         wdata       =>  wdata_from_DUV
+                        -- coverage on
                     );
     -------------------------------------------------------
 

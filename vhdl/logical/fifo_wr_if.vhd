@@ -27,18 +27,19 @@ entity fifo_wr_if is
     port (
         clk             :       in  std_logic                           ;
         rstn            :       in  std_logic                           ;-- Async. active LOW reset
-
         trig_in         :       in  std_logic                           ;--
         trig_out_0      :       out std_logic                           ;-- Trigger IF
         trig_out_1      :       out std_logic                           ;--
-
+        -- coverage off t
         rdata           :       out std_logic_vector(DW-1 downto 0) ;
+        -- coverage on
         wr              :       in  std_logic                           ;
         wdata           :       in  std_logic_vector(2  downto 0);
-
         full_to_DUV     :       out std_logic                           ;--
         wr_from_DUV     :       in  std_logic                           ;-- Write side
+        -- coverage off t
         wdata_from_DUV  :       in std_logic_vector(DW-1 downto 0)
+        -- coverage on
     );
 end entity;
 ---------------------------------------------------------------------------------------------------
@@ -68,15 +69,19 @@ architecture rtl of fifo_wr_if is
     -- =============
     -- 1: Selects the register which contains data written in by the DUV
     -- 0: Selects status signals from the FSM
+    -- coverage off t
     signal      rdata_mux       :   std_logic_vector(DW-1 downto 0);
     signal      rdata_mux_1     :   std_logic_vector(DW-1 downto 0);
     signal      rdata_mux_0     :   std_logic_vector(DW-1 downto 0);
+    -- coverage on
 
 
     -- Read Data Register
     -- ===================
     -- Stores the data which is written by the DUV, which will be eventually read by the Processor
+    -- coverage off t
     signal      rdata_reg       :   std_logic_vector(DW-1 downto 0);
+    -- coverage on
     signal      rdata_reg_en    :   std_logic;
 
 
