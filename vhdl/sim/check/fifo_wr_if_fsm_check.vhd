@@ -90,13 +90,38 @@ is
 
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0  =>        -- EXP                -- ACT
-                        --sv.compare('1',         rtl_out_if.trig_out     );
-                        --sv.compare(slv(32,'0'), rtl_out_if.rdata        );
-                        --sv.compare('0',         rtl_out_if.full_to_DUV  );
+            when 0|6|7|8  =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.show_data_fsm     );
+                        sv.compare('0',         rtl_out_if.rdata_reg_en      );
+                        sv.compare('1',         rtl_out_if.full              );
+                        sv.compare('0',         rtl_out_if.rcvd_data_fsm     );
+                        sv.compare('0',         rtl_out_if.enabled_fsm       );
                         check_done(sv);
             -------------------------------------------------
-
+            when 1|2|5 =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.show_data_fsm     );
+                        sv.compare('0',         rtl_out_if.rdata_reg_en      );
+                        sv.compare('0',         rtl_out_if.full              );
+                        sv.compare('0',         rtl_out_if.rcvd_data_fsm     );
+                        sv.compare('1',         rtl_out_if.enabled_fsm       );
+                        check_done(sv);
+            -------------------------------------------------
+            when 3  =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.show_data_fsm     );
+                        sv.compare('0',         rtl_out_if.rdata_reg_en      );
+                        sv.compare('1',         rtl_out_if.full              );
+                        sv.compare('1',         rtl_out_if.rcvd_data_fsm     );
+                        sv.compare('1',         rtl_out_if.enabled_fsm       );
+                        check_done(sv);
+            -------------------------------------------------
+            when 4  =>        -- EXP                -- ACT
+                        sv.compare('1',         rtl_out_if.show_data_fsm     );
+                        sv.compare('0',         rtl_out_if.rdata_reg_en      );
+                        sv.compare('1',         rtl_out_if.full              );
+                        sv.compare('0',         rtl_out_if.rcvd_data_fsm     );
+                        sv.compare('1',         rtl_out_if.enabled_fsm       );
+                        check_done(sv);
+            -------------------------------------------------
             -------------------------------------------------
             when others =>
         end case;
