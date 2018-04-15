@@ -90,10 +90,43 @@ is
         case (sv.get_tc_id)   is
             -------------------------------------------------
             when 0  =>        -- EXP                -- ACT
-                        --sv.compare('1',         rtl_out_if.trig_out     );
-                        --sv.compare(slv(32,'0'), rtl_out_if.rdata        );
-                        --sv.compare('0',         rtl_out_if.full_to_DUV  );
+                        sv.compare('0',         rtl_out_if.trig_out_0  );
+                        sv.compare('0',         rtl_out_if.trig_out_1  );
+                        sv.compare(slv(32,2),   rtl_out_if.rdata       );
+                        sv.compare('1',         rtl_out_if.full_to_DUV );
                         check_done(sv);
+            -------------------------------------------------
+            when 1|2=>        -- EXP                -- ACT
+                        sv.compare('1',         rtl_out_if.trig_out_0  );
+                        sv.compare('0',         rtl_out_if.trig_out_1  );
+                        sv.compare(slv(32,1),   rtl_out_if.rdata       );
+                        sv.compare('0',         rtl_out_if.full_to_DUV );
+                        check_done(sv);
+                        -----------------------------------
+                        wait_for_next_check(sv);
+                        sv.compare('1',         rtl_out_if.trig_out_0  );
+                        sv.compare('1',         rtl_out_if.trig_out_1  );
+                        sv.compare(slv(32,7),   rtl_out_if.rdata       );
+                        sv.compare('1',         rtl_out_if.full_to_DUV );
+                        check_done(sv);
+                        -----------------------------------
+                        wait_for_next_check(sv);
+                        sv.compare('1',         rtl_out_if.trig_out_0  );
+                        sv.compare('0',         rtl_out_if.trig_out_1  );
+                        sv.compare(slv(32,241), rtl_out_if.rdata       );
+                        sv.compare('1',         rtl_out_if.full_to_DUV );
+                        check_done(sv);
+                        -----------------------------------
+                        wait_for_next_check(sv);
+                        sv.compare('1',         rtl_out_if.trig_out_0  );
+                        sv.compare('0',         rtl_out_if.trig_out_1  );
+                        sv.compare(slv(32,1),   rtl_out_if.rdata       );
+                        sv.compare('0',         rtl_out_if.full_to_DUV );
+                        check_done(sv);
+
+
+
+
             -------------------------------------------------
 
             -------------------------------------------------

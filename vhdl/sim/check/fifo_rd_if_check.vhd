@@ -91,12 +91,112 @@ is
         case (sv.get_tc_id)   is
             -------------------------------------------------
             when 0  =>        -- EXP                -- ACT
-                        --sv.compare('1',         rtl_out_if.trig_out     );
-                        --sv.compare(slv(32,'0'), rtl_out_if.rdata        );
-                        --sv.compare('0',         rtl_out_if.full_to_DUV  );
+                        sv.compare(slv(32,2),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,'0'),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('0',             rtl_out_if.trig_out_0       );
                         check_done(sv);
             -------------------------------------------------
-
+            when 1  =>        -- EXP                -- ACT
+                        sv.compare(slv(32,2),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,'0'),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('0',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,3),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,'0'),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,1),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,115),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('0',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,7),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,115),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('1',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,1),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,250),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('0',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,2),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,250),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('0',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+            -------------------------------------------------
+            when 2  =>        -- EXP                -- ACT
+                        sv.compare(slv(32,3),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,'0'),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,1),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,1123),    rtl_out_if.rdata_to_DUV     );
+                        sv.compare('0',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,7),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,1123),    rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('1',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,3),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,1123),    rtl_out_if.rdata_to_DUV     );
+                        sv.compare('1',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        -------------------------------------
+                        wait_for_next_check(sv);
+                              -- EXP                -- ACT
+                        sv.compare(slv(32,1),       rtl_out_if.rdata            );
+                        sv.compare(slv(32,610),     rtl_out_if.rdata_to_DUV     );
+                        sv.compare('0',             rtl_out_if.empty_to_DUV     );
+                        sv.compare('0',             rtl_out_if.trig_out_1       );
+                        sv.compare('1',             rtl_out_if.trig_out_0       );
+                        check_done(sv);
+                        
+                        
+            -------------------------------------------------
             -------------------------------------------------
             when others =>
         end case;

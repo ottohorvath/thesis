@@ -89,14 +89,14 @@ is
 
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0|5|6|7=>        -- EXP                -- ACT
+            when 0|5|6 =>        -- EXP                -- ACT
                         sv.compare('0',         rtl_out_if.wdata_reg_en            );
                         sv.compare('1',         rtl_out_if.empty                   );
                         sv.compare('0',         rtl_out_if.got_read_out            );
                         sv.compare('0',         rtl_out_if.enabled_fsm             );
                         check_done(sv);
             -------------------------------------------------
-            when 1|4|8|9=>        -- EXP                -- ACT
+            when 1|4|7|8=>        -- EXP                -- ACT
                         sv.compare('1',         rtl_out_if.wdata_reg_en            );
                         sv.compare('1',         rtl_out_if.empty                   );
                         sv.compare('0',         rtl_out_if.got_read_out            );
