@@ -38,7 +38,7 @@ is
     end record;
     --------------------------------------------------------
 
-    constant    fifo_wr_if_fsm_num_of_tcs_c    :   integer := 5;     -- Number of testcases
+    constant    fifo_wr_if_fsm_num_of_tcs_c    :   integer := 9;     -- Number of testcases
 
     signal      rtl_in_if           :   fifo_wr_if_fsm_in_if_t     ;
 
@@ -154,7 +154,222 @@ is
                         -----------------------------------
 
                         req_to_check(sv);
+            -------------------------------------------------
+            when 1  =>  init_check(id_in,   "Checking IDLE->ENABLED state transtition"&
+                                            " WITHOUT trig_in", cd);
+                        sv.init(id_in);
 
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+                        rtl_in_if.wdata <= b"001";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 2  =>  init_check(id_in,   "Checking IDLE->ENABLED state transtition"&
+                                            " WITH trig_in", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        rtl_in_if.trig_in_fsm    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in_fsm    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 3  =>  init_check(id_in,   "Checking ENABLED->RCVD_DATA state transtition"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        rtl_in_if.trig_in_fsm    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in_fsm    <= '0'  ;   wait for 1 ps;
+                        -----------------------------------
+
+                        wait_re(clk);
+
+                        rtl_in_if.fifo_wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.fifo_wr    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 4  =>  init_check(id_in,   "Checking RCVD_DATA->SHOW_DATA state transtition"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        rtl_in_if.trig_in_fsm    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in_fsm    <= '0'  ;   wait for 1 ps;
+                        -----------------------------------
+
+                        wait_re(clk);
+
+                        rtl_in_if.fifo_wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.fifo_wr    <= '0'  ;   wait for 1 ps;
+
+                        wait_re(clk);
+
+                        rtl_in_if.wdata <= b"100";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 5  =>  init_check(id_in,   "Checking SHOW_DATA->ENABLED state transtition"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        rtl_in_if.trig_in_fsm    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in_fsm    <= '0'  ;   wait for 1 ps;
+                        -----------------------------------
+
+                        wait_re(clk);
+
+                        rtl_in_if.fifo_wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.fifo_wr    <= '0'  ;   wait for 1 ps;
+
+                        wait_re(clk);
+
+                        rtl_in_if.wdata <= b"100";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        wait_re(clk);
+
+                        rtl_in_if.wdata <= b"001";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 6  =>  init_check(id_in,   "Checking SHOW_DATA->IDLE state transtition"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        rtl_in_if.trig_in_fsm    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.trig_in_fsm    <= '0'  ;   wait for 1 ps;
+                        -----------------------------------
+
+                        wait_re(clk);
+
+                        rtl_in_if.fifo_wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.fifo_wr    <= '0'  ;   wait for 1 ps;
+
+                        wait_re(clk);
+
+                        rtl_in_if.wdata <= b"100";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        wait_re(clk);
+
+                        rtl_in_if.wdata <= b"010";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 7  =>  init_check(id_in,   "Checking ENABLED->IDLE state transtition"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+                        rtl_in_if.wdata <= b"001";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+
+
+                        -----------------------------------
+                        rtl_in_if.wdata <= b"010";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+                        req_to_check(sv);
+            -------------------------------------------------
+            when 8  =>  init_check(id_in,   "Checking RCVD_DATA->IDLE state transtition"
+                                            , cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        rtl_in_if.wdata <= b"001";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+                        -----------------------------------
+
+                        wait_re(clk);
+
+                        rtl_in_if.fifo_wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.fifo_wr    <= '0'  ;   wait for 1 ps;
+
+                        -----------------------------------
+
+                        wait_re(clk);
+
+
+                        rtl_in_if.wdata <= b"010";
+                        rtl_in_if.wr    <= '1'  ;   wait for 1 ps;
+                        wait_re(clk);
+                        rtl_in_if.wdata <= b"XXX";
+                        rtl_in_if.wr    <= '0'  ;   wait for 1 ps;
+
+
+
+
+
+
+                        req_to_check(sv);
 
             when others =>
         end case;

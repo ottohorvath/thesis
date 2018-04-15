@@ -142,11 +142,11 @@ is
         constant    scope           :           string  :=  super_name &"."& this;
     begin
 
-        rtl_in_if.wr              =>    '0';
-        rtl_in_if.wdata           =>    (others=>'X');
-        rtl_in_if.rd              =>    '0';
-        rtl_in_if.rdata_from_DUV  =>    (others=>'X');
-        rtl_in_if.ack_from_DUV    =>    '0';
+        rtl_in_if.wr              <=    '0';
+        rtl_in_if.wdata           <=    (others=>'X');
+        rtl_in_if.rd              <=    '0';
+        rtl_in_if.rdata_from_DUV  <=    (others=>'X');
+        rtl_in_if.ack_from_DUV    <=    '0';
         wait for 1 ps;
 
 
