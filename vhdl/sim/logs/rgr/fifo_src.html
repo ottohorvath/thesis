@@ -1,0 +1,39 @@
+ <!DOCTYPE html><html lang="en-US"><style type="text/css">.fail {color: #ff0000;}.pass {color: #86c500;}.skip {color: #00c3ff}.skip_blue {color: #00c3ff}table#tests {font-size:1.2em;font-family: 'Roboto';border-collapse: collapse;border-spacing: 0;/*width: 100%;*/}table#summary {font-size:1.4em;font-family: 'Roboto';border-collapse: collapse;border-spacing: 0;font-weight: bold;vertical-align: left;}#tests td,#tests th {text-align: left;border: 2px solid black;}#summary th, #summary td {width: 100px;text-align: left;}#tests tr:hover {background-color: #dddddd}td.bigger {padding: 5px 10px 5px 10px;font-size:1.5em;}.container{float:left}#piechart{float:left}</style><title>Test results for 
+fifo_src
+</title><body><h1>Test results for 
+fifo_src
+</h1><div id="piechart"></div><script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><script type="text/javascript">google.charts.load('current', {'packages':['corechart']});google.charts.setOnLoadCallback(drawChart);
+function drawChart() {var data = google.visualization.arrayToDataTable([['Check', 'Num'],['Failed',
+0
+,],['Passed',
+3
+],['Skipped',
+0
+],]);var options = {'title':'', 'width':550, 'height':400,is3D: true, colors:['#ff0000','#86c500','#00b6ff'], fontSize:[16]};var chart = new google.visualization.PieChart(document.getElementById('piechart'));chart.draw(data, options);}</script>
+<div class="container"><table id="summary"><tr><th>Total tests</th><th>Done</th><th class="skip_blue">Skipped</th><th class="pass">Passed</th><th class="fail">Failed</th></tr><tr><td class="bigger">
+3
+</td><td class="bigger">
+3
+</td><td class="bigger skip_blue">
+0
+</td><td class="bigger pass">
+3
+</td><td class="bigger fail">
+0
+</td></tr><table id="tests"><tr><th>Check ID</th><th>Description</th></tr>
+<tr class="pass"><td>
+0                                                                                                                                                                                                                                                               
+</td><td>
+Checking the reset values                                                                                                                                                                                                                                       
+</td></tr>
+<tr class="pass"><td>
+1                                                                                                                                                                                                                                                               
+</td><td>
+Checking the trig_out output port by writing full the FIFO                                                                                                                                                                                                      
+</td></tr>
+<tr class="pass"><td>
+2                                                                                                                                                                                                                                                               
+</td><td>
+Checking the trig_out output port by reading out after the FIFO after it was written full                                                                                                                                                                       
+</td></tr>
+</table></div></body></html>

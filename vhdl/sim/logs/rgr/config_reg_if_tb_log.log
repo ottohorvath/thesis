@@ -1,0 +1,40 @@
+# vsim -batch -t 1ps -coverage -do "coverage save -onexit ../coverage/config_reg_if_tb_ccov/config_reg_if_tb.ucdb; run -all; quit" -default_radix hexadecimal -logfile ../logs/rgr/config_reg_if_tb_log.log work.config_reg_if_tb_opt 
+# Start time: 22:18:03 on Apr 16,2018
+# //  Questa Sim-64
+# //  Version 10.4e win64 Apr  9 2016
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
+# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
+# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# //
+# Loading std.standard
+# Loading std.env(body)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_log_pkg(body)
+# Loading work.tb_report_pkg(body)
+# Loading work.tb_utils_pkg(body)
+# Loading work.tb_tc_pkg(body)
+# Loading work.tb_chk_pkg(body)
+# Loading work.config_reg_if_test(body)
+# Loading work.config_reg_if_check(body)
+# Loading work.config_reg_if_tb(bhv)#1
+# Loading work.config_reg_if(rtl)#1
+# Loading work.config_reg_if_fsm(rtl)#1
+# 
+# coverage save -onexit ../coverage/config_reg_if_tb_ccov/config_reg_if_tb.ucdb
+#  run -all
+# =====================================================              Start of the Simulation       =====================================================RTL name: 'config_reg_if'0 ps: process_tc.setup.clk_gen: Clock is ON!Testcase 0============1 ps: process_rst_gen: Reset is asserted.1001 ps: process_rst_gen: Reset is de-asserted.10002 ps: process_tc.run_test.config_reg_if_test.test: Testcase FINISHED ...Testcase 0 PASSED!Testcase 1============10003 ps: process_rst_gen: Reset is asserted.11003 ps: process_rst_gen: Reset is de-asserted.70002 ps: process_tc.run_test.config_reg_if_test.test: Testcase FINISHED ...Testcase 1 PASSED!Testcase 2============70003 ps: process_rst_gen: Reset is asserted.71003 ps: process_rst_gen: Reset is de-asserted.130001 ps: process_tc.run_test.config_reg_if_test.test: Testcase FINISHED ...Testcase 2 PASSED!process_tc.report_and_exit.gen_rgr_report_html: Processing the check descriptor ...process_tc.report_and_exit.gen_rgr_report_html: Generating HTML report ...process_tc.report_and_exit.gen_rgr_report_html: Done!=====================================================              End of the Simulation       =====================================================Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
+#  quit
+# Saving coverage database on exit...
+# End time: 22:18:06 on Apr 16,2018, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0
