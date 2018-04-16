@@ -49,7 +49,7 @@ is
     end record;
     --------------------------------------------------------
 
-    constant    config_reg_if_num_of_tcs_c    :   integer := 5;     -- Number of testcases
+    constant    config_reg_if_num_of_tcs_c    :   integer := 3;     -- Number of testcases
 
     signal      rtl_in_if           :   config_reg_if_in_if_t     ;
 
@@ -163,9 +163,117 @@ is
 
                         rst_gen(scope, rst_req); -- Reseting
                         wait_re(clk);
+                        wait for 1 ps;
                         -----------------------------------
 
                         req_to_check(sv);
+            -------------------------------------------------
+            when 1  =>  init_check(id_in, "Checking one simple write ", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        --req_to_check(sv);
+                        -- Write in write indicator
+                        processor_wr(
+                            x"12345678",
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        -- Write address
+                        processor_wr(
+                            x"0000000A",
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+                        -- Write data
+                        processor_wr(
+                            x"00001111",
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+
+                        wait_re(clk);
+                        wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+
+                        wait_re(clk);
+                        wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+            -------------------------------------------------
+            when 2  =>  init_check(id_in, "Checking one simple read ", cd);
+                        sv.init(id_in);
+
+                        rst_gen(scope, rst_req); -- Reseting
+                        wait_re(clk);
+                        -----------------------------------
+
+                        wait for 1 ps;
+                        req_to_check(sv);
+                        -- Write in write indicator
+                        processor_wr(
+                            x"12340000",
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        -- Read address
+                        processor_wr(
+                            x"0000000B",
+                            clk,
+                            rtl_in_if.wdata,
+                            rtl_in_if.wr
+                        );
+                        wait for 1 ps;
+                        ---- Drive in dummy read data
+                        --rtl_in_if.rdata_from_DUV    <=  x"CCCCDDDD";
+                        --wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+
+                        wait_re(clk);
+                        -- Drive in dummy read data
+                        rtl_in_if.rdata_from_DUV    <=  x"CCCCDDDD";
+                        wait for 1 ps;
+                        --wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+
+                        wait_re(clk);
+                        rtl_in_if.rd  <=    '1';
+                        wait for 1 ps;
+                        -----------------------------------
+                        req_to_check(sv);
+                        -----------------------------------
+                        wait_re(clk);
+                        rtl_in_if.rd  <=    '0';
+                        wait for 1 ps;
+
+
+
+
+
+
+
 
 
             when others =>
