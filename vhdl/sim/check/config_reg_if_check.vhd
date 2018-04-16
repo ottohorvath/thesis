@@ -104,11 +104,90 @@ is
 
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0  =>        -- EXP                -- ACT
-                        --sv.compare('1',         rtl_out_if.trig_out     );
-                        --sv.compare(slv(32,'0'), rtl_out_if.rdata        );
-                        --sv.compare('0',         rtl_out_if.full_to_DUV  );
+            when 0  =>          -- EXP                      -- ACT
+                        sv.compare('0',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.wstrb_to_DUV );
+                        --sv.compare(slv(chk_aw_c,'X'),   rtl_out_if.addr_to_DUV  );
+                        --sv.compare(slv(chk_dw_c,'X'),   rtl_out_if.wdata_to_DUV  );
+                        sv.assertion(Is_X(rtl_out_if.addr_to_DUV));
+                        sv.assertion(Is_X(rtl_out_if.wdata_to_DUV));
+
+
                         check_done(sv);
+            -------------------------------------------------
+            when 1  =>          -- EXP                      -- ACT
+                        sv.compare('0',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.wstrb_to_DUV );
+                        sv.compare(x"0000000A",         rtl_out_if.addr_to_DUV  );
+                        --sv.compare(slv(chk_dw_c,'X'),   rtl_out_if.wdata_to_DUV  );
+                        sv.assertion(Is_X(rtl_out_if.wdata_to_DUV));
+                        check_done(sv);
+
+                        wait_for_next_check(sv);
+
+                                -- EXP                      -- ACT
+                        sv.compare('1',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.wstrb_to_DUV );
+                        sv.compare(x"0000000A",         rtl_out_if.addr_to_DUV  );
+                        sv.compare(x"00001111",         rtl_out_if.wdata_to_DUV  );
+                        check_done(sv);
+
+                        wait_for_next_check(sv);
+
+                                -- EXP                      -- ACT
+                        sv.compare('1',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('1',                 rtl_out_if.wstrb_to_DUV );
+                        sv.compare(x"0000000A",         rtl_out_if.addr_to_DUV  );
+                        sv.compare(x"00001111",         rtl_out_if.wdata_to_DUV  );
+                        check_done(sv);
+
+                        wait_for_next_check(sv);
+
+                                -- EXP                      -- ACT
+                        sv.compare('0',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.wstrb_to_DUV );
+                        sv.compare(x"0000000A",         rtl_out_if.addr_to_DUV  );
+                        sv.compare(x"00001111",         rtl_out_if.wdata_to_DUV  );
+                        check_done(sv);
+            -------------------------------------------------
+            when 2  =>          -- EXP                      -- ACT
+                        sv.compare('0',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.rstrb_to_DUV );
+                        sv.compare(slv(chk_dw_c,'0'),   rtl_out_if.rdata  );
+                        --sv.compare(slv(chk_dw_c,'X'),   rtl_out_if.wdata_to_DUV  );
+                        --sv.assertion(Is_X(rtl_out_if.addr_to_DUV));
+                        check_done(sv);
+
+                        wait_for_next_check(sv);
+                                -- EXP                      -- ACT
+                        sv.compare('1',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.rstrb_to_DUV );
+                        sv.compare(slv(chk_dw_c,'0'),   rtl_out_if.rdata  );
+                        --sv.compare(slv(chk_dw_c,'X'),   rtl_out_if.wdata_to_DUV  );
+                        sv.compare(x"0000000B",       rtl_out_if.addr_to_DUV);
+                        check_done(sv);
+
+                        wait_for_next_check(sv);
+
+                                -- EXP                      -- ACT
+                        sv.compare('1',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('1',                 rtl_out_if.rstrb_to_DUV );
+                        sv.compare(slv(chk_dw_c,'0'),   rtl_out_if.rdata  );
+                        --sv.compare(slv(chk_dw_c,'X'),   rtl_out_if.wdata_to_DUV  );
+                        sv.compare(x"0000000B",       rtl_out_if.addr_to_DUV);
+                        check_done(sv);
+
+                        wait_for_next_check(sv);
+
+                                -- EXP                      -- ACT
+                        sv.compare('0',                 rtl_out_if.cs_to_DUV    );
+                        sv.compare('0',                 rtl_out_if.rstrb_to_DUV );
+                        sv.compare(x"CCCCDDDD",         rtl_out_if.rdata  );
+                        --sv.compare(slv(chk_dw_c,'X'),   rtl_out_if.wdata_to_DUV  );
+                        sv.compare(x"0000000B",       rtl_out_if.addr_to_DUV);
+                        check_done(sv);
+
+
             -------------------------------------------------
 
             -------------------------------------------------
