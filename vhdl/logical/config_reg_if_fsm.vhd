@@ -29,7 +29,9 @@ entity config_reg_if_fsm is
         clk         :   in  std_logic;
         rstn        :   in  std_logic;
         wr          :   in  std_logic;
+        -- coverage off t
         wdata       :   in  std_logic_vector(DW-1 downto 0);
+        -- coverage on
         ack_from_DUV:   in  std_logic;
         rstrb       :   out std_logic;
         wstrb       :   out std_logic;
