@@ -53,6 +53,12 @@ is
     );
     --------------------------------------------------
 
+    
+    
+    -- For ack_needed checks
+    --constant    chk_ack_needed_c    :   boolean :=  true;
+    -- Otherwise
+    constant    chk_ack_needed_c    :   boolean :=  false;
 
 
 
@@ -91,14 +97,87 @@ is
 
         case (sv.get_tc_id)   is
             -------------------------------------------------
-            when 0  =>        -- EXP                -- ACT
-                        --sv.compare('1',         rtl_out_if.trig_out     );
-                        --sv.compare(slv(32,'0'), rtl_out_if.rdata        );
-                        --sv.compare('0',         rtl_out_if.full_to_DUV  );
+            when 0|5|9|15 =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.cs       );
+                        sv.compare('0',         rtl_out_if.rstrb    );
+                        sv.compare('0',         rtl_out_if.wstrb    );
+                        sv.compare('0',         rtl_out_if.addr_en  );
+                        sv.compare('0',         rtl_out_if.wdata_en );
+                        sv.compare('0',         rtl_out_if.rdata_en );
                         check_done(sv);
             -------------------------------------------------
-
+            when 1  =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.cs       );
+                        sv.compare('0',         rtl_out_if.rstrb    );
+                        sv.compare('0',         rtl_out_if.wstrb    );
+                        sv.compare('1',         rtl_out_if.addr_en  );
+                        sv.compare('0',         rtl_out_if.wdata_en );
+                        sv.compare('0',         rtl_out_if.rdata_en );
+                        check_done(sv);
             -------------------------------------------------
+            when 2  =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.cs       );
+                        sv.compare('0',         rtl_out_if.rstrb    );
+                        sv.compare('0',         rtl_out_if.wstrb    );
+                        sv.compare('0',         rtl_out_if.addr_en  );
+                        sv.compare('1',         rtl_out_if.wdata_en );
+                        sv.compare('0',         rtl_out_if.rdata_en );
+                        check_done(sv);
+            -------------------------------------------------
+            when 3|7|10|13=>        -- EXP                -- ACT
+                        sv.compare('1',         rtl_out_if.cs       );
+                        sv.compare('0',         rtl_out_if.rstrb    );
+                        sv.compare('0',         rtl_out_if.wstrb    );
+                        sv.compare('0',         rtl_out_if.addr_en  );
+                        sv.compare('0',         rtl_out_if.wdata_en );
+                        sv.compare('0',         rtl_out_if.rdata_en );
+                        check_done(sv);
+            -------------------------------------------------
+            when 4|14  =>        -- EXP                -- ACT
+                        sv.compare('1',         rtl_out_if.cs       );
+                        sv.compare('0',         rtl_out_if.rstrb    );
+                        sv.compare('1',         rtl_out_if.wstrb    );
+                        sv.compare('0',         rtl_out_if.addr_en  );
+                        sv.compare('0',         rtl_out_if.wdata_en );
+                        sv.compare('0',         rtl_out_if.rdata_en );
+                        check_done(sv);
+            -------------------------------------------------
+            when 6  =>        -- EXP                -- ACT
+                        sv.compare('0',         rtl_out_if.cs       );
+                        sv.compare('0',         rtl_out_if.rstrb    );
+                        sv.compare('0',         rtl_out_if.wstrb    );
+                        sv.compare('1',         rtl_out_if.addr_en  );
+                        sv.compare('0',         rtl_out_if.wdata_en );
+                        sv.compare('0',         rtl_out_if.rdata_en );
+                        check_done(sv);
+            -------------------------------------------------
+            when 8|12 =>        -- EXP                -- ACT
+                        sv.compare('1',         rtl_out_if.cs       );
+                        sv.compare('1',         rtl_out_if.rstrb    );
+                        sv.compare('0',         rtl_out_if.wstrb    );
+                        sv.compare('0',         rtl_out_if.addr_en  );
+                        sv.compare('0',         rtl_out_if.wdata_en );
+                        sv.compare('1',         rtl_out_if.rdata_en );
+                        check_done(sv);
+            -------------------------------------------------
+            
+            when 11 =>  if(chk_ack_needed_c = true) then
+                            -- EXP                -- ACT
+                            sv.compare('1',         rtl_out_if.cs       );
+                            sv.compare('1',         rtl_out_if.rstrb    );
+                            sv.compare('0',         rtl_out_if.wstrb    );
+                            sv.compare('0',         rtl_out_if.addr_en  );
+                            sv.compare('0',         rtl_out_if.wdata_en );
+                            sv.compare('0',         rtl_out_if.rdata_en );
+                            check_done(sv);
+                        end if;
+            -------------------------------------------------
+            
+            
+            
+            
+            
+            
             when others =>
         end case;
 
