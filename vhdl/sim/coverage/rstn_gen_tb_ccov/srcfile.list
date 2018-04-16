@@ -1,0 +1,2 @@
+../../logical/rstn_gen.vhd
+../tbench/rstn_gen_tb.vhd

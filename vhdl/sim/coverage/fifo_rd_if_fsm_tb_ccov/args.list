@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/fifo_rd_if_fsm_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/fifo_rd_if_fsm_tb_ccov/fifo_rd_if_fsm_tb.ucdb

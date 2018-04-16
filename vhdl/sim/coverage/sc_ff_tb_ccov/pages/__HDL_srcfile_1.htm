@@ -1,0 +1,95 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="2"><q-n>     2  </q-n></a><q-m>--</q-m>
+<a name="3"><q-n>     3  </q-n></a><q-m>-- Author: Otto Horvath</q-m>
+<a name="4"><q-n>     4  </q-n></a><q-m>--</q-m>
+<a name="5"><q-n>     5  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="6"><q-n>     6  </q-n></a><q-m>--</q-m>
+<a name="7"><q-n>     7  </q-n></a><q-m>-- Description: ~ This module is implementing a D-FF style operation with only</q-m>
+<a name="8"><q-n>     8  </q-n></a><q-m>--                'set' and 'clr' inputs to change the output 'q'.</q-m>
+<a name="9"><q-n>     9  </q-n></a><q-m>--</q-m>
+<a name="10"><q-n>     10  </q-n></a><q-m>--              ~ It is built around a rising-edge D flop.</q-m>
+<a name="11"><q-n>     11  </q-n></a><q-m>--</q-m>
+<a name="12"><q-n>     12  </q-n></a><q-m>--              ~ The storage inside is reset to logic 0 by default with an</q-m>
+<a name="13"><q-n>     13  </q-n></a><q-m>--                async. active LOW reset input pin 'rstn'.</q-m>
+<a name="14"><q-n>     14  </q-n></a><q-m>--</q-m>
+<a name="15"><q-n>     15  </q-n></a><q-m>--              ~ Whenever 'set' input is asserted for one 'clk' cycle, it makes</q-m>
+<a name="16"><q-n>     16  </q-n></a><q-m>--                the output 'q' to logic 1, regardless what was its prev. value.</q-m>
+<a name="17"><q-n>     17  </q-n></a><q-m>--</q-m>
+<a name="18"><q-n>     18  </q-n></a><q-m>--              ~ The same can be said for the 'clr' input, with the only difference</q-m>
+<a name="19"><q-n>     19  </q-n></a><q-m>--                that it flips the output 'q' to logic 0.</q-m>
+<a name="20"><q-n>     20  </q-n></a><q-m>--</q-m>
+<a name="21"><q-n>     21  </q-n></a><q-m>--              ~ At all other cases of the 'set' and 'clr' inputs, the output 'q'</q-m>
+<a name="22"><q-n>     22  </q-n></a><q-m>--                remains unchanged.</q-m>
+<a name="23"><q-n>     23  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="24"><q-n>     24  </q-n></a>
+<a name="25"><q-n>     25  </q-n></a><q-w>library</q-w> ieee                    ;
+<a name="26"><q-n>     26  </q-n></a><q-w>use</q-w>     ieee.std_logic_1164.<q-w>all</q-w> ;
+<a name="27"><q-n>     27  </q-n></a><q-w>use</q-w>     ieee.numeric_std.<q-w>all</q-w>    ;
+<a name="28"><q-n>     28  </q-n></a>
+<a name="29"><q-n>     29  </q-n></a>
+<a name="30"><q-n>     30  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="31"><q-n>     31  </q-n></a><q-w>entity</q-w> sc_ff  <q-w>is</q-w>
+<a name="32"><q-n>     32  </q-n></a>    <q-m>--generic(</q-m>
+<a name="33"><q-n>     33  </q-n></a>    <q-m>--</q-m>
+<a name="34"><q-n>     34  </q-n></a>    <q-m>--);</q-m>
+<a name="35"><q-n>     35  </q-n></a>    <q-w>port</q-w>(
+<a name="36"><q-n>     36  </q-n></a>        clk     :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="37"><q-n>     37  </q-n></a>        rstn    :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="38"><q-n>     38  </q-n></a>        set     :   <q-a>in</q-w>  <q-t>std_logic</q-w>;  <q-m>-- control input</q-m>
+<a name="39"><q-n>     39  </q-n></a>        clr     :   <q-a>in</q-w>  <q-t>std_logic</q-w>;  <q-m>-- control input</q-m>
+<a name="40"><q-n>     40  </q-n></a>        q       :   <q-a>out</q-w> <q-t>std_logic</q-w>   <q-m>-- status output</q-m>
+<a name="41"><q-n>     41  </q-n></a>    );
+<a name="42"><q-n>     42  </q-n></a><q-w>end</q-w> <q-w>entity</q-w> sc_ff;
+<a name="43"><q-n>     43  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="44"><q-n>     44  </q-n></a>
+<a name="45"><q-n>     45  </q-n></a>
+<a name="46"><q-n>     46  </q-n></a>
+<a name="47"><q-n>     47  </q-n></a>
+<a name="48"><q-n>     48  </q-n></a>
+<a name="49"><q-n>     49  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="50"><q-n>     50  </q-n></a><q-w>architecture</q-w> rtl  <q-w>of</q-w>  sc_ff <q-w>is</q-w>
+<a name="51"><q-n>     51  </q-n></a>
+<a name="52"><q-n>     52  </q-n></a>    <q-w>signal</q-w>  int_q   :   <q-t>std_logic</q-w>;
+<a name="53"><q-n>     53  </q-n></a><q-w>begin</q-w>
+<a name="54"><q-n>     54  </q-n></a>
+<a name="55"><q-n>     55  </q-n></a>
+<a name="56"><q-n>     56  </q-n></a>    <q-m>--------------------------------------------------------</q-m>
+<a name="57"><q-n>     57  </q-n></a>    L_SEQ_P:    <q-w>process</q-w>(clk, rstn)  <q-w>is</q-w>
+<a name="58"><q-n>     58  </q-n></a>        <q-w>begin</q-w>
+<a name="59"><q-n>     59  </q-n></a>            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="60"><q-n>     60  </q-n></a>                int_q   &lt;= '0';                         <q-m>-- Reset to 0</q-m>
+<a name="61"><q-n>     61  </q-n></a>
+<a name="62"><q-n>     62  </q-n></a>            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="63"><q-n>     63  </q-n></a>
+<a name="64"><q-n>     64  </q-n></a>                <q-w>if</q-w>(set = '1' <q-w>and</q-w> clr = '0') <q-w>then</q-w>    <q-m>-- When the flop must be logic 1</q-m>
+<a name="65"><q-n>     65  </q-n></a>                    int_q &lt;= '1';
+<a name="66"><q-n>     66  </q-n></a>                <q-w>end</q-w> <q-w>if</q-w>;
+<a name="67"><q-n>     67  </q-n></a>
+<a name="68"><q-n>     68  </q-n></a>                <q-w>if</q-w>(set = '0' <q-w>and</q-w> clr = '1') <q-w>then</q-w>    <q-m>-- When the flop must be logic 0</q-m>
+<a name="69"><q-n>     69  </q-n></a>                    int_q &lt;= '0';
+<a name="70"><q-n>     70  </q-n></a>                <q-w>end</q-w> <q-w>if</q-w>;
+<a name="71"><q-n>     71  </q-n></a>
+<a name="72"><q-n>     72  </q-n></a>            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="73"><q-n>     73  </q-n></a>        <q-w>end</q-w> <q-w>process</q-w>;
+<a name="74"><q-n>     74  </q-n></a>
+<a name="75"><q-n>     75  </q-n></a>        q   &lt;= int_q;                   <q-m>-- Driving the output</q-m>
+<a name="76"><q-n>     76  </q-n></a>    <q-m>--------------------------------------------------------</q-m>
+<a name="77"><q-n>     77  </q-n></a>
+<a name="78"><q-n>     78  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w> rtl;
+<a name="79"><q-n>     79  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+</tt>
+</pre>
+
+  
+</body>
+</html>

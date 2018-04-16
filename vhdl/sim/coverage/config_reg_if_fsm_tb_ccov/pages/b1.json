@@ -1,0 +1,176 @@
+var g_data = {
+b0268665487_3462804914_0:[{dummy:0},
+{anchor:'cvg48',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'162',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'162',h:'10',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'162',h:'23',c:'g'}
+]},
+{anchor:'cvg49',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'165',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'165',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'165',h:'31',c:'g'}
+]},
+{anchor:'cvg50',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'168',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'168',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'168',h:'31',c:'g'}
+]},
+{anchor:'cvg51',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'172',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'172',h:'9',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'172',h:'24',c:'g'}
+]},
+{anchor:'cvg52',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'175',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'175',h:'4',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'175',h:'29',c:'g'}
+]},
+{anchor:'cvg53',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'178',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'178',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'178',h:'31',c:'g'}
+]}],
+b2597517629_1986562257_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'78',c:'Y',p:'66.66'}
+,{cr:'c',t:'T',z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',h:'20',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'95',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',h:'0',c:'r'}
+,{cr:'m',t:'T',z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                when CAPT_RDATA =>  nxt_state       <= IDLE;         --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'109',h:'2',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',h:'9',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'122',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                when GEN_WR     =>  nxt_state   <= IDLE;             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'132',h:'2',c:'g'}
+,{cr:'m',t:'T',z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',h:'0',c:'r'}
+]},
+{anchor:'cvg14',items:[{z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',h:'16',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                                        if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'83',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                        if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'83',h:'5',c:'g'}
+,{cr:'c',t:'A',z:'                                        if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'83',h:'15',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',h:'4',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'95',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'97',h:'3',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',h:'0',c:'r'}
+]},
+{anchor:'cvg19',items:[{z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',h:'0',c:'r'}
+]},
+{anchor:'cvg20',items:[{z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',h:'5',c:'g'}
+]},
+{anchor:'cvg21',items:[{z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',h:'4',c:'g'}
+]},
+{anchor:'cvg22',items:[{z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'122',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'124',h:'3',c:'g'}
+]},
+{anchor:'cvg23',items:[{z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',h:'0',c:'r'}
+]},
+{anchor:'cvg24',items:[{z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',h:'0',c:'r'}
+]},
+{anchor:'cvg25',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'220',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'220',h:'10',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'223',h:'54',c:'g'}
+]}],
+b0802091144_1752142365_0:[{dummy:0},
+{anchor:'cvg101',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'162',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'162',h:'10',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'162',h:'23',c:'g'}
+]},
+{anchor:'cvg102',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'165',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'165',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'165',h:'31',c:'g'}
+]},
+{anchor:'cvg103',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'168',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'168',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'168',h:'31',c:'g'}
+]},
+{anchor:'cvg104',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'172',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'172',h:'9',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'172',h:'24',c:'g'}
+]},
+{anchor:'cvg105',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'175',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'175',h:'4',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'175',h:'29',c:'g'}
+]},
+{anchor:'cvg106',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'178',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'178',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'178',h:'31',c:'g'}
+]}],
+b2607347699_2555614571_0:[{dummy:0},
+{anchor:'cvg66',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'78',c:'Y',p:'66.66'}
+,{cr:'c',t:'T',z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',h:'20',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'95',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',h:'0',c:'r'}
+,{cr:'m',t:'T',z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                when CAPT_RDATA =>  nxt_state       <= IDLE;         --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'109',h:'2',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',h:'9',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'122',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                when GEN_WR     =>  nxt_state   <= IDLE;             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'132',h:'2',c:'g'}
+,{cr:'m',t:'T',z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',h:'0',c:'r'}
+]},
+{anchor:'cvg67',items:[{z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE           =>  if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'80',h:'16',c:'g'}
+]},
+{anchor:'cvg68',items:[{z:'                                        if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'83',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                        if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'83',h:'5',c:'g'}
+,{cr:'c',t:'A',z:'                                        if(wr = \'1\' and wdata = std_logic...',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'83',h:'15',c:'g'}
+]},
+{anchor:'cvg69',items:[{z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'91',h:'4',c:'g'}
+]},
+{anchor:'cvg70',items:[{z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'95',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'97',h:'3',c:'g'}
+]},
+{anchor:'cvg71',items:[{z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'101',h:'0',c:'r'}
+]},
+{anchor:'cvg72',items:[{z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when EXTD_RD    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'105',h:'0',c:'r'}
+]},
+{anchor:'cvg73',items:[{z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'114',h:'5',c:'g'}
+]},
+{anchor:'cvg74',items:[{z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'118',h:'4',c:'g'}
+]},
+{anchor:'cvg75',items:[{z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'122',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'124',h:'3',c:'g'}
+]},
+{anchor:'cvg76',items:[{z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'128',h:'0',c:'r'}
+]},
+{anchor:'cvg77',items:[{z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when EXTD_WR    =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'134',h:'0',c:'r'}
+]},
+{anchor:'cvg78',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'220',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'220',h:'10',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/config_reg_if_fsm.vhd',l:'223',h:'54',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

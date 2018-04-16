@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/rstn_gen_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/rstn_gen_tb_ccov/rstn_gen_tb.ucdb

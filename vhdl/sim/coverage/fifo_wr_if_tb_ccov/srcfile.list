@@ -1,0 +1,2 @@
+../../logical/fifo_wr_if.vhd
+../tbench/fifo_wr_if_tb.vhd

@@ -1,0 +1,2 @@
+../../logical/sc_ff.vhd
+../tbench/sc_ff_tb.vhd

@@ -1,0 +1,114 @@
+var g_data = {
+f2597517629_1986562257_0:{
+scopes:[{i:0,s:'2192589349_2479080472_0',val:'config_reg_if_fsm_tb'},{link:'z.htm?f=0&s=2597517629_1986562257_0',val:'L_DUT'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg30',items:[{c:'Y',p:'59.04',lnk:'__HDL_srcfile_1.htm#80',z:'cur_state'}
+,{cr:'c',s:'1',z:'IDLE',h:'32',c:'g'}
+,{cr:'c',z:'IDLE -> ST_RADDR',h:'4',c:'g'}
+,{cr:'c',z:'IDLE -> ST_WADDR',h:'5',c:'g'}
+,{cr:'c',z:'IDLE -> IDLE',h:'23',c:'g'}
+,{cr:'c',s:'1',z:'ST_WADDR',h:'6',c:'g'}
+,{cr:'c',z:'ST_WADDR -> ST_WDATA',h:'4',c:'g'}
+,{cr:'c',z:'ST_WADDR -> IDLE',h:'1',c:'g'}
+,{cr:'c',z:'ST_WADDR -> ST_WADDR',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'ST_RADDR',h:'8',c:'g'}
+,{cr:'c',z:'ST_RADDR -> INIT_RD',h:'3',c:'g'}
+,{cr:'c',z:'ST_RADDR -> IDLE',h:'1',c:'g'}
+,{cr:'c',z:'ST_RADDR -> ST_RADDR',h:'4',c:'g'}
+,{cr:'c',s:'1',z:'INIT_RD',h:'3',c:'g'}
+,{cr:'m',z:'INIT_RD -> WAIT_RACK',h:'0',c:'r'}
+,{cr:'c',z:'INIT_RD -> CAPT_RDATA',h:'2',c:'g'}
+,{cr:'c',z:'INIT_RD -> IDLE',h:'1',c:'g'}
+,{cr:'m',z:'INIT_RD -> INIT_RD',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'CAPT_RDATA',h:'2',c:'g'}
+,{cr:'c',z:'CAPT_RDATA -> IDLE',h:'2',c:'g'}
+,{cr:'m',z:'CAPT_RDATA -> CAPT_RDATA',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'WAIT_RACK',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_RACK -> EXTD_RD',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_RACK -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_RACK -> WAIT_RACK',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'EXTD_RD',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_RD -> CAPT_RDATA',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_RD -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_RD -> EXTD_RD',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_WDATA',h:'8',c:'g'}
+,{cr:'c',z:'ST_WDATA -> INIT_WR',h:'3',c:'g'}
+,{cr:'c',z:'ST_WDATA -> IDLE',h:'1',c:'g'}
+,{cr:'c',z:'ST_WDATA -> ST_WDATA',h:'4',c:'g'}
+,{cr:'c',s:'1',z:'INIT_WR',h:'3',c:'g'}
+,{cr:'m',z:'INIT_WR -> WAIT_WACK',h:'0',c:'r'}
+,{cr:'c',z:'INIT_WR -> GEN_WR',h:'2',c:'g'}
+,{cr:'c',z:'INIT_WR -> IDLE',h:'1',c:'g'}
+,{cr:'m',z:'INIT_WR -> INIT_WR',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'GEN_WR',h:'2',c:'g'}
+,{cr:'c',z:'GEN_WR -> IDLE',h:'2',c:'g'}
+,{cr:'m',z:'GEN_WR -> GEN_WR',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'WAIT_WACK',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_WACK -> EXTD_WR',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_WACK -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_WACK -> WAIT_WACK',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'EXTD_WR',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_WR -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_WR -> EXTD_WR',h:'0',c:'r'}
+]}
+
+],
+},
+f2607347699_2555614571_0:{
+scopes:[{link:'z.htm?f=0&s=2607347699_2555614571_0',val:'work.config_reg_if_fsm(rtl)'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg83',items:[{c:'Y',p:'59.04',lnk:'__HDL_srcfile_1.htm#80',z:'cur_state'}
+,{cr:'c',s:'1',z:'IDLE',h:'32',c:'g'}
+,{cr:'c',z:'IDLE -> ST_RADDR',h:'4',c:'g'}
+,{cr:'c',z:'IDLE -> ST_WADDR',h:'5',c:'g'}
+,{cr:'c',z:'IDLE -> IDLE',h:'23',c:'g'}
+,{cr:'c',s:'1',z:'ST_WADDR',h:'6',c:'g'}
+,{cr:'c',z:'ST_WADDR -> ST_WDATA',h:'4',c:'g'}
+,{cr:'c',z:'ST_WADDR -> IDLE',h:'1',c:'g'}
+,{cr:'c',z:'ST_WADDR -> ST_WADDR',h:'1',c:'g'}
+,{cr:'c',s:'1',z:'ST_RADDR',h:'8',c:'g'}
+,{cr:'c',z:'ST_RADDR -> INIT_RD',h:'3',c:'g'}
+,{cr:'c',z:'ST_RADDR -> IDLE',h:'1',c:'g'}
+,{cr:'c',z:'ST_RADDR -> ST_RADDR',h:'4',c:'g'}
+,{cr:'c',s:'1',z:'INIT_RD',h:'3',c:'g'}
+,{cr:'m',z:'INIT_RD -> WAIT_RACK',h:'0',c:'r'}
+,{cr:'c',z:'INIT_RD -> CAPT_RDATA',h:'2',c:'g'}
+,{cr:'c',z:'INIT_RD -> IDLE',h:'1',c:'g'}
+,{cr:'m',z:'INIT_RD -> INIT_RD',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'CAPT_RDATA',h:'2',c:'g'}
+,{cr:'c',z:'CAPT_RDATA -> IDLE',h:'2',c:'g'}
+,{cr:'m',z:'CAPT_RDATA -> CAPT_RDATA',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'WAIT_RACK',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_RACK -> EXTD_RD',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_RACK -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_RACK -> WAIT_RACK',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'EXTD_RD',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_RD -> CAPT_RDATA',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_RD -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_RD -> EXTD_RD',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_WDATA',h:'8',c:'g'}
+,{cr:'c',z:'ST_WDATA -> INIT_WR',h:'3',c:'g'}
+,{cr:'c',z:'ST_WDATA -> IDLE',h:'1',c:'g'}
+,{cr:'c',z:'ST_WDATA -> ST_WDATA',h:'4',c:'g'}
+,{cr:'c',s:'1',z:'INIT_WR',h:'3',c:'g'}
+,{cr:'m',z:'INIT_WR -> WAIT_WACK',h:'0',c:'r'}
+,{cr:'c',z:'INIT_WR -> GEN_WR',h:'2',c:'g'}
+,{cr:'c',z:'INIT_WR -> IDLE',h:'1',c:'g'}
+,{cr:'m',z:'INIT_WR -> INIT_WR',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'GEN_WR',h:'2',c:'g'}
+,{cr:'c',z:'GEN_WR -> IDLE',h:'2',c:'g'}
+,{cr:'m',z:'GEN_WR -> GEN_WR',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'WAIT_WACK',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_WACK -> EXTD_WR',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_WACK -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'WAIT_WACK -> WAIT_WACK',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'EXTD_WR',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_WR -> IDLE',h:'0',c:'r'}
+,{cr:'m',z:'EXTD_WR -> EXTD_WR',h:'0',c:'r'}
+]}
+
+],
+},
+dummyEnd:0
+};
+processFsmData(g_data);

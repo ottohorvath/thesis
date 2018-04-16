@@ -1,0 +1,2 @@
+../../logical/re_det.vhd
+../tbench/re_det_tb.vhd

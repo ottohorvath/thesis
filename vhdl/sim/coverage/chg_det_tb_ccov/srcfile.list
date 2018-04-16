@@ -1,0 +1,2 @@
+../../logical/chg_det.vhd
+../tbench/chg_det_tb.vhd

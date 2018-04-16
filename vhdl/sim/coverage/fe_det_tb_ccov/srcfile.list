@@ -1,0 +1,2 @@
+../../logical/fe_det.vhd
+../tbench/fe_det_tb.vhd

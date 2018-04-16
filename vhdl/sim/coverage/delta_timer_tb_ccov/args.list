@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/delta_timer_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/delta_timer_tb_ccov/delta_timer_tb.ucdb

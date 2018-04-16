@@ -1,0 +1,2 @@
+../../logical/mem_if.vhd
+../tbench/mem_if_tb.vhd

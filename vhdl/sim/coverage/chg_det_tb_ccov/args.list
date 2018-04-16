@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/chg_det_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/chg_det_tb_ccov/chg_det_tb.ucdb

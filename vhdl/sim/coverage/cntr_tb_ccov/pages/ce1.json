@@ -1,0 +1,28 @@
+var g_data = {
+e0632438316_2339353216_0:[{dummy:0}
+,{anchor:'cvg57',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#47',z:'(res_v and slv(i))',c:'R',p:'0.00',d:'0',F:'1'}
+,{}
+,{z:'res_v',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{z:'slv(i)',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{}
+,{n:'1',z:'res_v_0',h1:'1',t:'e',c1:'slv(i)'}
+,{n:'2',z:'res_v_1',h1:'0',t:'e',c1:'slv(i)'}
+,{n:'3',z:'slv(i)_0',h1:'1',t:'e',c1:'res_v'}
+,{n:'4',z:'slv(i)_1',h1:'0',t:'e',c1:'res_v'}
+]}
+],
+e2721089054_2649441295_0:[{dummy:0}
+,{anchor:'cvg110',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#47',z:'(res_v and slv(i))',c:'R',p:'0.00',d:'0',F:'1'}
+,{}
+,{z:'res_v',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{z:'slv(i)',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{}
+,{n:'1',z:'res_v_0',h1:'1',t:'e',c1:'slv(i)'}
+,{n:'2',z:'res_v_1',h1:'0',t:'e',c1:'slv(i)'}
+,{n:'3',z:'slv(i)_0',h1:'1',t:'e',c1:'res_v'}
+,{n:'4',z:'slv(i)_1',h1:'0',t:'e',c1:'res_v'}
+]}
+],
+dummyEnd:0
+};
+processCondExprData(g_data);

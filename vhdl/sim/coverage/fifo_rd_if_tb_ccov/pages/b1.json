@@ -1,0 +1,22 @@
+var g_data = {
+b0336886627_2196279163_0:[{dummy:0},
+{anchor:'cvg14',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'101',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'101',h:'3',c:'g'}
+,{cr:'c',t:'T',z:'                        elsif( rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'104',h:'15',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                            if(wdata_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'106',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                            if(wdata_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'106',h:'5',c:'g'}
+,{cr:'c',t:'A',z:'                            if(wdata_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'106',h:'10',c:'g'}
+]}],
+b4110991361_0770101410_0:[{dummy:0},
+{anchor:'cvg210',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'101',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'101',h:'3',c:'g'}
+,{cr:'c',t:'T',z:'                        elsif( rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'104',h:'15',c:'g'}
+]},
+{anchor:'cvg211',items:[{z:'                            if(wdata_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'106',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                            if(wdata_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'106',h:'5',c:'g'}
+,{cr:'c',t:'A',z:'                            if(wdata_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if.vhd',l:'106',h:'10',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

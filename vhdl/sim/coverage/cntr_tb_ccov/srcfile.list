@@ -1,0 +1,2 @@
+../../logical/cntr.vhd
+../tbench/cntr_tb.vhd

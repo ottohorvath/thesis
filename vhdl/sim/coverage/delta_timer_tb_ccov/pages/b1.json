@@ -1,0 +1,30 @@
+var g_data = {
+b0634475285_4215087775_0:[{dummy:0},
+{anchor:'cvg18',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'106',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'106',h:'2',c:'g'}
+,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'108',h:'6',c:'g'}
+]},
+{anchor:'cvg19',items:[{z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'110',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'110',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'110',h:'4',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'                                                ) else (others => \'0\');',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'122',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                                ) else (others => \'0\');',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'122',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'                                                ) else (others => \'0\');',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'122',h:'5',c:'g'}
+]}],
+b4226573835_3515781567_0:[{dummy:0},
+{anchor:'cvg70',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'106',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'106',h:'2',c:'g'}
+,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'108',h:'6',c:'g'}
+]},
+{anchor:'cvg71',items:[{z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'110',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'110',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'110',h:'4',c:'g'}
+]},
+{anchor:'cvg72',items:[{z:'                                                ) else (others => \'0\');',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'122',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                                ) else (others => \'0\');',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'122',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'                                                ) else (others => \'0\');',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer.vhd',l:'122',h:'5',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

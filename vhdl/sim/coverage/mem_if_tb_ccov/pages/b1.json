@@ -1,0 +1,56 @@
+var g_data = {
+b4280020864_1523086539_0:[{dummy:0},
+{anchor:'cvg14',items:[{z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'96',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'96',h:'3',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                if(fsm_rdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'98',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                if(fsm_rdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'98',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                if(fsm_rdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'98',h:'2',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'        rdata <=    rdata_reg       when(rd = \'1\')   else',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'106',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        rdata <=    rdata_reg       when(rd = \'1\')   else',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'106',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'        rdata <=    rdata_reg       when(rd = \'1\')   else',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'106',h:'2',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'119',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'119',h:'7',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'                if(fsm_wdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'121',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                if(fsm_wdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'121',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                if(fsm_wdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'121',h:'6',c:'g'}
+]},
+{anchor:'cvg19',items:[{z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'130',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'130',h:'8',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'                if(fsm_addr_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'132',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                if(fsm_addr_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'132',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                if(fsm_addr_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'132',h:'6',c:'g'}
+]}],
+b1027121055_3171440516_0:[{dummy:0},
+{anchor:'cvg58',items:[{z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'96',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'96',h:'3',c:'g'}
+]},
+{anchor:'cvg59',items:[{z:'                if(fsm_rdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'98',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                if(fsm_rdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'98',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                if(fsm_rdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'98',h:'2',c:'g'}
+]},
+{anchor:'cvg60',items:[{z:'        rdata <=    rdata_reg       when(rd = \'1\')   else',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'106',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        rdata <=    rdata_reg       when(rd = \'1\')   else',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'106',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'        rdata <=    rdata_reg       when(rd = \'1\')   else',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'106',h:'2',c:'g'}
+]},
+{anchor:'cvg61',items:[{z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'119',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'119',h:'7',c:'g'}
+]},
+{anchor:'cvg62',items:[{z:'                if(fsm_wdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'121',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                if(fsm_wdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'121',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                if(fsm_wdata_en = \'1\')   then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'121',h:'6',c:'g'}
+]},
+{anchor:'cvg63',items:[{z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'130',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rising_edge(clk))    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'130',h:'8',c:'g'}
+]},
+{anchor:'cvg64',items:[{z:'                if(fsm_addr_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'132',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                if(fsm_addr_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'132',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                if(fsm_addr_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if.vhd',l:'132',h:'6',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

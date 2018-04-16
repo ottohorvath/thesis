@@ -1,0 +1,50 @@
+var g_data = {
+t2370202177_1815044020_0:{items:[{dummy:0}
+,{id:'cvg37',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#22',z:'chg_caught',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg38',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#18',z:'clk',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg39',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#21',z:'clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg40',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#24',z:'cntr_clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg41',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#25',z:'cntr_en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg42 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#41',z:'cur_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'3',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'4',c:'g'}
+,{cr:'c',st:'1',z:'COUNTING',h1:'2',c:'g'}
+,{cr:'c',st:'1',z:'DONE',h1:'1',c:'g'}
+,{id:'cvg43',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#26',z:'det_clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg44',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#27',z:'det_en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg45',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#20',z:'en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg46 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#42',z:'nxt_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'3',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'4',c:'g'}
+,{cr:'c',st:'1',z:'COUNTING',h1:'2',c:'g'}
+,{cr:'c',st:'1',z:'DONE',h1:'1',c:'g'}
+,{id:'cvg47',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#19',z:'rstn',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg48',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#23',z:'show_cntr',h1:'1',h2:'1',c:'G',p:'100.00'}
+]
+},
+t1781902717_1621740312_0:{items:[{dummy:0}
+,{id:'cvg37',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#22',z:'chg_caught',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg38',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#18',z:'clk',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg39',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#21',z:'clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg40',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#24',z:'cntr_clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg41',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#25',z:'cntr_en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg42 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#41',z:'cur_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'3',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'4',c:'g'}
+,{cr:'c',st:'1',z:'COUNTING',h1:'2',c:'g'}
+,{cr:'c',st:'1',z:'DONE',h1:'1',c:'g'}
+,{id:'cvg43',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#26',z:'det_clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg44',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#27',z:'det_en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg45',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#20',z:'en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg46 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#42',z:'nxt_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'3',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'4',c:'g'}
+,{cr:'c',st:'1',z:'COUNTING',h1:'2',c:'g'}
+,{cr:'c',st:'1',z:'DONE',h1:'1',c:'g'}
+,{id:'cvg47',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#19',z:'rstn',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg48',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#23',z:'show_cntr',h1:'1',h2:'1',c:'G',p:'100.00'}
+]
+},
+dummyEnd:0
+};
+processTogglesData(g_data);

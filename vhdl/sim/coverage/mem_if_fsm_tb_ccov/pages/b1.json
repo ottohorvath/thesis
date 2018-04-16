@@ -1,0 +1,146 @@
+var g_data = {
+b2093778835_2878781289_0:[{dummy:0},
+{anchor:'cvg77',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'146',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'146',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'146',h:'28',c:'g'}
+]},
+{anchor:'cvg78',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'149',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'149',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'149',h:'28',c:'g'}
+]},
+{anchor:'cvg79',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'153',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'153',h:'10',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'153',h:'20',c:'g'}
+]},
+{anchor:'cvg80',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'156',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'156',h:'4',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'156',h:'26',c:'g'}
+]},
+{anchor:'cvg81',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'159',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'159',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'159',h:'29',c:'g'}
+]}],
+b0720497296_4198300078_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'73',c:'Y',p:'77.77'}
+,{cr:'c',t:'T',z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',h:'27',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',h:'8',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'89',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                when CAPT_RDATA =>  nxt_state   <= IDLE;             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'99',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',h:'9',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',h:'8',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             -- W...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'112',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',h:'0',c:'r'}
+]},
+{anchor:'cvg14',items:[{z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',h:'23',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                                    if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'78',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'78',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'                                    if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'78',h:'21',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',h:'5',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'89',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'91',h:'3',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',h:'0',c:'r'}
+]},
+{anchor:'cvg19',items:[{z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',h:'3',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',h:'6',c:'g'}
+]},
+{anchor:'cvg21',items:[{z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             -- W...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'112',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'114',h:'3',c:'g'}
+]},
+{anchor:'cvg22',items:[{z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',h:'0',c:'r'}
+]},
+{anchor:'cvg23',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'198',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'198',h:'13',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'201',h:'52',c:'g'}
+]}],
+b2647300301_0481346111_0:[{dummy:0},
+{anchor:'cvg156',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'146',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'146',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'146',h:'28',c:'g'}
+]},
+{anchor:'cvg157',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'149',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'149',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'149',h:'28',c:'g'}
+]},
+{anchor:'cvg158',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'153',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'153',h:'10',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'153',h:'20',c:'g'}
+]},
+{anchor:'cvg159',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'156',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'156',h:'4',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'156',h:'26',c:'g'}
+]},
+{anchor:'cvg160',items:[{z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'159',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'159',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'                                ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'159',h:'29',c:'g'}
+]}],
+b1941912866_1636848953_0:[{dummy:0},
+{anchor:'cvg92',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'73',c:'Y',p:'77.77'}
+,{cr:'c',t:'T',z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',h:'27',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',h:'8',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'89',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                when CAPT_RDATA =>  nxt_state   <= IDLE;             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'99',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',h:'9',c:'g'}
+,{cr:'c',t:'T',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',h:'8',c:'g'}
+,{cr:'c',t:'T',z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             -- W...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'112',h:'3',c:'g'}
+,{cr:'m',t:'T',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',h:'0',c:'r'}
+]},
+{anchor:'cvg93',items:[{z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE       =>  if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'75',h:'23',c:'g'}
+]},
+{anchor:'cvg94',items:[{z:'                                    if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'78',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'78',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'                                    if(wr = \'1\' and wdata = std_logic_vec...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'78',h:'21',c:'g'}
+]},
+{anchor:'cvg95',items:[{z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_RADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'85',h:'5',c:'g'}
+]},
+{anchor:'cvg96',items:[{z:'                when INIT_RD    =>  if(ACK_NEEDED)  then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'89',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'91',h:'3',c:'g'}
+]},
+{anchor:'cvg97',items:[{z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_RACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'95',h:'0',c:'r'}
+]},
+{anchor:'cvg98',items:[{z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WADDR   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'104',h:'3',c:'g'}
+]},
+{anchor:'cvg99',items:[{z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when ST_WDATA   =>  if(wr = \'1\')    then             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'108',h:'6',c:'g'}
+]},
+{anchor:'cvg100',items:[{z:'                when INIT_WR    =>  if(ACK_NEEDED)  then             -- W...',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'112',c:'G',p:'100.00'}
+,{cr:'c',t:'E',z:'                                    else                             --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'114',h:'3',c:'g'}
+]},
+{anchor:'cvg101',items:[{z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',h:'0',c:'r'}
+,{cr:'m',t:'A',z:'                when WAIT_WACK  =>  if(ack_from_DUV = \'1\')  then     --',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'118',h:'0',c:'r'}
+]},
+{anchor:'cvg102',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'198',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'198',h:'13',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/mem_if_fsm.vhd',l:'201',h:'52',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

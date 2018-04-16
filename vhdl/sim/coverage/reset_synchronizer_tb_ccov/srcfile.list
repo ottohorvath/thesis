@@ -1,0 +1,2 @@
+../../logical/reset_synchronizer.vhd
+../tbench/reset_synchronizer_tb.vhd

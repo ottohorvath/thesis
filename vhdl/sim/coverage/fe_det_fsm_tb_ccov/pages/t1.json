@@ -1,0 +1,38 @@
+var g_data = {
+t4247662367_3086425847_0:{items:[{dummy:0}
+,{id:'cvg28',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#19',z:'clk',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg29',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#22',z:'clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg30 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#36',z:'cur_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'CAPTURED',h1:'1',c:'g'}
+,{id:'cvg31',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#21',z:'en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg32',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#24',z:'fe_caught',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg33 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#37',z:'nxt_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'CAPTURED',h1:'1',c:'g'}
+,{id:'cvg34',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#20',z:'rstn',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg35',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#23',z:'sig_from_fe_det',h1:'1',h2:'1',c:'G',p:'100.00'}
+]
+},
+t2677238136_2418733558_0:{items:[{dummy:0}
+,{id:'cvg28',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#19',z:'clk',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg29',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#22',z:'clr',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg30 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#36',z:'cur_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'CAPTURED',h1:'1',c:'g'}
+,{id:'cvg31',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#21',z:'en',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg32',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#24',z:'fe_caught',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg33 ',s:9,cr:'c',lnk:'__HDL_srcfile_1.htm#37',z:'nxt_state',c:'G',p:'100.00'}
+,{cr:'c',st:'1',z:'IDLE',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'ENABLED',h1:'1',c:'g'}
+,{cr:'c',st:'1',z:'CAPTURED',h1:'1',c:'g'}
+,{id:'cvg34',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#20',z:'rstn',h1:'1',h2:'1',c:'G',p:'100.00'}
+,{id:'cvg35',s:'2',cr:'c',lnk:'__HDL_srcfile_1.htm#23',z:'sig_from_fe_det',h1:'1',h2:'1',c:'G',p:'100.00'}
+]
+},
+dummyEnd:0
+};
+processTogglesData(g_data);

@@ -1,0 +1,2 @@
+../../logical/config_reg_if.vhd
+../tbench/config_reg_if_tb.vhd

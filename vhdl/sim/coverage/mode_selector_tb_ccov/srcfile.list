@@ -1,0 +1,2 @@
+../../logical/mode_selector.vhd
+../tbench/mode_selector_tb.vhd

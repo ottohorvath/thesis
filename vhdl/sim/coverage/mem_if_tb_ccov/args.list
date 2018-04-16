@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/mem_if_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/mem_if_tb_ccov/mem_if_tb.ucdb

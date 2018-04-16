@@ -1,0 +1,38 @@
+var g_data = {
+b3376703996_3665481412_0:[{dummy:0},
+{anchor:'cvg14',items:[{z:'                                        if(rstn = \'0\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'72',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                        if(rstn = \'0\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'72',h:'4',c:'g'}
+,{cr:'c',t:'T',z:'                                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'75',h:'10',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'77',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'77',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'77',h:'7',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                                            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'120',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'120',h:'4',c:'g'}
+,{cr:'c',t:'T',z:'                                            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'123',h:'11',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                                                if(re_det_reg_en = \'1\') t...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'126',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                                if(re_det_reg_en = \'1\') t...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'126',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                                                if(re_det_reg_en = \'1\') t...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'126',h:'7',c:'g'}
+]}],
+b1441492447_1538394257_0:[{dummy:0},
+{anchor:'cvg52',items:[{z:'                                        if(rstn = \'0\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'72',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                        if(rstn = \'0\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'72',h:'4',c:'g'}
+,{cr:'c',t:'T',z:'                                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'75',h:'10',c:'g'}
+]},
+{anchor:'cvg53',items:[{z:'                                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'77',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'77',h:'3',c:'g'}
+,{cr:'c',t:'A',z:'                                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'77',h:'7',c:'g'}
+]},
+{anchor:'cvg54',items:[{z:'                                            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'120',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'120',h:'4',c:'g'}
+,{cr:'c',t:'T',z:'                                            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'123',h:'11',c:'g'}
+]},
+{anchor:'cvg55',items:[{z:'                                                if(re_det_reg_en = \'1\') t...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'126',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                                if(re_det_reg_en = \'1\') t...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'126',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                                                if(re_det_reg_en = \'1\') t...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det.vhd',l:'126',h:'7',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

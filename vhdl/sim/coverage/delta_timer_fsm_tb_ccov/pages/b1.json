@@ -1,0 +1,102 @@
+var g_data = {
+b2370202177_1815044020_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'56',c:'G',p:'100.00'}
+,{cr:'c',t:'T',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',h:'19',c:'g'}
+,{cr:'c',t:'T',z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',h:'3',c:'g'}
+,{cr:'c',t:'T',z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',h:'2',c:'g'}
+]},
+{anchor:'cvg14',items:[{z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',h:'15',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                    elsif(chg_caught = \'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'64',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',h:'4',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',c:'Y',p:'66.66'}
+,{cr:'m',t:'I',z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                                    elsif(chg_caught = \'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'70',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',h:'2',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',h:'1',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'        show_cntr   <=  \'1\' when (cur_state = DONE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'87',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        show_cntr   <=  \'1\' when (cur_state = DONE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'87',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'        show_cntr   <=  \'1\' when (cur_state = DONE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'87',h:'11',c:'g'}
+]},
+{anchor:'cvg19',items:[{z:'        cntr_clr    <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'88',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        cntr_clr    <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'88',h:'5',c:'g'}
+,{cr:'c',t:'E',z:'        cntr_clr    <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'88',h:'7',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'        cntr_en     <=  \'1\' when (cur_state = COUNTING) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'89',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        cntr_en     <=  \'1\' when (cur_state = COUNTING) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'89',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'        cntr_en     <=  \'1\' when (cur_state = COUNTING) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'89',h:'10',c:'g'}
+]},
+{anchor:'cvg21',items:[{z:'        det_clr     <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'90',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        det_clr     <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'90',h:'5',c:'g'}
+,{cr:'c',t:'E',z:'        det_clr     <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'90',h:'7',c:'g'}
+]},
+{anchor:'cvg22',items:[{z:'        det_en      <=  \'1\' when ((cur_state = ENABLED) or (cur_state = C...',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'91',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        det_en      <=  \'1\' when ((cur_state = ENABLED) or (cur_state = C...',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'91',h:'6',c:'g'}
+,{cr:'c',t:'E',z:'        det_en      <=  \'1\' when ((cur_state = ENABLED) or (cur_state = C...',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'91',h:'6',c:'g'}
+]},
+{anchor:'cvg23',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'97',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'97',h:'8',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'100',h:'46',c:'g'}
+]}],
+b1781902717_1621740312_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'56',c:'G',p:'100.00'}
+,{cr:'c',t:'T',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',h:'19',c:'g'}
+,{cr:'c',t:'T',z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',h:'3',c:'g'}
+,{cr:'c',t:'T',z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',h:'2',c:'g'}
+]},
+{anchor:'cvg14',items:[{z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'58',h:'15',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                    elsif(chg_caught = \'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'64',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when ENABLED    =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'62',h:'4',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',c:'Y',p:'66.66'}
+,{cr:'m',t:'I',z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',h:'0',c:'r'}
+,{cr:'c',t:'T',z:'                                    elsif(chg_caught = \'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'70',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                when COUNTING   =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'68',h:'2',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                when DONE       =>  if(en=\'0\' and clr=\'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'74',h:'1',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'        show_cntr   <=  \'1\' when (cur_state = DONE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'87',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        show_cntr   <=  \'1\' when (cur_state = DONE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'87',h:'1',c:'g'}
+,{cr:'c',t:'E',z:'        show_cntr   <=  \'1\' when (cur_state = DONE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'87',h:'11',c:'g'}
+]},
+{anchor:'cvg19',items:[{z:'        cntr_clr    <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'88',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        cntr_clr    <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'88',h:'5',c:'g'}
+,{cr:'c',t:'E',z:'        cntr_clr    <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'88',h:'7',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'        cntr_en     <=  \'1\' when (cur_state = COUNTING) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'89',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        cntr_en     <=  \'1\' when (cur_state = COUNTING) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'89',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'        cntr_en     <=  \'1\' when (cur_state = COUNTING) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'89',h:'10',c:'g'}
+]},
+{anchor:'cvg21',items:[{z:'        det_clr     <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'90',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        det_clr     <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'90',h:'5',c:'g'}
+,{cr:'c',t:'E',z:'        det_clr     <=  \'1\' when (cur_state = IDLE) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'90',h:'7',c:'g'}
+]},
+{anchor:'cvg22',items:[{z:'        det_en      <=  \'1\' when ((cur_state = ENABLED) or (cur_state = C...',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'91',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        det_en      <=  \'1\' when ((cur_state = ENABLED) or (cur_state = C...',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'91',h:'6',c:'g'}
+,{cr:'c',t:'E',z:'        det_en      <=  \'1\' when ((cur_state = ENABLED) or (cur_state = C...',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'91',h:'6',c:'g'}
+]},
+{anchor:'cvg23',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'97',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'97',h:'8',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/delta_timer_fsm.vhd',l:'100',h:'46',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

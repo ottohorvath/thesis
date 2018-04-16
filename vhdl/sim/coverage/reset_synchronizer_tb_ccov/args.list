@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/reset_synchronizer_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/reset_synchronizer_tb_ccov/reset_synchronizer_tb.ucdb

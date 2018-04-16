@@ -1,0 +1,94 @@
+var g_data = {
+b2350314446_2204707177_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'64',c:'G',p:'100.00'}
+,{cr:'c',t:'T',z:'                when IDLE           =>      if( (wdata(1 downto 0) = b&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'67',h:'17',c:'g'}
+,{cr:'c',t:'T',z:'                when ENABLED        =>      --if( wdata(1 downto 0) = b&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'73',h:'16',c:'g'}
+,{cr:'c',t:'T',z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',h:'11',c:'g'}
+,{cr:'c',t:'T',z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',h:'7',c:'g'}
+]},
+{anchor:'cvg14',items:[{z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'69',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'69',h:'8',c:'g'}
+,{cr:'c',t:'A',z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'69',h:'9',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                                            if( wr = \'1\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'76',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            if( wr = \'1\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'76',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'                                            if( wr = \'1\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'76',h:'10',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                            elsif(fifo_rd = \'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'83',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',h:'6',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'93',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',h:'4',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'108',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'108',h:'10',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'108',h:'18',c:'g'}
+]},
+{anchor:'cvg19',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'113',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'113',h:'22',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'113',h:'6',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'116',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'116',h:'4',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'116',h:'24',c:'g'}
+]},
+{anchor:'cvg21',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'119',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'119',h:'20',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'119',h:'8',c:'g'}
+]},
+{anchor:'cvg22',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'125',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'125',h:'9',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'128',h:'52',c:'g'}
+]}],
+b3068861698_1763397125_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'64',c:'G',p:'100.00'}
+,{cr:'c',t:'T',z:'                when IDLE           =>      if( (wdata(1 downto 0) = b&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'67',h:'17',c:'g'}
+,{cr:'c',t:'T',z:'                when ENABLED        =>      --if( wdata(1 downto 0) = b&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'73',h:'16',c:'g'}
+,{cr:'c',t:'T',z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',h:'11',c:'g'}
+,{cr:'c',t:'T',z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',h:'7',c:'g'}
+]},
+{anchor:'cvg14',items:[{z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'69',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'69',h:'8',c:'g'}
+,{cr:'c',t:'A',z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'69',h:'9',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                                            if( wr = \'1\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'76',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                            if( wr = \'1\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'76',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'                                            if( wr = \'1\') then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'76',h:'10',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                            elsif(fifo_rd = \'1\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'83',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when RDATA_PRESENT  =>      if( wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'81',h:'6',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                            ) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'93',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when RDATA_GOT_READ_OUT =>  if(wdata(1 downto 0) = b&#34;10&#34;...',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'89',h:'4',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'108',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'108',h:'10',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'108',h:'18',c:'g'}
+]},
+{anchor:'cvg19',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'113',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'113',h:'22',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'113',h:'6',c:'g'}
+]},
+{anchor:'cvg20',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'116',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'116',h:'4',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'116',h:'24',c:'g'}
+]},
+{anchor:'cvg21',items:[{z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'119',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'119',h:'20',c:'g'}
+,{cr:'c',t:'E',z:'                                    ) else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'119',h:'8',c:'g'}
+]},
+{anchor:'cvg22',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'125',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'125',h:'9',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/fifo_rd_if_fsm.vhd',l:'128',h:'52',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

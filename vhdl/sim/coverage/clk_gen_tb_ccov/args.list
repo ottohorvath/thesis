@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/clk_gen_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/clk_gen_tb_ccov/clk_gen_tb.ucdb

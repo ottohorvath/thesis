@@ -1,0 +1,2 @@
+../../logical/clk_gen.vhd
+../tbench/clk_gen_tb.vhd

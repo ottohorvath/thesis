@@ -1,0 +1,84 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="2"><q-n>     2  </q-n></a><q-m>--</q-m>
+<a name="3"><q-n>     3  </q-n></a><q-m>-- Author: Otto Horvath</q-m>
+<a name="4"><q-n>     4  </q-n></a><q-m>--</q-m>
+<a name="5"><q-n>     5  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="6"><q-n>     6  </q-n></a><q-m>--</q-m>
+<a name="7"><q-n>     7  </q-n></a><q-m>-- Description: ~</q-m>
+<a name="8"><q-n>     8  </q-n></a><q-m>--</q-m>
+<a name="9"><q-n>     9  </q-n></a><q-m>--</q-m>
+<a name="10"><q-n>     10  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="11"><q-n>     11  </q-n></a>
+<a name="12"><q-n>     12  </q-n></a><q-w>library</q-w> ieee                    ;
+<a name="13"><q-n>     13  </q-n></a><q-w>use</q-w>     ieee.std_logic_1164.<q-w>all</q-w> ;
+<a name="14"><q-n>     14  </q-n></a><q-w>use</q-w>     ieee.numeric_std.<q-w>all</q-w>    ;
+<a name="15"><q-n>     15  </q-n></a>
+<a name="16"><q-n>     16  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="17"><q-n>     17  </q-n></a><q-w>entity</q-w> chg_det <q-w>is</q-w>
+<a name="18"><q-n>     18  </q-n></a>
+<a name="19"><q-n>     19  </q-n></a>    <q-w>port</q-w>(
+<a name="20"><q-n>     20  </q-n></a>        clk             :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="21"><q-n>     21  </q-n></a>        rstn            :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="22"><q-n>     22  </q-n></a>        en              :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="23"><q-n>     23  </q-n></a>        clr             :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="24"><q-n>     24  </q-n></a>        sig             :   <q-a>in</q-w>  <q-t>std_logic</q-w>;
+<a name="25"><q-n>     25  </q-n></a>        det_out         :   <q-a>out</q-w> <q-t>std_logic</q-w>
+<a name="26"><q-n>     26  </q-n></a>    );
+<a name="27"><q-n>     27  </q-n></a><q-w>end</q-w> <q-w>entity</q-w> chg_det;
+<a name="28"><q-n>     28  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="29"><q-n>     29  </q-n></a>
+<a name="30"><q-n>     30  </q-n></a>
+<a name="31"><q-n>     31  </q-n></a><q-m>---------------------------------------------------------------------------</q-m>
+<a name="32"><q-n>     32  </q-n></a><q-w>architecture</q-w> rtl <q-w>of</q-w> chg_det <q-w>is</q-w>
+<a name="33"><q-n>     33  </q-n></a>
+<a name="34"><q-n>     34  </q-n></a>    <q-w>signal</q-w>  sample      :   <q-t>std_logic</q-w>;
+<a name="35"><q-n>     35  </q-n></a>    <q-w>signal</q-w>  en_sampling :   <q-t>std_logic</q-w>;
+<a name="36"><q-n>     36  </q-n></a>
+<a name="37"><q-n>     37  </q-n></a><q-w>begin</q-w>
+<a name="38"><q-n>     38  </q-n></a>
+<a name="39"><q-n>     39  </q-n></a>    <q-m>---------------------------------------------------------------</q-m>
+<a name="40"><q-n>     40  </q-n></a>    L_SAMPLER:  <q-w>process</q-w>(clk,rstn)  <q-w>is</q-w>
+<a name="41"><q-n>     41  </q-n></a>    <q-w>begin</q-w>
+<a name="42"><q-n>     42  </q-n></a>        <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="43"><q-n>     43  </q-n></a>            sample &lt;= '0';
+<a name="44"><q-n>     44  </q-n></a>
+<a name="45"><q-n>     45  </q-n></a>        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="46"><q-n>     46  </q-n></a>            <q-m>-----------------------------</q-m>
+<a name="47"><q-n>     47  </q-n></a>            <q-w>if</q-w>(en_sampling = '1')   <q-w>then</q-w>
+<a name="48"><q-n>     48  </q-n></a>                sample  &lt;= sig;
+<a name="49"><q-n>     49  </q-n></a>
+<a name="50"><q-n>     50  </q-n></a>            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="51"><q-n>     51  </q-n></a>            <q-m>-----------------------------</q-m>
+<a name="52"><q-n>     52  </q-n></a>        <q-w>end</q-w> <q-w>if</q-w>;
+<a name="53"><q-n>     53  </q-n></a>    <q-w>end</q-w> <q-w>process</q-w>;
+<a name="54"><q-n>     54  </q-n></a>    <q-m>---------------------------------------------------------------</q-m>
+<a name="55"><q-n>     55  </q-n></a>    L_FSM:      <q-w>entity</q-w> work.chg_det_fsm(rtl)
+<a name="56"><q-n>     56  </q-n></a>                    <q-w>port</q-w> <q-w>map</q-w>(
+<a name="57"><q-n>     57  </q-n></a>                        clk             =&gt;  clk         ,
+<a name="58"><q-n>     58  </q-n></a>                        rstn            =&gt;  rstn        ,
+<a name="59"><q-n>     59  </q-n></a>                        en_fsm          =&gt;  en          ,
+<a name="60"><q-n>     60  </q-n></a>                        clr_fsm         =&gt;  clr         ,
+<a name="61"><q-n>     61  </q-n></a>                        sig_fsm         =&gt;  sig         ,
+<a name="62"><q-n>     62  </q-n></a>                        sample_fsm      =&gt;  sample      ,
+<a name="63"><q-n>     63  </q-n></a>                        en_sampling_fsm =&gt;  en_sampling ,
+<a name="64"><q-n>     64  </q-n></a>                        sig_changed_fsm =&gt;  det_out
+<a name="65"><q-n>     65  </q-n></a>                    );
+<a name="66"><q-n>     66  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="67"><q-n>     67  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w> rtl;
+<a name="68"><q-n>     68  </q-n></a>
+</tt>
+</pre>
+
+  
+</body>
+</html>

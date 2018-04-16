@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/sc_ff_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/sc_ff_tb_ccov/sc_ff_tb.ucdb

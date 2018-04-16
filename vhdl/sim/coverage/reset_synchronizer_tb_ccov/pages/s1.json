@@ -1,0 +1,12 @@
+var g_data = {
+s0392392860_3856558818_0:[{dummy:0},{items:[{dummy:0}
+,{l:'48',c:'N'}
+,{h:'1',c:'G',l:'49'}],jsonsrcf:'__HDL_srcfile_1.json',fname:'../../logical/reset_synchronizer.vhd'}
+],
+s0382183741_3746530412_0:[{dummy:0},{items:[{dummy:0}
+,{l:'48',c:'N'}
+,{h:'1',c:'G',l:'49'}],jsonsrcf:'__HDL_srcfile_1.json',fname:'../../logical/reset_synchronizer.vhd'}
+],
+dummyEnd:0
+};
+processStatementsData(g_data);

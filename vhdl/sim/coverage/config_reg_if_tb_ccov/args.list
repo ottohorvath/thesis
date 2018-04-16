@@ -1,0 +1,12 @@
+-html
+-htmldir
+../coverage/config_reg_if_tb_ccov
+-source
+-details
+-code
+bcefst
+-threshL
+50
+-threshH
+90
+../coverage/config_reg_if_tb_ccov/config_reg_if_tb.ucdb

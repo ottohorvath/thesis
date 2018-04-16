@@ -1,0 +1,58 @@
+var g_data = {
+b1038595998_3779243826_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'49',c:'G',p:'100.00'}
+,{cr:'c',t:'T',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',h:'12',c:'g'}
+,{cr:'c',t:'T',z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',h:'3',c:'g'}
+]},
+{anchor:'cvg14',items:[{z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',h:'8',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                    elsif(sig_from_re_det = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'57',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',h:'4',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',h:'2',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'        re_caught   <= \'1\'  when (cur_state = CAPTURED)    else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'76',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        re_caught   <= \'1\'  when (cur_state = CAPTURED)    else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'76',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'        re_caught   <= \'1\'  when (cur_state = CAPTURED)    else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'76',h:'9',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'82',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'82',h:'5',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'85',h:'33',c:'g'}
+]}],
+b1595012453_3483264701_0:[{dummy:0},
+{anchor:'cvg13',items:[{z:'            case(cur_state) is',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'49',c:'G',p:'100.00'}
+,{cr:'c',t:'T',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',h:'12',c:'g'}
+,{cr:'c',t:'T',z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',h:'7',c:'g'}
+,{cr:'c',t:'T',z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',h:'3',c:'g'}
+]},
+{anchor:'cvg14',items:[{z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',h:'4',c:'g'}
+,{cr:'c',t:'A',z:'                when IDLE       =>  if(en=\'1\' and clr=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'51',h:'8',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',h:'1',c:'g'}
+,{cr:'c',t:'T',z:'                                    elsif(sig_from_re_det = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'57',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                when ENABLED    =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'55',h:'4',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'                when CAPTURED  =>  if(clr=\'1\' and en=\'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'61',h:'2',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'        re_caught   <= \'1\'  when (cur_state = CAPTURED)    else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'76',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'        re_caught   <= \'1\'  when (cur_state = CAPTURED)    else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'76',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'        re_caught   <= \'1\'  when (cur_state = CAPTURED)    else \'0\';',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'76',h:'9',c:'g'}
+]},
+{anchor:'cvg18',items:[{z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'82',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'            if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'82',h:'5',c:'g'}
+,{cr:'c',t:'T',z:'            elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_det_fsm.vhd',l:'85',h:'33',c:'g'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

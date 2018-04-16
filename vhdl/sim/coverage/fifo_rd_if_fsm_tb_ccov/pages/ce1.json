@@ -1,0 +1,126 @@
+var g_data = {
+c2350314446_2204707177_0:[{dummy:0}
+,{anchor:'cvg24',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#69',z:'(((wdata(1 DOWNTO 0) = "01") and (wr = \'1\')) or (trig_in_fsm = \'1\'))',c:'Y',p:'66.66',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "01")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'(trig_in_fsm = \'1\')',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "01")_0',h1:'1',t:'c',c1:'not (trig_in_fsm = \'1\')'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "01")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'not (trig_in_fsm = \'1\') && (wdata(1 DOWNTO 0) = "01")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "01")'}
+,{n:'5',z:'(trig_in_fsm = \'1\')_0',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+,{n:'6',z:'(trig_in_fsm = \'1\')_1',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+]}
+,{anchor:'cvg26',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#81',z:'((wdata(1 DOWNTO 0) = "10") and (wr = \'1\'))',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "10")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "10")_0',h1:'1',t:'c',c1:'-'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "10")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+]}
+,{anchor:'cvg28',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#89',z:'((wdata(1 DOWNTO 0) = "10") and (wr = \'1\'))',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "10")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "10")_0',h1:'1',t:'c',c1:'-'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "10")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+]}
+,{anchor:'cvg30',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#93',z:'(((wdata(1 DOWNTO 0) = "01") and (wr = \'1\')) or (trig_in_fsm = \'1\'))',c:'Y',p:'66.66',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "01")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'(trig_in_fsm = \'1\')',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "01")_0',h1:'1',t:'c',c1:'not (trig_in_fsm = \'1\')'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "01")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'not (trig_in_fsm = \'1\') && (wdata(1 DOWNTO 0) = "01")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "01")'}
+,{n:'5',z:'(trig_in_fsm = \'1\')_0',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+,{n:'6',z:'(trig_in_fsm = \'1\')_1',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+]}
+,{anchor:'cvg32',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#113',z:'(((cur_state = IDLE) or (cur_state = ENABLED)) or (cur_state = RDATA_GOT_READ_OUT))',c:'G',p:'100.00',d:'0',F:'1'}
+,{}
+,{z:'(cur_state = IDLE)',c:'g',r:'',i:''}
+,{z:'(cur_state = ENABLED)',c:'g',r:'',i:''}
+,{z:'(cur_state = RDATA_GOT_READ_OUT)',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'(cur_state = IDLE)_0',h1:'1',t:'c',c1:'not (cur_state = RDATA_GOT_READ_OUT) && not (cur_state = ENABLED)'}
+,{n:'2',z:'(cur_state = IDLE)_1',h1:'1',t:'c',c1:'-'}
+,{n:'3',z:'(cur_state = ENABLED)_0',h1:'1',t:'c',c1:'not (cur_state = RDATA_GOT_READ_OUT) && not (cur_state = IDLE)'}
+,{n:'4',z:'(cur_state = ENABLED)_1',h1:'1',t:'c',c1:'not (cur_state = IDLE)'}
+,{n:'5',z:'(cur_state = RDATA_GOT_READ_OUT)_0',h1:'1',t:'c',c1:'not ((cur_state = IDLE) or (cur_state = ENABLED))'}
+,{n:'6',z:'(cur_state = RDATA_GOT_READ_OUT)_1',h1:'1',t:'c',c1:'not ((cur_state = IDLE) or (cur_state = ENABLED))'}
+]}
+],
+c3068861698_1763397125_0:[{dummy:0}
+,{anchor:'cvg24',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#69',z:'(((wdata(1 DOWNTO 0) = "01") and (wr = \'1\')) or (trig_in_fsm = \'1\'))',c:'Y',p:'66.66',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "01")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'(trig_in_fsm = \'1\')',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "01")_0',h1:'1',t:'c',c1:'not (trig_in_fsm = \'1\')'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "01")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'not (trig_in_fsm = \'1\') && (wdata(1 DOWNTO 0) = "01")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "01")'}
+,{n:'5',z:'(trig_in_fsm = \'1\')_0',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+,{n:'6',z:'(trig_in_fsm = \'1\')_1',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+]}
+,{anchor:'cvg26',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#81',z:'((wdata(1 DOWNTO 0) = "10") and (wr = \'1\'))',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "10")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "10")_0',h1:'1',t:'c',c1:'-'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "10")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+]}
+,{anchor:'cvg28',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#89',z:'((wdata(1 DOWNTO 0) = "10") and (wr = \'1\'))',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "10")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "10")_0',h1:'1',t:'c',c1:'-'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "10")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "10")'}
+]}
+,{anchor:'cvg30',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#93',z:'(((wdata(1 DOWNTO 0) = "01") and (wr = \'1\')) or (trig_in_fsm = \'1\'))',c:'Y',p:'66.66',d:'0',F:'1'}
+,{}
+,{z:'(wdata(1 DOWNTO 0) = "01")',c:'g',r:'',i:''}
+,{z:'(wr = \'1\')',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'(trig_in_fsm = \'1\')',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'(wdata(1 DOWNTO 0) = "01")_0',h1:'1',t:'c',c1:'not (trig_in_fsm = \'1\')'}
+,{n:'2',z:'(wdata(1 DOWNTO 0) = "01")_1',h1:'1',t:'c',c1:'(wr = \'1\')'}
+,{n:'3',z:'(wr = \'1\')_0',h1:'0',t:'c',c1:'not (trig_in_fsm = \'1\') && (wdata(1 DOWNTO 0) = "01")'}
+,{n:'4',z:'(wr = \'1\')_1',h1:'1',t:'c',c1:'(wdata(1 DOWNTO 0) = "01")'}
+,{n:'5',z:'(trig_in_fsm = \'1\')_0',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+,{n:'6',z:'(trig_in_fsm = \'1\')_1',h1:'1',t:'c',c1:'not ((wdata(1 DOWNTO 0) = "01") and (wr = \'1\'))'}
+]}
+,{anchor:'cvg32',items:[{s:'3',x:'FC',lnk:'__HDL_srcfile_1.htm#113',z:'(((cur_state = IDLE) or (cur_state = ENABLED)) or (cur_state = RDATA_GOT_READ_OUT))',c:'G',p:'100.00',d:'0',F:'1'}
+,{}
+,{z:'(cur_state = IDLE)',c:'g',r:'',i:''}
+,{z:'(cur_state = ENABLED)',c:'g',r:'',i:''}
+,{z:'(cur_state = RDATA_GOT_READ_OUT)',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'(cur_state = IDLE)_0',h1:'1',t:'c',c1:'not (cur_state = RDATA_GOT_READ_OUT) && not (cur_state = ENABLED)'}
+,{n:'2',z:'(cur_state = IDLE)_1',h1:'1',t:'c',c1:'-'}
+,{n:'3',z:'(cur_state = ENABLED)_0',h1:'1',t:'c',c1:'not (cur_state = RDATA_GOT_READ_OUT) && not (cur_state = IDLE)'}
+,{n:'4',z:'(cur_state = ENABLED)_1',h1:'1',t:'c',c1:'not (cur_state = IDLE)'}
+,{n:'5',z:'(cur_state = RDATA_GOT_READ_OUT)_0',h1:'1',t:'c',c1:'not ((cur_state = IDLE) or (cur_state = ENABLED))'}
+,{n:'6',z:'(cur_state = RDATA_GOT_READ_OUT)_1',h1:'1',t:'c',c1:'not ((cur_state = IDLE) or (cur_state = ENABLED))'}
+]}
+],
+dummyEnd:0
+};
+processCondExprData(g_data);
