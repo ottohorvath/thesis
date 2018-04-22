@@ -103,7 +103,7 @@ begin
                                     end if;                          --
                 -------------------------------------------------------
                 when EXTD_RD    =>  if(ack_from_DUV = '1')  then     --
-                                        nxt_state   <= CAPT_RDATA;   --
+                                        nxt_state   <= IDLE;   --
                                     end if;                          --
                 -------------------------------------------------------
                 when CAPT_RDATA =>  nxt_state       <= IDLE;         --
@@ -208,7 +208,8 @@ begin
             wdata_en<=  '1' when( cur_state = ST_WDATA
                                 ) else '0';
             --------------------------------------------------
-            rdata_en<=  '1' when( cur_state = CAPT_RDATA
+            rdata_en<=  '1' when( cur_state = CAPT_RDATA    or
+                                  (cur_state = EXTD_RD and ack_from_DUV = '1')
                                 ) else '0';
             --------------------------------------------------
         end generate;
