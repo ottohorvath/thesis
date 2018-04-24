@@ -113,7 +113,7 @@
 <a name="103"><q-n>     103  </q-n></a>                                    <q-w>end</q-w> <q-w>if</q-w>;                          <q-m>--</q-m>
 <a name="104"><q-n>     104  </q-n></a>                <q-m>-------------------------------------------------------</q-m>
 <a name="105"><q-n>     105  </q-n></a>                <q-w>when</q-w> EXTD_RD    =&gt;  <q-w>if</q-w>(ack_from_DUV = '1')  <q-w>then</q-w>     <q-m>--</q-m>
-<a name="106"><q-n>     106  </q-n></a>                                        nxt_state   &lt;= CAPT_RDATA;   <q-m>--</q-m>
+<a name="106"><q-n>     106  </q-n></a>                                        nxt_state   &lt;= IDLE;   <q-m>--</q-m>
 <a name="107"><q-n>     107  </q-n></a>                                    <q-w>end</q-w> <q-w>if</q-w>;                          <q-m>--</q-m>
 <a name="108"><q-n>     108  </q-n></a>                <q-m>-------------------------------------------------------</q-m>
 <a name="109"><q-n>     109  </q-n></a>                <q-w>when</q-w> CAPT_RDATA =&gt;  nxt_state       &lt;= IDLE;         <q-m>--</q-m>
@@ -218,27 +218,28 @@
 <a name="208"><q-n>     208  </q-n></a>            wdata_en&lt;=  '1' <q-w>when</q-w>( cur_state = ST_WDATA
 <a name="209"><q-n>     209  </q-n></a>                                ) <q-w>else</q-w> '0';
 <a name="210"><q-n>     210  </q-n></a>            <q-m>--------------------------------------------------</q-m>
-<a name="211"><q-n>     211  </q-n></a>            rdata_en&lt;=  '1' <q-w>when</q-w>( cur_state = CAPT_RDATA
-<a name="212"><q-n>     212  </q-n></a>                                ) <q-w>else</q-w> '0';
-<a name="213"><q-n>     213  </q-n></a>            <q-m>--------------------------------------------------</q-m>
-<a name="214"><q-n>     214  </q-n></a>        <q-w>end</q-w> <q-w>generate</q-w>;
-<a name="215"><q-n>     215  </q-n></a>
+<a name="211"><q-n>     211  </q-n></a>            rdata_en&lt;=  '1' <q-w>when</q-w>( cur_state = CAPT_RDATA    <q-w>or</q-w>
+<a name="212"><q-n>     212  </q-n></a>                                  (cur_state = EXTD_RD <q-w>and</q-w> ack_from_DUV = '1')
+<a name="213"><q-n>     213  </q-n></a>                                ) <q-w>else</q-w> '0';
+<a name="214"><q-n>     214  </q-n></a>            <q-m>--------------------------------------------------</q-m>
+<a name="215"><q-n>     215  </q-n></a>        <q-w>end</q-w> <q-w>generate</q-w>;
 <a name="216"><q-n>     216  </q-n></a>
-<a name="217"><q-n>     217  </q-n></a>        <q-m>-----------------------------------------------------</q-m>
-<a name="218"><q-n>     218  </q-n></a>        L_STATE:    <q-w>process</q-w>(clk,rstn)   <q-w>is</q-w>
-<a name="219"><q-n>     219  </q-n></a>        <q-w>begin</q-w>
-<a name="220"><q-n>     220  </q-n></a>            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
-<a name="221"><q-n>     221  </q-n></a>                cur_state  &lt;= IDLE;
-<a name="222"><q-n>     222  </q-n></a>
-<a name="223"><q-n>     223  </q-n></a>            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
-<a name="224"><q-n>     224  </q-n></a>                cur_state  &lt;= nxt_state;
-<a name="225"><q-n>     225  </q-n></a>
-<a name="226"><q-n>     226  </q-n></a>            <q-w>end</q-w> <q-w>if</q-w>;
-<a name="227"><q-n>     227  </q-n></a>        <q-w>end</q-w> <q-w>process</q-w>;
-<a name="228"><q-n>     228  </q-n></a>        <q-m>-----------------------------------------------------</q-m>
-<a name="229"><q-n>     229  </q-n></a>    <q-w>end</q-w> <q-w>block</q-w>;
-<a name="230"><q-n>     230  </q-n></a>
-<a name="231"><q-n>     231  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w>;</tt>
+<a name="217"><q-n>     217  </q-n></a>
+<a name="218"><q-n>     218  </q-n></a>        <q-m>-----------------------------------------------------</q-m>
+<a name="219"><q-n>     219  </q-n></a>        L_STATE:    <q-w>process</q-w>(clk,rstn)   <q-w>is</q-w>
+<a name="220"><q-n>     220  </q-n></a>        <q-w>begin</q-w>
+<a name="221"><q-n>     221  </q-n></a>            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="222"><q-n>     222  </q-n></a>                cur_state  &lt;= IDLE;
+<a name="223"><q-n>     223  </q-n></a>
+<a name="224"><q-n>     224  </q-n></a>            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="225"><q-n>     225  </q-n></a>                cur_state  &lt;= nxt_state;
+<a name="226"><q-n>     226  </q-n></a>
+<a name="227"><q-n>     227  </q-n></a>            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="228"><q-n>     228  </q-n></a>        <q-w>end</q-w> <q-w>process</q-w>;
+<a name="229"><q-n>     229  </q-n></a>        <q-m>-----------------------------------------------------</q-m>
+<a name="230"><q-n>     230  </q-n></a>    <q-w>end</q-w> <q-w>block</q-w>;
+<a name="231"><q-n>     231  </q-n></a>
+<a name="232"><q-n>     232  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w>;</tt>
 </pre>
 
   

@@ -1,5 +1,5 @@
 # vsim -batch -t 1ps -coverage -do "coverage save -onexit ../coverage/fe_det_tb_ccov/fe_det_tb.ucdb; run -all; quit" -default_radix hexadecimal -logfile ../logs/rgr/fe_det_tb_log.log work.fe_det_tb_opt 
-# Start time: 22:18:25 on Apr 16,2018
+# Start time: 11:53:26 on Apr 24,2018
 # //  Questa Sim-64
 # //  Version 10.4e win64 Apr  9 2016
 # //
@@ -36,5 +36,5 @@
 # =====================================================              Start of the Simulation       =====================================================RTL name: 'fe_det'0 ps: process_tc.setup.clk_gen: Clock is ON!Testcase 0============1 ps: process_rst_gen: Reset is asserted.1001 ps: process_rst_gen: Reset is de-asserted.10001 ps: process_tc.run_test.fe_det_test.test: Testcase FINISHED ...Testcase 0 PASSED!Testcase 1============10002 ps: process_rst_gen: Reset is asserted.11002 ps: process_rst_gen: Reset is de-asserted.50000 ps: process_tc.run_test.fe_det_test.test: Testcase FINISHED ...Testcase 1 PASSED!Testcase 2============50001 ps: process_rst_gen: Reset is asserted.51001 ps: process_rst_gen: Reset is de-asserted.110000 ps: process_tc.run_test.fe_det_test.test: Testcase FINISHED ...Testcase 2 PASSED!Testcase 3============110001 ps: process_rst_gen: Reset is asserted.111001 ps: process_rst_gen: Reset is de-asserted.160000 ps: process_tc.run_test.fe_det_test.test: Testcase FINISHED ...Testcase 3 PASSED!process_tc.report_and_exit.gen_rgr_report_html: Processing the check descriptor ...process_tc.report_and_exit.gen_rgr_report_html: Generating HTML report ...process_tc.report_and_exit.gen_rgr_report_html: Done!=====================================================              End of the Simulation       =====================================================Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
 #  quit
 # Saving coverage database on exit...
-# End time: 22:18:28 on Apr 16,2018, Elapsed time: 0:00:03
+# End time: 11:53:28 on Apr 24,2018, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0

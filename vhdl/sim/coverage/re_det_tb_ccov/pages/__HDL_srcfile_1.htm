@@ -59,105 +59,110 @@
 <a name="49"><q-n>     49  </q-n></a>    <q-m>-- Rising-edge detector signals</q-m>
 <a name="50"><q-n>     50  </q-n></a>    <q-m>-- =============================</q-m>
 <a name="51"><q-n>     51  </q-n></a>    <q-w>signal</q-w>      re_det_reg      :   <q-t>std_logic</q-w>;
-<a name="52"><q-n>     52  </q-n></a>    <q-w>signal</q-w>      re_det_reg_en   :   <q-t>std_logic</q-w>;
-<a name="53"><q-n>     53  </q-n></a>    <q-w>signal</q-w>      re_det_out      :   <q-t>std_logic</q-w>;
+<a name="52"><q-n>     52  </q-n></a>    <q-w>signal</q-w>      re_det_out      :   <q-t>std_logic</q-w>;
+<a name="53"><q-n>     53  </q-n></a>
 <a name="54"><q-n>     54  </q-n></a>
-<a name="55"><q-n>     55  </q-n></a>
-<a name="56"><q-n>     56  </q-n></a>    <q-m>-- Signals from FSM</q-m>
-<a name="57"><q-n>     57  </q-n></a>    <q-m>-- ===================</q-m>
-<a name="58"><q-n>     58  </q-n></a>    <q-w>signal</q-w>      fsm_re_caught       :   <q-t>std_logic</q-w>;
+<a name="55"><q-n>     55  </q-n></a>    <q-m>-- Signals from FSM</q-m>
+<a name="56"><q-n>     56  </q-n></a>    <q-m>-- ===================</q-m>
+<a name="57"><q-n>     57  </q-n></a>    <q-w>signal</q-w>      fsm_re_caught       :   <q-t>std_logic</q-w>;
+<a name="58"><q-n>     58  </q-n></a>
 <a name="59"><q-n>     59  </q-n></a>
-<a name="60"><q-n>     60  </q-n></a>
-<a name="61"><q-n>     61  </q-n></a>    <q-m>-- Trigger output signals</q-m>
-<a name="62"><q-n>     62  </q-n></a>    <q-m>-- ======================</q-m>
-<a name="63"><q-n>     63  </q-n></a>    <q-w>signal</q-w>      trig_out_reg        :   <q-t>std_logic</q-w>;
+<a name="60"><q-n>     60  </q-n></a>    <q-m>-- Trigger output signals</q-m>
+<a name="61"><q-n>     61  </q-n></a>    <q-m>-- ======================</q-m>
+<a name="62"><q-n>     62  </q-n></a>    <q-w>signal</q-w>      trig_out_reg        :   <q-t>std_logic</q-w>;
+<a name="63"><q-n>     63  </q-n></a>
 <a name="64"><q-n>     64  </q-n></a>
-<a name="65"><q-n>     65  </q-n></a><q-w>begin</q-w>
-<a name="66"><q-n>     66  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="67"><q-n>     67  </q-n></a>    L_WDATA:    <q-w>block</q-w>
-<a name="68"><q-n>     68  </q-n></a>                <q-w>begin</q-w>
-<a name="69"><q-n>     69  </q-n></a>                    <q-m>-----------------------------------------------------</q-m>
-<a name="70"><q-n>     70  </q-n></a>                    L_WDATA_REG:    <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
-<a name="71"><q-n>     71  </q-n></a>                                    <q-w>begin</q-w>
-<a name="72"><q-n>     72  </q-n></a>                                        <q-w>if</q-w>(rstn = '0') <q-w>then</q-w>
-<a name="73"><q-n>     73  </q-n></a>                                            wdata_reg &lt;= b<q-l>"00"</q-l>;
-<a name="74"><q-n>     74  </q-n></a>
-<a name="75"><q-n>     75  </q-n></a>                                        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
-<a name="76"><q-n>     76  </q-n></a>
-<a name="77"><q-n>     77  </q-n></a>                                            <q-w>if</q-w>(wr = '1')    <q-w>then</q-w>
-<a name="78"><q-n>     78  </q-n></a>                                                wdata_reg   &lt;= wdata;
-<a name="79"><q-n>     79  </q-n></a>                                            <q-w>end</q-w> <q-w>if</q-w>;
-<a name="80"><q-n>     80  </q-n></a>
-<a name="81"><q-n>     81  </q-n></a>                                        <q-w>end</q-w> <q-w>if</q-w>;
-<a name="82"><q-n>     82  </q-n></a>                                    <q-w>end</q-w> <q-w>process</q-w>;
-<a name="83"><q-n>     83  </q-n></a>                    <q-m>-----------------------------------------------------</q-m>
-<a name="84"><q-n>     84  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="85"><q-n>     85  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="86"><q-n>     86  </q-n></a>    L_TRIG:     <q-w>block</q-w>
-<a name="87"><q-n>     87  </q-n></a>                <q-w>begin</q-w>
-<a name="88"><q-n>     88  </q-n></a>                    L_REG:  <q-w>if</q-w>(REG_LAYER = true)    <q-w>generate</q-w>
-<a name="89"><q-n>     89  </q-n></a>                                <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
-<a name="90"><q-n>     90  </q-n></a>                                <q-w>begin</q-w>
-<a name="91"><q-n>     91  </q-n></a>                                    <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
-<a name="92"><q-n>     92  </q-n></a>                                        trig_out_reg    &lt;= '0';
-<a name="93"><q-n>     93  </q-n></a>                                    <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
-<a name="94"><q-n>     94  </q-n></a>                                        trig_out_reg    &lt;= fsm_re_caught;
-<a name="95"><q-n>     95  </q-n></a>                                    <q-w>end</q-w> <q-w>if</q-w>;
-<a name="96"><q-n>     96  </q-n></a>                                <q-w>end</q-w> <q-w>process</q-w>;
-<a name="97"><q-n>     97  </q-n></a>
-<a name="98"><q-n>     98  </q-n></a>                                <q-m>-- Drive trig_out from flop</q-m>
-<a name="99"><q-n>     99  </q-n></a>                                trig_out    &lt;= trig_out_reg;
-<a name="100"><q-n>     100  </q-n></a>                            <q-w>end</q-w> <q-w>generate</q-w>;
-<a name="101"><q-n>     101  </q-n></a>
-<a name="102"><q-n>     102  </q-n></a>                    L_NOREG:<q-w>if</q-w>(REG_LAYER = false)   <q-w>generate</q-w>
-<a name="103"><q-n>     103  </q-n></a>
-<a name="104"><q-n>     104  </q-n></a>                                <q-m>-- Drive it directly</q-m>
-<a name="105"><q-n>     105  </q-n></a>                                trig_out    &lt;= fsm_re_caught;
-<a name="106"><q-n>     106  </q-n></a>                            <q-w>end</q-w> <q-w>generate</q-w>;
-<a name="107"><q-n>     107  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="108"><q-n>     108  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="109"><q-n>     109  </q-n></a>    L_RDATA:    <q-w>block</q-w>
-<a name="110"><q-n>     110  </q-n></a>                <q-w>begin</q-w>
-<a name="111"><q-n>     111  </q-n></a>                    <q-m>-- FSM caught the rising-edge event</q-m>
-<a name="112"><q-n>     112  </q-n></a>                    rdata   &lt;=  fsm_re_caught;
-<a name="113"><q-n>     113  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="114"><q-n>     114  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="115"><q-n>     115  </q-n></a>    L_RE_DETECTOR:  <q-w>block</q-w>
-<a name="116"><q-n>     116  </q-n></a>                    <q-w>begin</q-w>
-<a name="117"><q-n>     117  </q-n></a>                        <q-m>-----------------------------------------------------</q-m>
-<a name="118"><q-n>     118  </q-n></a>                        L_RE_DET_REG:   <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
-<a name="119"><q-n>     119  </q-n></a>                                        <q-w>begin</q-w>
-<a name="120"><q-n>     120  </q-n></a>                                            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
-<a name="121"><q-n>     121  </q-n></a>                                                re_det_reg &lt;= '1';
-<a name="122"><q-n>     122  </q-n></a>
-<a name="123"><q-n>     123  </q-n></a>                                            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
-<a name="124"><q-n>     124  </q-n></a>
-<a name="125"><q-n>     125  </q-n></a>                                                <q-m>-- Only sampling when it is needed</q-m>
-<a name="126"><q-n>     126  </q-n></a>                                                <q-w>if</q-w>(re_det_reg_en = '1') <q-w>then</q-w>
-<a name="127"><q-n>     127  </q-n></a>                                                    re_det_reg  &lt;= signal_from_DUV;
-<a name="128"><q-n>     128  </q-n></a>                                                <q-w>end</q-w> <q-w>if</q-w>;
-<a name="129"><q-n>     129  </q-n></a>
-<a name="130"><q-n>     130  </q-n></a>                                            <q-w>end</q-w> <q-w>if</q-w>;
-<a name="131"><q-n>     131  </q-n></a>                                        <q-w>end</q-w> <q-w>process</q-w>;
-<a name="132"><q-n>     132  </q-n></a>                        <q-m>-----------------------------------------------------</q-m>
-<a name="133"><q-n>     133  </q-n></a>                        <q-m>-- Enablement is coming from 'wdata_reg'</q-m>
-<a name="134"><q-n>     134  </q-n></a>                        re_det_reg_en   &lt;= wdata_reg(0);
-<a name="135"><q-n>     135  </q-n></a>                        <q-m>-----------------------------------------------------</q-m>
-<a name="136"><q-n>     136  </q-n></a>                        <q-m>-- Detector output</q-m>
-<a name="137"><q-n>     137  </q-n></a>                        re_det_out      &lt;=  <q-w>not</q-w>(re_det_reg)  <q-w>and</q-w> signal_from_DUV;
-<a name="138"><q-n>     138  </q-n></a>                    <q-w>end</q-w> <q-w>block</q-w>;
-<a name="139"><q-n>     139  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="140"><q-n>     140  </q-n></a>    L_FSM:  <q-w>entity</q-w> work.re_det_fsm(rtl)
-<a name="141"><q-n>     141  </q-n></a>                <q-w>port</q-w> <q-w>map</q-w>(
-<a name="142"><q-n>     142  </q-n></a>                    clk             =&gt;  clk             ,
-<a name="143"><q-n>     143  </q-n></a>                    rstn            =&gt;  rstn            ,
-<a name="144"><q-n>     144  </q-n></a>                    en              =&gt;  wdata_reg(0)    ,
-<a name="145"><q-n>     145  </q-n></a>                    clr             =&gt;  wdata_reg(1)    ,
-<a name="146"><q-n>     146  </q-n></a>                    sig_from_re_det =&gt;  re_det_out      ,
-<a name="147"><q-n>     147  </q-n></a>                    re_caught       =&gt;  fsm_re_caught
-<a name="148"><q-n>     148  </q-n></a>                );
-<a name="149"><q-n>     149  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="150"><q-n>     150  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w> rtl;
+<a name="65"><q-n>     65  </q-n></a>    <q-m>-- MUX on 'signal_from_DUV' input</q-m>
+<a name="66"><q-n>     66  </q-n></a>    <q-m>-- ==============================</q-m>
+<a name="67"><q-n>     67  </q-n></a>    <q-w>signal</q-w>      sig_mux             :   <q-t>std_logic</q-w>;
+<a name="68"><q-n>     68  </q-n></a>
+<a name="69"><q-n>     69  </q-n></a>
+<a name="70"><q-n>     70  </q-n></a><q-w>begin</q-w>
+<a name="71"><q-n>     71  </q-n></a>
+<a name="72"><q-n>     72  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="73"><q-n>     73  </q-n></a>    L_SIG_MUX:  <q-w>block</q-w>
+<a name="74"><q-n>     74  </q-n></a>                <q-w>begin</q-w>
+<a name="75"><q-n>     75  </q-n></a>                    sig_mux &lt;=  signal_from_DUV <q-w>when</q-w>(wdata_reg(0) = '1')
+<a name="76"><q-n>     76  </q-n></a>                                <q-w>else</q-w>    re_det_reg;
+<a name="77"><q-n>     77  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="78"><q-n>     78  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="79"><q-n>     79  </q-n></a>    L_WDATA:    <q-w>block</q-w>
+<a name="80"><q-n>     80  </q-n></a>                <q-w>begin</q-w>
+<a name="81"><q-n>     81  </q-n></a>                    <q-m>-----------------------------------------------------</q-m>
+<a name="82"><q-n>     82  </q-n></a>                    L_WDATA_REG:    <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
+<a name="83"><q-n>     83  </q-n></a>                                    <q-w>begin</q-w>
+<a name="84"><q-n>     84  </q-n></a>                                        <q-w>if</q-w>(rstn = '0') <q-w>then</q-w>
+<a name="85"><q-n>     85  </q-n></a>                                            wdata_reg &lt;= b<q-l>"00"</q-l>;
+<a name="86"><q-n>     86  </q-n></a>
+<a name="87"><q-n>     87  </q-n></a>                                        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="88"><q-n>     88  </q-n></a>
+<a name="89"><q-n>     89  </q-n></a>                                            <q-w>if</q-w>(wr = '1')    <q-w>then</q-w>
+<a name="90"><q-n>     90  </q-n></a>                                                wdata_reg   &lt;= wdata;
+<a name="91"><q-n>     91  </q-n></a>                                            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="92"><q-n>     92  </q-n></a>
+<a name="93"><q-n>     93  </q-n></a>                                        <q-w>end</q-w> <q-w>if</q-w>;
+<a name="94"><q-n>     94  </q-n></a>                                    <q-w>end</q-w> <q-w>process</q-w>;
+<a name="95"><q-n>     95  </q-n></a>                    <q-m>-----------------------------------------------------</q-m>
+<a name="96"><q-n>     96  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="97"><q-n>     97  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="98"><q-n>     98  </q-n></a>    L_TRIG:     <q-w>block</q-w>
+<a name="99"><q-n>     99  </q-n></a>                <q-w>begin</q-w>
+<a name="100"><q-n>     100  </q-n></a>                    L_REG:  <q-w>if</q-w>(REG_LAYER = true)    <q-w>generate</q-w>
+<a name="101"><q-n>     101  </q-n></a>                                <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
+<a name="102"><q-n>     102  </q-n></a>                                <q-w>begin</q-w>
+<a name="103"><q-n>     103  </q-n></a>                                    <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="104"><q-n>     104  </q-n></a>                                        trig_out_reg    &lt;= '0';
+<a name="105"><q-n>     105  </q-n></a>                                    <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="106"><q-n>     106  </q-n></a>                                        trig_out_reg    &lt;= fsm_re_caught;
+<a name="107"><q-n>     107  </q-n></a>                                    <q-w>end</q-w> <q-w>if</q-w>;
+<a name="108"><q-n>     108  </q-n></a>                                <q-w>end</q-w> <q-w>process</q-w>;
+<a name="109"><q-n>     109  </q-n></a>
+<a name="110"><q-n>     110  </q-n></a>                                <q-m>-- Drive trig_out from flop</q-m>
+<a name="111"><q-n>     111  </q-n></a>                                trig_out    &lt;= trig_out_reg;
+<a name="112"><q-n>     112  </q-n></a>                            <q-w>end</q-w> <q-w>generate</q-w>;
+<a name="113"><q-n>     113  </q-n></a>
+<a name="114"><q-n>     114  </q-n></a>                    L_NOREG:<q-w>if</q-w>(REG_LAYER = false)   <q-w>generate</q-w>
+<a name="115"><q-n>     115  </q-n></a>
+<a name="116"><q-n>     116  </q-n></a>                                <q-m>-- Drive it directly</q-m>
+<a name="117"><q-n>     117  </q-n></a>                                trig_out    &lt;= fsm_re_caught;
+<a name="118"><q-n>     118  </q-n></a>                            <q-w>end</q-w> <q-w>generate</q-w>;
+<a name="119"><q-n>     119  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="120"><q-n>     120  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="121"><q-n>     121  </q-n></a>    L_RDATA:    <q-w>block</q-w>
+<a name="122"><q-n>     122  </q-n></a>                <q-w>begin</q-w>
+<a name="123"><q-n>     123  </q-n></a>                    <q-m>-- FSM caught the rising-edge event</q-m>
+<a name="124"><q-n>     124  </q-n></a>                    rdata   &lt;=  fsm_re_caught;
+<a name="125"><q-n>     125  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="126"><q-n>     126  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="127"><q-n>     127  </q-n></a>    L_RE_DETECTOR:  <q-w>block</q-w>
+<a name="128"><q-n>     128  </q-n></a>                    <q-w>begin</q-w>
+<a name="129"><q-n>     129  </q-n></a>                        <q-m>-----------------------------------------------------</q-m>
+<a name="130"><q-n>     130  </q-n></a>                        L_RE_DET_REG:   <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
+<a name="131"><q-n>     131  </q-n></a>                                        <q-w>begin</q-w>
+<a name="132"><q-n>     132  </q-n></a>                                            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="133"><q-n>     133  </q-n></a>                                                re_det_reg &lt;= '1';
+<a name="134"><q-n>     134  </q-n></a>
+<a name="135"><q-n>     135  </q-n></a>                                            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="136"><q-n>     136  </q-n></a>                                                re_det_reg  &lt;= sig_mux;
+<a name="137"><q-n>     137  </q-n></a>
+<a name="138"><q-n>     138  </q-n></a>                                            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="139"><q-n>     139  </q-n></a>                                        <q-w>end</q-w> <q-w>process</q-w>;
+<a name="140"><q-n>     140  </q-n></a>                        <q-m>-----------------------------------------------------</q-m>
+<a name="141"><q-n>     141  </q-n></a>                        <q-m>-- Detector output</q-m>
+<a name="142"><q-n>     142  </q-n></a>                        re_det_out      &lt;=  <q-w>not</q-w>(re_det_reg)  <q-w>and</q-w> sig_mux;
+<a name="143"><q-n>     143  </q-n></a>                    <q-w>end</q-w> <q-w>block</q-w>;
+<a name="144"><q-n>     144  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="145"><q-n>     145  </q-n></a>    L_FSM:  <q-w>entity</q-w> work.re_det_fsm(rtl)
+<a name="146"><q-n>     146  </q-n></a>                <q-w>port</q-w> <q-w>map</q-w>(
+<a name="147"><q-n>     147  </q-n></a>                    clk             =&gt;  clk             ,
+<a name="148"><q-n>     148  </q-n></a>                    rstn            =&gt;  rstn            ,
+<a name="149"><q-n>     149  </q-n></a>                    en              =&gt;  wdata_reg(0)    ,
+<a name="150"><q-n>     150  </q-n></a>                    clr             =&gt;  wdata_reg(1)    ,
+<a name="151"><q-n>     151  </q-n></a>                    sig_from_re_det =&gt;  re_det_out      ,
+<a name="152"><q-n>     152  </q-n></a>                    re_caught       =&gt;  fsm_re_caught
+<a name="153"><q-n>     153  </q-n></a>                );
+<a name="154"><q-n>     154  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="155"><q-n>     155  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w> rtl;
 </tt>
 </pre>
 

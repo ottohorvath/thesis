@@ -1,26 +1,26 @@
 var g_data = {
 e3376703996_3665481412_0:[{dummy:0}
-,{anchor:'cvg19',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#137',z:'(not(re_det_reg) and signal_from_DUV)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{anchor:'cvg19',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#142',z:'(not(re_det_reg) and sig_mux)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'re_det_reg',c:'g',r:'',i:''}
-,{z:'signal_from_DUV',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'sig_mux',c:'g',r:'',i:''}
 ,{}
-,{n:'1',z:'re_det_reg_0',h1:'1',t:'e',c1:'signal_from_DUV'}
-,{n:'2',z:'re_det_reg_1',h1:'1',t:'e',c1:'signal_from_DUV'}
-,{n:'3',z:'signal_from_DUV_0',h1:'0',t:'e',c1:'not re_det_reg'}
-,{n:'4',z:'signal_from_DUV_1',h1:'1',t:'e',c1:'not re_det_reg'}
+,{n:'1',z:'re_det_reg_0',h1:'1',t:'e',c1:'sig_mux'}
+,{n:'2',z:'re_det_reg_1',h1:'1',t:'e',c1:'sig_mux'}
+,{n:'3',z:'sig_mux_0',h1:'1',t:'e',c1:'not re_det_reg'}
+,{n:'4',z:'sig_mux_1',h1:'1',t:'e',c1:'not re_det_reg'}
 ]}
 ],
 e1441492447_1538394257_0:[{dummy:0}
-,{anchor:'cvg57',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#137',z:'(not(re_det_reg) and signal_from_DUV)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{anchor:'cvg58',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#142',z:'(not(re_det_reg) and sig_mux)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'re_det_reg',c:'g',r:'',i:''}
-,{z:'signal_from_DUV',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'sig_mux',c:'g',r:'',i:''}
 ,{}
-,{n:'1',z:'re_det_reg_0',h1:'1',t:'e',c1:'signal_from_DUV'}
-,{n:'2',z:'re_det_reg_1',h1:'1',t:'e',c1:'signal_from_DUV'}
-,{n:'3',z:'signal_from_DUV_0',h1:'0',t:'e',c1:'not re_det_reg'}
-,{n:'4',z:'signal_from_DUV_1',h1:'1',t:'e',c1:'not re_det_reg'}
+,{n:'1',z:'re_det_reg_0',h1:'1',t:'e',c1:'sig_mux'}
+,{n:'2',z:'re_det_reg_1',h1:'1',t:'e',c1:'sig_mux'}
+,{n:'3',z:'sig_mux_0',h1:'1',t:'e',c1:'not re_det_reg'}
+,{n:'4',z:'sig_mux_1',h1:'1',t:'e',c1:'not re_det_reg'}
 ]}
 ],
 dummyEnd:0

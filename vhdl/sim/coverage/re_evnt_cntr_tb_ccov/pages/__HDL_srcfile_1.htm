@@ -80,131 +80,138 @@
 <a name="70"><q-n>     70  </q-n></a>
 <a name="71"><q-n>     71  </q-n></a>
 <a name="72"><q-n>     72  </q-n></a>    <q-m>-- Falling-edge detector signals</q-m>
-<a name="73"><q-n>     73  </q-n></a>    <q-m>-- =======================</q-m>
+<a name="73"><q-n>     73  </q-n></a>    <q-m>-- =============================</q-m>
 <a name="74"><q-n>     74  </q-n></a>    <q-w>signal</q-w>  re_det_reg     :   <q-t>std_logic</q-w>;
-<a name="75"><q-n>     75  </q-n></a>    <q-w>signal</q-w>  re_det_reg_en  :   <q-t>std_logic</q-w>;
-<a name="76"><q-n>     76  </q-n></a>    <q-w>signal</q-w>  re_det_out     :   <q-t>std_logic</q-w>;
+<a name="75"><q-n>     75  </q-n></a>    <q-w>signal</q-w>  re_det_out     :   <q-t>std_logic</q-w>;
+<a name="76"><q-n>     76  </q-n></a>
 <a name="77"><q-n>     77  </q-n></a>
-<a name="78"><q-n>     78  </q-n></a><q-w>begin</q-w>
-<a name="79"><q-n>     79  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="80"><q-n>     80  </q-n></a>    L_GLOBAL:   <q-w>block</q-w>
-<a name="81"><q-n>     81  </q-n></a>                <q-w>begin</q-w>
-<a name="82"><q-n>     82  </q-n></a>
-<a name="83"><q-n>     83  </q-n></a>                    <q-m>-- Processor or a component can enable the module</q-m>
-<a name="84"><q-n>     84  </q-n></a>                    global_en   &lt;=  wdata_reg(0) <q-w>or</q-w>  trig_in_sc_ff;
-<a name="85"><q-n>     85  </q-n></a>                    global_clr  &lt;=  wdata_reg(1);
-<a name="86"><q-n>     86  </q-n></a>
-<a name="87"><q-n>     87  </q-n></a>                    sc_ff_set   &lt;=  trig_in;
+<a name="78"><q-n>     78  </q-n></a>    <q-m>-- MUX on 'signal_from_DUV' input</q-m>
+<a name="79"><q-n>     79  </q-n></a>    <q-m>-- ==============================</q-m>
+<a name="80"><q-n>     80  </q-n></a>    <q-w>signal</q-w>  sig_mux         :   <q-t>std_logic</q-w>;
+<a name="81"><q-n>     81  </q-n></a>
+<a name="82"><q-n>     82  </q-n></a><q-w>begin</q-w>
+<a name="83"><q-n>     83  </q-n></a>    L_SIG_MUX:  <q-w>block</q-w>
+<a name="84"><q-n>     84  </q-n></a>                <q-w>begin</q-w>
+<a name="85"><q-n>     85  </q-n></a>                    sig_mux &lt;=  signal_from_DUV     <q-w>when</q-w>(global_en = '1')
+<a name="86"><q-n>     86  </q-n></a>                                <q-w>else</q-w>    re_det_reg;
+<a name="87"><q-n>     87  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
 <a name="88"><q-n>     88  </q-n></a>
-<a name="89"><q-n>     89  </q-n></a>                    <q-m>-- Counter is incremented when the module is globally enabled</q-m>
-<a name="90"><q-n>     90  </q-n></a>                    <q-m>-- and there was a catch by the edge detector</q-m>
-<a name="91"><q-n>     91  </q-n></a>                    cntr_en_w   &lt;=  global_en   <q-w>and</q-w>     re_det_out;
-<a name="92"><q-n>     92  </q-n></a>
-<a name="93"><q-n>     93  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="94"><q-n>     94  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="95"><q-n>     95  </q-n></a>    L_RDATA:    <q-w>block</q-w>
-<a name="96"><q-n>     96  </q-n></a>                <q-w>begin</q-w>
-<a name="97"><q-n>     97  </q-n></a>                    rdata   &lt;= cntr_out_w;
-<a name="98"><q-n>     98  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="99"><q-n>     99  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="100"><q-n>     100  </q-n></a>    L_WDATA:    <q-w>block</q-w>
-<a name="101"><q-n>     101  </q-n></a>                <q-w>begin</q-w>
-<a name="102"><q-n>     102  </q-n></a>
-<a name="103"><q-n>     103  </q-n></a>                    <q-w>process</q-w>(clk, rstn) <q-w>is</q-w>
-<a name="104"><q-n>     104  </q-n></a>                    <q-w>begin</q-w>
-<a name="105"><q-n>     105  </q-n></a>                        <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
-<a name="106"><q-n>     106  </q-n></a>                            wdata_reg   &lt;= (<q-w>others</q-w> =&gt;'0');
-<a name="107"><q-n>     107  </q-n></a>                        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
-<a name="108"><q-n>     108  </q-n></a>
-<a name="109"><q-n>     109  </q-n></a>                            <q-w>if</q-w>(wr = '1')    <q-w>then</q-w>
-<a name="110"><q-n>     110  </q-n></a>                                wdata_reg &lt;= wdata;
-<a name="111"><q-n>     111  </q-n></a>                            <q-w>end</q-w> <q-w>if</q-w>;
-<a name="112"><q-n>     112  </q-n></a>
-<a name="113"><q-n>     113  </q-n></a>                        <q-w>end</q-w> <q-w>if</q-w>;
-<a name="114"><q-n>     114  </q-n></a>                    <q-w>end</q-w> <q-w>process</q-w>;
-<a name="115"><q-n>     115  </q-n></a>
-<a name="116"><q-n>     116  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="117"><q-n>     117  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="118"><q-n>     118  </q-n></a>    L_REG_LAYER:    <q-w>block</q-w>
-<a name="119"><q-n>     119  </q-n></a>                    <q-w>begin</q-w>
-<a name="120"><q-n>     120  </q-n></a>                        <q-m>------------------------------------------------</q-m>
-<a name="121"><q-n>     121  </q-n></a>                        L_REGLAY:   <q-w>if</q-w>(REG_LAYER = true)    <q-w>generate</q-w>
-<a name="122"><q-n>     122  </q-n></a>
-<a name="123"><q-n>     123  </q-n></a>                                        <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
-<a name="124"><q-n>     124  </q-n></a>                                        <q-w>begin</q-w>
-<a name="125"><q-n>     125  </q-n></a>                                            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
-<a name="126"><q-n>     126  </q-n></a>                                                trig_out_reg    &lt;= '0';
-<a name="127"><q-n>     127  </q-n></a>                                            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
-<a name="128"><q-n>     128  </q-n></a>
-<a name="129"><q-n>     129  </q-n></a>                                                <q-m>-- Drive the 're_det_out' signal from flop</q-m>
-<a name="130"><q-n>     130  </q-n></a>                                                <q-w>if</q-w>(trig_out_reg_en = '1') <q-w>then</q-w>
-<a name="131"><q-n>     131  </q-n></a>                                                    trig_out_reg    &lt;= re_det_out;
-<a name="132"><q-n>     132  </q-n></a>                                                <q-w>end</q-w> <q-w>if</q-w>;
+<a name="89"><q-n>     89  </q-n></a>
+<a name="90"><q-n>     90  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="91"><q-n>     91  </q-n></a>    L_GLOBAL:   <q-w>block</q-w>
+<a name="92"><q-n>     92  </q-n></a>                <q-w>begin</q-w>
+<a name="93"><q-n>     93  </q-n></a>
+<a name="94"><q-n>     94  </q-n></a>                    <q-m>-- Processor or a component can enable the module</q-m>
+<a name="95"><q-n>     95  </q-n></a>                    global_en   &lt;=  wdata_reg(0) <q-w>or</q-w>  trig_in_sc_ff;
+<a name="96"><q-n>     96  </q-n></a>                    global_clr  &lt;=  wdata_reg(1);
+<a name="97"><q-n>     97  </q-n></a>
+<a name="98"><q-n>     98  </q-n></a>                    sc_ff_set   &lt;=  trig_in;
+<a name="99"><q-n>     99  </q-n></a>
+<a name="100"><q-n>     100  </q-n></a>                    <q-m>-- Counter is incremented when the module is globally enabled</q-m>
+<a name="101"><q-n>     101  </q-n></a>                    <q-m>-- and there was a catch by the edge detector</q-m>
+<a name="102"><q-n>     102  </q-n></a>                    cntr_en_w   &lt;=  global_en   <q-w>and</q-w>     re_det_out;
+<a name="103"><q-n>     103  </q-n></a>
+<a name="104"><q-n>     104  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="105"><q-n>     105  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="106"><q-n>     106  </q-n></a>    L_RDATA:    <q-w>block</q-w>
+<a name="107"><q-n>     107  </q-n></a>                <q-w>begin</q-w>
+<a name="108"><q-n>     108  </q-n></a>                    rdata   &lt;= cntr_out_w;
+<a name="109"><q-n>     109  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="110"><q-n>     110  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="111"><q-n>     111  </q-n></a>    L_WDATA:    <q-w>block</q-w>
+<a name="112"><q-n>     112  </q-n></a>                <q-w>begin</q-w>
+<a name="113"><q-n>     113  </q-n></a>
+<a name="114"><q-n>     114  </q-n></a>                    <q-w>process</q-w>(clk, rstn) <q-w>is</q-w>
+<a name="115"><q-n>     115  </q-n></a>                    <q-w>begin</q-w>
+<a name="116"><q-n>     116  </q-n></a>                        <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="117"><q-n>     117  </q-n></a>                            wdata_reg   &lt;= (<q-w>others</q-w> =&gt;'0');
+<a name="118"><q-n>     118  </q-n></a>                        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="119"><q-n>     119  </q-n></a>
+<a name="120"><q-n>     120  </q-n></a>                            <q-w>if</q-w>(wr = '1')    <q-w>then</q-w>
+<a name="121"><q-n>     121  </q-n></a>                                wdata_reg &lt;= wdata;
+<a name="122"><q-n>     122  </q-n></a>                            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="123"><q-n>     123  </q-n></a>
+<a name="124"><q-n>     124  </q-n></a>                        <q-w>end</q-w> <q-w>if</q-w>;
+<a name="125"><q-n>     125  </q-n></a>                    <q-w>end</q-w> <q-w>process</q-w>;
+<a name="126"><q-n>     126  </q-n></a>
+<a name="127"><q-n>     127  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="128"><q-n>     128  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="129"><q-n>     129  </q-n></a>    L_REG_LAYER:    <q-w>block</q-w>
+<a name="130"><q-n>     130  </q-n></a>                    <q-w>begin</q-w>
+<a name="131"><q-n>     131  </q-n></a>                        <q-m>------------------------------------------------</q-m>
+<a name="132"><q-n>     132  </q-n></a>                        L_REGLAY:   <q-w>if</q-w>(REG_LAYER = true)    <q-w>generate</q-w>
 <a name="133"><q-n>     133  </q-n></a>
-<a name="134"><q-n>     134  </q-n></a>                                            <q-w>end</q-w> <q-w>if</q-w>;
-<a name="135"><q-n>     135  </q-n></a>                                        <q-w>end</q-w> <q-w>process</q-w>;
-<a name="136"><q-n>     136  </q-n></a>
-<a name="137"><q-n>     137  </q-n></a>                                        <q-m>-- 'trig_out_reg' is enabled globally</q-m>
-<a name="138"><q-n>     138  </q-n></a>                                        trig_out_reg_en &lt;= global_en;
+<a name="134"><q-n>     134  </q-n></a>                                        <q-w>process</q-w>(clk,rstn) <q-w>is</q-w>
+<a name="135"><q-n>     135  </q-n></a>                                        <q-w>begin</q-w>
+<a name="136"><q-n>     136  </q-n></a>                                            <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="137"><q-n>     137  </q-n></a>                                                trig_out_reg    &lt;= '0';
+<a name="138"><q-n>     138  </q-n></a>                                            <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
 <a name="139"><q-n>     139  </q-n></a>
-<a name="140"><q-n>     140  </q-n></a>                                        <q-m>-- Drive the output from the extra register</q-m>
-<a name="141"><q-n>     141  </q-n></a>                                        trig_out    &lt;= trig_out_reg;
-<a name="142"><q-n>     142  </q-n></a>
-<a name="143"><q-n>     143  </q-n></a>                                    <q-w>end</q-w> <q-w>generate</q-w>;
-<a name="144"><q-n>     144  </q-n></a>                        <q-m>------------------------------------------------</q-m>
-<a name="145"><q-n>     145  </q-n></a>                        L_NO_REGL:  <q-w>if</q-w>(REG_LAYER = false)   <q-w>generate</q-w>
-<a name="146"><q-n>     146  </q-n></a>
-<a name="147"><q-n>     147  </q-n></a>                                        <q-m>-- Drive the output directly</q-m>
-<a name="148"><q-n>     148  </q-n></a>                                        trig_out    &lt;= re_det_out;
-<a name="149"><q-n>     149  </q-n></a>                                    <q-w>end</q-w> <q-w>generate</q-w>;
-<a name="150"><q-n>     150  </q-n></a>                        <q-m>------------------------------------------------</q-m>
-<a name="151"><q-n>     151  </q-n></a>                    <q-w>end</q-w> <q-w>block</q-w>;
-<a name="152"><q-n>     152  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="153"><q-n>     153  </q-n></a>    L_RE_DET:  <q-w>block</q-w>
-<a name="154"><q-n>     154  </q-n></a>                <q-w>begin</q-w>
-<a name="155"><q-n>     155  </q-n></a>                    re_det_reg_en   &lt;=  global_en;
-<a name="156"><q-n>     156  </q-n></a>
-<a name="157"><q-n>     157  </q-n></a>                    re_det_out  &lt;=  <q-w>not</q-w>(re_det_reg) <q-w>and</q-w> signal_from_DUV;
-<a name="158"><q-n>     158  </q-n></a>
-<a name="159"><q-n>     159  </q-n></a>
-<a name="160"><q-n>     160  </q-n></a>                    <q-w>process</q-w>(clk,rstn)   <q-w>is</q-w>
-<a name="161"><q-n>     161  </q-n></a>                    <q-w>begin</q-w>
-<a name="162"><q-n>     162  </q-n></a>                        <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
-<a name="163"><q-n>     163  </q-n></a>                            re_det_reg &lt;= '1';
-<a name="164"><q-n>     164  </q-n></a>
-<a name="165"><q-n>     165  </q-n></a>                        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="140"><q-n>     140  </q-n></a>                                                <q-m>-- Drive the 're_det_out' signal from flop</q-m>
+<a name="141"><q-n>     141  </q-n></a>                                                <q-w>if</q-w>(trig_out_reg_en = '1') <q-w>then</q-w>
+<a name="142"><q-n>     142  </q-n></a>                                                    trig_out_reg    &lt;= re_det_out;
+<a name="143"><q-n>     143  </q-n></a>                                                <q-w>end</q-w> <q-w>if</q-w>;
+<a name="144"><q-n>     144  </q-n></a>
+<a name="145"><q-n>     145  </q-n></a>                                            <q-w>end</q-w> <q-w>if</q-w>;
+<a name="146"><q-n>     146  </q-n></a>                                        <q-w>end</q-w> <q-w>process</q-w>;
+<a name="147"><q-n>     147  </q-n></a>
+<a name="148"><q-n>     148  </q-n></a>                                        <q-m>-- 'trig_out_reg' is enabled globally</q-m>
+<a name="149"><q-n>     149  </q-n></a>                                        trig_out_reg_en &lt;= global_en;
+<a name="150"><q-n>     150  </q-n></a>
+<a name="151"><q-n>     151  </q-n></a>                                        <q-m>-- Drive the output from the extra register</q-m>
+<a name="152"><q-n>     152  </q-n></a>                                        trig_out    &lt;= trig_out_reg;
+<a name="153"><q-n>     153  </q-n></a>
+<a name="154"><q-n>     154  </q-n></a>                                    <q-w>end</q-w> <q-w>generate</q-w>;
+<a name="155"><q-n>     155  </q-n></a>                        <q-m>------------------------------------------------</q-m>
+<a name="156"><q-n>     156  </q-n></a>                        L_NO_REGL:  <q-w>if</q-w>(REG_LAYER = false)   <q-w>generate</q-w>
+<a name="157"><q-n>     157  </q-n></a>
+<a name="158"><q-n>     158  </q-n></a>                                        <q-m>-- Drive the output directly</q-m>
+<a name="159"><q-n>     159  </q-n></a>                                        trig_out    &lt;= re_det_out;
+<a name="160"><q-n>     160  </q-n></a>                                    <q-w>end</q-w> <q-w>generate</q-w>;
+<a name="161"><q-n>     161  </q-n></a>                        <q-m>------------------------------------------------</q-m>
+<a name="162"><q-n>     162  </q-n></a>                    <q-w>end</q-w> <q-w>block</q-w>;
+<a name="163"><q-n>     163  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="164"><q-n>     164  </q-n></a>    L_RE_DET:  <q-w>block</q-w>
+<a name="165"><q-n>     165  </q-n></a>                <q-w>begin</q-w>
 <a name="166"><q-n>     166  </q-n></a>
-<a name="167"><q-n>     167  </q-n></a>                            <q-w>if</q-w>(re_det_reg_en = '1')    <q-w>then</q-w>
-<a name="168"><q-n>     168  </q-n></a>                                re_det_reg &lt;= signal_from_DUV;
-<a name="169"><q-n>     169  </q-n></a>                            <q-w>end</q-w> <q-w>if</q-w>;
-<a name="170"><q-n>     170  </q-n></a>
-<a name="171"><q-n>     171  </q-n></a>                        <q-w>end</q-w> <q-w>if</q-w>;
-<a name="172"><q-n>     172  </q-n></a>                    <q-w>end</q-w> <q-w>process</q-w>;
-<a name="173"><q-n>     173  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
-<a name="174"><q-n>     174  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="175"><q-n>     175  </q-n></a>    L_SC_FF:    <q-w>entity</q-w> work.sc_ff(rtl)
-<a name="176"><q-n>     176  </q-n></a>                    <q-w>port</q-w> <q-w>map</q-w>(
-<a name="177"><q-n>     177  </q-n></a>                        clk         =&gt; clk          ,
-<a name="178"><q-n>     178  </q-n></a>                        rstn        =&gt; rstn         ,
-<a name="179"><q-n>     179  </q-n></a>                        set         =&gt; sc_ff_set    ,
-<a name="180"><q-n>     180  </q-n></a>                        clr         =&gt; global_clr   ,
-<a name="181"><q-n>     181  </q-n></a>                        q           =&gt; trig_in_sc_ff
-<a name="182"><q-n>     182  </q-n></a>                    );
-<a name="183"><q-n>     183  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="184"><q-n>     184  </q-n></a>    L_CNTR:     <q-w>entity</q-w> work.cntr(rtl)
-<a name="185"><q-n>     185  </q-n></a>                    <q-w>generic</q-w> <q-w>map</q-w>(
-<a name="186"><q-n>     186  </q-n></a>                        CW       =&gt;  CW
-<a name="187"><q-n>     187  </q-n></a>                    )
-<a name="188"><q-n>     188  </q-n></a>                    <q-w>port</q-w> <q-w>map</q-w>(
-<a name="189"><q-n>     189  </q-n></a>                        clk         =&gt; clk          ,
-<a name="190"><q-n>     190  </q-n></a>                        rstn        =&gt; rstn         ,
-<a name="191"><q-n>     191  </q-n></a>                        en          =&gt; cntr_en_w    ,
-<a name="192"><q-n>     192  </q-n></a>                        clr         =&gt; global_clr   ,
-<a name="193"><q-n>     193  </q-n></a>                        cntr_out    =&gt; cntr_out_w
-<a name="194"><q-n>     194  </q-n></a>                    );
-<a name="195"><q-n>     195  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
-<a name="196"><q-n>     196  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w> rtl;
-<a name="197"><q-n>     197  </q-n></a>
+<a name="167"><q-n>     167  </q-n></a>                    re_det_out  &lt;=  <q-w>not</q-w>(re_det_reg) <q-w>and</q-w> sig_mux;
+<a name="168"><q-n>     168  </q-n></a>
+<a name="169"><q-n>     169  </q-n></a>
+<a name="170"><q-n>     170  </q-n></a>                    <q-w>process</q-w>(clk,rstn)   <q-w>is</q-w>
+<a name="171"><q-n>     171  </q-n></a>                    <q-w>begin</q-w>
+<a name="172"><q-n>     172  </q-n></a>                        <q-w>if</q-w>(rstn = '0')  <q-w>then</q-w>
+<a name="173"><q-n>     173  </q-n></a>                            re_det_reg &lt;= '1';
+<a name="174"><q-n>     174  </q-n></a>
+<a name="175"><q-n>     175  </q-n></a>                        <q-w>elsif</q-w>(rising_edge(clk)) <q-w>then</q-w>
+<a name="176"><q-n>     176  </q-n></a>                                re_det_reg &lt;= sig_mux;
+<a name="177"><q-n>     177  </q-n></a>
+<a name="178"><q-n>     178  </q-n></a>                        <q-w>end</q-w> <q-w>if</q-w>;
+<a name="179"><q-n>     179  </q-n></a>                    <q-w>end</q-w> <q-w>process</q-w>;
+<a name="180"><q-n>     180  </q-n></a>                <q-w>end</q-w> <q-w>block</q-w>;
+<a name="181"><q-n>     181  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="182"><q-n>     182  </q-n></a>    L_SC_FF:    <q-w>entity</q-w> work.sc_ff(rtl)
+<a name="183"><q-n>     183  </q-n></a>                    <q-w>port</q-w> <q-w>map</q-w>(
+<a name="184"><q-n>     184  </q-n></a>                        clk         =&gt; clk          ,
+<a name="185"><q-n>     185  </q-n></a>                        rstn        =&gt; rstn         ,
+<a name="186"><q-n>     186  </q-n></a>                        set         =&gt; sc_ff_set    ,
+<a name="187"><q-n>     187  </q-n></a>                        clr         =&gt; global_clr   ,
+<a name="188"><q-n>     188  </q-n></a>                        q           =&gt; trig_in_sc_ff
+<a name="189"><q-n>     189  </q-n></a>                    );
+<a name="190"><q-n>     190  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="191"><q-n>     191  </q-n></a>    L_CNTR:     <q-w>entity</q-w> work.cntr(rtl)
+<a name="192"><q-n>     192  </q-n></a>                    <q-w>generic</q-w> <q-w>map</q-w>(
+<a name="193"><q-n>     193  </q-n></a>                        CW       =&gt;  CW
+<a name="194"><q-n>     194  </q-n></a>                    )
+<a name="195"><q-n>     195  </q-n></a>                    <q-w>port</q-w> <q-w>map</q-w>(
+<a name="196"><q-n>     196  </q-n></a>                        clk         =&gt; clk          ,
+<a name="197"><q-n>     197  </q-n></a>                        rstn        =&gt; rstn         ,
+<a name="198"><q-n>     198  </q-n></a>                        en          =&gt; cntr_en_w    ,
+<a name="199"><q-n>     199  </q-n></a>                        clr         =&gt; global_clr   ,
+<a name="200"><q-n>     200  </q-n></a>                        cntr_out    =&gt; cntr_out_w
+<a name="201"><q-n>     201  </q-n></a>                    );
+<a name="202"><q-n>     202  </q-n></a>    <q-m>---------------------------------------------------------------------</q-m>
+<a name="203"><q-n>     203  </q-n></a><q-w>end</q-w> <q-w>architecture</q-w> rtl;
+<a name="204"><q-n>     204  </q-n></a>
 </tt>
 </pre>
 

@@ -2,7 +2,7 @@ var g_data = {
 f2597517629_1986562257_0:{
 scopes:[{i:0,s:'2192589349_2479080472_0',val:'config_reg_if_fsm_tb'},{link:'z.htm?f=0&s=2597517629_1986562257_0',val:'L_DUT'}]
 ,FSMs:[{dummy:0}
-,{anchor:'cvg30',items:[{c:'Y',p:'59.04',lnk:'__HDL_srcfile_1.htm#80',z:'cur_state'}
+,{anchor:'cvg30',items:[{c:'Y',p:'59.80',lnk:'__HDL_srcfile_1.htm#80',z:'cur_state'}
 ,{cr:'c',s:'1',z:'IDLE',h:'32',c:'g'}
 ,{cr:'c',z:'IDLE -> ST_RADDR',h:'4',c:'g'}
 ,{cr:'c',z:'IDLE -> ST_WADDR',h:'5',c:'g'}
@@ -28,7 +28,6 @@ scopes:[{i:0,s:'2192589349_2479080472_0',val:'config_reg_if_fsm_tb'},{link:'z.ht
 ,{cr:'m',z:'WAIT_RACK -> IDLE',h:'0',c:'r'}
 ,{cr:'m',z:'WAIT_RACK -> WAIT_RACK',h:'0',c:'r'}
 ,{cr:'m',s:'1',z:'EXTD_RD',h:'0',c:'r'}
-,{cr:'m',z:'EXTD_RD -> CAPT_RDATA',h:'0',c:'r'}
 ,{cr:'m',z:'EXTD_RD -> IDLE',h:'0',c:'r'}
 ,{cr:'m',z:'EXTD_RD -> EXTD_RD',h:'0',c:'r'}
 ,{cr:'c',s:'1',z:'ST_WDATA',h:'8',c:'g'}
@@ -57,7 +56,7 @@ scopes:[{i:0,s:'2192589349_2479080472_0',val:'config_reg_if_fsm_tb'},{link:'z.ht
 f2607347699_2555614571_0:{
 scopes:[{link:'z.htm?f=0&s=2607347699_2555614571_0',val:'work.config_reg_if_fsm(rtl)'}]
 ,FSMs:[{dummy:0}
-,{anchor:'cvg83',items:[{c:'Y',p:'59.04',lnk:'__HDL_srcfile_1.htm#80',z:'cur_state'}
+,{anchor:'cvg83',items:[{c:'Y',p:'59.80',lnk:'__HDL_srcfile_1.htm#80',z:'cur_state'}
 ,{cr:'c',s:'1',z:'IDLE',h:'32',c:'g'}
 ,{cr:'c',z:'IDLE -> ST_RADDR',h:'4',c:'g'}
 ,{cr:'c',z:'IDLE -> ST_WADDR',h:'5',c:'g'}
@@ -83,7 +82,6 @@ scopes:[{link:'z.htm?f=0&s=2607347699_2555614571_0',val:'work.config_reg_if_fsm(
 ,{cr:'m',z:'WAIT_RACK -> IDLE',h:'0',c:'r'}
 ,{cr:'m',z:'WAIT_RACK -> WAIT_RACK',h:'0',c:'r'}
 ,{cr:'m',s:'1',z:'EXTD_RD',h:'0',c:'r'}
-,{cr:'m',z:'EXTD_RD -> CAPT_RDATA',h:'0',c:'r'}
 ,{cr:'m',z:'EXTD_RD -> IDLE',h:'0',c:'r'}
 ,{cr:'m',z:'EXTD_RD -> EXTD_RD',h:'0',c:'r'}
 ,{cr:'c',s:'1',z:'ST_WDATA',h:'8',c:'g'}

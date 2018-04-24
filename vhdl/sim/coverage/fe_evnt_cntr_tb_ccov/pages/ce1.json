@@ -1,0 +1,68 @@
+var g_data = {
+e4067999049_2895594698_0:[{dummy:0}
+,{anchor:'cvg20',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#96',z:'(wdata_reg(0) or trig_in_sc_ff)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'wdata_reg(0)',c:'g',r:'',i:''}
+,{z:'trig_in_sc_ff',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{}
+,{n:'1',z:'wdata_reg(0)_0',h1:'1',t:'e',c1:'not trig_in_sc_ff'}
+,{n:'2',z:'wdata_reg(0)_1',h1:'1',t:'e',c1:'not trig_in_sc_ff'}
+,{n:'3',z:'trig_in_sc_ff_0',h1:'1',t:'e',c1:'not wdata_reg(0)'}
+,{n:'4',z:'trig_in_sc_ff_1',h1:'0',t:'e',c1:'not wdata_reg(0)'}
+]}
+,{anchor:'cvg22',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#103',z:'(global_en and fe_det_out)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'global_en',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'fe_det_out',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'global_en_0',h1:'0',t:'e',c1:'fe_det_out'}
+,{n:'2',z:'global_en_1',h1:'1',t:'e',c1:'fe_det_out'}
+,{n:'3',z:'fe_det_out_0',h1:'1',t:'e',c1:'global_en'}
+,{n:'4',z:'fe_det_out_1',h1:'1',t:'e',c1:'global_en'}
+]}
+,{anchor:'cvg24',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#167',z:'(fe_det_reg and not(sig_mux))',c:'G',p:'100.00',d:'0',F:'1'}
+,{}
+,{z:'fe_det_reg',c:'g',r:'',i:''}
+,{z:'sig_mux',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'fe_det_reg_0',h1:'1',t:'e',c1:'not sig_mux'}
+,{n:'2',z:'fe_det_reg_1',h1:'1',t:'e',c1:'not sig_mux'}
+,{n:'3',z:'sig_mux_0',h1:'1',t:'e',c1:'fe_det_reg'}
+,{n:'4',z:'sig_mux_1',h1:'1',t:'e',c1:'fe_det_reg'}
+]}
+],
+e2270916670_3716947710_0:[{dummy:0}
+,{anchor:'cvg71',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#96',z:'(wdata_reg(0) or trig_in_sc_ff)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'wdata_reg(0)',c:'g',r:'',i:''}
+,{z:'trig_in_sc_ff',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{}
+,{n:'1',z:'wdata_reg(0)_0',h1:'1',t:'e',c1:'not trig_in_sc_ff'}
+,{n:'2',z:'wdata_reg(0)_1',h1:'1',t:'e',c1:'not trig_in_sc_ff'}
+,{n:'3',z:'trig_in_sc_ff_0',h1:'1',t:'e',c1:'not wdata_reg(0)'}
+,{n:'4',z:'trig_in_sc_ff_1',h1:'0',t:'e',c1:'not wdata_reg(0)'}
+]}
+,{anchor:'cvg73',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#103',z:'(global_en and fe_det_out)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'global_en',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'fe_det_out',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'global_en_0',h1:'0',t:'e',c1:'fe_det_out'}
+,{n:'2',z:'global_en_1',h1:'1',t:'e',c1:'fe_det_out'}
+,{n:'3',z:'fe_det_out_0',h1:'1',t:'e',c1:'global_en'}
+,{n:'4',z:'fe_det_out_1',h1:'1',t:'e',c1:'global_en'}
+]}
+,{anchor:'cvg75',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#167',z:'(fe_det_reg and not(sig_mux))',c:'G',p:'100.00',d:'0',F:'1'}
+,{}
+,{z:'fe_det_reg',c:'g',r:'',i:''}
+,{z:'sig_mux',c:'g',r:'',i:''}
+,{}
+,{n:'1',z:'fe_det_reg_0',h1:'1',t:'e',c1:'not sig_mux'}
+,{n:'2',z:'fe_det_reg_1',h1:'1',t:'e',c1:'not sig_mux'}
+,{n:'3',z:'sig_mux_0',h1:'1',t:'e',c1:'fe_det_reg'}
+,{n:'4',z:'sig_mux_1',h1:'1',t:'e',c1:'fe_det_reg'}
+]}
+],
+dummyEnd:0
+};
+processCondExprData(g_data);

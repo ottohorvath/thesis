@@ -1,5 +1,5 @@
 # vsim -batch -t 1ps -coverage -do "coverage save -onexit ../coverage/delta_timer_tb_ccov/delta_timer_tb.ucdb; run -all; quit" -default_radix hexadecimal -logfile ../logs/rgr/delta_timer_tb_log.log work.delta_timer_tb_opt 
-# Start time: 22:18:11 on Apr 16,2018
+# Start time: 11:53:14 on Apr 24,2018
 # //  Questa Sim-64
 # //  Version 10.4e win64 Apr  9 2016
 # //
@@ -39,5 +39,5 @@
 # =====================================================              Start of the Simulation       =====================================================RTL name: 'delta_timer'0 ps: process_tc.setup.clk_gen: Clock is ON!Testcase 0============1 ps: process_rst_gen: Reset is asserted.1001 ps: process_rst_gen: Reset is de-asserted.10002 ps: process_tc.run_test.delta_timer_test.test: Testcase FINISHED ...Testcase 0 PASSED!Testcase 1============10003 ps: process_rst_gen: Reset is asserted.11003 ps: process_rst_gen: Reset is de-asserted.80001 ps: process_tc.run_test.delta_timer_test.test: Testcase FINISHED ...Testcase 1 PASSED!Testcase 2============100002 ps: process_tc.run_test.delta_timer_test.test: Testcase FINISHED ...Testcase 2 PASSED!process_tc.report_and_exit.gen_rgr_report_html: Processing the check descriptor ...process_tc.report_and_exit.gen_rgr_report_html: Generating HTML report ...process_tc.report_and_exit.gen_rgr_report_html: Done!=====================================================              End of the Simulation       =====================================================Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
 #  quit
 # Saving coverage database on exit...
-# End time: 22:18:15 on Apr 16,2018, Elapsed time: 0:00:04
+# End time: 11:53:17 on Apr 24,2018, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 0

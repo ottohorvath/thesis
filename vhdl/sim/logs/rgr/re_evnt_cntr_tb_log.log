@@ -1,5 +1,5 @@
 # vsim -batch -t 1ps -coverage -do "coverage save -onexit ../coverage/re_evnt_cntr_tb_ccov/re_evnt_cntr_tb.ucdb; run -all; quit" -default_radix hexadecimal -logfile ../logs/rgr/re_evnt_cntr_tb_log.log work.re_evnt_cntr_tb_opt 
-# Start time: 22:19:21 on Apr 16,2018
+# Start time: 11:54:22 on Apr 24,2018
 # //  Questa Sim-64
 # //  Version 10.4e win64 Apr  9 2016
 # //
@@ -37,5 +37,5 @@
 # =====================================================              Start of the Simulation       =====================================================RTL name: 're_evnt_cntr'0 ps: process_tc.setup.clk_gen: Clock is ON!Testcase 0============1 ps: process_rst_gen: Reset is asserted.1001 ps: process_rst_gen: Reset is de-asserted.10001 ps: process_tc.run_test.re_evnt_cntr_test.test: Testcase FINISHED ...Testcase 0 PASSED!Testcase 1============20000 ps: process_rst_gen: Reset is asserted.21000 ps: process_rst_gen: Reset is de-asserted.120000 ps: process_tc.run_test.re_evnt_cntr_test.test: Testcase FINISHED ...Testcase 1 PASSED!process_tc.report_and_exit.gen_rgr_report_html: Processing the check descriptor ...process_tc.report_and_exit.gen_rgr_report_html: Generating HTML report ...process_tc.report_and_exit.gen_rgr_report_html: Done!=====================================================              End of the Simulation       =====================================================Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
 #  quit
 # Saving coverage database on exit...
-# End time: 22:19:24 on Apr 16,2018, Elapsed time: 0:00:03
+# End time: 11:54:25 on Apr 24,2018, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 0

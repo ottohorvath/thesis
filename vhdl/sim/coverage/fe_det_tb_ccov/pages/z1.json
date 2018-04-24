@@ -1,5 +1,5 @@
 var g_data = {
-z2497172002_2609373595_0:{prod:'Questa',reporttype:'in',scopes:[{i:0,s:'0982019559_1942565465_0',val:'fe_det_tb'},{link:'z.htm?f=0&s=2290803074_2972663433_0',val:'L_DUT'},{val:'L_TRIG'},{link:'z.htm?f=1&s=2497172002_2609373595_0',val:'L_NOREG'}],lang:'VHDL',src:{lnk:'__HDL_srcfile_1.htm#102',z:'../../logical/fe_det.vhd'},summaryTables:{loctable:{
+z2497172002_2609373595_0:{prod:'Questa',reporttype:'in',scopes:[{i:0,s:'0982019559_1942565465_0',val:'fe_det_tb'},{link:'z.htm?f=0&s=2290803074_2972663433_0',val:'L_DUT'},{val:'L_TRIG'},{link:'z.htm?f=1&s=2497172002_2609373595_0',val:'L_NOREG'}],lang:'VHDL',src:{lnk:'__HDL_srcfile_1.htm#113',z:'../../logical/fe_det.vhd'},summaryTables:{loctable:{
 headers:['Coverage Type', 'Bins', 'Hits', 'Misses', 'Weight', '% Hit', 'Coverage'],
  fc:'#006699', fa:'1',totalhits:{class:'odd_r', val:'100.00%'},avgw:{class:'bgGreen', val:'100.00%'},
 data:[
@@ -54,7 +54,7 @@ data:[
 }
 }
 },
-z0858008887_3189908747_0:{prod:'Questa',reporttype:'in',scopes:[{i:0,s:'1518622200_0306629005_0',val:'work.fe_det(rtl)'},{val:'L_TRIG'},{link:'z.htm?f=1&s=0858008887_3189908747_0',val:'L_NOREG'}],lang:'VHDL',src:{lnk:'__HDL_srcfile_1.htm#102',z:'../../logical/fe_det.vhd'},summaryTables:{loctable:{
+z0858008887_3189908747_0:{prod:'Questa',reporttype:'in',scopes:[{i:0,s:'1518622200_0306629005_0',val:'work.fe_det(rtl)'},{val:'L_TRIG'},{link:'z.htm?f=1&s=0858008887_3189908747_0',val:'L_NOREG'}],lang:'VHDL',src:{lnk:'__HDL_srcfile_1.htm#113',z:'../../logical/fe_det.vhd'},summaryTables:{loctable:{
 headers:['Coverage Type', 'Bins', 'Hits', 'Misses', 'Weight', '% Hit', 'Coverage'],
  fc:'#006699', fa:'1',totalhits:{class:'odd_r', val:'100.00%'},avgw:{class:'bgGreen', val:'100.00%'},
 data:[

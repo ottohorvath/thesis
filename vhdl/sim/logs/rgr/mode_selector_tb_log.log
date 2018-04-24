@@ -1,5 +1,5 @@
 # vsim -batch -t 1ps -coverage -do "coverage save -onexit ../coverage/mode_selector_tb_ccov/mode_selector_tb.ucdb; run -all; quit" -default_radix hexadecimal -logfile ../logs/rgr/mode_selector_tb_log.log work.mode_selector_tb_opt 
-# Start time: 22:19:06 on Apr 16,2018
+# Start time: 11:54:07 on Apr 24,2018
 # //  Questa Sim-64
 # //  Version 10.4e win64 Apr  9 2016
 # //
@@ -36,5 +36,5 @@
 # =====================================================              Start of the Simulation       =====================================================RTL name: 'mode_selector'0 ps: process_tc.setup.clk_gen: Clock is ON!Testcase 0============1 ps: process_rst_gen: Reset is asserted.1001 ps: process_rst_gen: Reset is de-asserted.10001 ps: process_tc.run_test.mode_selector_test.test: Testcase FINISHED ...Testcase 0 PASSED!Testcase 1============10002 ps: process_rst_gen: Reset is asserted.11002 ps: process_rst_gen: Reset is de-asserted.50002 ps: process_tc.run_test.mode_selector_test.test: Testcase FINISHED ...Testcase 1 PASSED!Testcase 2============50003 ps: process_rst_gen: Reset is asserted.51003 ps: process_rst_gen: Reset is de-asserted.90002 ps: process_tc.run_test.mode_selector_test.test: Testcase FINISHED ...Testcase 2 PASSED!Testcase 3============90003 ps: process_rst_gen: Reset is asserted.91003 ps: process_rst_gen: Reset is de-asserted.150001 ps: process_tc.run_test.mode_selector_test.test: Testcase FINISHED ...Testcase 3 PASSED!Testcase 4============150002 ps: process_rst_gen: Reset is asserted.151002 ps: process_rst_gen: Reset is de-asserted.210001 ps: process_tc.run_test.mode_selector_test.test: Testcase FINISHED ...Testcase 4 PASSED!process_tc.report_and_exit.gen_rgr_report_html: Processing the check descriptor ...process_tc.report_and_exit.gen_rgr_report_html: Generating HTML report ...process_tc.report_and_exit.gen_rgr_report_html: Done!=====================================================              End of the Simulation       =====================================================Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
 #  quit
 # Saving coverage database on exit...
-# End time: 22:19:08 on Apr 16,2018, Elapsed time: 0:00:02
+# End time: 11:54:10 on Apr 24,2018, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 0

@@ -1,37 +1,37 @@
 var g_data = {
 b3431202108_4118664323_0:[{dummy:0},
-{anchor:'cvg15',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'105',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'105',h:'2',c:'g'}
-,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'107',h:'6',c:'g'}
+{anchor:'cvg15',items:[{z:'                    sig_mux <=  signal_from_DUV     when(global_en = \'1\')...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'85',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                    sig_mux <=  signal_from_DUV     when(global_en = \'1\')...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'85',h:'8',c:'g'}
+,{cr:'c',t:'E',z:'                                else    re_det_reg;',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'86',h:'5',c:'g'}
 ]},
-{anchor:'cvg16',items:[{z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'109',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'109',h:'2',c:'g'}
-,{cr:'c',t:'A',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'109',h:'4',c:'g'}
+{anchor:'cvg16',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'116',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'116',h:'2',c:'g'}
+,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'118',h:'6',c:'g'}
 ]},
-{anchor:'cvg17',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'162',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'162',h:'2',c:'g'}
-,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'165',h:'9',c:'g'}
+{anchor:'cvg17',items:[{z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'120',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'120',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'120',h:'4',c:'g'}
 ]},
-{anchor:'cvg18',items:[{z:'                            if(re_det_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'167',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                            if(re_det_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'167',h:'6',c:'g'}
-,{cr:'c',t:'A',z:'                            if(re_det_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'167',h:'3',c:'g'}
+{anchor:'cvg18',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'172',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'172',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'175',h:'22',c:'g'}
 ]}],
 b2144650999_0542174460_0:[{dummy:0},
-{anchor:'cvg65',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'105',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'105',h:'2',c:'g'}
-,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'107',h:'6',c:'g'}
+{anchor:'cvg66',items:[{z:'                    sig_mux <=  signal_from_DUV     when(global_en = \'1\')...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'85',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                    sig_mux <=  signal_from_DUV     when(global_en = \'1\')...',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'85',h:'8',c:'g'}
+,{cr:'c',t:'E',z:'                                else    re_det_reg;',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'86',h:'5',c:'g'}
 ]},
-{anchor:'cvg66',items:[{z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'109',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'109',h:'2',c:'g'}
-,{cr:'c',t:'A',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'109',h:'4',c:'g'}
+{anchor:'cvg67',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'116',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'116',h:'2',c:'g'}
+,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'118',h:'6',c:'g'}
 ]},
-{anchor:'cvg67',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'162',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'162',h:'2',c:'g'}
-,{cr:'c',t:'T',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'165',h:'9',c:'g'}
+{anchor:'cvg68',items:[{z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'120',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'120',h:'2',c:'g'}
+,{cr:'c',t:'A',z:'                            if(wr = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'120',h:'4',c:'g'}
 ]},
-{anchor:'cvg68',items:[{z:'                            if(re_det_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'167',c:'G',p:'100.00'}
-,{cr:'c',t:'I',z:'                            if(re_det_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'167',h:'6',c:'g'}
-,{cr:'c',t:'A',z:'                            if(re_det_reg_en = \'1\')    then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'167',h:'3',c:'g'}
+{anchor:'cvg69',items:[{z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'172',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'                        if(rstn = \'0\')  then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'172',h:'2',c:'g'}
+,{cr:'c',t:'E',z:'                        elsif(rising_edge(clk)) then',hf:'__HDL_srcfile_1.htm',f:'../../logical/re_evnt_cntr.vhd',l:'175',h:'22',c:'g'}
 ]}],
 dummyEnd:0
 };

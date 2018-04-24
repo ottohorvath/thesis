@@ -1,0 +1,28 @@
+var g_data = {
+e1371037189_0319950162_0:[{dummy:0}
+,{anchor:'cvg17',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#55',z:'(sig and en_sampling)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'sig',c:'g',r:'',i:''}
+,{z:'en_sampling',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{}
+,{n:'1',z:'sig_0',h1:'1',t:'e',c1:'en_sampling'}
+,{n:'2',z:'sig_1',h1:'1',t:'e',c1:'en_sampling'}
+,{n:'3',z:'en_sampling_0',h1:'0',t:'e',c1:'sig'}
+,{n:'4',z:'en_sampling_1',h1:'1',t:'e',c1:'sig'}
+]}
+],
+e2900628644_3803903922_0:[{dummy:0}
+,{anchor:'cvg17',items:[{s:'3',x:'FE',lnk:'__HDL_srcfile_1.htm#55',z:'(sig and en_sampling)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{}
+,{z:'sig',c:'g',r:'',i:''}
+,{z:'en_sampling',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{}
+,{n:'1',z:'sig_0',h1:'1',t:'e',c1:'en_sampling'}
+,{n:'2',z:'sig_1',h1:'1',t:'e',c1:'en_sampling'}
+,{n:'3',z:'en_sampling_0',h1:'0',t:'e',c1:'sig'}
+,{n:'4',z:'en_sampling_1',h1:'1',t:'e',c1:'sig'}
+]}
+],
+dummyEnd:0
+};
+processCondExprData(g_data);
