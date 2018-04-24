@@ -49,7 +49,6 @@ architecture rtl of fe_det is
     -- Falling-edge detector signals
     -- =============================
     signal      fe_det_reg      :   std_logic;
-    signal      fe_det_reg_en   :   std_logic;
     signal      fe_det_out      :   std_logic;
 
 
@@ -62,7 +61,19 @@ architecture rtl of fe_det is
     -- ======================
     signal      trig_out_reg        :   std_logic;
 
+    -- MUX on 'signal_from_DUV' input
+    -- ==============================
+    signal      sig_mux             :   std_logic;
+
+
+
 begin
+    ---------------------------------------------------------------------
+    L_SIG_MUX:  block
+                begin
+                    sig_mux <=  signal_from_DUV when(wdata_reg(0) = '1')
+                                else    fe_det_reg;
+                end block;
     ---------------------------------------------------------------------
     L_WDATA:    block
                 begin
@@ -121,20 +132,12 @@ begin
                                                 fe_det_reg <= '0';
 
                                             elsif(rising_edge(clk)) then
-
-                                                -- Only sampling when it is needed
-                                                if(fe_det_reg_en = '1') then
-                                                    fe_det_reg  <= signal_from_DUV;
-                                                end if;
-
+                                                fe_det_reg  <= sig_mux;
                                             end if;
                                         end process;
                         -----------------------------------------------------
-                        -- Enablement is coming from 'wdata_reg'
-                        fe_det_reg_en   <= wdata_reg(0);
-                        -----------------------------------------------------
                         -- Detector output
-                        fe_det_out      <=  fe_det_reg  and not(signal_from_DUV);
+                        fe_det_out      <=  fe_det_reg  and not(sig_mux);
                     end block;
     ---------------------------------------------------------------------
     L_FSM:  entity work.fe_det_fsm(rtl)

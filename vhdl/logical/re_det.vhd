@@ -49,7 +49,6 @@ architecture rtl of re_det is
     -- Rising-edge detector signals
     -- =============================
     signal      re_det_reg      :   std_logic;
-    signal      re_det_reg_en   :   std_logic;
     signal      re_det_out      :   std_logic;
 
 
@@ -62,7 +61,20 @@ architecture rtl of re_det is
     -- ======================
     signal      trig_out_reg        :   std_logic;
 
+
+    -- MUX on 'signal_from_DUV' input
+    -- ==============================
+    signal      sig_mux             :   std_logic;
+
+
 begin
+
+    ---------------------------------------------------------------------
+    L_SIG_MUX:  block
+                begin
+                    sig_mux <=  signal_from_DUV when(wdata_reg(0) = '1')
+                                else    re_det_reg;
+                end block;
     ---------------------------------------------------------------------
     L_WDATA:    block
                 begin
@@ -121,20 +133,13 @@ begin
                                                 re_det_reg <= '1';
 
                                             elsif(rising_edge(clk)) then
-
-                                                -- Only sampling when it is needed
-                                                if(re_det_reg_en = '1') then
-                                                    re_det_reg  <= signal_from_DUV;
-                                                end if;
+                                                re_det_reg  <= sig_mux;
 
                                             end if;
                                         end process;
                         -----------------------------------------------------
-                        -- Enablement is coming from 'wdata_reg'
-                        re_det_reg_en   <= wdata_reg(0);
-                        -----------------------------------------------------
                         -- Detector output
-                        re_det_out      <=  not(re_det_reg)  and signal_from_DUV;
+                        re_det_out      <=  not(re_det_reg)  and sig_mux;
                     end block;
     ---------------------------------------------------------------------
     L_FSM:  entity work.re_det_fsm(rtl)

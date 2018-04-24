@@ -73,10 +73,22 @@ architecture rtl of evnt_cntr is
     -- Change detector signals
     -- =======================
     signal  chg_det_reg     :   std_logic_vector(SIG_W-1 downto 0);
-    signal  chg_det_en      :   std_logic;
     signal  chg_det_out     :   std_logic;
 
+
+    -- MUX on 'signal_from_DUV' input
+    -- ===================================
+    signal  sig_mux       :   std_logic_vector(SIG_W-1 downto 0);
+
+
+
 begin
+    ---------------------------------------------------------------------
+    L_SIG_MUX:  block
+                begin
+                    sig_mux   <=    signal_from_DUV when (global_en = '1')  else
+                                    chg_det_reg;
+                end block;
     ---------------------------------------------------------------------
     L_GLOBAL:   block
                 begin
@@ -153,9 +165,8 @@ begin
     ---------------------------------------------------------------------
     L_CHG_DET:  block
                 begin
-                    chg_det_en  <=  global_en;
 
-                    chg_det_out <=  '1' when( chg_det_reg /= signal_from_DUV
+                    chg_det_out <=  '1' when( chg_det_reg /= sig_mux
                                             ) else '0';
 
                     process(clk,rstn)   is
@@ -165,9 +176,7 @@ begin
 
                         elsif(rising_edge(clk)) then
 
-                            if(chg_det_en = '1')    then
-                                chg_det_reg <= signal_from_DUV;
-                            end if;
+                                chg_det_reg <= sig_mux;
 
                         end if;
                     end process;

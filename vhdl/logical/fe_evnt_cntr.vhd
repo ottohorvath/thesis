@@ -71,12 +71,23 @@ architecture rtl of fe_evnt_cntr is
 
 
     -- Falling-edge detector signals
-    -- =======================
+    -- =============================
     signal  fe_det_reg     :   std_logic;
-    signal  fe_det_reg_en  :   std_logic;
     signal  fe_det_out     :   std_logic;
 
+
+    -- MUX on 'signal_from_DUV' input
+    -- ==============================
+    signal  sig_mux         :   std_logic;
+
+
 begin
+    ---------------------------------------------------------------------
+    L_SIG_MUX:  block
+                begin
+                    sig_mux <=  signal_from_DUV when(global_en = '1')
+                                else    fe_det_reg;
+                end block;
     ---------------------------------------------------------------------
     L_GLOBAL:   block
                 begin
@@ -153,10 +164,7 @@ begin
     ---------------------------------------------------------------------
     L_FE_DET:  block
                 begin
-                    fe_det_reg_en   <=  global_en;
-
-                    fe_det_out  <=  fe_det_reg and not(signal_from_DUV);
-
+                    fe_det_out  <=  fe_det_reg and not(sig_mux);
 
                     process(clk,rstn)   is
                     begin
@@ -164,10 +172,7 @@ begin
                             fe_det_reg <= '0';
 
                         elsif(rising_edge(clk)) then
-
-                            if(fe_det_reg_en = '1')    then
-                                fe_det_reg <= signal_from_DUV;
-                            end if;
+                                fe_det_reg <= sig_mux;
 
                         end if;
                     end process;

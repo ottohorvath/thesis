@@ -31,11 +31,29 @@ end entity chg_det;
 ---------------------------------------------------------------------------
 architecture rtl of chg_det is
 
+    -- Sampler flop
+    -- ============
     signal  sample      :   std_logic;
+
+    -- Enable signal from FSM
+    -- ======================
     signal  en_sampling :   std_logic;
+
+
+    -- AND gate on 'sig' input
+    -- =======================
+    signal  sig_gated:   std_logic;
+
+
+
 
 begin
 
+    ---------------------------------------------------------------
+    L_GATE: block
+            begin
+                sig_gated   <= sig and en_sampling;
+            end block;
     ---------------------------------------------------------------
     L_SAMPLER:  process(clk,rstn)  is
     begin
@@ -45,7 +63,7 @@ begin
         elsif(rising_edge(clk)) then
             -----------------------------
             if(en_sampling = '1')   then
-                sample  <= sig;
+                sample  <= sig_gated;
 
             end if;
             -----------------------------
@@ -58,7 +76,7 @@ begin
                         rstn            =>  rstn        ,
                         en_fsm          =>  en          ,
                         clr_fsm         =>  clr         ,
-                        sig_fsm         =>  sig         ,
+                        sig_fsm         =>  sig_gated   ,
                         sample_fsm      =>  sample      ,
                         en_sampling_fsm =>  en_sampling ,
                         sig_changed_fsm =>  det_out
