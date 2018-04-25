@@ -36,6 +36,48 @@
     <ClInclude Include="mode_selector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clk_gen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rstn_gen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interface_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem_if.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config_reg_if.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simple_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fifo_rd_if.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fifo_wr_if.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fifo_src.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fifo_snk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="edge_detector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="re_det.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fe_det.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chg_det.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

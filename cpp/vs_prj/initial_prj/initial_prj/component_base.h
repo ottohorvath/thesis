@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
+//
 //  ~ Virtual base class for the component classes
-//                  
+//
 //
 //-------------------------------------------------------------------------
 
@@ -15,7 +15,8 @@
 #define COMPONENT_BASE_H
 
 class   component_base
-{ 
+{
+public:
     //==================================
     // Component name
     std::string     name;
@@ -32,6 +33,7 @@ class   component_base
     GETTER( uint32_t,        base_addr)
     GETTER( uint32_t,        relative_addr)
     GETTER( uint32_t,        enabled)
+    SETTER( uint32_t,        enabled)
     //==================================
 
 
@@ -42,16 +44,49 @@ public:
     //==================================
     // Constructor
     component_base(
-        std::string     _name           ,     
+        std::string     _name           ,
         uint32_t        _base_addr      ,
-        uint32_t        _relative_addr
+        uint32_t        _relative_addr     
     ):
-        name            (_name      ), 
-        base_addr       (_base_addr ),
-        relative_addr   (_relative_addr)
+        name            (_name      )   ,
+        base_addr       (_base_addr )   ,
+        relative_addr   (_relative_addr),
+        enabled         (0x00000000 )
     {}
     //==================================
-};
 
+    
+    //==================================
+    // Get the value of 'rdata' output port
+    virtual uint32_t read_data(){
+        uint32_t*   mem_addr;
+        uint32_t    read_data;
+        
+        // Create the physical address to access the module
+        mem_addr    = (uint32_t*)( base_addr + relative_addr );
+
+        // Read out
+        read_data   =   *mem_addr;
+
+        return read_data;
+    }
+    //==================================
+
+
+    //==================================
+    // Simple write to component
+    virtual void write_data(
+        const uint32_t&  write_data
+    ){
+        uint32_t*   mem_addr;
+        
+        // Create the physical address to access the module
+        mem_addr    = (uint32_t*)( base_addr + relative_addr );
+
+        // Write in
+        *mem_addr   =   write_data;
+    }
+    //==================================
+};
 
 #endif//COMPONENT_BASE_H

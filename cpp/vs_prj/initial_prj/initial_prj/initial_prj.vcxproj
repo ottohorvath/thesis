@@ -77,10 +77,24 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chg_det.h" />
+    <ClInclude Include="clk_gen.h" />
     <ClInclude Include="component_base.h" />
     <ClInclude Include="component_library.h" />
     <ClInclude Include="component_macros.h" />
+    <ClInclude Include="config_reg_if.h" />
+    <ClInclude Include="fe_det.h" />
+    <ClInclude Include="fifo_rd_if.h" />
+    <ClInclude Include="fifo_snk.h" />
+    <ClInclude Include="fifo_src.h" />
+    <ClInclude Include="fifo_wr_if.h" />
+    <ClInclude Include="edge_detector.h" />
+    <ClInclude Include="re_det.h" />
+    <ClInclude Include="simple_component.h" />
+    <ClInclude Include="interface_component.h" />
+    <ClInclude Include="mem_if.h" />
     <ClInclude Include="mode_selector.h" />
+    <ClInclude Include="rstn_gen.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
