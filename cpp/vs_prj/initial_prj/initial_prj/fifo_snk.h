@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
-//  ~ 
-//                  
+//
+//  ~
+//
 //
 //-------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ const uint32_t   FIFO_SNK_FULL  = 0x02;
 class fifo_snk:    public  component_base
 {
 public:
-    
+
     //==================================
     // Constructor
     BASIC_CONSTRUCTOR(fifo_snk, component_base)
@@ -41,7 +41,7 @@ public:
     // The method assumes that the module
     // previously has been set to show its status
     bool is_full(){
-        
+
         return (read_data() == FIFO_SNK_FULL)?(true):(false);
     }
     //==================================
@@ -52,7 +52,7 @@ public:
     // The method assumes that the module
     // previously has been set to show its status
     bool is_empty(){
-        
+
         return (read_data() == FIFO_SNK_EMPTY)?(true):(false);
     }
     //==================================

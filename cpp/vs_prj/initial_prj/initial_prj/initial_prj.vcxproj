@@ -83,13 +83,17 @@
     <ClInclude Include="component_library.h" />
     <ClInclude Include="component_macros.h" />
     <ClInclude Include="config_reg_if.h" />
+    <ClInclude Include="delta_timer.h" />
+    <ClInclude Include="evnt_cntr.h" />
     <ClInclude Include="fe_det.h" />
+    <ClInclude Include="fe_evnt_cntr.h" />
     <ClInclude Include="fifo_rd_if.h" />
     <ClInclude Include="fifo_snk.h" />
     <ClInclude Include="fifo_src.h" />
     <ClInclude Include="fifo_wr_if.h" />
     <ClInclude Include="edge_detector.h" />
     <ClInclude Include="re_det.h" />
+    <ClInclude Include="re_evnt_cntr.h" />
     <ClInclude Include="simple_component.h" />
     <ClInclude Include="interface_component.h" />
     <ClInclude Include="mem_if.h" />

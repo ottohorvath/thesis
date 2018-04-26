@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
-//  ~ 
-//                  
+//
+//  ~
+//
 //
 //-------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ const uint32_t  EDGE_DECTOR_CAUGHT   =   0x1;
 class edge_detector:    public  component_base
 {
 public:
-    
+
     //==================================
     // Constructor
     BASIC_CONSTRUCTOR(edge_detector, component_base)
@@ -47,7 +47,7 @@ public:
     //==================================
     // Clear the detector
     virtual void clear(){
-    
+
         write_data(EDGE_DECTOR_CLEAR);
     }
     //==================================
@@ -55,7 +55,7 @@ public:
     //==================================
     // Checks if it has detected the event
     virtual bool has_caught(){
-    
+
         return(read_data()== EDGE_DECTOR_CAUGHT)?(true):(false);
     }
     //==================================

@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
-//  ~ 
-//                  
+//
+//  ~
+//
 //
 //-------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ class mode_selector:    public  simple_component
 {
 
 public:
-    
+
     //==================================
     // Constructor
     BASIC_CONSTRUCTOR(mode_selector, simple_component)
@@ -27,10 +27,10 @@ public:
 
 
     //==================================
-    // Set test mode 
+    // Set test mode
     void set_test_mode(){
         enable();
-        std::cout << get_name()<<": Test mode has been set!" <<std::endl;
+        std::cout <<"["<<get_name()<<"] Test mode has been set!" <<std::endl;
     }
     //==================================
 
@@ -39,7 +39,7 @@ public:
     // Set normal mode
     void set_normal_mode(){
         clear();
-        std::cout << get_name()<<": Normal mode has been set!" <<std::endl;
+        std::cout <<"["<<get_name()<<"] Normal mode has been set!" <<std::endl;
     }
     //==================================
 };

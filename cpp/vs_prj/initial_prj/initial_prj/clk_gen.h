@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
-// 
-//                  
+//
+//
+//
 //
 //-------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ class clk_gen:    public  simple_component
 {
 
 public:
-    
+
     //==================================
     // Constructor
     BASIC_CONSTRUCTOR(clk_gen, simple_component)
@@ -31,7 +31,7 @@ public:
     // Start generating the clock
     void start_clock(){
         enable();
-        std::cout << get_name()<<": Clock is started!" <<std::endl;
+        std::cout <<"["<<get_name()<<"] Clock is started!" <<std::endl;
     }
     //==================================
 
@@ -41,7 +41,7 @@ public:
     // Stop the clock
     void stop_clock(){
         clear();
-        std::cout << get_name()<<": Clock is stopped!" <<std::endl;
+        std::cout <<"["<<get_name()<<"] Clock is stopped!" <<std::endl;
     }
     //==================================
 };

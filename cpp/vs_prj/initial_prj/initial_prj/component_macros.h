@@ -5,16 +5,16 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
+//
 //  ~ Contains some basic macros for the classes
-//                  
+//
 //
 //-------------------------------------------------------------------------
 
 #define FIELD_WITH_ACCESSORS(type, var)                             \
 private:    type var;                                               \
 public:     virtual type    get_##var()          {return var;}      \
-public:     virtual void    set_##var(type var) {this->var = var;} 
+public:     virtual void    set_##var(type var) {this->var = var;}
 
 
 #define GETTER(type, var)   \
@@ -22,7 +22,7 @@ public:     virtual type    get_##var()          {return var;}
 
 
 #define SETTER(type, var)   \
-public:     virtual void    set_##var(type var) {this->var = var;} 
+public:     virtual void    set_##var(type var) {this->var = var;}
 
 
 

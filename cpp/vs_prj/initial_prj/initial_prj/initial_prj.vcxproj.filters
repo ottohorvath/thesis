@@ -78,6 +78,18 @@
     <ClInclude Include="chg_det.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="re_evnt_cntr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="evnt_cntr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fe_evnt_cntr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="delta_timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

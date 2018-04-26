@@ -6,10 +6,10 @@
 //
 // Description:
 //
-//  ~ Includes macros  
+//  ~ Includes macros
 //
-//  ~ Container header file: Stores all the class
-//                  
+//  ~ Container header file: stores all the class
+//
 //
 //-------------------------------------------------------------------------
 
@@ -24,6 +24,7 @@
     #include"simple_component.h"
     #include"interface_component.h"
     #include"edge_detector.h"
+    #include"evnt_cntr.h"
     //==========================
     #include"mode_selector.h"
     #include"clk_gen.h"
@@ -37,6 +38,9 @@
     #include"re_det.h"
     #include"fe_det.h"
     #include"chg_det.h"
+    #include"re_evnt_cntr.h"
+    #include"fe_evnt_cntr.h"
+    #include"delta_timer.h"
 
 
 #endif//COMPONENT_LIBRARY_H

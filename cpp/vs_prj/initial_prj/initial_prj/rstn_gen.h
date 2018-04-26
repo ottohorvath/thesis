@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
-//  ~ 
-//                  
+//
+//  ~
+//
 //
 //-------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ class rstn_gen:    public  simple_component
 {
 
 public:
-    
+
     //==================================
     // Constructor
     BASIC_CONSTRUCTOR(rstn_gen, simple_component)
@@ -27,10 +27,10 @@ public:
 
 
     //==================================
-    // Generate reset pulse 
+    // Generate reset pulse
     void gen_pulse(){
         enable();
-        std::cout << get_name()<<": Reset pulse has been generated!" <<std::endl;
+        std::cout <<"["<< get_name()  <<"] Reset pulse has been generated!" <<std::endl;
     }
     //==================================
 
@@ -39,7 +39,7 @@ public:
     // Clear the control register
     void clear_register(){
         clear();
-        std::cout << get_name()<<": Cleared!" <<std::endl;
+        std::cout <<"["<<get_name()<<"] Cleared!" <<std::endl;
     }
     //==================================
 };

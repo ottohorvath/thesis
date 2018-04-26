@@ -5,9 +5,9 @@
 //-------------------------------------------------------------------------
 //
 // Description:
-//          
-//  ~ 
-//                  
+//
+//  ~
+//
 //
 //-------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ class config_reg_if:    public  interface_component
 {
 
 public:
-    
+
     //==================================
     // Constructor
     BASIC_CONSTRUCTOR(config_reg_if, interface_component)
