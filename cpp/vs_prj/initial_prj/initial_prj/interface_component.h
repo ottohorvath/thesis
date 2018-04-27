@@ -33,6 +33,7 @@ public:
         const uint32_t&  read_indicator,
         const uint32_t&  raddr
     ){
+        
         // First write in the 'read_indicator'
         write_data(read_indicator);
 
@@ -49,6 +50,7 @@ public:
         const uint32_t&  waddr            ,
         const uint32_t&  wdata
     ){
+        
         // First write in the 'write_indicator'
         write_data(write_indicator);
 

@@ -41,6 +41,7 @@ public:
     //==================================
     // Enable the module
     virtual void enable(){
+
         // Write the command
         write_data(FIFO_WR_IF_CMD_EN);
 
@@ -49,9 +50,6 @@ public:
 
         // Update status field
         set_enabled(0x1);
-
-        // Info
-        std::cout <<"["<< get_name()  <<"] Enabled!" <<std::endl;
     }
     //==================================
 
@@ -59,6 +57,7 @@ public:
     //==================================
     // Send back the module to idle
     virtual void clear(){
+
         // Write the command
         write_data(FIFO_WR_IF_CMD_CLR);
 
@@ -68,8 +67,6 @@ public:
         // Update status field
         set_enabled(0x0);
 
-        // Info
-        std::cout <<"["<< get_name()  <<"] Cleared!" <<std::endl;
     }
     //==================================
 
@@ -77,9 +74,6 @@ public:
     //==================================
     // Poll the control register until it is enabled
     virtual void wait_until_enabled(){
-
-        // Info
-        std::cout <<"["<< get_name()  <<"] Waiting to be enabled ..." <<std::endl;
 
         // Waiting for the component to be enabled
         while( read_data() != FIFO_WR_IF_ENABLED ){}
@@ -90,9 +84,6 @@ public:
    //==================================
     // Poll the control register until it is enabled
     virtual void wait_until_cleared(){
-
-        // Info
-        std::cout <<"["<< get_name()  <<"] Waiting to be cleared ..." <<std::endl;
 
         // Waiting for the component to be cleared
         while( read_data() != FIFO_WR_IF_IDLE ){}

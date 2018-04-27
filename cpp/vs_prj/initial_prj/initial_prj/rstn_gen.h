@@ -29,8 +29,8 @@ public:
     //==================================
     // Generate reset pulse
     void gen_pulse(){
+
         enable();
-        std::cout <<"["<< get_name()  <<"] Reset pulse has been generated!" <<std::endl;
     }
     //==================================
 
@@ -38,8 +38,8 @@ public:
     //==================================
     // Clear the control register
     void clear_register(){
+
         clear();
-        std::cout <<"["<<get_name()<<"] Cleared!" <<std::endl;
     }
     //==================================
 };

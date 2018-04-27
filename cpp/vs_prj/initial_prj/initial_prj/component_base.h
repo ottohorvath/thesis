@@ -56,18 +56,13 @@ public:
     //==================================
 
 
-
-//    //==================================
-
 #ifdef DEBUG    
     //==================================
     virtual void write_data(
         const uint32_t&  write_data
     ){
 
-        std::cout   <<"["<< get_name()  <<"] Write data = 0x"<< std::hex<<write_data<<std::endl;
-
-    
+        std::cout   <<"["<< get_name()  <<"] Write data = 0x"<< std::hex<<write_data<<std::endl;    
     }
     //==================================
 
@@ -78,9 +73,7 @@ public:
     
         read_data = DEBUG_RDATA;
 
-//        std::cout   <<"["<< get_name()  <<"] Read data = 0x"<<std::hex <<read_data<<std::endl;
-
-        
+        std::cout   <<"["<< get_name()  <<"] Read data = 0x"<<std::hex <<read_data<<std::endl;
         return read_data;
     }
     //==================================

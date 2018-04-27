@@ -6,7 +6,7 @@
 
 
 #define DEBUG
-#define DEBUG_RDATA 0x04
+#define DEBUG_RDATA 0x01
 
 //Include the component library
 #include"component_library.h"
@@ -16,21 +16,10 @@
 int main()
 {
 
-    fifo_wr_if fwi("FIFO write IF",0x1,0x2);
+    delta_timer e("re_evnt_cntr",0x1,0x2);
 
-
-    //fwi.enable();
-    fwi.show_data();
-    std::cout   <<"Read data out:   0x" <<std::hex  <<fwi.read_out()    <<std::endl;
-
-
-    std::cout   <<"IDLE:        "       <<fwi.is_idle()     <<std::endl;
-    std::cout   <<"ENABLED:     "       <<fwi.is_enabled()  <<std::endl;
-    std::cout   <<"RCVD_DATA:   "       <<fwi.is_rcvd_data()<<std::endl;
-
-
-
-
+    e.clear();
+    e.enable();
     return 0;
 }
 
