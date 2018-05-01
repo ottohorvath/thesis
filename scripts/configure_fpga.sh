@@ -87,6 +87,16 @@ configure_fpga()
 #===============================================================================
 #===============================================================================
 
+# Check input
+# ===========
+if [[ "$#" -eq "0" ]]; then
+    echo "[INFO] Usage: ./configure_fpga.sh <path to an .rbf file>"
+    exit 1
+# Check file extension
+elif ! [[ "$1" == *.rbf ]]; then
+    echo "[INFO] Please add an *.rfb file as first argument"
+    exit 1
+fi
 
 # Get the status of the bridges
 # =============================
@@ -98,8 +108,8 @@ if [[ "${BRIDGES_ENABLED}" -eq "1" ]]; then
     disable_bridges
 fi
 
-# Configure the FPGA up
-# =====================
+# Configure the FPGA
+# ==================
 configure_fpga $1
 
 # Enable them again
