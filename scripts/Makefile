@@ -11,7 +11,7 @@ TARGET          := main
 
 
 CROSS_COMPILE   := arm-linux-gnueabihf-
-CFLAGS          := -g -Wall -I ${SOCEDS_DEST_ROOT}/ip/altera/hps/altera_hps/hwlib/include
+CFLAGS          := -g -Wall -Wextra -I ${SOCEDS_DEST_ROOT}/ip/altera/hps/altera_hps/hwlib/include -O0 -std=c++11 
 LDFLAGS         := -g -Wall
 CC              := $(CROSS_COMPILE)g++
 ARCH            := arm
