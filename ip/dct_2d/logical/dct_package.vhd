@@ -97,17 +97,6 @@ is
     -----------------------------------------------------------------------------------
 
 
-    --- a DCT_wrapper-ben megvalositott soros-parhuzamos / parhuzamos soros atalakitast
-    --- megvalosito allapotgep allapotai
-    -----------------------------------------------------------------------------------
-    type state_wrapper is(
-        idle                    ,
-        new_input_to_recieve    ,
-        new_output_to_transmit  ,
-        new_output_incr
-    );
-    -----------------------------------------------------------------------------------
-
     ------------------------------------------------
     function    shift_left_by_2_and_extend_to_16_bits(
         data_in :   in  std_logic_vector
