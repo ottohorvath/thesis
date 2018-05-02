@@ -29,7 +29,6 @@ public:
     //==================================
     // Generate reset pulse
     void gen_pulse(){
-
         enable();
     }
     //==================================
@@ -38,7 +37,6 @@ public:
     //==================================
     // Clear the control register
     void clear_register(){
-
         clear();
     }
     //==================================

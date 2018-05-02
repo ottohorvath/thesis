@@ -36,7 +36,7 @@ public:
     //==================================
     // Enable the detector
     virtual void enable(){
-
+        std::cout<<"["<< get_name()<<"] Enabling!"<<std::endl;
         write_data(EVNT_CNTR_ENABLE);
     }
     //==================================
@@ -45,7 +45,7 @@ public:
     //==================================
     // Clear the detector
     virtual void clear(){
-
+        std::cout<<"["<< get_name()<<"] Clearing!"<<std::endl;
         write_data(EVNT_CNTR_CLEAR);
     }
     //==================================

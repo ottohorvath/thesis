@@ -48,6 +48,7 @@ public:
         // Waiting for the component to be updated
         while( read_data() != STATUS_EN ){}
 
+        std::cout<<"["<< get_name()<<"] Enabled!"<<std::endl;
         // Update status field
         set_enabled(0x1);
     }
@@ -65,6 +66,7 @@ public:
         // Waiting for the component to be updated
         while( read_data() != STATUS_CLR ){}
 
+        std::cout<<"["<< get_name()<<"] Cleared!"<<std::endl;
         // Updated status field
         set_enabled(0x0);
     }
@@ -75,8 +77,11 @@ public:
     // Poll the control register until it is enabled
     virtual void wait_until_enabled(){
 
+        std::cout<<"["<< get_name()<<"] Waiting to be enabled ..."<<std::endl;
+
         // Waiting for the component to be enabled
         while( read_data() != STATUS_EN ){}
+        std::cout<<"["<< get_name()<<"] Done!"<<std::endl;
     }
     //==================================
 
@@ -85,9 +90,12 @@ public:
     //==================================
     // Poll the control register until it is enabled
     virtual void wait_until_cleared(){
+        
+        std::cout<<"["<< get_name()<<"] Waiting to be cleared ..."<<std::endl;
 
         // Waiting for the component to be cleared
         while( read_data() != STATUS_CLR ){}
+        std::cout<<"["<< get_name()<<"] Done!"<<std::endl;
     }
     //==================================
 

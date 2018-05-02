@@ -21,36 +21,31 @@ public:
     // Component name
     std::string     name;
     // Base memory address
-    uint32_t        base_addr;
-    // Relative memory address
-    uint32_t        relative_addr;
+    uint32_t*       base_addr;
     // Component enabled flag
     uint32_t        enabled;
     //==================================
 
     //==================================
     GETTER( std::string,     name)
-    GETTER( uint32_t,        base_addr)
-    GETTER( uint32_t,        relative_addr)
+    GETTER( uint32_t*,       base_addr)
     GETTER( uint32_t,        enabled)
     SETTER( uint32_t,        enabled)
     //==================================
 
 
     // Basic status printer
-    INFO(name, base_addr,   relative_addr, enabled)
+    INFO(name, base_addr, enabled)
 
 public:
     //==================================
     // Constructor
     component_base(
         std::string     _name           ,
-        uint32_t        _base_addr      ,
-        uint32_t        _relative_addr
+        uint32_t*        _base_addr
     ):
         name            (_name      )   ,
         base_addr       (_base_addr )   ,
-        relative_addr   (_relative_addr),
         enabled         (0x00000000 )
     {}
     //==================================
@@ -82,15 +77,11 @@ public:
     //==================================
     // Get the value of 'rdata' output port
     virtual uint32_t read_data(){
-        uint32_t*   mem_addr;
-        uint32_t    read_data;
-
-        // Create the physical address to access the module
-        mem_addr    = (uint32_t*)( base_addr + relative_addr );
+        uint32_t read_data;
 
         // Read out
-        read_data   =   *mem_addr;
-
+        read_data = *base_addr;
+        std::cout<<"["<< get_name()<<"] Read data = 0x"<<std::hex <<read_data<<std::endl;
         return read_data;
     }
     //==================================
@@ -101,13 +92,9 @@ public:
     virtual void write_data(
         const uint32_t&  write_data
     ){
-        uint32_t*   mem_addr;
-
-        // Create the physical address to access the module
-        mem_addr    = (uint32_t*)( base_addr + relative_addr );
-
+        std::cout<<"["<< get_name()<<"] Write data = 0x"<< std::hex<<write_data<<std::endl;
         // Write in
-        *mem_addr   =   write_data;
+        *base_addr   =   write_data;
     }
 
 #endif
