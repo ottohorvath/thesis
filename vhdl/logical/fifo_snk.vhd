@@ -20,7 +20,7 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity fifo_snk is
     generic (
-        DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
+        DEPTH       :       integer range 8 to 512  :=  64           ;-- Depth of the FIFO
         DW          :       integer                 :=  32           -- Data width
     );
     port (
@@ -99,7 +99,7 @@ begin
 
                     rdata   <=  slv(DW-2,'0') & fifo_full & fifo_empty when conf_reg = B"01"  else  -- Showing the FIFO-s empty signal
                                 fifo_rdata                     when conf_reg = B"10"  else  -- Showing FIFO rdata
-                                slv(DW,'0');                                            -- Otherwise, DW{1b0}}
+                                slv(DW,'X');                                            -- Otherwise, DW{1b0}}
 
                 end block;
     -------------------------------------------------------
