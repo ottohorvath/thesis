@@ -19,7 +19,7 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity fifo is
     generic (
-        DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
+        DEPTH       :       integer range 8 to 512  :=  64           ;-- Depth of the FIFO
         DW          :       integer                 :=  32          -- Data width
     );
     port (
@@ -76,17 +76,8 @@ architecture rtl of fifo is
 
         return res_v;
     end function;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     type data_t is  array (0 to DEPTH-1) of std_logic_vector(DW-1 downto 0);
 
     -- FIFO slots
