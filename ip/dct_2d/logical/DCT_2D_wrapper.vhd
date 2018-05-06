@@ -54,7 +54,9 @@ architecture rtl of DCT_2D_wrapper is
 
     -- The serially shifted OUT transformed pixels
     -- ===========================================
-    signal  transmitted_pixels  :   outputPixelBlock;
+    signal  transmitted_pixels      :   outputPixelBlock;
+    signal  transmitted_pixels_reg  :   outputPixelBlock;
+
 
 
     -- Input pixel data counters
@@ -84,7 +86,8 @@ architecture rtl of DCT_2D_wrapper is
     -- FSM on the output serializing side
     type output_fsm_state_t is(
         IDLE,
-        EMITTING
+        EMITTING,
+        DONE
     );
 
     signal  nxt_state   :   output_fsm_state_t;
@@ -119,12 +122,11 @@ begin
                             --------------------------------------------------------------------
                         end block;
     ---------------------------------------------------------------------------------------------
-    L_OUTPUT:   block
-                begin
+
                     -- Drive the FSM signal to indicate validity of data
                     new_output      <=  fsm_new_output;
                     -- Drive the data pointed out by the counters
-                    new_output_data <=  transmitted_pixels(to_integer(unsigned(output_pixel_data_y_cntr)), to_integer(unsigned(output_pixel_data_x_cntr)));
+                    new_output_data <=  transmitted_pixels_reg(to_integer(unsigned(output_pixel_data_y_cntr)), to_integer(unsigned(output_pixel_data_x_cntr)));
                     --------------------------------------------------------------------
                     L_FSM_STATE:    process(clk,rstn)   is
                                     begin
@@ -151,16 +153,15 @@ begin
                                         when EMITTING   =>  if( output_pixel_data_y_cntr = b"111" and
                                                                 output_pixel_data_x_cntr = b"111")
                                                             then
-                                                                nxt_state   <= IDLE;
+                                                                nxt_state   <= DONE;
                                                             end if;
+                                        when DONE   =>  nxt_state <= IDLE;
                                         ------------------------------------------------
                                         when others =>  nxt_state   <=  IDLE;
                                         ------------------------------------------------
                                     end case;
                                 end process;
                     --------------------------------------------------------------------
-                    L_FSM_CNTRL:    block
-                                    begin
                                         -- Generate valid when it is emitting data
                                         fsm_new_output              <=  '1' when (cur_state = EMITTING) else
                                                                         '0';
@@ -172,8 +173,6 @@ begin
                                                                         '0';
                                         clr_output_pixel_data_y_cntr<=  '1' when (cur_state = IDLE) else
                                                                         '0';
-                                    end block;
-                end block;
     ---------------------------------------------------------------------------------------------
 
 
@@ -263,6 +262,22 @@ begin
                                                                                     else '0';
                             end block;
     ---------------------------------------------------------------------------------------------
+
+
+    process(clk,rstn) is
+    begin
+        if(rstn = '0') then
+            transmitted_pixels_reg <=  (others =>(others =>(others => '0')));
+        elsif(rising_edge(clk)) then
+            if(dct_done_w = '1') then
+                transmitted_pixels_reg  <= transmitted_pixels;
+            end if;
+        end if;
+    end process;
+
+
+
+
 
 
     L_DRIVE_DONE:   dct_done    <=  dct_done_w;

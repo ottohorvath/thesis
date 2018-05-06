@@ -20,13 +20,14 @@ end entity DCT_2D_tb;
 -----------------------------------------------
 
 architecture bhv of DCT_2D_tb is
-    constant    period      :           time            := 10 ns;
-    signal      dataIn_tb   :           inputPixelBlock := (others =>   (others =>  (others => '0')))   ;
-    signal      dataOut_tb  :           outputPixelBlock:= (others =>   (others =>  (others => '0')))   ;
+    constant    period      :           time            := 20 ns;
+    signal      dataIn_tb   :           inputPixelBlock ;
+    signal      dataOut_tb  :           outputPixelBlock;
     signal      clk_tb      :           std_logic       := '1';
     signal      rstn_tb     :           std_logic       := '0';
     signal      start_dct_tb:           std_logic       := '0';
-    signal      dct_done_tb :           std_logic       := '0';
+    signal      dct_done_tb :           std_logic       ;
+    signal      busy_tb :           std_logic       ;
 
 begin
     L_DUT:  entity work.DCT_2D(rtl)
@@ -34,7 +35,7 @@ begin
                     clk             =>  clk_tb      ,
                     rstn            =>  rstn_tb     ,
                     start_dct       =>  start_dct_tb,
-                    busy            =>  open        ,
+                    busy            =>  busy_tb     ,
                     pixel_block_in  =>  dataIn_tb   ,
                     pixel_block_out =>  dataOut_tb  ,
                     dct_done        =>  dct_done_tb
@@ -72,11 +73,14 @@ begin
         wait until rising_edge(clk_tb);
         wait for 1 ns;
         start_dct_tb <= '1';
+        wait for 1 ns;
 
         wait until rising_edge(clk_tb);
         start_dct_tb <= '0';
         wait for 1 ns;
 
+        
+        
         wait;
     end process;
 

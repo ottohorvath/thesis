@@ -1,3 +1,4 @@
+
 ---------------------------------------------------------------------------
 --
 -- Author: Otto Horvath
@@ -46,49 +47,109 @@ architecture rtl of loeff_1D_DCT is
     signal reg3                     : dctArray  ;
     signal reg4                     : dctArray  ;
     signal reg5                     : dctArray  ;
-    signal pipeline_cntr            : std_logic_vector(2 downto 0);
+
+
+    signal pipeline_cntr           : std_logic_vector(2 downto 0);
+    signal cntr_clr                : std_logic;
+    signal cntr_en                 : std_logic;
+
+    type fsm_state_t is(
+        IDLE,
+        BUSY,
+        DONE
+    );
+
+    signal  nxt_state   :   fsm_state_t;
+    signal  cur_state   :   fsm_state_t;
 
 begin
+    --------------------------------------------
+    L_CNTR: block
+            begin
+                process(clk,rstn) is
+                begin
+                    if(rstn = '0')  then
+                        pipeline_cntr   <= (others =>'0');
+                    elsif(rising_edge(clk)) then
+                        if(cntr_clr = '1') then
+                            pipeline_cntr   <= (others =>'0');
+                        end if;
+                        if(cntr_en = '1') then
+                            pipeline_cntr   <=  std_logic_vector(unsigned(pipeline_cntr) + 1);
+                        end if;
+                    end if;
+                end process;
+            end block;
 
 
     ---------------------------------------------------------------------
-    L_SEQUENTIAL:   process(clk,rstn)
+    L_REG_LAYERS:   process(clk)
                     begin
-                        if(rstn ='0') then
-                            done_dct        <=  '0'                     ;
-                            reg1            <= (others =>(others =>'0'));
-                            reg2            <= (others =>(others =>'0'));
-                            reg3            <= (others =>(others =>'0'));
-                            reg4            <= (others =>(others =>'0'));
-                            reg5            <= (others =>(others =>'0'));
-                            pipeline_cntr   <= (others => '0')          ;
-                        elsif(rising_edge(clk)) then
+                        if(rising_edge(clk)) then
+                            reg1    <= data_from_INPUT_to_A1;
+                            reg2    <= data_from_A1_to_A2;
+                            reg3    <= data_from_A2_to_A3;
+                            reg4    <= data_from_A3_to_A4;
+                            reg5    <= data_from_from_A4;
 
-                            done_dct <= '0';
-
-                            if(en = '1') then
-                                -- Pipeline stage 1.
-                                reg1    <= data_from_INPUT_to_A1;
-                                -- Pipeline stage 2.
-                                reg2    <= data_from_A1_to_A2;
-                                -- Pipeline stage 3.
-                                reg3    <= data_from_A2_to_A3;
-                                -- Pipeline stage 4.
-                                reg4    <= data_from_A3_to_A4;
-                                -- Pipeline stage 5.
-                                reg5    <= data_from_from_A4;
-                                -- Pipeline counter increasing
-                                pipeline_cntr <= std_logic_vector(unsigned(pipeline_cntr) + 1);
-                            end if;
-
-                            -- Generate done
-                            if(pipeline_cntr = b"101")  then
-                                done_dct        <= '1';
-                                pipeline_cntr   <= b"000";
+                            if(en = '1')    then
+                                data_from_INPUT_to_A1   <= dataInDCT;
                             end if;
                         end if;
                     end process;
     ---------------------------------------------------------------------
+    
+    ---------------------------------------------------------------------
+    L_FSM_NXT:  process(cur_state,
+                        en,
+                        pipeline_cntr
+                ) is
+                begin
+                    nxt_state   <=  cur_state;
+                    case(cur_state) is
+                        ------------------------------------------------
+                        when IDLE       =>  if(en = '1')
+                                            then
+                                                nxt_state   <=  BUSY;
+                                            end if;
+                        ------------------------------------------------
+                        when BUSY       =>  if(pipeline_cntr = b"100")
+                                            then
+                                                nxt_state   <=  DONE;
+                                            end if;
+                        ------------------------------------------------
+                        when DONE       =>
+                                            nxt_state   <=  IDLE;
+                        ------------------------------------------------
+                        when others =>  nxt_state   <=  IDLE;
+                        ------------------------------------------------
+                    end case;
+                end process;
+    --------------------------------------------------------------------
+    --------------------------------------------------------------------
+    L_FSM_CNTRL:    block
+                    begin
+                        cntr_clr    <=  '1' when(pipeline_cntr = b"100") else
+                                        '0';
+                        cntr_en     <=  '1' when(cur_state = BUSY and pipeline_cntr /= b"100") else
+                                        '0';
+                        done_dct    <=  '1' when(cur_state = done) else
+                                        '0';
+                    end block;
+    --------------------------------------------------------------------
+
+    ----------------------------------------
+    L_FSM_STATE:    process(clk,rstn)  is
+                    begin
+                        if(rstn = '0')  then
+                            cur_state   <= IDLE;
+                        elsif(rising_edge(clk)) then
+                            cur_state   <= nxt_state;
+                        end if;
+                    end process;
+    ----------------------------------------
+
+
 
     --------------------------------------------
     L_A1:   entity work.loeff_A1(rtl)
@@ -124,10 +185,14 @@ begin
     --------------------------------------------
 
     ---------------------------------------------------------------------
-    L_DATAIN_ASSIGNMENT :   data_from_INPUT_to_A1   <= dataInDCT;
+--    L_DATAIN_ASSIGNMENT :   data_from_INPUT_to_A1   <= dataInDCT;
     L_DATAOUT_ASSIGNMENT:   dataOutDCT              <= reg5;
     L_DONE_ASSIGNMENT   :   doneDCT                 <= done_dct;
-    ---------------------------------------------------------------------
+
+
+
+
+
 
 end architecture rtl;
 ------------------------------------------------------------------

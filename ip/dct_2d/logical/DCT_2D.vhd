@@ -73,8 +73,10 @@ begin
     ---------------------------------------------------------------------------------
     L_BUSY: block
             begin
-                busy    <=  '1' when(state /= idle) else
-                            '0';
+                busy        <=  '1' when(state /= idle and state /= output_ready) else
+                                '0';
+                dct_done    <=  '1' when(state = output_ready) else
+                                '0';
             end block;
     ---------------------------------------------------------------------------------
 
@@ -86,8 +88,6 @@ begin
         then
             dct_1d_en           <=  '0'   ;
             state               <=  idle  ;
-            dct_done            <=  '0'   ;
-            pixel_block_out            <=  (others =>  (others =>  (others => '0')));
             input_data_reg      <=  (others =>  (others =>  (others => '0')));
             output_data_reg     <=  (others =>  (others =>  (others => '0')));
             reg_bank            <=  (others =>  (others =>  (others => '0')));
@@ -96,9 +96,7 @@ begin
             case state  is
                 -----------------------------------------------------------------------------
                 when idle =>
-                    -------------------------------------------------------------
-                    drive_transformed_pixels_to_output(output_data_reg, pixel_block_out);
-                    dct_done  <= '0';
+
                     -------------------------------------------------------------
                     -- Store the inputs to the register bank
                     if(start_dct = '1') then
@@ -116,13 +114,14 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <= h0done  ;
+                    -- Disable and stop the 1D-DCT transformator
+                        dct_1d_en   <= '0';
+                        state       <= h0done  ;
                     end if;
                 -----------------------------------------------------------------------------
                 when h0done =>
                     drive_row_data_from_1d_dct_back_to_regbank(0,data_from_DCT,reg_bank);
-                    -- Disable and stop the 1D-DCT transformator
-                    dct_1d_en   <= '0';
+
                     state       <= h1;
                 -----------------------------------------------------------------------------
                 when h1 =>
@@ -133,12 +132,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
+                        dct_1d_en   <= '0';
                         state   <=  h1done;
                     end if;
                 -------------------------------------------------------------------------------
                 when h1done =>
                     drive_row_data_from_1d_dct_back_to_regbank(1,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <=  h2;
                 ------------------------------------------------------------------------------
                 when h2 =>
@@ -149,12 +149,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
+                        dct_1d_en   <= '0';
                         state   <=  h2done;
                     end if;
                 ----------------------------------------------------------------------------------
                 when h2done =>
                     drive_row_data_from_1d_dct_back_to_regbank(2,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= h3;
                 ------------------------------------------------------------------------------
                 when h3 =>
@@ -165,12 +166,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
+                        dct_1d_en   <= '0';
                         state   <=  h3done;
                     end if;
                 ----------------------------------------------------------------------------------
                 when h3done =>
                     drive_row_data_from_1d_dct_back_to_regbank(3,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= h4;
                 ----------------------------------------------------------------------------------
                 when h4 =>
@@ -181,12 +183,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
+                        dct_1d_en   <= '0';
                         state   <=  h4done  ;
                     end if;
                 ----------------------------------------------------------------------------------
                 when h4done =>
                     drive_row_data_from_1d_dct_back_to_regbank(4,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= h5;
                 ----------------------------------------------------------------------------------
                 when h5 =>
@@ -197,12 +200,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  h5done;
+                        dct_1d_en   <= '0';
+                        state       <=  h5done;
                     end if;
                 ----------------------------------------------------------------------------------
                 when h5done =>
                     drive_row_data_from_1d_dct_back_to_regbank(5,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= h6;
                 ----------------------------------------------------------------------------------
                 when h6 =>
@@ -213,12 +217,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  h6done;
+                        dct_1d_en   <= '0';
+                        state       <=  h6done;
                     end if;
                 ----------------------------------------------------------------------------------
                 when h6done =>
                     drive_row_data_from_1d_dct_back_to_regbank(6,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= h7;
                 ----------------------------------------------------------------------------------
                 when h7 =>
@@ -229,12 +234,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  h7done;
+                        dct_1d_en   <= '0';
+                        state       <=  h7done;
                     end if;
                 ----------------------------------------------------------------------------------
                 when h7done =>
                     drive_row_data_from_1d_dct_back_to_regbank(7,data_from_DCT,reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v0;
                 ----------------------------------------------------------------------------------
                 when v0 =>
@@ -245,12 +251,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
+                        dct_1d_en   <= '0';
                         state   <=  v0done;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v0done =>
                     drive_col_data_from_1d_dct_back_to_regbank(0,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v1;
                 ------------------------------------------------------------------------------
                 when v1 =>
@@ -261,12 +268,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
+                        dct_1d_en   <= '0';
                         state   <=  v1done  ;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v1done =>
                     drive_col_data_from_1d_dct_back_to_regbank(1,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v2;
                 ------------------------------------------------------------------------------
                 when v2 =>
@@ -277,12 +285,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  v2done  ;
+                        dct_1d_en   <= '0';
+                        state       <=  v2done  ;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v2done =>
                     drive_col_data_from_1d_dct_back_to_regbank(2,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v3;
                 ------------------------------------------------------------------------------
                 when v3 =>
@@ -293,12 +302,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  v3done  ;
+                        dct_1d_en   <= '0';
+                        state       <=  v3done  ;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v3done =>
                     drive_col_data_from_1d_dct_back_to_regbank(3,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v4;
                 ------------------------------------------------------------------------------
                 when v4 =>
@@ -309,12 +319,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  v4done  ;
+                        dct_1d_en   <= '0';
+                        state       <=  v4done  ;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v4done =>
                     drive_col_data_from_1d_dct_back_to_regbank(4,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v5;
                 ------------------------------------------------------------------------------
                 when v5 =>
@@ -325,12 +336,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  v5done  ;
+                        dct_1d_en   <= '0';
+                        state       <=  v5done  ;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v5done =>
                     drive_col_data_from_1d_dct_back_to_regbank(5,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v6;
                 ------------------------------------------------------------------------------
                 when v6 =>
@@ -341,12 +353,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  v6done;
+                        dct_1d_en   <= '0';
+                        state       <=  v6done;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v6done =>
                     drive_col_data_from_1d_dct_back_to_regbank(6,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= v7;
                 ------------------------------------------------------------------------------
                 when v7 =>
@@ -357,12 +370,13 @@ begin
                     dct_1d_en   <= '1';
                     if(dct_1d_done = '1')
                     then
-                        state   <=  v7done;
+                        dct_1d_en   <= '0';
+                        state       <=  v7done;
                     end if;
                 ------------------------------------------------------------------------------------
                 when v7done =>
                     drive_col_data_from_1d_dct_back_to_regbank(7,data_from_DCT, reg_bank);
-                    dct_1d_en   <= '0';
+
                     state       <= data_to_output;
                 ------------------------------------------------------------------------------
                 -- Drive register bank to output register layer
@@ -372,7 +386,7 @@ begin
                 ------------------------------------------------------------------------------
                 -- The data can be taken from output
                 when output_ready =>
-                    dct_done    <= '1';
+
                     state       <= idle;
                 ------------------------------------------------------------------------------
                 when others =>
@@ -381,6 +395,20 @@ begin
             end case;
         end if;
     end process;
+
+
+
+        -------------------------------
+        L_S:for ii in 0 to M-1  generate
+            -------------------------------
+            L_P:for jj in 0 to N-1  generate
+                pixel_block_out(ii,jj) <= output_data_reg(ii,jj);
+            end generate;
+            -------------------------------
+        end generate;
+        -------------------------------
+
+
 
 
     -------------------------------------------------------
