@@ -1,0 +1,37 @@
+# vsim -batch -t 1ps -do "run -all; quit;" -default_radix hexadecimal -logfile ../logs/cli/fe_evnt_cntr_tb_log.log work.fe_evnt_cntr_tb_opt 
+# Start time: 11:52:03 on Apr 24,2018
+# //  Questa Sim-64
+# //  Version 10.4e win64 Apr  9 2016
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
+# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
+# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# //
+# Loading std.standard
+# Loading std.env(body)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_log_pkg(body)
+# Loading work.tb_report_pkg(body)
+# Loading work.tb_utils_pkg(body)
+# Loading work.tb_tc_pkg(body)
+# Loading work.tb_chk_pkg(body)
+# Loading work.fe_evnt_cntr_test(body)
+# Loading work.fe_evnt_cntr_check(body)
+# Loading work.fe_evnt_cntr_tb(bhv)#1
+# Loading work.fe_evnt_cntr(rtl)#1
+# 
+# run -all
+# =====================================================              Start of the Simulation       =====================================================RTL name: 'fe_evnt_cntr'0 ps: process_tc.setup.clk_gen: Clock is ON!Testcase 0============1 ps: process_rst_gen: Reset is asserted.1001 ps: process_rst_gen: Reset is de-asserted.10001 ps: process_tc.run_test.fe_evnt_cntr_test.test: Testcase FINISHED ...Testcase 0 PASSED!Testcase 1============20000 ps: process_rst_gen: Reset is asserted.21000 ps: process_rst_gen: Reset is de-asserted.120000 ps: process_tc.run_test.fe_evnt_cntr_test.test: Testcase FINISHED ...Testcase 1 PASSED!=====================================================              End of the Simulation       =====================================================Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
+#  quit
+# End time: 11:52:05 on Apr 24,2018, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0

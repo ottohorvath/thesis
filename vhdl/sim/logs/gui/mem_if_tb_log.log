@@ -1,0 +1,67 @@
+# vsim -t 1ps -do "set NoQuitOnFinish 1; log -r /*; add wave -position insertpoint sim:/mem_if_tb/sync_sv; add wave -position insertpoint sim:/mem_if_tb/L_DUT/*; run -all;" -default_radix hexadecimal -logfile ../logs/gui/mem_if_tb_log.log work.mem_if_tb_opt 
+# Start time: 21:31:23 on Apr 26,2018
+# Loading std.standard
+# Loading std.env(body)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_log_pkg(body)
+# Loading work.tb_report_pkg(body)
+# Loading work.tb_utils_pkg(body)
+# Loading work.tb_tc_pkg(body)
+# Loading work.tb_chk_pkg(body)
+# Loading work.mem_if_test(body)
+# Loading work.mem_if_check(body)
+# Loading work.mem_if_tb(bhv)#1
+# Loading work.mem_if(rtl)#1
+# Loading work.mem_if_fsm(rtl)#1
+# set NoQuitOnFinish 1
+# 1
+#  log -r /*
+#  add wave -position insertpoint sim:/mem_if_tb/sync_sv
+#  add wave -position insertpoint sim:/mem_if_tb/L_DUT/*
+#  run -all
+# 
+# =====================================================
+#               Start of the Simulation       
+# =====================================================
+# 
+# RTL name: 'mem_if'
+# 
+# 0 ps: process_tc.setup.clk_gen: Clock is ON!
+# 
+# Testcase 0
+# ============
+# 1 ps: process_rst_gen: Reset is asserted.
+# 1001 ps: process_rst_gen: Reset is de-asserted.
+# 10001 ps: process_tc.run_test.mem_if_test.test: Testcase FINISHED ...
+# 
+# Testcase 0 PASSED!
+# 
+# 
+# Testcase 1
+# ============
+# 10002 ps: process_rst_gen: Reset is asserted.
+# 11002 ps: process_rst_gen: Reset is de-asserted.
+# 50002 ps: process_tc.run_test.mem_if_test.test: Testcase FINISHED ...
+# 
+# Testcase 1 PASSED!
+# 
+# 
+# Testcase 2
+# ============
+# 50003 ps: process_rst_gen: Reset is asserted.
+# 51003 ps: process_rst_gen: Reset is de-asserted.
+# 100002 ps: process_tc.run_test.mem_if_test.test: Testcase FINISHED ...
+# 
+# Testcase 2 PASSED!
+# 
+# 
+# =====================================================
+#               End of the Simulation       
+# =====================================================
+# 
+# Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
+# 
+# End time: 21:35:26 on Apr 26,2018, Elapsed time: 0:04:03
+# Errors: 0, Warnings: 0

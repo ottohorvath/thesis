@@ -1,0 +1,452 @@
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:57:59 on Apr 24,2018
+vcom -just p -2008 -work work ../tbench_pkg/*.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling package tb_log_pkg
+-- Loading package tb_log_pkg
+-- Compiling package tb_report_pkg
+-- Loading package tb_report_pkg
+-- Compiling package tb_utils_pkg
+-- Loading package tb_utils_pkg
+-- Compiling package tb_chk_pkg
+-- Compiling package tb_tc_pkg
+End time: 10:57:59 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:57:59 on Apr 24,2018
+vcom -just pb -2008 -work work ../tbench_pkg/*.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling package tb_log_pkg
+-- Compiling package body tb_log_pkg
+-- Loading package tb_log_pkg
+-- Loading package tb_log_pkg
+-- Compiling package tb_report_pkg
+-- Compiling package body tb_report_pkg
+-- Loading package tb_report_pkg
+-- Loading package tb_report_pkg
+-- Compiling package tb_utils_pkg
+-- Compiling package body tb_utils_pkg
+-- Loading package tb_utils_pkg
+-- Loading package tb_utils_pkg
+-- Compiling package tb_chk_pkg
+-- Compiling package body tb_chk_pkg
+-- Loading package tb_chk_pkg
+-- Compiling package tb_tc_pkg
+-- Compiling package body tb_tc_pkg
+-- Loading package tb_tc_pkg
+End time: 10:57:59 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:00 on Apr 24,2018
+vcom -just p -2008 -work work ../test/*.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package tb_log_pkg
+-- Loading package tb_report_pkg
+-- Loading package tb_utils_pkg
+-- Loading package tb_tc_pkg
+-- Compiling package chg_det_test
+-- Compiling package clk_gen_test
+-- Compiling package cntr_test
+-- Compiling package config_reg_if_fsm_test
+-- Compiling package config_reg_if_test
+-- Compiling package delta_timer_fsm_test
+-- Compiling package delta_timer_test
+-- Compiling package evnt_cntr_test
+-- Compiling package fe_det_fsm_test
+-- Compiling package fe_det_test
+-- Compiling package fifo_rd_if_fsm_test
+-- Compiling package fifo_rd_if_test
+-- Compiling package fifo_snk_test
+-- Compiling package fifo_src_test
+-- Compiling package fifo_test
+-- Compiling package fifo_wr_if_fsm_test
+-- Compiling package fifo_wr_if_test
+-- Compiling package mem_if_fsm_test
+-- Compiling package mem_if_test
+-- Compiling package mode_selector_test
+-- Compiling package reset_synchronizer_test
+-- Compiling package re_det_fsm_test
+-- Compiling package re_det_test
+-- Compiling package re_evnt_cntr_test
+-- Compiling package rstn_gen_test
+-- Compiling package sc_ff_test
+End time: 10:58:00 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:00 on Apr 24,2018
+vcom -just pb -2008 -work work ../test/*.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package tb_log_pkg
+-- Loading package tb_report_pkg
+-- Loading package tb_utils_pkg
+-- Loading package tb_tc_pkg
+-- Compiling package chg_det_test
+-- Compiling package body chg_det_test
+-- Loading package chg_det_test
+-- Compiling package clk_gen_test
+-- Compiling package body clk_gen_test
+-- Loading package clk_gen_test
+-- Compiling package cntr_test
+-- Compiling package body cntr_test
+-- Loading package cntr_test
+-- Compiling package config_reg_if_fsm_test
+-- Compiling package body config_reg_if_fsm_test
+-- Loading package config_reg_if_fsm_test
+-- Compiling package config_reg_if_test
+-- Compiling package body config_reg_if_test
+-- Loading package config_reg_if_test
+-- Compiling package delta_timer_fsm_test
+-- Compiling package body delta_timer_fsm_test
+-- Loading package delta_timer_fsm_test
+-- Compiling package delta_timer_test
+-- Compiling package body delta_timer_test
+-- Loading package delta_timer_test
+-- Compiling package evnt_cntr_test
+-- Compiling package body evnt_cntr_test
+-- Loading package evnt_cntr_test
+-- Compiling package fe_det_fsm_test
+-- Compiling package body fe_det_fsm_test
+-- Loading package fe_det_fsm_test
+-- Compiling package fe_det_test
+-- Compiling package body fe_det_test
+-- Loading package fe_det_test
+-- Compiling package fifo_rd_if_fsm_test
+-- Compiling package body fifo_rd_if_fsm_test
+-- Loading package fifo_rd_if_fsm_test
+-- Compiling package fifo_rd_if_test
+-- Compiling package body fifo_rd_if_test
+-- Loading package fifo_rd_if_test
+-- Compiling package fifo_snk_test
+-- Compiling package body fifo_snk_test
+-- Loading package fifo_snk_test
+-- Compiling package fifo_src_test
+-- Compiling package body fifo_src_test
+-- Loading package fifo_src_test
+-- Compiling package fifo_test
+-- Compiling package body fifo_test
+-- Loading package fifo_test
+-- Compiling package fifo_wr_if_fsm_test
+-- Compiling package body fifo_wr_if_fsm_test
+-- Loading package fifo_wr_if_fsm_test
+-- Compiling package fifo_wr_if_test
+-- Compiling package body fifo_wr_if_test
+-- Loading package fifo_wr_if_test
+-- Compiling package mem_if_fsm_test
+-- Compiling package body mem_if_fsm_test
+-- Loading package mem_if_fsm_test
+-- Compiling package mem_if_test
+-- Compiling package body mem_if_test
+-- Loading package mem_if_test
+-- Compiling package mode_selector_test
+-- Compiling package body mode_selector_test
+-- Loading package mode_selector_test
+-- Compiling package reset_synchronizer_test
+-- Compiling package body reset_synchronizer_test
+-- Loading package reset_synchronizer_test
+-- Compiling package re_det_fsm_test
+-- Compiling package body re_det_fsm_test
+-- Loading package re_det_fsm_test
+-- Compiling package re_det_test
+-- Compiling package body re_det_test
+-- Loading package re_det_test
+-- Compiling package re_evnt_cntr_test
+-- Compiling package body re_evnt_cntr_test
+-- Loading package re_evnt_cntr_test
+-- Compiling package rstn_gen_test
+-- Compiling package body rstn_gen_test
+-- Loading package rstn_gen_test
+-- Compiling package sc_ff_test
+-- Compiling package body sc_ff_test
+-- Loading package sc_ff_test
+End time: 10:58:00 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:00 on Apr 24,2018
+vcom -just p -2008 -work work ../check/*.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package tb_log_pkg
+-- Loading package tb_report_pkg
+-- Loading package tb_utils_pkg
+-- Loading package tb_chk_pkg
+-- Compiling package chg_det_check
+-- Compiling package clk_gen_check
+-- Compiling package cntr_check
+-- Compiling package config_reg_if_check
+-- Compiling package config_reg_if_fsm_check
+-- Compiling package delta_timer_check
+-- Compiling package delta_timer_fsm_check
+-- Compiling package evnt_cntr_check
+-- Compiling package fe_det_check
+-- Compiling package fe_det_fsm_check
+-- Compiling package fifo_check
+-- Compiling package fifo_rd_if_check
+-- Compiling package fifo_rd_if_fsm_check
+-- Compiling package fifo_snk_check
+-- Compiling package fifo_src_check
+-- Compiling package fifo_wr_if_check
+-- Compiling package fifo_wr_if_fsm_check
+-- Compiling package mem_if_check
+-- Compiling package mem_if_fsm_check
+-- Compiling package mode_selector_check
+-- Compiling package reset_synchronizer_check
+-- Compiling package re_det_check
+-- Compiling package re_det_fsm_check
+-- Compiling package re_evnt_cntr_check
+-- Compiling package rstn_gen_check
+-- Compiling package sc_ff_check
+End time: 10:58:00 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:00 on Apr 24,2018
+vcom -just pb -2008 -work work ../check/*.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package tb_log_pkg
+-- Loading package tb_report_pkg
+-- Loading package tb_utils_pkg
+-- Loading package tb_chk_pkg
+-- Compiling package chg_det_check
+-- Compiling package body chg_det_check
+-- Loading package chg_det_check
+-- Compiling package clk_gen_check
+-- Compiling package body clk_gen_check
+-- Loading package clk_gen_check
+-- Compiling package cntr_check
+-- Compiling package body cntr_check
+-- Loading package cntr_check
+-- Compiling package config_reg_if_check
+-- Compiling package body config_reg_if_check
+-- Loading package config_reg_if_check
+-- Compiling package config_reg_if_fsm_check
+-- Compiling package body config_reg_if_fsm_check
+-- Loading package config_reg_if_fsm_check
+-- Compiling package delta_timer_check
+-- Compiling package body delta_timer_check
+-- Loading package delta_timer_check
+-- Compiling package delta_timer_fsm_check
+-- Compiling package body delta_timer_fsm_check
+-- Loading package delta_timer_fsm_check
+-- Compiling package evnt_cntr_check
+-- Compiling package body evnt_cntr_check
+-- Loading package evnt_cntr_check
+-- Compiling package fe_det_check
+-- Compiling package body fe_det_check
+-- Loading package fe_det_check
+-- Compiling package fe_det_fsm_check
+-- Compiling package body fe_det_fsm_check
+-- Loading package fe_det_fsm_check
+-- Compiling package fifo_check
+-- Compiling package body fifo_check
+-- Loading package fifo_check
+-- Compiling package fifo_rd_if_check
+-- Compiling package body fifo_rd_if_check
+-- Loading package fifo_rd_if_check
+-- Compiling package fifo_rd_if_fsm_check
+-- Compiling package body fifo_rd_if_fsm_check
+-- Loading package fifo_rd_if_fsm_check
+-- Compiling package fifo_snk_check
+-- Compiling package body fifo_snk_check
+-- Loading package fifo_snk_check
+-- Compiling package fifo_src_check
+-- Compiling package body fifo_src_check
+-- Loading package fifo_src_check
+-- Compiling package fifo_wr_if_check
+-- Compiling package body fifo_wr_if_check
+-- Loading package fifo_wr_if_check
+-- Compiling package fifo_wr_if_fsm_check
+-- Compiling package body fifo_wr_if_fsm_check
+-- Loading package fifo_wr_if_fsm_check
+-- Compiling package mem_if_check
+-- Compiling package body mem_if_check
+-- Loading package mem_if_check
+-- Compiling package mem_if_fsm_check
+-- Compiling package body mem_if_fsm_check
+-- Loading package mem_if_fsm_check
+-- Compiling package mode_selector_check
+-- Compiling package body mode_selector_check
+-- Loading package mode_selector_check
+-- Compiling package reset_synchronizer_check
+-- Compiling package body reset_synchronizer_check
+-- Loading package reset_synchronizer_check
+-- Compiling package re_det_check
+-- Compiling package body re_det_check
+-- Loading package re_det_check
+-- Compiling package re_det_fsm_check
+-- Compiling package body re_det_fsm_check
+-- Loading package re_det_fsm_check
+-- Compiling package re_evnt_cntr_check
+-- Compiling package body re_evnt_cntr_check
+-- Loading package re_evnt_cntr_check
+-- Compiling package rstn_gen_check
+-- Compiling package body rstn_gen_check
+-- Loading package rstn_gen_check
+-- Compiling package sc_ff_check
+-- Compiling package body sc_ff_check
+-- Loading package sc_ff_check
+End time: 10:58:00 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:01 on Apr 24,2018
+vcom -just e -93 -lint -work work ../../logical/*.vhd 
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity chg_det
+-- Compiling entity chg_det_fsm
+-- Compiling entity clk_gen
+-- Compiling entity cntr
+-- Compiling entity config_reg_if
+-- Compiling entity config_reg_if_fsm
+-- Compiling entity delta_timer
+-- Compiling entity delta_timer_fsm
+-- Compiling entity evnt_cntr
+-- Compiling entity fe_det
+-- Compiling entity fe_det_fsm
+-- Compiling entity fe_evnt_cntr
+-- Compiling entity fifo
+-- Compiling entity fifo_rd_if
+-- Compiling entity fifo_rd_if_fsm
+-- Compiling entity fifo_snk
+-- Compiling entity fifo_src
+-- Compiling entity fifo_wr_if
+-- Compiling entity fifo_wr_if_fsm
+-- Compiling entity mem_if
+-- Compiling entity mem_if_fsm
+-- Compiling entity mode_selector
+-- Compiling entity mode_sel_mux
+-- Compiling entity reset_flop
+-- Compiling entity reset_synchronizer
+-- Compiling entity re_det
+-- Compiling entity re_det_fsm
+-- Compiling entity re_evnt_cntr
+-- Compiling entity rstn_gen
+-- Compiling entity sc_ff
+End time: 10:58:01 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:01 on Apr 24,2018
+vcom -just a -93 -lint -work work ../../logical/*.vhd 
+-- Loading package STANDARD
+-- Compiling architecture rtl of chg_det
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading entity chg_det
+-- Loading entity chg_det_fsm
+-- Compiling architecture rtl of chg_det_fsm
+-- Compiling architecture rtl of clk_gen
+-- Loading entity clk_gen
+-- Loading entity sc_ff
+-- Compiling architecture rtl of cntr
+-- Loading entity cntr
+-- Compiling architecture rtl of config_reg_if
+-- Loading entity config_reg_if
+-- Loading entity config_reg_if_fsm
+-- Compiling architecture rtl of config_reg_if_fsm
+-- Compiling architecture rtl of delta_timer
+-- Loading entity delta_timer
+-- Loading entity chg_det
+-- Loading entity cntr
+-- Loading entity delta_timer_fsm
+-- Compiling architecture rtl of delta_timer_fsm
+-- Compiling architecture rtl of evnt_cntr
+-- Loading entity evnt_cntr
+-- Compiling architecture rtl of fe_det
+-- Loading entity fe_det
+-- Loading entity fe_det_fsm
+-- Compiling architecture rtl of fe_det_fsm
+-- Compiling architecture rtl of fe_evnt_cntr
+-- Loading entity fe_evnt_cntr
+-- Compiling architecture rtl of fifo
+-- Loading entity fifo
+-- Compiling architecture rtl of fifo_rd_if
+-- Loading entity fifo_rd_if
+-- Loading entity fifo_rd_if_fsm
+-- Compiling architecture rtl of fifo_rd_if_fsm
+-- Compiling architecture rtl of fifo_snk
+-- Loading entity fifo_snk
+-- Loading entity fifo
+-- Compiling architecture rtl of fifo_src
+-- Loading entity fifo_src
+-- Compiling architecture rtl of fifo_wr_if
+-- Loading entity fifo_wr_if
+-- Loading entity fifo_wr_if_fsm
+-- Compiling architecture rtl of fifo_wr_if_fsm
+-- Compiling architecture rtl of mem_if
+-- Loading entity mem_if
+-- Loading entity mem_if_fsm
+-- Compiling architecture rtl of mem_if_fsm
+-- Compiling architecture rtl of mode_selector
+-- Loading entity mode_selector
+-- Compiling architecture rtl of mode_sel_mux
+-- Loading entity mode_sel_mux
+-- Compiling architecture rtl of reset_flop
+-- Loading entity reset_flop
+-- Compiling architecture rtl of reset_synchronizer
+-- Loading entity reset_synchronizer
+-- Loading entity reset_flop
+-- Compiling architecture rtl of re_det
+-- Loading entity re_det
+-- Loading entity re_det_fsm
+-- Compiling architecture rtl of re_det_fsm
+-- Compiling architecture rtl of re_evnt_cntr
+-- Loading entity re_evnt_cntr
+-- Compiling architecture rtl of rstn_gen
+-- Loading entity rstn_gen
+-- Compiling architecture rtl of sc_ff
+End time: 10:58:01 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
+Start time: 10:58:01 on Apr 24,2018
+vcom -2008 -work work ../tbench/evnt_cntr_tb.vhd 
+-- Loading package STANDARD
+-- Loading package ENV
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package tb_log_pkg
+-- Loading package tb_report_pkg
+-- Loading package tb_utils_pkg
+-- Loading package tb_tc_pkg
+-- Loading package tb_chk_pkg
+-- Loading package evnt_cntr_test
+-- Loading package evnt_cntr_check
+-- Compiling entity evnt_cntr_tb
+-- Compiling architecture bhv of evnt_cntr_tb
+** Warning: ../tbench/evnt_cntr_tb.vhd(128): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
+-- Loading entity evnt_cntr
+End time: 10:58:01 on Apr 24,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 1
+

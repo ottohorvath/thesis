@@ -267,9 +267,8 @@ is
         wait for 1 ps;
         wait_re(clk);
         ---------------
-        wait  for 1 ps;
         wr      <= '0';
-        wdata   <=  'Z';
+        wdata   <=  'X';
         wait for 1 ps;
 
     end procedure;
@@ -292,7 +291,7 @@ is
         wait_re(clk);
         ---------------
         wr      <= '0';
-        wdata   <=  slv(wdata'length, 'Z');
+        wdata   <=  slv(wdata'length, 'X');
         wait  for 1 ps;
 
     end procedure;
@@ -314,7 +313,7 @@ is
         wait_re(clk);
         ---------------
         wr      <= '0';
-        wdata   <=  slv(wdata'length, 'Z');
+        wdata   <=  slv(wdata'length, 'X');
         wait  for 1 ps;
 
     end procedure;
@@ -361,7 +360,6 @@ is
         rd      <= '1';
         wait  for 1 ps;
         wait_re(clk);
-        wait  for 1 ps;
         ---------------
         rd      <= '0';
         wait  for 1 ps;

@@ -5,13 +5,13 @@
 --
 --
 ----------------------------------------------------------------------------------------
-library ieee				;
+library ieee                ;
 library std                 ;
 -----------------------------
 use std.env.all             ;
 use std.textio.all          ;
-use ieee.numeric_std.all	;
-use ieee.std_logic_1164.all	;
+use ieee.numeric_std.all    ;
+use ieee.std_logic_1164.all ;
 use work.all;
 -----------------------------
 
@@ -119,7 +119,7 @@ is
                         sv.compare('1',             rtl_out_if.rstrb_to_DUV   );
                         sv.compare('0',             rtl_out_if.wstrb_to_DUV   );
 
-                        
+
                         sv.compare(x"aaaabbbb",     rtl_out_if.addr_to_DUV     );
 
 
@@ -129,26 +129,26 @@ is
 
                         sv.compare('0',             rtl_out_if.rstrb_to_DUV   );
                         sv.compare('0',             rtl_out_if.wstrb_to_DUV   );
-                        
-                        
+
+
                         sv.compare(x"aaaabbbb",     rtl_out_if.addr_to_DUV     );
-                        
+
                         check_done(sv);
                         ------------------------------------
                         wait_for_next_check(sv);
-                        
+
                         sv.compare('0',             rtl_out_if.rstrb_to_DUV   );
                         sv.compare('0',             rtl_out_if.wstrb_to_DUV   );
-                        
-                        
+
+
                         sv.compare(x"aaaabbbb",     rtl_out_if.addr_to_DUV     );
                         sv.compare(x"0000aaa2",     rtl_out_if.rdata     );
-                        
+
                         check_done(sv);
-                        
-                            
-                        
-                        
+
+
+
+
             -------------------------------------------------
            when others =>
         end case;

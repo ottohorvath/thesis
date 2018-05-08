@@ -1,0 +1,59 @@
+# vsim -t 1ps -do "set NoQuitOnFinish 1; log -r /*; add wave -position insertpoint sim:/re_evnt_cntr_tb/sync_sv; add wave -position insertpoint sim:/re_evnt_cntr_tb/L_DUT/*; run -all;" -default_radix hexadecimal -logfile ../logs/gui/re_evnt_cntr_tb_log.log work.re_evnt_cntr_tb_opt 
+# Start time: 11:03:09 on Apr 24,2018
+# Loading std.standard
+# Loading std.env(body)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_log_pkg(body)
+# Loading work.tb_report_pkg(body)
+# Loading work.tb_utils_pkg(body)
+# Loading work.tb_tc_pkg(body)
+# Loading work.tb_chk_pkg(body)
+# Loading work.re_evnt_cntr_test(body)
+# Loading work.re_evnt_cntr_check(body)
+# Loading work.re_evnt_cntr_tb(bhv)#1
+# Loading work.re_evnt_cntr(rtl)#1
+# Loading work.sc_ff(rtl)#1
+# Loading work.cntr(rtl)#1
+# set NoQuitOnFinish 1
+# 1
+#  log -r /*
+#  add wave -position insertpoint sim:/re_evnt_cntr_tb/sync_sv
+#  add wave -position insertpoint sim:/re_evnt_cntr_tb/L_DUT/*
+#  run -all
+# 
+# =====================================================
+#               Start of the Simulation       
+# =====================================================
+# 
+# RTL name: 're_evnt_cntr'
+# 
+# 0 ps: process_tc.setup.clk_gen: Clock is ON!
+# 
+# Testcase 0
+# ============
+# 1 ps: process_rst_gen: Reset is asserted.
+# 1001 ps: process_rst_gen: Reset is de-asserted.
+# 10001 ps: process_tc.run_test.re_evnt_cntr_test.test: Testcase FINISHED ...
+# 
+# Testcase 0 PASSED!
+# 
+# 
+# Testcase 1
+# ============
+# 20000 ps: process_rst_gen: Reset is asserted.
+# 21000 ps: process_rst_gen: Reset is de-asserted.
+# 120000 ps: process_tc.run_test.re_evnt_cntr_test.test: Testcase FINISHED ...
+# 
+# Testcase 1 PASSED!
+# 
+# 
+# =====================================================
+#               End of the Simulation       
+# =====================================================
+# 
+# Break in Subprogram report_and_exit at ../tbench_pkg/4_tb_tc_pkg.vhd line 248
+# 
+# End time: 11:05:20 on Apr 24,2018, Elapsed time: 0:02:11
+# Errors: 0, Warnings: 0
