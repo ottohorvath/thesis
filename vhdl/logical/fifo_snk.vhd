@@ -20,7 +20,7 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity fifo_snk is
     generic (
-        DEPTH       :       integer range 8 to 512  :=  64           ;-- Depth of the FIFO
+        DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
         DW          :       integer                 :=  32           -- Data width
     );
     port (
@@ -72,13 +72,20 @@ architecture rtl of fifo_snk is
     signal  fifo_rdata  :   std_logic_vector(DW-1 downto 0) ;
     -- coverage on
     ------------------------------------------------------------------------------
+
+
+    signal      rd_mux  :   std_logic;
 begin
 
     L_FULL:     full_to_DUV <= fifo_full;
     -------------------------------------------------------
     L_TRIG:     trig_out    <= fifo_empty;
     -------------------------------------------------------
-    L_FIFO_RD:  fifo_rd     <= rd;
+    L_FIFO_RD:  block
+                begin
+                    rd_mux      <=  rd  when(conf_reg = B"10") else '0';
+                    fifo_rd     <=  rd_mux;
+                end block;
     -------------------------------------------------------
     L_CFG_REG:  process (clk, rstn) is
                 begin
@@ -99,7 +106,7 @@ begin
 
                     rdata   <=  slv(DW-2,'0') & fifo_full & fifo_empty when conf_reg = B"01"  else  -- Showing the FIFO-s empty signal
                                 fifo_rdata                     when conf_reg = B"10"  else  -- Showing FIFO rdata
-                                slv(DW,'X');                                            -- Otherwise, DW{1b0}}
+                                slv(DW,'0');                                            -- Otherwise, DW{1b0}}
 
                 end block;
     -------------------------------------------------------

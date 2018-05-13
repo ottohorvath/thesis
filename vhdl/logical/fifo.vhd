@@ -19,7 +19,7 @@ use     ieee.numeric_std.all    ;
 ---------------------------------------------------------------------------
 entity fifo is
     generic (
-        DEPTH       :       integer range 8 to 512  :=  64           ;-- Depth of the FIFO
+        DEPTH       :       integer range 8 to 512  :=  8           ;-- Depth of the FIFO
         DW          :       integer                 :=  32          -- Data width
     );
     port (
