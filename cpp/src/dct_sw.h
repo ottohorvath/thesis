@@ -135,6 +135,10 @@ float**     dct_2d(
     }
     //==========================================================================
 
+    //==========================================================================
+    // Transpose the intermediate matrix
+    transformed_pixel_block =   transpose_matrix( transformed_pixel_block);
+    //==========================================================================
 
 
     return  transformed_pixel_block;
