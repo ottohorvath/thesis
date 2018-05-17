@@ -11,10 +11,8 @@
 
 //  Simple and naive 1D-DCT algorithm
 //  =================================
-//  ~ N         :   order of the transformation / number of values in input
 //  ~ x         :   pointer to data to be transformed / input data vector
 float*     dct_1d(
-//    uint32_t    N,
     float      x[8]
 )
 {
@@ -60,7 +58,6 @@ float*     dct_1d(
 // ===============================
 // (pretty slow)
 float**    transpose_matrix(
-//    uint32_t    N,
     float**     A
 )
 {
@@ -90,8 +87,7 @@ float**    transpose_matrix(
 // ========================================
 
 float**     dct_2d(
-//    uint32_t    N,
-    float     pixel_block[8][8]
+    float  pixel_block[8][8]
 )
 {
     const uint32_t    N = 8;
