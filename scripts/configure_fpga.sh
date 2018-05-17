@@ -20,7 +20,7 @@ BRIDGES_ENABLED="0"
 # ==================================
 check_bridges()
 {
-    echo "[INFO] Checking the status of the bridges between HPS an FPGA ..."
+    echo "[INFO] Checking the status of the bridges between HPS and FPGA ..."
 
     F2H=`cat /sys/class/fpga-bridge/fpga2hps/enable`
     H2F=`cat /sys/class/fpga-bridge/hps2fpga/enable`
