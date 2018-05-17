@@ -1,0 +1,260 @@
+[FPGA Configuration] Checking the status of the bridges between HPS and FPGA ...
+[FPGA Configuration] Disabling the bridges!
+[FPGA Configuration] Configuring FPGA with './demo.rbf'!
+[FPGA Configuration] FPGA is now in 'user mode'. Configuration DONE!
+[FPGA Configuration] Enabling the bridges!
+[FPGA Map] Mapping FPGA to userpace!
+[SW Ref. Model] Calculating expected values ...
+[HW Env.] Running test ...
+[INFO] Component name = Reset generator
+[INFO] Base addr      = 0x76cb3000
+[INFO] Enabled        = 0
+[INFO] Component name = Clock generator
+[INFO] Base addr      = 0x76cb3004
+[INFO] Enabled        = 0
+[Clock generator] Starting clock for the environment ...
+[Clock generator] Done!
+[Clock generator] Waiting to be enabled ...
+[Clock generator] Done!
+[Reset generator] Generating reset pulse ...
+[Reset generator] Done!
+[Reset generator] Waiting to be enabled ...
+[Reset generator] Done!
+[INFO] Component name = Reset generator
+[INFO] Base addr      = 0x76cb3000
+[INFO] Enabled        = 1
+[INFO] Component name = Clock generator
+[INFO] Base addr      = 0x76cb3004
+[INFO] Enabled        = 1
+[Mode selector] Normal mode ...
+[Mode selector] Done!
+[Rising edge det.] Clearing status register ...
+[Delta timer] Enabling!
+[FIFO sink] Showing status ...
+[FIFO sink] Checking full ...
+[FIFO sink] Not full!
+[FIFO sink] Checking empty ...
+[FIFO sink] Empty!
+[SW Ref. Model] Done!
+[SW Ref. Model] Execution time = 431 [us]
+[HW Env.] Fill up the HW ...
+[Mode selector] Test mode ...
+[Mode selector] Done!
+[Mode selector] Normal mode ...
+[Mode selector] Done!
+[Rising edge det.] Checking detector ...
+[Rising edge det.] Caught something!
+[FIFO sink] Checking full ...
+[FIFO sink] Full!
+[FIFO sink] Checking empty ...
+[FIFO sink] Not empty!
+[FIFO sink] Showing data ...
+[HW Env.] Read out the HW ...
+[FIFO sink] Showing status ...
+[FIFO sink] Checking full ...
+[FIFO sink] Not full!
+[FIFO sink] Checking empty ...
+[FIFO sink] Empty!
+[HW Env.] Done!
+[HW Env.] Test done!
+[CHECK] Start checking results!
+[CHECK] Start with DCT-2D values ...
+[CHECK] 1 digit of difference is allowed!
+[CHECK] Expected = -21.625
+        Actual   = -22
+        Diff.    = 0.375002
+[CHECK] Expected = 26.1214
+        Actual   = 26
+        Diff.    = 0.121428
+[CHECK] Expected = 48.6527
+        Actual   = 48
+        Diff.    = 0.652706
+[CHECK] Expected = -63.9365
+        Actual   = -64
+        Diff.    = 0.0635414
+[CHECK] Expected = -65.125
+        Actual   = -65
+        Diff.    = 0.124992
+[CHECK] Expected = 36.0802
+        Actual   = 36
+        Diff.    = 0.0802498
+[CHECK] Expected = 51.15
+        Actual   = 51
+        Diff.    = 0.150009
+[CHECK] Expected = 47.4877
+        Actual   = 47
+        Diff.    = 0.487675
+[CHECK] Expected = 11.7619
+        Actual   = 12
+        Diff.    = 0.238142
+[CHECK] Expected = 67.5319
+        Actual   = 67
+        Diff.    = 0.531921
+[CHECK] Expected = 114.86
+        Actual   = 115
+        Diff.    = 0.139999
+[CHECK] Expected = 66.5116
+        Actual   = 66
+        Diff.    = 0.511612
+[CHECK] Expected = -5.80063
+        Actual   = -6
+        Diff.    = 0.199368
+[CHECK] Expected = -8.58405
+        Actual   = -9
+        Diff.    = 0.415951
+[CHECK] Expected = -8.06765
+        Actual   = -8
+        Diff.    = 0.0676451
+[CHECK] Expected = 9.6483
+        Actual   = 10
+        Diff.    = 0.3517
+[CHECK] Expected = -10.2697
+        Actual   = -10
+        Diff.    = 0.269733
+[CHECK] Expected = 228.62
+        Actual   = 228
+        Diff.    = 0.620377
+[CHECK] Expected = -6.386
+        Actual   = -6
+        Diff.    = 0.386
+[CHECK] Expected = 50.6711
+        Actual   = 50
+        Diff.    = 0.671112
+[CHECK] Expected = 97.3881
+        Actual   = 97
+        Diff.    = 0.388077
+[CHECK] Expected = -11.5679
+        Actual   = -11
+        Diff.    = 0.567949
+[CHECK] Expected = -66.0688
+        Actual   = -66
+        Diff.    = 0.068779
+[CHECK] Expected = 53.7544
+        Actual   = 54
+        Diff.    = 0.245647
+[CHECK] Expected = 118.504
+        Actual   = 118
+        Diff.    = 0.503601
+[CHECK] Expected = -79.9611
+        Actual   = -80
+        Diff.    = 0.0389404
+[CHECK] Expected = -76.3634
+        Actual   = -76
+        Diff.    = 0.363441
+[CHECK] Expected = 37.3242
+        Actual   = 37
+        Diff.    = 0.324184
+[CHECK] Expected = 115.457
+        Actual   = 115
+        Diff.    = 0.456734
+[CHECK] Expected = 54.8818
+        Actual   = 55
+        Diff.    = 0.118168
+[CHECK] Expected = -20.0881
+        Actual   = -20
+        Diff.    = 0.0880604
+[CHECK] Expected = -64.1361
+        Actual   = -64
+        Diff.    = 0.136131
+[CHECK] Expected = -93.375
+        Actual   = -93
+        Diff.    = 0.375038
+[CHECK] Expected = -59.8548
+        Actual   = -60
+        Diff.    = 0.145245
+[CHECK] Expected = 12.0809
+        Actual   = 12
+        Diff.    = 0.080904
+[CHECK] Expected = -43.8719
+        Actual   = -44
+        Diff.    = 0.128109
+[CHECK] Expected = -50.375
+        Actual   = -50
+        Diff.    = 0.375031
+[CHECK] Expected = -72.4658
+        Actual   = -72
+        Diff.    = 0.46579
+[CHECK] Expected = 2.70802
+        Actual   = 3
+        Diff.    = 0.291976
+[CHECK] Expected = 69.0285
+        Actual   = 69
+        Diff.    = 0.02845
+[CHECK] Expected = -87.6241
+        Actual   = -88
+        Diff.    = 0.375854
+[CHECK] Expected = 174.199
+        Actual   = 174
+        Diff.    = 0.199097
+[CHECK] Expected = -27.6807
+        Actual   = -28
+        Diff.    = 0.319262
+[CHECK] Expected = 75.659
+        Actual   = 76
+        Diff.    = 0.341019
+[CHECK] Expected = -13.6326
+        Actual   = -14
+        Diff.    = 0.367368
+[CHECK] Expected = -49.2258
+        Actual   = -49
+        Diff.    = 0.225754
+[CHECK] Expected = -61.3925
+        Actual   = -61
+        Diff.    = 0.392536
+[CHECK] Expected = -63.9341
+        Actual   = -64
+        Diff.    = 0.0658951
+[CHECK] Expected = -105.474
+        Actual   = -105
+        Diff.    = 0.473663
+[CHECK] Expected = 12.9327
+        Actual   = 13
+        Diff.    = 0.0672512
+[CHECK] Expected = -4.81875
+        Actual   = -5
+        Diff.    = 0.181253
+[CHECK] Expected = 43.0072
+        Actual   = 43
+        Diff.    = 0.00720978
+[CHECK] Expected = -33.7098
+        Actual   = -34
+        Diff.    = 0.290215
+[CHECK] Expected = -95.3979
+        Actual   = -95
+        Diff.    = 0.397919
+[CHECK] Expected = -121.114
+        Actual   = -121
+        Diff.    = 0.114059
+[CHECK] Expected = 12.1781
+        Actual   = 12
+        Diff.    = 0.178116
+[CHECK] Expected = -109.873
+        Actual   = -110
+        Diff.    = 0.127434
+[CHECK] Expected = 257.925
+        Actual   = 258
+        Diff.    = 0.0745544
+[CHECK] Expected = -29.175
+        Actual   = -29
+        Diff.    = 0.174997
+[CHECK] Expected = -40.4428
+        Actual   = -41
+        Diff.    = 0.557167
+[CHECK] Expected = -41.7035
+        Actual   = -42
+        Diff.    = 0.296509
+[CHECK] Expected = -15.0512
+        Actual   = -15
+        Diff.    = 0.0512295
+[CHECK] Expected = 47.1713
+        Actual   = 47
+        Diff.    = 0.171288
+[CHECK] Expected = -74.1303
+        Actual   = -74
+        Diff.    = 0.130318
+[RESULT: DCT-2D] PASSED!
+[CHECK] Collected accelerator busy time must be matched with the value given by the RTL simulation
+        Expected = 161 x clock period (20 ns)
+        Actual   = 161
+[RESULT: Busy-time] PASSED!
+[FPGA Unmap] Removing FPGA from userpace!
