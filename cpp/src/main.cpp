@@ -186,8 +186,6 @@ int main()
         std::cout<<"[SW Ref. Model] Calculating expected values ..."   <<std::endl;
 
         // Measure thread execution time
-
-
         gettimeofday(&start, NULL);
             // Run the SW reference modell
             expected_dct_values     =   dct_2d(pixel_block_float);
